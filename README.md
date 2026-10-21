@@ -1,22 +1,18 @@
-<div style="display: flex; justify-content: center; align-item: center; gap: 3rem; padding: 1rem 0;">
-  <figure role="group" aria-labelledby="bct-logo-caption">
-    <img
-      src="./assets/images/BitCrusherTeam.png"
-      alt="Logo del gruppo Bit Crusher, un teschio in pixel art che schiaccia tra le fauci particelle pixelate"
-      width="150"
-      height="150"
-    />
-  </figure>
-
-  <figure role="group" aria-labelledby="unipd-logo-caption">
-    <img
-      src="./assets/images/UnipdLogo.png"
-      alt="Emblema dell'Università di Padova, le figure di due patroni e le nove stelle su campo azzurro"
-      width="150"
-      height="150"
-    />
-  </figure>
-</div>
+<p align="center">
+  <img
+    src="./assets/images/BitCrusherTeam.png"
+    alt="Logo del gruppo Bit Crusher, un teschio in pixel art che schiaccia tra le fauci particelle pixelate"
+    width="200"
+    height="200"
+  />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img
+    src="./assets/images/UnipdLogo.png"
+    alt="Emblema dell'Università di Padova, le figure di due patroni e le nove stelle su campo azzurro"
+    width="150"
+    height="150"
+  />
+</p>
 
 # Progetto di Ingegneria del Software
 
@@ -244,7 +240,7 @@
 
 ## Riferimenti / Strumenti e Tecnologie
 
-<ol>
+<ol style="list-style-type: upper-roman;">
   <li>[Prematuro, necessario a definire le risorse esterne o riferimenti tecnici]</li>
   <li>[Conterrà anche conformità a standard e normative nazionali/europee]</li>
 </ol>
