@@ -3,6 +3,8 @@
     <img
       src="./assets/images/BitCrusherTeam.png"
       alt="Logo del gruppo Bit Crusher, un teschio in pixel art che schiaccia tra le fauci particelle pixelate"
+      width="150"
+      height="150"
     />
   </figure>
 
@@ -10,6 +12,8 @@
     <img
       src="./assets/images/UnipdLogo.png"
       alt="Emblema dell'Università di Padova, le figure di due patroni e le nove stelle su campo azzurro"
+      width="150"
+      height="150"
     />
   </figure>
 </div>
@@ -180,43 +184,43 @@
   <tr>
     <td>Alex Singh</td>
     <td>2148621</td>
-    <td>[@ZiraelOneTwo](https://github.com/ZiraelOneTwo)</td>
+    <td><a href="https://github.com/ZiraelOneTwo">@ZiraelOneTwo</a></td>
   </tr>
     
   <tr>
     <td>Pietro Leonardo Acampora</td>
     <td>2146762</td>
-    <td>[@hipietro](https://github.com/hipietro)</td>
+    <td><a href="https://github.com/hipietro">@hipietro</a></td>
   </tr>
 
   <tr>
     <td>Marco Bollettin</td>
     <td>2147955</td>
-    <td>[@Ahwrs](https://github.com/Ahwrs)</td>
+    <td><a href="https://github.com/Ahwrs">@Ahwrs</a></td>
   </tr>
 
   <tr>
     <td>Erik Giuliano</td>
     <td>2138012</td>
-    <td>[@FlameStorm199](https://github.com/FlameStorm199)</td>
+    <td><a href="https://github.com/FlameStorm199">@FlameStorm199</a></td>
   </tr>
 
   <tr>
     <td>Alexandru Mitu</td>
     <td>2101083</td>
-    <td>[@aycollapse](https://github.com/aycollapse)</td>
+    <td><a href="https://github.com/aycollapse">@aycollapse</a></td>
   </tr>
   
   <tr>
     <td>Riccardo Pozzato</td>
     <td>2147988</td>
-    <td>[@rpozzato](https://github.com/rpozzato)</td>
+    <td><a href="https://github.com/rpozzato">@rpozzato</a></td>
   </tr>
 
   <tr>
     <td>Antonio Tufano</td>
     <td>2137972</td>
-    <td>[@antotuf06](https://github.com/antotuf06)</td>
+    <td><a href="https://github.com/antotuf06">@antotuf06</a></td>
   </tr>
   </tbody>
 </table>
