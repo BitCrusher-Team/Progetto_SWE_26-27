@@ -83,9 +83,14 @@
   </thead>
   <tbody>
     <tr>
-      <td>[Da aggiornare]</td>
+      <td>2026-10-17</td>
       <td>Primo incontro</td>
-      <td><a href="./docs/verbali/verbale_01.pdf">Verbale 01</a></td>
+      <td><a href="./docs/verbali/Verbale_interno_01.pdf">Verbale 01</a></td>
+    </tr>
+    <tr>
+      <td>2026-10-21</td>
+      <td>Secondo incontro</td>
+      <td><a href="./docs/verbali/Verbale_interno_02.pdf">Verbale 02</a></td>
     </tr>
   </tbody>
 </table>
