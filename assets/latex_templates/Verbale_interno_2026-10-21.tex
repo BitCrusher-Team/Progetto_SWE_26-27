@@ -1,0 +1,215 @@
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI ---
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+% --- CONFIGURAZIONE HEADER E FOOTER ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Verbale Interno N. 2} 
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Configurazione link indice
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+    
+    % --- LOGHI ---
+    % Sostituisci i \framebox con i comandi \includegraphics corretti
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        % Esempio: \includegraphics[width=0.7\textwidth]{logo_unipd.png}
+        \includegraphics[width=0.7\textwidth]{unipd_logo.png} 
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        % Esempio: \includegraphics[width=0.7\textwidth]{WhatsApp Image 2026-10-15 at 17.29.12.jpeg}
+        \includegraphics[width=0.7\textwidth]{Logo-BitCrusher-Nero.png}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large \textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}} \\
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica} \\
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software} \\
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027} \\
+
+    \vspace{2cm}
+    {\Huge \textbf{Verbale di Riunione}} \\
+    \vspace{0.5cm}
+    {\Large Riunione Interna \#2}
+
+    \vspace{2cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \textbf{Email:} bitcrusherteam@gmail.com \\
+        \textbf{Versione:} v1.0.0 \\
+        \textbf{Data della riunione:} 2026-10-21 \\
+        \textbf{Data ultima modifica:} 22 ottobre 2026
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+\newpage
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE
+% ==========================================
+\section*{Registro delle Modifiche}
+\vspace{0.5cm}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|l|l|l|l|X|}
+\hline
+\textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+1.0.0 & 2026-10-21 & Antonio Tufano & Riccardo Pozzato & Prima stesura delle sezioni: OdG, Resoconto, Decisioni e To-Do. \\ \hline
+
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==========================================
+% INDICE
+% ==========================================
+\tableofcontents
+\newpage
+% ==========================================
+% 1. INFORMAZIONI GENERALI
+% ==========================================
+\section{Informazioni Generali}
+\begin{itemize}
+    \item \textbf{Luogo/Piattaforma:} Riunione Discord
+    \item \textbf{Data:} 2026-10-21
+    \item \textbf{Orario di inizio:} 17:30
+    \item \textbf{Orario di fine:} 19:45
+    \item \textbf{Responsabile:} -
+    \item \textbf{Scriba:} Riccardo Pozzato
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Partecipanti presenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Pietro Leonardo Acampora & 2146762 \\ \hline
+Marco Bollettin & 2147955 \\ \hline
+Alexandru Mitu & 2101083 \\ \hline
+Riccardo Pozzato & 2147988 \\ \hline
+Alex Singh & 2148621 \\ \hline
+Antonio Tufano & 2137972 \\ \hline
+Erik Giuliano & 2138012 \\ \hline
+\end{tabularx}
+
+\vspace{0.5cm}
+\textbf{Partecipanti assenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+ Nessuno & - \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 2. ORDINE DEL GIORNO
+% ==========================================
+\vspace{0.5cm}
+\section{Ordine del Giorno}
+Gli argomenti previsti per la riunione odierna sono:
+\begin{enumerate}
+    \item Stesura delle domande per le aziende committenti
+    \item Riorganizzazione della repository GitHub e accordo sulle convenzioni per l'utilizzo
+    \item Invio mail di decisione nome e logo del gruppo al prof. Vardanega
+    \item Caricare nel repository layout LaTeX del verbale e verbale interno n.1
+    \item Invio delle mail alle aziende con i relativi quesiti
+\end{enumerate}
+
+% ==========================================
+% 3. RESOCONTO DELLA RIUNIONE
+% ==========================================
+\newpage
+\section{Resoconto della Riunione}
+
+\subsection{Stesura domande relative ai capitolati} 
+Sono state discusse le domande sorte ai membri del gruppo riguardo ogni capitolato proposto e si è valutato quali fosse necessario chiedere alle aziende proponenti.
+
+
+\subsection{Riorganizzazione repository GitHub}
+Il repository GitHub è stato riorganizzato in sezioni, così da avere già un'organizzazione basilare. Inoltre sono state discusse e scelte le convenzioni per l'utilizzo di tale repository.
+
+\subsection{Invio mail al prof. Vardanega}
+Inviata al prof. Vardanega la mail per comunicare il nome, il logo e il recapito di posta elettronica scelti dal gruppo, come richiesto.
+
+\subsection{Caricato layout LaTeX e primo verbale nel repository}
+Caricati nel repository GitHub i primi documenti interni, il layout LaTeX per i verbali e il file pdf del primo verbale della riunione del 17/10/2026 completo.
+
+\subsection{Invio mail alle aziende}
+Sono state mandate le prime mail alle aziende proponenti, dove si chiedono chiarimenti e spiegazioni riguardo a dubbi sorti relativamente ai capitolati. Siamo in attesa di risposta, per poter organizzare le prime riunioni.
+
+% ==========================================
+% 4. DECISIONI PRESE
+% ==========================================
+\section{Decisioni Prese}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|c|X|}
+\hline
+\textbf{Codice} & \textbf{Decisione} \\ \hline
+V-1.1 & Scelte le domande relative ai capitolati da rivolgere alle aziende \\ \hline
+V-1.2 & Scelte le convenzioni per l'utilizzo del repository GitHub\\ \hline
+
+
+\end{tabularx}
+
+% ==========================================
+% 5. AZIONI DA SVOLGERE (TO-DO)
+% ==========================================
+\vspace{0.5cm}
+\section{Azioni da Svolgere (To-Do)}
+\begin{tabularx}{\textwidth}{|c|X|l|l|}
+\hline
+\textbf{Codice Rif.} & \textbf{Descrizione Task} & \textbf{Assegnatario} & \textbf{Scadenza} \\ \hline
+VI-1.1 & Continuare il dialogo con le aziende e organizzare le riunioni & Marco Bollettin & 2026-10-28 \\ \hline
+
+
+\end{tabularx}
+
+% ==========================================
+% 6. PROSSIMA RIUNIONE
+% ==========================================
+\vspace{0.5cm}
+\section{Prossima Riunione}
+\begin{itemize}
+    \item \textbf{Data:}  Da concordare
+    \item \textbf{Ora:} Da concordare
+    \item \textbf{OdG preliminare:} Discutere sulle riunioni fatte con le aziende, inizio stesura documenti per la candidatura
+\end{itemize}
+
+\end{document}
