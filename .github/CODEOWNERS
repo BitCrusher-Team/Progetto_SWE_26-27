@@ -1,0 +1,10 @@
+# .github/CODEOWNERS
+
+# Ogni PR richiede almeno un review dall'insieme delegato
+*                       @ZiraelOneTwo @Ahwrs @rpozzato
+
+# I ruoli non-fissi sono modificabili con permesso esplicito
+docs/verbali/           @rpozzato @Ahwrs @antotuf06
+
+# La CI e Codeowners richiedono permesso esplicito
+.github/                @ZiraelOneTwo
