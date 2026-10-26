@@ -99,6 +99,11 @@
       <td>Secondo incontro</td>
       <td><a href="./docs/verbali/Verbale_interno_02.pdf">Verbale 02</a></td>
     </tr>
+    <tr>
+      <td>2026-10-24</td>
+      <td>Terzo incontro</td>
+      <td><a href="./docs/verbali/Verbale_interno_03.pdf">Verbale 03</a></td>
+    </tr>
   </tbody>
 </table>
 
