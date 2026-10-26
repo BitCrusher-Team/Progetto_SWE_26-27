@@ -6,3 +6,5 @@ githubBranch: main
 mergeMethod: rebase
 requireChecks: true
 requireApproval: true
+branchPushIndividually: true
+deleteMergedBranches: true

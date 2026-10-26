@@ -1,12 +1,12 @@
 <p align="center">
   <img
-    src="./assets/images/BitCrusherTeam.png"
+    src="./assets/images/ReadmeLogo/BitCrusherTeam.png"
     alt="Logo del gruppo Bit Crusher, un teschio in pixel art che schiaccia tra le fauci particelle pixelate"
     width="150"
   />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img
-    src="./assets/images/UnipdLogo.png"
+    src="./assets/images/ReadmeLogo/UnipdLogo.png"
     alt="Emblema dell'Università di Padova, le figure di due patroni e le nove stelle su campo azzurro"
     width="150"
   />
