@@ -1,0 +1,82 @@
+name: Diario di bordo
+description: Preparazione dell'intervento di diario di bordo davanti al committente, nelle date fissate.
+title: "[Diario] GG-MM-AAAA"
+labels: ["diario-di-bordo"]
+projects: ["BitCrusher-Team/4"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Il diario espone il rapporto tra costi sostenuti e avanzamento. Le ore si leggono dalla board([Prematuro]).
+
+  - type: input
+    id: data
+    attributes:
+      label: Data presentazione
+      placeholder: "26-10-2016"
+    validations:
+      required: true
+
+  - type: input
+    id: periodo
+    attributes:
+      label: Periodo coperto
+      placeholder: "Sprint 0 (15-10-2026 → 26-10-2026)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: avanzamento
+    attributes:
+      label: Cosa è stato completato
+      description: Link alle issue chiuse nel periodo.
+      placeholder: |
+        - #12 Valutazione dei capitolati
+        - #15 Verbale esterno con …
+    validations:
+      required: true
+
+  - type: textarea
+    id: costi
+    attributes:
+      label: \[Prematuro\] Ore consumate rispetto al preventivo
+      value: |
+        | Ruolo         | Ore nel periodo | Ore totali | Preventivo |
+        |---------------|-----------------|------------|------------|
+        | Responsabile  |                 |            |            |
+        | Amministratore|                 |            |            |
+        | Analista      |                 |            |            |
+        | Progettista   |                 |            |            |
+        | Programmatore |                 |            |            |
+        | Verificatore  |                 |            |            |
+
+  - type: textarea
+    id: prossimi
+    attributes:
+      label: Prossime attività
+      description: Cosa entra nel backlog del prossimo sprint.
+    validations:
+      required: true
+
+  - type: textarea
+    id: difficolta
+    attributes:
+      label: Difficoltà e rischi emersi
+      description: Cosa ha rallentato, cosa potrebbe farlo in futuro, cosa stiamo facendo per mitigarlo.
+
+  - type: textarea
+    id: domande
+    attributes:
+      label: Domande per il committente
+      description: Dubbi da sciogliere durante l'intervento.
+
+  - type: checkboxes
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: Lasciale vuote alla creazione; si spuntano modificando l'issue.
+      options:
+        - label: Contenuti concordati con il team
+        - label: Materiale di presentazione pronto
+        - label: Relatore designato
+        - label: Feedback del docente riportato nei commenti, con eventuali nuove issue

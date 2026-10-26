@@ -1,0 +1,89 @@
+name: Verbale riunione
+description: Una issue per ogni riunione, interna o esterna. Aperta il giorno stesso, anche solo con degli appunti grezzi.
+title: "[Verbale] GG-MM-AAAA – "
+labels: ["verbale"]
+projects: ["BitCrusher-Team/4"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Questa issue raccoglie i fatti della riunione e traccia il lavoro sul verbale. Il documento vero e proprio va nella repo documentale e passa da PR + verifica.
+
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo di riunione
+      options:
+        - Interna
+        - Esterna – committente
+        - Esterna – proponente
+    validations:
+      required: true
+
+  - type: input
+    id: data
+    attributes:
+      label: Data
+      placeholder: "15-10-2026"
+    validations:
+      required: true
+
+  - type: input
+    id: orario
+    attributes:
+      label: Orario
+      placeholder: "17:30 – 19:00"
+    validations:
+      required: true
+
+  - type: input
+    id: luogo
+    attributes:
+      label: Luogo / piattaforma
+      placeholder: "Discord, aula, Google Meet…"
+
+  - type: textarea
+    id: partecipanti
+    attributes:
+      label: Partecipanti
+      description: Membri presenti con il ruolo del periodo. Per le riunioni esterne, anche nome e ruolo dei rappresentanti.
+      placeholder: |
+        - Nome Cognome (Ruolo)
+        - …
+    validations:
+      required: true
+
+  - type: textarea
+    id: odg
+    attributes:
+      label: Ordine del giorno
+      placeholder: |
+        1. …
+        2. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: decisioni
+    attributes:
+      label: Discussione e decisioni
+      description: Appunti grezzi vanno bene. Un one-liner per le decisioni, con una breve motivazione.
+
+  - type: textarea
+    id: azioni
+    attributes:
+      label: Azioni da intraprendere
+      description: Una riga per azione con chi se ne occupa. Dopo aver creato l'issue, apri una sub-issue per ciascuna dal pannello laterale.
+      placeholder: |
+        - Chiedere all'azienda chiarimenti su … – @utente
+
+  - type: checkboxes
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: Lasciale vuote alla creazione; si spuntano modificando l'issue, man mano che vengono completate.
+      options:
+        - label: "Verbale redatto nella repo documentale, con commit che contiene `Closes #<numero di questa issue>`"
+        - label: Verificato da un membro diverso dal redattore (PR approvata)
+        - label: Ogni azione ha una sub-issue con assegnatario
+        - label: "[Prematuro] Solo riunioni esterne: verbale inviato al proponente per approvazione, se previsto"

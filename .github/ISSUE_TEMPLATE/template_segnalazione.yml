@@ -1,0 +1,53 @@
+name: Segnalazione
+description: Errore, incoerenza o mancanza trovata in un documento o nell'infrastruttura, fuori dal perimetro di una PR in corso.
+title: "[Segnalazione] "
+labels: ["segnalazione"]
+projects: ["BitCrusher-Team/4"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Se il problema è nel diff di una PR aperta, commentalo nella review invece di aprire una issue.
+
+  - type: dropdown
+    id: dove
+    attributes:
+      label: Dove
+      options:
+        - Documento
+        - Infrastruttura (CI, template, repo)
+        - Altro
+    validations:
+      required: true
+
+  - type: input
+    id: posizione
+    attributes:
+      label: Posizione
+      placeholder: "latex_templates/example.tex, §2.3"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema
+      description: Cosa è sbagliato o mancante, e in contrasto con cosa (norma, altro documento, capitolato).
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Correzione proposta
+
+  - type: dropdown
+    id: urgenza
+    attributes:
+      label: Urgenza
+      options:
+        - Blocca una consegna
+        - Da correggere entro lo sprint
+        - Cosmetica
+    validations:
+      required: true
