@@ -2,29 +2,54 @@ name: CI
 
 on:
   pull_request:
-    branches: [main]
+    # Niente filtro sul branch base: la CI gira anche sulle PR impilate (base spr/*).
+    # edited: rilancia il check quando cambia il titolo o il branch base (retarget).
+    types: [opened, synchronize, reopened, edited]
   merge_group:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   checks:
+    name: CI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate PR title (multi-commit conventional)
+      - name: Valida il titolo della PR
         if: github.event_name == 'pull_request'
+        shell: bash
         env:
           TITLE: ${{ github.event.pull_request.title }}
         run: |
-          # Pattern: uno o più commit separati da ';', messaggio che termina con '.'
-          # Ogni commit: type(scope): desc  OPPURE  type: desc
-          # type: vedi lista nel pattern
-          # scope: opzionale, tra parentesi ()
-          PATTERN='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-zA-Z0-9_./+-]+\))?!?: [a-z][^.]*((; )(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-zA-Z0-9_./+-]+\))?!?: [a-z][^.]*)*\.$'
-          
-          if ! echo "$TITLE" | grep -qE "$PATTERN"; then
-            echo "::error::PR title must follow multi-commit format:"
-            echo "e.g.  type(scope): description; type2: description2."
-            echo "      Valid types: feat fix docs style refactor perf test build ci chore revert"
+          # Formato: uno o più segmenti separati da "; ", titolo che termina con ".".
+          # Segmento: tipo(scope)!: descrizione   (scope e "!" opzionali)
+          # Descrizione: non inizia con maiuscola o spazio, non termina con spazio,
+          # non contiene ";" (riservato al separatore). Punti, ":", "/" ammessi.
+          export LC_ALL=C
+          types='feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert'
+          seg_re="^(${types})(\([A-Za-z0-9_./+-]+\))?!?: [^A-Z[:space:];]([^;]*[^[:space:];])?\$"
+
+          fail() {
+            echo "::error title=Titolo PR non valido::$1"
+            echo "Formato atteso: tipo(scope): descrizione; tipo2: descrizione2."
+            echo "Tipi validi: ${types//|/ }"
             exit 1
-          fi
+          }
+
+          [[ "$TITLE" == *. ]] || fail "il titolo deve terminare con '.'"
+          rest=${TITLE%.}
+          n=0
+          while :; do
+            seg=${rest%%; *}
+            n=$((n + 1))
+            [[ "$seg" =~ $seg_re ]] || fail "segmento $n non valido: '$seg'"
+            [[ "$rest" == *"; "* ]] || break
+            rest=${rest#*; }
+          done
+          echo "Titolo valido ($n segmenti)."
