@@ -4,7 +4,7 @@
     alt="Logo del gruppo Bit Crusher, un teschio in pixel art che schiaccia tra le fauci particelle pixelate"
     width="150"
   />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img
     src="./assets/images/UnipdLogo.png"
     alt="Emblema dell'Università di Padova, le figure di due patroni e le nove stelle su campo azzurro"
@@ -12,10 +12,14 @@
   />
 </p>
 
+<!-- markdownlint-disable-next-line MD033 -->
+<div align="center">
 
 [![Build Status](https://github.com/BitCrusher-Team/Progetto_SWE_26-27/actions/workflows/ci.yml/badge.svg)](https://github.com/BitCrusher-Team/Progetto_SWE_26-27/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+</div>
+<!-- markdownlint-enable-next-line MD033 -->
 
 # Progetto di Ingegneria del Software
 

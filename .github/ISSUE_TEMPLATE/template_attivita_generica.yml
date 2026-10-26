@@ -1,0 +1,82 @@
+name: Attività
+description: Unità di lavoro pianificabile in uno sprint. Redazione o modifica di un documento, infrastruttura, studio etc.
+labels: ["attività"]
+projects: ["BitCrusher-Team/4"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Granularità**: una persona, un output verificabile, chiudibile entro lo sprint. Se non riesci a scrivere i criteri di accettazione, l'issue è troppo vaga; se è troppo grande, spezzala in sub-issue.
+        **Raccomandazione**: ul titolo nomina l'output, non l'attività.
+
+  - type: dropdown
+    id: categoria
+    attributes:
+      label: Categoria
+      options:
+        - Redazione documento
+        - Modifica documento
+        - Infrastruttura e automazione
+        - Studio e formazione
+        - Altro
+    validations:
+      required: true
+
+  - type: dropdown
+    id: documento
+    attributes:
+      label: Documento
+      description: Adatta l'elenco ai nomi richiesti nell'edizione del corso.
+      options:
+        - Nessuno
+        - Lettera di presentazione
+        - Valutazione dei capitolati
+        - Dichiarazione degli impegni
+        - Norme di Progetto
+        - Piano di Progetto
+        - Piano di Qualifica
+        - Analisi dei Requisiti
+        - Glossario
+        - Altro
+
+  - type: input
+    id: perimetro
+    attributes:
+      label: Sezione o file
+      description: Restringe il perimetro e riduce i conflitti di merge.
+      placeholder: "latex_templates/example.tex"
+
+  - type: textarea
+    id: obiettivo
+    attributes:
+      label: Obiettivo
+      description: Cosa cambia e perché.
+    validations:
+      required: true
+
+  - type: textarea
+    id: accettazione
+    attributes:
+      label: Criteri di accettazione
+      description: Condizioni che il verificatore controlla per approvare.
+      placeholder: |
+        - La sezione descrive …
+    validations:
+      required: true
+
+  - type: textarea
+    id: dipendenze
+    attributes:
+      label: Dipendenze
+      placeholder: "e.g. Bloccata da #12"
+
+  - type: checkboxes
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: Lasciale vuote alla creazione; si spuntano modificando l'issue.
+      options:
+        - label: "Commit con `Closes #<numero di questa issue>` nel messaggio"
+        - label: Verificato da un membro diverso dall'autore (PR approvata)
+        - label: Registro delle modifiche del documento aggiornato
+        - label: Nuovi termini aggiunti al Glossario

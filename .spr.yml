@@ -1,0 +1,8 @@
+# .spr.yml
+
+githubRepoOwner: BitCrusher-Team
+githubRepoName: Progetto_SWE_26-27
+githubBranch: main
+mergeMethod: rebase
+requireChecks: true
+requireApproval: true
