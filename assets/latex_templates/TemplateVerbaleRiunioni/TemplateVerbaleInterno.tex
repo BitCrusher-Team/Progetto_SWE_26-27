@@ -1,0 +1,204 @@
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI ---
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+% --- CONFIGURAZIONE HEADER E FOOTER ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Verbale Interno N. x} %INSERIRE NUMERO RIUNIONE 
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Configurazione link indice
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+    
+    % --- LOGHI ---
+    % Sostituisci i \framebox con i comandi \includegraphics corretti
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        % Esempio: \includegraphics[width=0.7\textwidth]{logo_unipd.png}
+        \includegraphics[width=0.7\textwidth]{unipd_logo.png} 
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        % Esempio: \includegraphics[width=0.7\textwidth]{WhatsApp Image 2026-10-15 at 17.29.12.jpeg}
+        \includegraphics[width=0.7\textwidth]{Logo-BitCrusher-Nero.png}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large \textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}} \\
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica} \\
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software} \\
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027} \\
+
+    \vspace{2cm}
+    {\Huge \textbf{Verbale di Riunione}} \\
+    \vspace{0.5cm}
+    {\Large Riunione Interna \#x}  %INSERIRE NUMERO RIUNIONE
+
+    \vspace{2cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \textbf{Email:} bitcrusherteam@gmail.com \\
+        \textbf{Versione:} v1.0.0 \\
+        \textbf{Data della riunione:} [Inserire data riunione] \\ 
+        \textbf{Data ultima modifica:} [Inserire data ultima modifica]
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+\newpage
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE
+% ==========================================
+\section*{Registro delle Modifiche}
+\vspace{0.5cm}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|l|l|l|l|X|}
+\hline
+\textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+1.0.0 & Inserire data & Nome Cognome & Nome Cognome & Inserire Descrizione \\ \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==========================================
+% INDICE
+% ==========================================
+\tableofcontents
+\newpage
+
+% ==========================================
+% 1. INFORMAZIONI GENERALI
+% ==========================================
+\section{Informazioni Generali}
+\begin{itemize}
+    \item \textbf{Luogo/Piattaforma:} Riunione Discord
+    \item \textbf{Data:} [Inserire data riunione]
+    \item \textbf{Orario di inizio:} [Inserire orario di inizio]
+    \item \textbf{Orario di fine:} [Inserire orario di fine]
+    \item \textbf{Responsabile:} [Inserire Nome]
+    \item \textbf{Scriba:} [Inserire Nome]
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Partecipanti presenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Pietro Leonardo Acampora & 2146762 \\ \hline
+Marco Bollettin & 2147955 \\ \hline
+Erik Giuliano & 2138012 \\ \hline
+Alexandru Mitu & 2101083 \\ \hline
+Riccardo Pozzato & 2147988 \\ \hline
+Alex Singh & 2148621 \\ \hline
+Antonio Tufano & 2137972 \\ \hline
+\end{tabularx}
+
+\vspace{0.5cm}
+\textbf{Partecipanti assenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Nessuno & - \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 2. ORDINE DEL GIORNO
+% ==========================================
+\section{Ordine del Giorno}
+Gli argomenti previsti per la riunione odierna sono:
+\begin{enumerate}
+    \item 
+    \item 
+    \item 
+\end{enumerate}
+
+% ==========================================
+% 3. RESOCONTO DELLA RIUNIONE
+% ==========================================
+\section{Resoconto della Riunione}
+
+\subsection{Sezione 1}
+Inserire descrizione
+
+\subsection{Sezione 2}
+Inserire descrizione
+
+\subsection{Sezione 3}
+Inserire descrizione
+
+
+
+% ==========================================
+% 4. DECISIONI PRESE
+% ==========================================
+\section{Decisioni Prese}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|c|X|}
+\hline
+\textbf{Codice} & \textbf{Decisione} \\ \hline
+V-1.1 & Inserire decisione presa \\ \hline
+V-1.2 & Inserire decisione presa \\ \hline
+V-1.3 & Inserire decisione presa \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 5. AZIONI DA SVOLGERE (TO-DO)
+% ==========================================
+\section{Azioni da Svolgere (To-Do)}
+\begin{tabularx}{\textwidth}{|c|X|l|l|}
+\hline
+\textbf{Codice Rif.} & \textbf{Descrizione Task} & \textbf{Assegnatario} & \textbf{Scadenza} \\ \hline
+VI-1.1 & Inserire descrizione & Nome Cognome & Inserire data \\ \hline
+VI-1.2 & Inserire descrizione & Nome Cognome & Inserire data \\ \hline
+VI-1.3 & Inserire descrizione & Nome Cognome & Inserire data \\ \hline
+
+\end{tabularx}
+
+% ==========================================
+% 6. PROSSIMA RIUNIONE
+% ==========================================
+\section{Prossima Riunione}
+\begin{itemize}
+    \item \textbf{Data:} Inserire data
+    \item \textbf{Ora:} Inserire ora
+    \item \textbf{OdG preliminare:} Inserire OdG Preliminare
+\end{itemize}
+
+\end{document}
