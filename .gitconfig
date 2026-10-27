@@ -1,0 +1,7 @@
+# .gitconfig
+# Alias condivisi del team.
+# RACCOMANDAZIONE: Attivazione richiesta una volta per clone:
+#   git config --local include.path ../.gitconfig
+[alias]
+	newstack = "!sh scripts/stack.sh new"
+	delstack = "!sh scripts/stack.sh del"
