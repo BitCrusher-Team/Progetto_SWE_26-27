@@ -31,17 +31,22 @@ jobs:
           # Segmento: tipo(scope)!: descrizione   (scope e "!" opzionali)
           # Descrizione: non inizia con maiuscola o spazio, non termina con spazio,
           # non contiene ";" (riservato al separatore). Punti, ":", "/" ammessi.
+          # Lunghezza in char (non byte): non oltre 72 perchè GH tronca il subject
+          # con '...' e sposta il resto nel body.
+          LC_ALL=C.UTF-8
+          len=${#TITLE}
           export LC_ALL=C
           types='feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert'
           seg_re="^(${types})(\([A-Za-z0-9_./+-]+\))?!?: [^A-Z[:space:];]([^;]*[^[:space:];])?\$"
-
+ 
           fail() {
             echo "::error title=Titolo PR non valido::$1"
             echo "Formato atteso: tipo(scope): descrizione; tipo2: descrizione2."
             echo "Tipi validi: ${types//|/ }"
             exit 1
           }
-
+ 
+          (( len <= 72 )) || fail "titolo di $len caratteri (max 72): accorcia il subject del commit, i dettagli vanno nel body"
           [[ "$TITLE" == *. ]] || fail "il titolo deve terminare con '.'"
           rest=${TITLE%.}
           n=0
