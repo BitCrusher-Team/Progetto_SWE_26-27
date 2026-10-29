@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bit Crusher // Progetto SWE 26-27</title>
+  <meta name="description" content="Bit Crusher, gruppo del corso di Ingegneria del Software dell'Università degli Studi di Padova (A.A. 2026/2027): capitolati, verbali, processo, squadra e telemetria della repo di progetto.">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bit Crusher // Progetto SWE 26-27">
+  <meta property="og:description" content="Il sito del gruppo Bit Crusher per il progetto di Ingegneria del Software, UniPD A.A. 2026/2027.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body data-stage="boot">
+  <a class="skip-link" href="#main">Salta al contenuto</a>
+  <noscript>
+    <div class="noscript">Questo sito richiede JavaScript. Il materiale del progetto è sulla
+      <a href="https://github.com/BitCrusher-Team/Progetto_SWE_26-27">repo GitHub</a>.</div>
+  </noscript>
+
+  <!-- ============ 01 // APERTURA: fase rossa, tieni premuto ============ -->
+  <section id="boot" class="stage boot" aria-label="Apertura: tieni premuto per inizializzare">
+    <canvas class="boot__canvas" data-boot-canvas aria-hidden="true"></canvas>
+    <div class="boot__hud" aria-hidden="true">
+      <p class="boot__tl">BC//SYS BOOTLOADER v0.1<br>NODO UNIPD-SC1167<br><span class="jp" lang="ja">起動 待機中</span></p>
+      <p class="boot__tr">N 45°24'27" E 11°52'38"<br><span data-clock></span><br>A.A. 2026—2027</p>
+      <p class="boot__bl"><span data-boot-glyphs></span> BC-002627 // SEGNALE ROSSO</p>
+    </div>
+    <div class="boot__center">
+      <button id="boot-hold" class="hold" type="button" aria-describedby="boot-hint">
+        <span class="hold__label">Tieni premuto</span>
+        <span class="hold__fill" data-boot-p aria-hidden="true"><span class="hold__label">Tieni premuto</span></span>
+      </button>
+      <p id="boot-hint" class="boot__hint">[ SPAZIO ] · CLICK · TOUCH // tieni premuto per inizializzare</p>
+      <div class="boot__meter" aria-hidden="true">
+        <span class="boot__pct"><b data-boot-pct>000</b>%</span>
+        <span class="boot__bar" data-boot-p></span>
+        <span class="boot__status" data-boot-status>IN ATTESA DI OPERATORE</span>
+      </div>
+    </div>
+    <div class="boot__ctl">
+      <button type="button" class="ctl ctl--red" data-boot-ctl data-sound-toggle aria-pressed="true">SND <b data-sound-state>ON</b></button>
+      <button type="button" class="ctl ctl--red" data-boot-ctl data-boot-skip>Salta intro »</button>
+    </div>
+    <div class="breach" data-breach hidden aria-hidden="true">
+      <div class="breach__field"><canvas class="breach__canvas" data-breach-canvas></canvas></div>
+      <div class="breach__band breach__band--a"><span data-breach-ttm>26:27 TTM</span></div>
+      <div class="breach__band breach__band--b"><span>QTERM CORE BREACH</span><span data-breach-id>ID: -------</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 02 // TERMINALE DI ACCESSO ============ -->
+  <section id="term" class="stage term" aria-label="Terminale di accesso" hidden>
+    <div class="term__frame" aria-hidden="true">
+      <i class="xh xh--tl"></i><i class="xh xh--tr"></i><i class="xh xh--bl"></i><i class="xh xh--br"></i>
+      <span class="term__corner term__corner--tr">BC_SYNC VIE<br>[RIALLINEAMENTO]</span>
+      <span class="term__corner term__corner--bl">F1-3<br>BC DESYNC<br>CMP ... [SÌ]</span>
+      <span class="term__corner term__corner--br">SEN PAT<br>DISTURBATO</span>
+    </div>
+    <aside class="term__side" data-term-side aria-hidden="true"></aside>
+    <div class="term__main">
+      <div class="term__out" data-term-out role="log" aria-live="polite"></div>
+      <form class="term__line" data-term-form autocomplete="off">
+        <label class="term__prompt" for="term-input" data-term-prompt>guest@bitcrusher:~$</label>
+        <span class="term__field">
+          <input id="term-input" class="term__input" data-term-input type="text" spellcheck="false" autocapitalize="off" autocomplete="off" enterkeyhint="send">
+          <span class="term__caret" aria-hidden="true"></span>
+        </span>
+      </form>
+      <div class="term__chips" aria-label="Comandi rapidi">
+        <button type="button" data-cmd="accedi">accedi</button>
+        <button type="button" data-cmd="aiuto">aiuto</button>
+        <button type="button" data-cmd="squadra">squadra</button>
+        <button type="button" data-cmd="stato">stato</button>
+      </div>
+    </div>
+    <div class="ovr" data-ovr aria-hidden="true">
+      <div class="ovr__panel">
+        <i class="ovr__tab ovr__tab--tl"></i><i class="ovr__tab ovr__tab--tr"></i>
+        <i class="ovr__tab ovr__tab--bl"></i><i class="ovr__tab ovr__tab--br"></i>
+        <i class="ovr__sq ovr__sq--tl"></i><i class="ovr__sq ovr__sq--tr"></i>
+        <i class="ovr__sq ovr__sq--bl"></i><i class="ovr__sq ovr__sq--br"></i>
+        <span class="ovr__icon"></span>
+        <span class="ovr__label">BC-2627</span>
+        <span class="ovr__code">BCNET</span>
+        <span class="ovr__jp" lang="ja">全権限</span>
+        <span class="ovr__right">LIMITATORE OFF<br>ACCESSO REPO<br>CONFORME (sì) SC-1167</span>
+        <div class="ovr__marquee"><div class="ovr__track"><span>ACCESSO ACCESSO </span><span>ACCESSO ACCESSO </span></div></div>
+        <div class="ovr__foot"><span class="ovr__mini"></span><span>CORE [ATTIVO]<br>SYS OVERRIDE · BARRIERA DI SEGNALE GIÙ</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02b // ATTESA: dentro la sfera, telecamera alla deriva ============ -->
+  <section id="wait" class="wait" aria-label="Sincronizzazione dei dati del sito" hidden>
+    <canvas class="wait__canvas" data-wait-canvas aria-hidden="true"></canvas>
+    <div class="wait__reticle" aria-hidden="true">
+      <svg viewBox="-100 -100 200 200">
+        <g class="rt-spin">
+          <circle r="84" class="rt-dash"/>
+          <path d="M0 -94v12M0 82v12M-94 0h12M82 0h12" class="rt-line"/>
+        </g>
+        <path d="M-62 -40V-62H-40M40 -62H62V-40M62 40V62H40M-40 62H-62V40" class="rt-line"/>
+        <path d="M28.98 7.76A30 30 0 0 1 7.76 28.98M-7.76 28.98A30 30 0 0 1 -28.98 7.76M-28.98 -7.76A30 30 0 0 1 -7.76 -28.98M7.76 -28.98A30 30 0 0 1 28.98 -7.76" class="rt-line"/>
+        <path d="M0 -46v12M0 34v12M-46 0h12M34 0h12" class="rt-line"/>
+        <circle r="2.6" class="rt-dot"/>
+        <text x="48" y="-70" class="rt-txt">FUOCO</text>
+        <text x="-90" y="78" class="rt-txt">BC-2627</text>
+      </svg>
+    </div>
+    <p class="wait__lock" data-wait-lock aria-hidden="true">IN ATTESA DEL SEGNALE</p>
+    <div class="wait__hud" aria-hidden="true">
+      <p class="wait__tl">BC//SYNC — SINCRONIZZAZIONE DATI<br><span class="jp" lang="ja">接続 待機中</span></p>
+      <p class="wait__tr"><span data-clock></span><br><span data-wait-cam>CAM —</span></p>
+    </div>
+    <ol class="wait__tasks" data-wait-tasks aria-hidden="true"></ol>
+    <div class="wait__foot" aria-hidden="true">
+      <span class="wait__count" data-wait-count>00/00</span>
+      <span class="wait__bar"><span data-wait-p></span></span>
+      <span class="wait__skip">INVIO · CLICK PER SALTARE</span>
+    </div>
+    <p class="sr-only" aria-live="polite" data-wait-live></p>
+  </section>
+
+  <!-- ============ 03 // IL SITO (dentro la sfera) ============ -->
+  <div id="site" class="site" hidden>
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Bit Crusher, torna all'inizio">
+        <span class="brand__mark"></span>
+        <span class="brand__name">BIT<i>//</i>CRUSHER</span>
+        <span class="brand__sub">SWE 26—27</span>
+      </a>
+      <nav id="nav" class="nav" aria-label="Sezioni del sito"><ol data-nav></ol></nav>
+      <div class="sys">
+        <span class="sys__clock" data-clock></span>
+        <button type="button" class="ctl" data-sphere-toggle aria-pressed="true">SFERA <b data-sphere-state>ON</b></button>
+        <button type="button" class="ctl" data-sound-toggle aria-pressed="true">SND <b data-sound-state>ON</b></button>
+        <button type="button" class="ctl" data-console-open aria-label="Apri il terminale">&gt;_</button>
+        <button type="button" class="ctl nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="nav">MENU</button>
+      </div>
+    </header>
+    <aside class="rail" aria-hidden="true">
+      <span class="rail__code" data-rail-sec>SEC.00</span>
+      <span class="rail__word">BIT CRUSHER</span>
+      <span class="rail__track"><span class="rail__fill"></span></span>
+      <span class="rail__pct"><b data-rail-pct>000</b>%</span>
+    </aside>
+    <div id="screen" class="screen" tabindex="-1">
+      <main id="main"></main>
+      <div id="footer-slot"></div>
+    </div>
+    <svg class="hud" data-hud aria-hidden="true"></svg>
+    <p class="subtitle" data-subtitle aria-hidden="true"></p>
+    <div id="console" class="console" role="dialog" aria-label="Terminale di sistema" hidden>
+      <div class="console__bar">
+        <span>BC QTERM // TTY1</span>
+        <span class="console__hint">\ oppure ESC per chiudere</span>
+        <button type="button" class="ctl" data-console-close>Chiudi ×</button>
+      </div>
+      <div class="term__out" data-term-out role="log" aria-live="polite"></div>
+      <form class="term__line" data-term-form autocomplete="off">
+        <label class="term__prompt" for="console-input" data-term-prompt></label>
+        <span class="term__field">
+          <input id="console-input" class="term__input" data-term-input type="text" spellcheck="false" autocapitalize="off" autocomplete="off" enterkeyhint="send">
+          <span class="term__caret" aria-hidden="true"></span>
+        </span>
+      </form>
+    </div>
+    <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+    <div class="toast" data-toast role="status" hidden></div>
+  </div>
+
+  <!-- glifi micrografici -->
+  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="g-x" viewBox="0 0 10 10"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="currentColor" stroke-width="1.4" fill="none"/></symbol>
+      <symbol id="g-sq" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="3.5" y="3.5" width="3" height="3" fill="currentColor"/></symbol>
+      <symbol id="g-ring" viewBox="0 0 10 10"><circle cx="5" cy="5" r="3.8" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5" cy="5" r="1.4" fill="currentColor"/></symbol>
+      <symbol id="g-dia" viewBox="0 0 10 10"><path d="M5 .8L9.2 5 5 9.2.8 5z" fill="currentColor"/></symbol>
+      <symbol id="g-tri" viewBox="0 0 10 10"><path d="M5 1.2L9 8.8H1z" fill="none" stroke="currentColor" stroke-width="1.2"/></symbol>
+      <symbol id="g-bars" viewBox="0 0 10 10"><path d="M1 1h1.4v8H1zM4.3 1h1.4v8H4.3zM7.6 1H9v8H7.6z" fill="currentColor"/></symbol>
+      <symbol id="g-plus" viewBox="0 0 10 10"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.4"/></symbol>
+      <symbol id="g-dot" viewBox="0 0 10 10"><rect x="3" y="3" width="4" height="4" fill="currentColor"/></symbol>
+      <symbol id="g-half" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M1 1h8v4H1z" fill="currentColor"/></symbol>
+    </defs>
+  </svg>
+
+  <script src="assets/js/content.js" defer></script>
+  <script src="assets/js/lib.js" defer></script>
+  <script src="assets/js/repo.js" defer></script>
+  <script src="assets/js/fault.js" defer></script>
+  <script src="assets/js/boot.js" defer></script>
+  <script src="assets/js/terminal.js" defer></script>
+  <script src="assets/js/wait.js" defer></script>
+  <script src="assets/js/sphere.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

@@ -29,7 +29,7 @@
 
 <aside>
   <strong>Gruppo:</strong> Bit Crusher &nbsp;|&nbsp;
-  <strong>Relatore:</strong> Prof. Tullio Verdanega &nbsp;|&nbsp;
+  <strong>Relatore:</strong> Prof. Tullio Vardanega &nbsp;|&nbsp;
   <strong>Corso:</strong> Informatica (cod. SC1167), Università di Padova &nbsp;|&nbsp;
   <strong>Anno Accademico:</strong> 2026/2027
 </aside>
@@ -61,16 +61,14 @@
 ## Diario di Bordo
 
 <p>
-  Il <strong>diario di bordo</strong> (<code>docs/diario_di_bordo/</code>)
+  Il <strong>diario di bordo</strong>
   traccia l'andamento del progetto settimana per settimana: attività svolte,
   ostacoli incontrati, decisioni prese e obiettivi per il ciclo successivo.
 </p>
 
 <p>
-  Il file sorgente è presente in
-  <a href="./assets/latex_templates/diario_di_bordo.tex"><code>diario_di_bordo.tex</code></a>;
-  mentre la versione compilata è disponibile come
-  <a href="./docs/diario_di_bordo/diario_di_bordo.pdf"><code>diario_di_bordo.pdf</code></a>.
+  Il file template pptx è presente in
+  <a href="./assets/latex_templates/[TO_REPLACE]"><code>diario_di_bordo.pptx</code></a>.
 </p>
 
 ## Verbali delle Riunioni
