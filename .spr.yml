@@ -3,8 +3,7 @@
 githubRepoOwner: BitCrusher-Team
 githubRepoName: Progetto_SWE_26-27
 githubBranch: main
-mergeMethod: rebase
+mergeMethod: squash
 requireChecks: true
 requireApproval: true
 branchPushIndividually: true
-deleteMergedBranches: true

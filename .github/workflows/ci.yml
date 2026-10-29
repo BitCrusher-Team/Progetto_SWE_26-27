@@ -2,8 +2,8 @@ name: CI
 
 on:
   pull_request:
-    # Niente filtro sul branch base: la CI gira anche sulle PR impilate (base spr/*).
-    # edited: rilancia il check quando cambia il titolo o il branch base (retarget).
+    # Niente filtro sul branch base: la CI gira anche sulle stacked PR (base spr/*).
+    # NOTA: ora rilancia il check anche quando cambia il titolo o il branch base.
     types: [opened, synchronize, reopened, edited]
   merge_group:
 
@@ -26,27 +26,36 @@ jobs:
         shell: bash
         env:
           TITLE: ${{ github.event.pull_request.title }}
+          ACTION: ${{ github.event.action }}
+          OLD_TITLE: ${{ github.event.changes.title.from }}
         run: |
+          # git spr merge, subito prima del merge, riscrive il titolo con l'headline
+          # che GitHub tronca oltre 72 caratteri ("…" in fondo, il resto nel body).
+          # Se l'unica modifica è quel troncamento, si valida il titolo completo
+          # precedente: con squash "Default message" è il subject che arriva sul main.
+          if [[ "$ACTION" == edited && -n "$OLD_TITLE" ]]; then
+            stem=${TITLE%…}; stem=${stem%...}
+            if [[ "$stem" != "$TITLE" && "$OLD_TITLE" == "$stem"* ]]; then
+              echo "Titolo troncato da GitHub: valido il titolo completo precedente."
+              TITLE=$OLD_TITLE
+            fi
+          fi
+
           # Formato: uno o più segmenti separati da "; ", titolo che termina con ".".
           # Segmento: tipo(scope)!: descrizione   (scope e "!" opzionali)
           # Descrizione: non inizia con maiuscola o spazio, non termina con spazio,
           # non contiene ";" (riservato al separatore). Punti, ":", "/" ammessi.
-          # Lunghezza in char (non byte): non oltre 72 perchè GH tronca il subject
-          # con '...' e sposta il resto nel body.
-          LC_ALL=C.UTF-8
-          len=${#TITLE}
           export LC_ALL=C
           types='feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert'
           seg_re="^(${types})(\([A-Za-z0-9_./+-]+\))?!?: [^A-Z[:space:];]([^;]*[^[:space:];])?\$"
- 
+
           fail() {
             echo "::error title=Titolo PR non valido::$1"
             echo "Formato atteso: tipo(scope): descrizione; tipo2: descrizione2."
             echo "Tipi validi: ${types//|/ }"
             exit 1
           }
- 
-          (( len <= 72 )) || fail "titolo di $len caratteri (max 72): accorcia il subject del commit, i dettagli vanno nel body"
+
           [[ "$TITLE" == *. ]] || fail "il titolo deve terminare con '.'"
           rest=${TITLE%.}
           n=0
