@@ -15,6 +15,7 @@
 <!-- markdownlint-disable-next-line MD033 -->
 <div align="center">
 
+[![BitCrusher Project Site](https://shields.io)](https://bitcrusher-team.github.io/Progetto_SWE_26-27/)
 [![Build Status](https://github.com/BitCrusher-Team/Progetto_SWE_26-27/actions/workflows/ci.yml/badge.svg)](https://github.com/BitCrusher-Team/Progetto_SWE_26-27/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -71,7 +72,7 @@
 
 <p>
   Il file template pptx è presente in
-  <a href="./assets/pptx_templates/Template Meeting Bit Crusher.pptx"><code>diario_di_bordo.pptx</code></a>.
+  <a href="./assets/pptx_templates/Meeting_Bit_Crusher.pptx"><code>Meeting_Bit_Crusher.pptx</code></a>.
   
   Mentre la concretizzazione nelle istanze è presente in
   <a href="./docs/diario_di_bordo/"><code>docs/diario_di_bordo</code></a>.
