@@ -115,7 +115,7 @@
     </tr>
     <tr>
       <td>2026-10-28</td>
-      <td>Redazione bozza dei documenti di candidatura/td>
+      <td>Redazione bozza dei documenti di candidatura</td>
       <td><a href="./docs/verbali/verbali_interni/Verbale_interno_04.pdf">Verbale I04</a></td>
     </tr>
   </tbody>
