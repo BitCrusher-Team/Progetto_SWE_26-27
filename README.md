@@ -122,7 +122,7 @@
     <tr>
       <td>2026-10-29</td>
       <td>Revisione documenti per candidatura ed elezione responsabile</td>
-      <td><a href="./docs/verbali/verbali_esterni/Verbale_interno_05.pdf">Verbale I05</a></td>
+      <td><a href="./docs/verbali/verbali_interni/verbale_interno_05.pdf">Verbale I05</a></td>
     </tr>
   </tbody>
 </table>
