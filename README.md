@@ -109,8 +109,8 @@
     </tr>
     <tr>
       <td>2026-10-28</td>
-      <td>Definizione monte ore per persona e costo totale stimato</td>
-      <td><a href="./docs/verbali/verbali_esterni/Verbale_interno_04.pdf">Verbale I04</a></td>
+      <td>Redazione bozza dei documenti di candidatura</td>
+      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_04.pdf">Verbale I04</a></td>
     </tr>
     <tr>
       <td>2026-10-29</td>
