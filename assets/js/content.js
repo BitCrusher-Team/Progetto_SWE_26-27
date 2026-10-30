@@ -100,6 +100,9 @@ window.BC_CONTENT = {
     { id: "I03", tipo: "interno", data: "2026-10-24", titolo: "Formazione del primo diario di bordo ed il relativo template",
       versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Marco Bollettin, Antonio Tufano",
       file: "docs/verbali/verbali_interni/Verbale_interno_03.pdf" },
+    { id: "I04", tipo: "interno", data: "2026-10-28", titolo: "Redazione bozza dei documenti di candidatura",
+      versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Erik Giuliano",
+      file: "docs/verbali/verbali_interni/Verbale_interno_04.pdf" },
     { id: "E01", tipo: "esterno", data: "2026-10-26", titolo: "Confronto su dubbi e domande con l'azienda proponente",
       con: "Var Group", firmato: true,
       versione: "1.0.1", redattore: "Marco Bollettin", verificatore: "Alex Singh",
@@ -116,9 +119,9 @@ window.BC_CONTENT = {
 
   // Documenti di progetto. stato: null | "bozza" | "in verifica" | "approvato"
   documenti: [
-    { nome: "Lettera di presentazione", versione: null, stato: null, file: null },
-    { nome: "Valutazione dei capitolati", versione: null, stato: null, file: null },
-    { nome: "Dichiarazione degli impegni", versione: null, stato: null, file: null },
+    { nome: "Lettera di presentazione", versione: "1.0.0", stato: "approvato", file: "docs/candidatura/Lettera_Di_Candidatura_BitCrusher.pdf" },
+    { nome: "Valutazione dei capitolati", versione: "1.0.0", stato: "approvato", file: "docs/candidatura/Valutazione_Capitolati_BitCrusher.pdf" },
+    { nome: "Dichiarazione degli impegni", versione: "1.0.0", stato: "approvato", file: "docs/candidatura/Dichiarazione_Impegni_BitCrusher.pdf" },
     { nome: "Norme di Progetto", versione: null, stato: null, file: null },
     { nome: "Piano di Progetto", versione: null, stato: null, file: null },
     { nome: "Piano di Qualifica", versione: null, stato: null, file: null },
@@ -140,13 +143,13 @@ window.BC_CONTENT = {
 
   // ruolo: ruolo del periodo corrente (i ruoli sono a rotazione), null se non assegnato
   team: [
-    { nome: "Alex Singh", matricola: "2148621", github: "ZiraelOneTwo", ruolo: null },
-    { nome: "Pietro Leonardo Acampora", matricola: "2146762", github: "hipietro", ruolo: null },
-    { nome: "Marco Bollettin", matricola: "2147955", github: "Ahwrs", ruolo: null },
-    { nome: "Erik Giuliano", matricola: "2138012", github: "FlameStorm199", ruolo: null },
-    { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: null },
-    { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: null },
-    { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: null },
+    { nome: "Alex Singh", matricola: "2148621", github: "ZiraelOneTwo", ruolo: "Amministratore" },
+    { nome: "Pietro Leonardo Acampora", matricola: "2146762", github: "hipietro", ruolo: "Verificatore" },
+    { nome: "Marco Bollettin", matricola: "2147955", github: "Ahwrs", ruolo: "Analista" },
+    { nome: "Erik Giuliano", matricola: "2138012", github: "FlameStorm199", ruolo: "Verificatore" },
+    { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: "Verificatore" },
+    { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: "Responsabile" },
+    { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: "Progettista" },
   ],
 
   ruoli: ["Responsabile", "Amministratore", "Analista", "Progettista", "Programmatore", "Verificatore"],
