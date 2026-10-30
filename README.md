@@ -68,7 +68,7 @@
 
 <p>
   Il file template pptx è presente in
-  <a href="./assets/latex_templates/[TO_REPLACE]"><code>diario_di_bordo.pptx</code></a>.
+  <a href="./assets/pptx_templates/Template Meeting Bit Crusher.pptx"><code>diario_di_bordo.pptx</code></a>.
 </p>
 
 ## Verbali delle Riunioni
