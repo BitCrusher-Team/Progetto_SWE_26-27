@@ -143,13 +143,13 @@ window.BC_CONTENT = {
 
   // ruolo: ruolo del periodo corrente (i ruoli sono a rotazione), null se non assegnato
   team: [
-    { nome: "Alex Singh", matricola: "2148621", github: "ZiraelOneTwo", ruolo: "Amministratore" },
-    { nome: "Pietro Leonardo Acampora", matricola: "2146762", github: "hipietro", ruolo: "Verificatore" },
-    { nome: "Marco Bollettin", matricola: "2147955", github: "Ahwrs", ruolo: "Analista" },
-    { nome: "Erik Giuliano", matricola: "2138012", github: "FlameStorm199", ruolo: "Verificatore" },
-    { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: "Verificatore" },
-    { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: "Responsabile" },
-    { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: "Progettista" },
+    { nome: "Alex Singh", matricola: "2148621", github: "ZiraelOneTwo", ruolo: null },
+    { nome: "Pietro Leonardo Acampora", matricola: "2146762", github: "hipietro", ruolo: null },
+    { nome: "Marco Bollettin", matricola: "2147955", github: "Ahwrs", ruolo: null },
+    { nome: "Erik Giuliano", matricola: "2138012", github: "FlameStorm199", ruolo: null },
+    { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: null },
+    { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: null },
+    { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: null },
   ],
 
   ruoli: ["Responsabile", "Amministratore", "Analista", "Progettista", "Programmatore", "Verificatore"],
