@@ -100,6 +100,9 @@ window.BC_CONTENT = {
     { id: "I03", tipo: "interno", data: "2026-10-24", titolo: "Formazione del primo diario di bordo ed il relativo template",
       versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Marco Bollettin, Antonio Tufano",
       file: "docs/verbali/verbali_interni/Verbale_interno_03.pdf" },
+    { id: "I04", tipo: "interno", data: "2026-10-28", titolo: "Redazione bozza dei documenti di candidatura",
+      versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Erik Giuliano",
+      file: "docs/verbali/verbali_interni/Verbale_interno_04.pdf" },
     { id: "E01", tipo: "esterno", data: "2026-10-26", titolo: "Confronto su dubbi e domande con l'azienda proponente",
       con: "Var Group", firmato: true,
       versione: "1.0.1", redattore: "Marco Bollettin", verificatore: "Alex Singh",
@@ -116,9 +119,9 @@ window.BC_CONTENT = {
 
   // Documenti di progetto. stato: null | "bozza" | "in verifica" | "approvato"
   documenti: [
-    { nome: "Lettera di presentazione", versione: null, stato: null, file: null },
-    { nome: "Valutazione dei capitolati", versione: null, stato: null, file: null },
-    { nome: "Dichiarazione degli impegni", versione: null, stato: null, file: null },
+    { nome: "Lettera di presentazione", versione: "1.0.0", stato: "approvato", file: "docs/candidatura/Lettera_Di_Candidatura_BitCrusher.pdf" },
+    { nome: "Valutazione dei capitolati", versione: "1.0.0", stato: "approvato", file: "docs/candidatura/Valutazione_Capitolati_BitCrusher.pdf" },
+    { nome: "Dichiarazione degli impegni", versione: "1.0.0", stato: "approvato", file: "docs/candidatura/Dichiarazione_Impegni_BitCrusher.pdf" },
     { nome: "Norme di Progetto", versione: null, stato: null, file: null },
     { nome: "Piano di Progetto", versione: null, stato: null, file: null },
     { nome: "Piano di Qualifica", versione: null, stato: null, file: null },
