@@ -107,6 +107,16 @@
       <td>Confronto su dubbi e domande con l'azienda proponente</td>
       <td><a href="./docs/verbali/verbali_esterni/Verbale_esterno_01.pdf">Verbale E01</a></td>
     </tr>
+    <tr>
+      <td>2026-10-28</td>
+      <td>Definizione monte ore per persona e costo totale stimato</td>
+      <td><a href="./docs/verbali/verbali_esterni/Verbale_interno_04.pdf">Verbale I04</a></td>
+    </tr>
+    <tr>
+      <td>2026-10-29</td>
+      <td>Revisione documenti per candidatura ed elezione responsabile</td>
+      <td><a href="./docs/verbali/verbali_esterni/Verbale_interno_05.pdf">Verbale I05</a></td>
+    </tr>
   </tbody>
 </table>
 
