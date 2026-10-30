@@ -15,6 +15,7 @@
 <!-- markdownlint-disable-next-line MD033 -->
 <div align="center">
 
+[![BitCrusher Project Site](https://shields.io)](https://bitcrusher-team.github.io/Progetto_SWE_26-27/)
 [![Build Status](https://github.com/BitCrusher-Team/Progetto_SWE_26-27/actions/workflows/ci.yml/badge.svg)](https://github.com/BitCrusher-Team/Progetto_SWE_26-27/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -56,6 +57,9 @@
 
   <dt><code>assets/</code></dt>
   <dd>Risorse statiche (immagini, diagrammi, template).</dd>
+
+  <dt><code>scripts/</code></dt>
+  <dd>Script di automatizzazione locale (attualmente git aliases).</dd>
 </dl>
 
 ## Diario di Bordo
@@ -68,7 +72,10 @@
 
 <p>
   Il file template pptx è presente in
-  <a href="./assets/pptx_templates/Template Meeting Bit Crusher.pptx"><code>diario_di_bordo.pptx</code></a>.
+  <a href="./assets/pptx_templates/Meeting_Bit_Crusher.pptx"><code>Meeting_Bit_Crusher.pptx</code></a>.
+  
+  Mentre la concretizzazione nelle istanze è presente in
+  <a href="./docs/diario_di_bordo/"><code>docs/diario_di_bordo</code></a>.
 </p>
 
 ## Verbali delle Riunioni
@@ -106,6 +113,11 @@
       <td>2026-10-26</td>
       <td>Confronto su dubbi e domande con l'azienda proponente</td>
       <td><a href="./docs/verbali/verbali_esterni/Verbale_esterno_01.pdf">Verbale E01</a></td>
+    </tr>
+    <tr>
+      <td>2026-10-28</td>
+      <td>Redazione bozza dei documenti di candidatura</td>
+      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_04.pdf">Verbale I04</a></td>
     </tr>
   </tbody>
 </table>
@@ -165,17 +177,17 @@
     <tr>
       <td>1</td>
       <td>C6</td>
-      <td>[Espansione in corso]</td>
+      <td>Il capitolato offre un perfetto bilanciamento tra richiesta di competenze tecniche ed ingegneria del software applicata; le sfide poste si allineano con l'interesse del gruppo.</td>
     </tr>
     <tr>
       <td>2</td>
       <td>C3</td>
-      <td>[Espansione in corso]</td>
+      <td>La composizione dell'architettura della pipeline di esecuzione dal barebone (su embedded o SBC) al software (dal ML alle web app) rappresenta una sfida tecnico tecnologica allettante.</td>
     </tr>
     <tr>
       <td>3</td>
       <td>C1</td>
-      <td>[Espansione in corso]</td>
+      <td>L'integrazione con standard e protocolli aperti e la formalizzazione dei servizi di bridging tra domotica e LLM rappresenta una sfida di disegno architetturale soddisfacente.</td>
     </tr>
   </tbody>
 </table>
