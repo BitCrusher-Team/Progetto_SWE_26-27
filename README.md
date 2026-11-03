@@ -95,24 +95,9 @@
   </thead>
   <tbody>
     <tr>
-      <td>2026-10-17</td>
-      <td>Primo incontro conoscitivo</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_01.pdf">Verbale I01</a></td>
-    </tr>
-    <tr>
-      <td>2026-10-21</td>
-      <td>Organizzazione repo, stesura domande ed invio mail ai proponenti</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_02.pdf">Verbale I02</a></td>
-    </tr>
-    <tr>
-      <td>2026-10-24</td>
-      <td>Formazione del primo diario di bordo ed il relativo template</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_03.pdf">Verbale I03</a></td>
-    </tr>
-    <tr>
-      <td>2026-10-26</td>
-      <td>Confronto su dubbi e domande con l'azienda proponente</td>
-      <td><a href="./docs/verbali/verbali_esterni/Verbale_esterno_01.pdf">Verbale E01</a></td>
+      <td>2026-10-29</td>
+      <td>Revisione documenti per candidatura ed elezione responsabile</td>
+      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_05.pdf">Verbale I05</a></td>
     </tr>
     <tr>
       <td>2026-10-28</td>
@@ -120,9 +105,24 @@
       <td><a href="./docs/verbali/verbali_interni/Verbale_interno_04.pdf">Verbale I04</a></td>
     </tr>
     <tr>
-      <td>2026-10-29</td>
-      <td>Revisione documenti per candidatura ed elezione responsabile</td>
-      <td><a href="./docs/verbali/verbali_interni/verbale_interno_05.pdf">Verbale I05</a></td>
+      <td>2026-10-26</td>
+      <td>Confronto su dubbi e domande con l'azienda proponente</td>
+      <td><a href="./docs/verbali/verbali_esterni/Verbale_esterno_01.pdf">Verbale E01</a></td>
+    </tr>
+    <tr>
+      <td>2026-10-24</td>
+      <td>Formazione del primo diario di bordo ed il relativo template</td>
+      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_03.pdf">Verbale I03</a></td>
+    </tr>
+    <tr>
+      <td>2026-10-21</td>
+      <td>Organizzazione repo, stesura domande ed invio mail ai proponenti</td>
+      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_02.pdf">Verbale I02</a></td>
+    </tr>
+    <tr>
+      <td>2026-10-17</td>
+      <td>Primo incontro conoscitivo</td>
+      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_01.pdf">Verbale I01</a></td>
     </tr>
   </tbody>
 </table>
