@@ -39,8 +39,10 @@
 
 <p>
   <strong>[Prematuro per specifiche dettagliate -- da aggiornare]</strong>
-  Il progetto è stato sviluppato nel contesto del corso di Ingegneria del Software
-  e segue un processo di sviluppo agile con cicli di [Prematuro] settimane.
+  <p>
+    Il progetto è stato sviluppato nel contesto del corso di Ingegneria del Software
+    e segue un processo di sviluppo agile con cicli di 2 settimane.
+  </p>
 </p>
 
 ## Struttura del Progetto
@@ -168,35 +170,6 @@
   <dd>SpecCheck: Skills OpenCode per tracciabilità tra casi d'uso, requisiti e codice sorgente</dd>
 </dl>
 
-### Scelta per priorità
-
-<table>
-  <thead>
-    <tr>
-      <th>Priorità</th>
-      <th>Capitolati</th>
-      <th>Motivazione</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>C6</td>
-      <td>Il capitolato offre un perfetto bilanciamento tra richiesta di competenze tecniche ed ingegneria del software applicata; le sfide poste si allineano con l'interesse del gruppo.</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>C3</td>
-      <td>La composizione dell'architettura della pipeline di esecuzione dal barebone (su embedded o SBC) al software (dal ML alle web app) rappresenta una sfida tecnico tecnologica allettante.</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>C1</td>
-      <td>L'integrazione con standard e protocolli aperti e la formalizzazione dei servizi di bridging tra domotica e LLM rappresenta una sfida di disegno architetturale soddisfacente.</td>
-    </tr>
-  </tbody>
-</table>
-
 ## Team
 
 <p>
@@ -278,8 +251,8 @@
 ## Riferimenti / Strumenti e Tecnologie
 
 <ol>
-  <li>[Prematuro, necessario a definire le risorse esterne o riferimenti tecnici]</li>
-  <li>[Conterrà anche conformità a standard e normative nazionali/europee]</li>
+  <li>Stacked PR in locale: <a href="https://github.com/ejoffe/spr.git">ejoffe/spr</a></li>
+  <li>Trunk Based Development: <a href="https://trunkbaseddevelopment.com/">link e risorse</a></li>
 </ol>
 
 ---
