@@ -15,9 +15,9 @@
 <!-- markdownlint-disable-next-line MD033 -->
 <div align="center">
 
-[![BitCrusher Project Site](https://shields.io)](https://bitcrusher-team.github.io/Progetto_SWE_26-27/)
+[![Site](https://img.shields.io/badge/Site-BitCrusher-red?style=flat)](https://bitcrusher-team.github.io/Progetto_SWE_26-27/)
 [![Build Status](https://github.com/BitCrusher-Team/Progetto_SWE_26-27/actions/workflows/ci.yml/badge.svg)](https://github.com/BitCrusher-Team/Progetto_SWE_26-27/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat)](https://opensource.org/licenses/MIT)
 
 </div>
 <!-- markdownlint-enable-next-line MD033 -->
