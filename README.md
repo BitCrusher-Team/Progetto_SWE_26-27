@@ -97,6 +97,11 @@
   </thead>
   <tbody>
     <tr>
+      <td>2026-11-03</td>
+      <td>Ristesura dei documenti per la candidatura</td>
+      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_06.pdf">Verbale I06</a></td>
+    </tr>
+    <tr>
       <td>2026-10-29</td>
       <td>Revisione documenti per candidatura ed elezione responsabile</td>
       <td><a href="./docs/verbali/verbali_interni/Verbale_interno_05.pdf">Verbale I05</a></td>

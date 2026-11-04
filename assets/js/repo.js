@@ -1,17 +1,15 @@
 /* =====================================================================
    BIT CRUSHER // repo.js
    Il sito legge i propri dati dalla repo di progetto, in sola lettura:
-   - README.md: scheda del gruppo (<aside>), nota, panoramica,
-     struttura, diario, verbali, capitolati, priorità, squadra, setup,
-     riferimenti e proponente (riga finale);
+   - README.md: scheda del gruppo (<aside>), nota, template del diario,
+     verbali, capitolati e priorità, squadra, proponente (riga finale);
    - milestone di GitHub: revisioni di avanzamento con scadenza, stato
      e percentuale (issue chiuse sul totale);
-   - configurazioni: ci.yml (tipi di commit, limite del titolo,
-     troncamento di spr), .spr.yml, CODEOWNERS, template delle issue
-     (nomi e Definition of Done);
-   - albero dei file: PDF di capitolati e documenti, verifica che i
-     link del README puntino a file esistenti;
-   - API: contributori, licenza, descrizione, linguaggi, release, issue.
+   - template Attività: nomi ufficiali dei documenti (menu "Documento");
+   - albero dei file: consegne di ogni revisione (docs/<revisione>/),
+     interventi del diario di bordo, verbali, e verifica che i link del
+     README puntino a file esistenti;
+   - API: contributori, licenza, linguaggi, release.
    content.js resta il ripiego per ciò che la repo non dice o se la rete
    non risponde. BC.Repo.src dice da dove arriva ogni parte.
    ===================================================================== */
@@ -25,7 +23,7 @@
 
   const norm = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
   const key = (s) => norm(s).replace(/[^a-z0-9]/g, '');
-  const clean = (s) => String(s == null ? '' : s).replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
+  const clean = (s) => String(s == null ? '' : s).replace(/\s+/g, ' ').trim();
   // null se il testo è vuoto o è solo un segnaposto
   const value = (s) => {
     const t = clean(s);
@@ -105,31 +103,19 @@
     const note = /^>\s*\[!(?:NOTE|IMPORTANT|WARNING|TIP|CAUTION)\]\s*\n((?:>.*(?:\n|$))+)/m.exec(md);
     if (note) d.nota = clean(note[1].replace(/^>\s?/gm, ' '));
 
-    const pano = findSec(secs, 'panoramica');
-    if (pano) d.panoramica = clean([...dom(pano.text).querySelectorAll('p')].map((p) => p.textContent).join(' ') || dom(pano.text).textContent);
-
-    const str = findSec(secs, 'struttura');
-    if (str) {
-      const el = dom(str.text);
-      d.struttura = [...el.querySelectorAll('dt')].map((dt) => {
-        const dd = dt.nextElementSibling && dt.nextElementSibling.tagName === 'DD' ? dt.nextElementSibling : null;
-        return { path: clean(dt.textContent).replace(/\/$/, ''), desc: dd ? clean(dd.textContent) : null };
-      });
-    }
-
-    // diario: un link con un segnaposto nel percorso ("[TO_REPLACE]") è un file
-    // non ancora caricato; il testo del link dice quale
+    // diario: il README indica il template (un file con "template" nel percorso);
+    // gli interventi si leggono dall'albero, in docs/diario_di_bordo/. Un link
+    // con un segnaposto nel percorso ("[TO_REPLACE]") è un file non ancora
+    // caricato, e il testo del link dice quale
     const diario = findSec(secs, 'diario');
     if (diario) {
       const links = [...dom(diario.text).querySelectorAll('a')]
         .map((a) => ({ path: repoPath(a.getAttribute('href')), text: clean(a.textContent) }))
         .filter((a) => a.path);
       const pending = (a) => /\[[^\]]*\]/.test(a.path);
-      const real = links.filter((a) => !pending(a));
       const later = links.find(pending);
       d.diario = {
-        file: (real.find((a) => /\.(pdf|pptx?|odp|docx?)$/i.test(a.path)) || {}).path || null,
-        sorgente: (real.find((a) => /\.tex$/i.test(a.path)) || {}).path || null,
+        template: (links.find((a) => !pending(a) && /template/i.test(a.path) && /\.[a-z0-9]+$/i.test(a.path)) || {}).path || null,
         atteso: later ? later.text || fileName(later.path) : null,
       };
     }
@@ -155,21 +141,16 @@
       }).filter((v) => v.data || v.file);
     }
 
+    // capitolati e priorità: per il capitolato aggiudicato in home e per il
+    // comando «capitolati» del terminale
     const cap = findSec(secs, 'capitolati');
     if (cap) {
       d.capitolati = [...dom(cap.text).querySelectorAll('dt')].map((dt) => {
-        const a = dt.querySelector('a');
         const id = (/C\d+/i.exec(dt.textContent) || [])[0];
         const dd = dt.nextElementSibling && dt.nextElementSibling.tagName === 'DD' ? dt.nextElementSibling : null;
         const [main, prop] = clean(dd ? dd.textContent : '').split(/\s+—\s+/);
         const i = main.indexOf(':');
-        return {
-          id: id ? id.toUpperCase() : null,
-          dir: a ? repoPath(a.getAttribute('href')) : null,
-          nome: i > 0 ? clean(main.slice(0, i)) : null,
-          descrizione: i > 0 ? clean(main.slice(i + 1)) : value(main),
-          proponente: value(prop),
-        };
+        return { id: id ? id.toUpperCase() : null, nome: i > 0 ? clean(main.slice(0, i)) : null, proponente: value(prop) };
       }).filter((c) => c.id);
     }
 
@@ -178,7 +159,6 @@
       d.priorita = tableRows(dom(prio.text)).map((row) => ({
         rank: Number((/\d+/.exec(cellText(row, 'priorita') || '') || [])[0]) || 99,
         ids: ((cellText(row, 'capitolat') || '').match(/C\d+/gi) || []).map((x) => x.toUpperCase()),
-        motivazione: value(cellText(row, 'motivazione')),
       })).filter((p) => p.ids.length).sort((a, b) => a.rank - b.rank);
     }
 
@@ -195,24 +175,6 @@
           ruolo: value(cellText(row, 'ruolo')),
         };
       }).filter((m) => m.nome);
-    }
-
-    const setup = findSec(secs, 'setup', 'installazione');
-    if (setup) {
-      d.setup = [...dom(setup.text).querySelectorAll('ol > li, ul > li')].map((li) => {
-        const code = li.querySelector('pre, code');
-        const copy = li.cloneNode(true);
-        copy.querySelectorAll('pre, code').forEach((n) => n.remove());
-        return { titolo: clean(copy.textContent).replace(/:\s*$/, ''), cmd: code ? value(code.textContent) : null };
-      }).filter((s) => s.titolo);
-    }
-
-    const refs = findSec(secs, 'riferimenti');
-    if (refs) {
-      d.riferimenti = [...dom(refs.text).querySelectorAll('li')].map((li) => {
-        const a = li.querySelector('a[href^="http"]');
-        return { testo: clean(li.textContent), url: a ? a.getAttribute('href') : null };
-      }).filter((r) => r.testo);
     }
 
     const coll = /collaborazione con\s+(.+?)\s+[—–-]\s/i.exec(md);
@@ -242,35 +204,19 @@
     }
     if (d.nota) P.nota = d.nota;
     if (d.proponente !== undefined && P.proponente == null) P.proponente = d.proponente;
-    if (d.panoramica) {
-      C.panoramica.testo = d.panoramica;
-      S.panoramica = 'README';
-    }
-    if (d.struttura && d.struttura.length) C.struttura = d.struttura;
-    // il README è la fonte del diario: se non collega un file, sul sito non ce n'è
     if (d.diario) {
-      Object.assign(C.diario, d.diario);
-      if (!d.diario.file) C.diario.stato = C.diario.stato || 'In preparazione';
+      if (d.diario.template) C.diario.template = d.diario.template;
+      C.diario.atteso = d.diario.atteso;
     }
-
     if (d.capitolati && d.capitolati.length) {
       const old = Object.fromEntries(C.capitolati.map((c) => [c.id, c]));
       C.capitolati = d.capitolati.map((c) => {
         const o = old[c.id] || {};
-        // "Nome: descrizione" nel README; senza ":" il testo è la descrizione,
-        // a meno che coincida con il nome già noto
-        const nome = c.nome || o.nome || c.descrizione || c.id;
-        const descrizione = c.nome ? c.descrizione : c.descrizione && key(c.descrizione) !== key(nome) ? c.descrizione : o.descrizione || null;
-        return { ...o, id: c.id, dir: c.dir || o.dir, nome, descrizione, proponente: c.proponente || o.proponente || null };
+        return { id: c.id, nome: c.nome || o.nome || c.id, proponente: c.proponente || o.proponente || null };
       });
-      S.capitolati = 'README';
     }
     if (d.priorita && d.priorita.length) {
-      const old = Object.fromEntries(C.priorita.map((p) => [p.capitolato, p]));
-      C.priorita = d.priorita.flatMap((p) => p.ids.map((id) => ({
-        capitolato: id, rank: p.rank, motivazione: p.motivazione || (old[id] || {}).motivazione || null,
-      })));
-      S.priorita = 'README';
+      C.priorita = d.priorita.flatMap((p) => p.ids.map((id) => ({ capitolato: id })));
     }
     if (d.verbali && d.verbali.length) {
       const old = Object.fromEntries(C.verbali.map((v) => [v.id, v]));
@@ -286,14 +232,6 @@
       C.team = d.team.map((m) => ({ ...(old[key(m.github)] || {}), ...Object.fromEntries(Object.entries(m).filter(([, v]) => v != null)) }));
       S.team = 'README';
     }
-    if (d.setup && d.setup.length) {
-      C.setup = d.setup;
-      S.setup = 'README';
-    }
-    if (d.riferimenti && d.riferimenti.length) {
-      C.riferimenti = d.riferimenti;
-      S.riferimenti = 'README';
-    }
   }
 
   /* ---------- milestone: revisioni di avanzamento ---------- */
@@ -305,24 +243,28 @@
   }
 
   // Le milestone della repo, in ordine di scadenza. Una milestone che cita una
-  // revisione di content.js (la sigla come parola, "RTB", o il nome completo)
-  // ne prende sigla e nome; le revisioni future ancora senza milestone restano
-  // in coda come "attesa".
+  // revisione di content.js (la sigla come parola, "RTB", il nome completo o un
+  // alias) ne prende sigla e nome ufficiale, così sul sito resta "Candidatura"
+  // anche se la milestone si chiama "Aggiudicazione appalto". Le revisioni
+  // future ancora senza milestone restano in coda come "attesa".
   function applyMilestones(list) {
     if (!Array.isArray(list) || !list.length) return;
     const ms = list.slice().sort((a, b) => (a.due_on || '9999').localeCompare(b.due_on || '9999') || a.number - b.number);
     const current = ms.find((m) => m.state === 'open');
     const reviews = C.milestone || [];
     const used = new Set();
+    const cites = (m, x) => new RegExp(`\\b${x.sigla}\\b`).test(m.title)
+      || [x.nome, ...(x.alias || [])].some((n) => n && key(m.title).includes(key(n)));
     const fromRepo = ms.map((m) => {
-      const r = reviews.find((x) => !used.has(x) && (new RegExp(`\\b${x.sigla}\\b`).test(m.title) || key(m.title).includes(key(x.nome))));
+      const r = reviews.find((x) => !used.has(x) && cites(m, x));
       if (r) used.add(r);
       const tot = m.open_issues + m.closed_issues;
       const stato = m.state === 'closed' ? 'completata' : m === current || m.closed_issues > 0 ? 'in-corso' : 'attesa';
+      if (m === current) C.progetto.fase = r ? r.nome : m.title;
       return {
         sigla: r ? r.sigla : codeOf(m.title),
-        nome: r && key(m.title) === key(r.sigla) ? r.nome : m.title,
-        descrizione: value(m.description),
+        nome: r ? r.nome : m.title,
+        alias: r ? r.alias : undefined,
         data: m.due_on ? BC.dayKey(new Date(m.due_on)) : null,
         chiusa: m.closed_at ? BC.dayKey(new Date(m.closed_at)) : null,
         stato,
@@ -332,159 +274,80 @@
       };
     });
     C.milestone = [...fromRepo, ...reviews.filter((r) => !used.has(r) && r.stato === 'attesa')];
-    if (current) C.progetto.fase = current.title;
     BC.Repo.src.milestone = 'milestone GitHub';
   }
 
-  /* ---------- configurazioni ---------- */
-  function applyCI(yml) {
-    const types = /types='([^']+)'/.exec(yml);
-    if (types) {
-      const desc = Object.fromEntries((C.processo.tipiCommit || []).map((t) => [t.tipo, t.desc]));
-      C.processo.tipiCommit = types[1].split('|').map((t) => ({ tipo: t, desc: desc[t] || '' }));
-      BC.commitTypes = C.processo.tipiCommit.map((t) => t.tipo);
-    }
-    // limite di lunghezza se c'è il controllo "(( len <= N ))"; troncamento di
-    // spr riconosciuto se la CI confronta il titolo con quello precedente
-    const max = /\(\(\s*len\s*<=\s*(\d+)\s*\)\)/.exec(yml);
-    BC.Repo.ciRepo = { lunghezzaMax: max ? Number(max[1]) : null, troncamentoSpr: /OLD_TITLE/.test(yml) };
-    BC.ci = { ...BC.ci, ...BC.Repo.ciRepo };
-    BC.Repo.src.ci = 'ci.yml';
+  /* ---------- consegne: i documenti di ogni revisione ---------- */
+  // chiave tollerante per i nomi dei documenti, senza articoli e preposizioni:
+  // "Valutazione dei capitolati" = "Valutazione_Capitolati"
+  const STOP = /\b(il|lo|la|i|gli|le|di|del|dello|della|dei|degli|delle|e|ed)\b/g;
+  const docKey = (s) => norm(s).replace(STOP, ' ').replace(/[^a-z0-9]/g, '');
+
+  // nomi ufficiali dei documenti: il menu "Documento" del template Attività
+  async function applyDocNames(files) {
+    const f = files.find((x) => /^\.github\/ISSUE_TEMPLATE\/[^/]*attivit[^/]*\.ya?ml$/i.test(x.path));
+    if (!f) return;
+    const menu = /id:\s*documento\b[\s\S]*?options:\s*\n((?:[ \t]*-[^\n]*\n?)+)/.exec(await BC.raw(f.path));
+    if (!menu) return;
+    const names = [...menu[1].matchAll(/-\s*(.+?)\s*$/gm)]
+      .map((m) => clean(m[1]).replace(/^["']|["']$/g, ''))
+      .filter((n) => n && !/^(nessuno|altro)$/i.test(n));
+    if (names.length) C.documenti = names.map((nome) => ({ nome }));
   }
 
-  function applySpr(yml) {
-    const get = (k) => {
-      const m = new RegExp(`^${k}:\\s*(.+?)\\s*$`, 'm').exec(yml);
-      return m ? m[1].replace(/^["']|["']$/g, '') : null;
-    };
-    const yes = (v) => (v === 'true' ? 'sì' : v === 'false' ? 'no' : null);
-    const merge = get('mergeMethod');
-    if (merge) BC.ci = { ...BC.ci, merge };
-    C.processo.spr = [
-      { chiave: 'Check obbligatori', valore: yes(get('requireChecks')) },
-      { chiave: 'Approvazione obbligatoria', valore: yes(get('requireApproval')) },
-      { chiave: 'Push dei branch', valore: get('branchPushIndividually') == null ? null : get('branchPushIndividually') === 'true' ? 'uno per volta' : 'tutti insieme' },
-      { chiave: 'Branch dopo il merge', valore: get('deleteMergedBranches') == null ? null : get('deleteMergedBranches') === 'true' ? 'eliminati' : 'mantenuti' },
-    ].filter((r) => r.valore != null);
-    BC.Repo.src.spr = '.spr.yml';
+  // nome leggibile di un file: senza estensione, versione e nome del gruppo
+  // ("Lettera_Di_Presentazione_BitCrusher_v1.0.0.pdf" -> "Lettera di presentazione")
+  function prettyName(path) {
+    const group = String(C.progetto.gruppo || '').split(/\s+/).filter(Boolean).join('[_\\s-]*');
+    let n = fileName(path).replace(/\.[a-z0-9]+$/i, '').replace(/[_\s-]*v?\d+(?:[._]\d+){1,2}$/i, '');
+    if (group) n = n.replace(new RegExp(`[_\\s-]*${group}`, 'ig'), '');
+    n = n.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+    return n.charAt(0).toUpperCase() + n.slice(1);
   }
+  // nome ufficiale, se il file ne corrisponde uno
+  const canonical = (name) => ((C.documenti || []).find((d) => docKey(d.nome) === docKey(name)) || {}).nome || name;
 
-  function applyOwners(txt) {
-    const rules = [];
-    let note = [];
-    for (const line of txt.split('\n')) {
-      const l = line.trim();
-      if (!l) { note = []; continue; }
-      if (l.startsWith('#')) {
-        const c = l.replace(/^#\s?/, '');
-        if (c && !/codeowners$/i.test(c)) note.push(c);
-        continue;
-      }
-      const [path, ...owners] = l.split(/\s+/);
-      rules.push({ path, owners: owners.map((o) => o.replace(/^@/, '')), nota: note.join(' ') || null });
-      note = [];
-    }
-    if (rules.length) {
-      C.processo.codeowners = rules;
-      BC.Repo.src.codeowners = 'CODEOWNERS';
-    }
-  }
-
-  // template delle issue: nome, descrizione, la Definition of Done e l'elenco
-  // dei documenti di progetto (menu "Documento" del template Attività)
-  const unquote = (s) => clean(s).replace(/^["']|["']$/g, '');
-  async function applyTemplates(files) {
-    const tpl = files.filter((f) => /^\.github\/ISSUE_TEMPLATE\/[^/]+\.ya?ml$/i.test(f.path) && !/config\.ya?ml$/i.test(f.path));
-    if (!tpl.length) return;
-    const texts = await Promise.allSettled(tpl.map((f) => BC.raw(f.path)));
-    const list = [];
-    let dod = null;
-    let docs = null;
-    texts.forEach((r, i) => {
-      if (r.status !== 'fulfilled') return;
-      const y = r.value;
-      const name = (/^name:\s*(.+)$/m.exec(y) || [])[1];
-      const desc = (/^description:\s*(.+)$/m.exec(y) || [])[1];
-      list.push({ nome: unquote(name || fileName(tpl[i].path)), desc: desc ? unquote(desc) : null, file: fileName(tpl[i].path) });
-      const block = /id:\s*dod[\s\S]*?options:\s*\n([\s\S]*?)(?=\n\s*-\s*type:|\s*$)/.exec(y);
-      if (block && (!dod || /attivit/i.test(name || ''))) {
-        dod = [...block[1].matchAll(/-\s*label:\s*(.+?)\s*$/gm)].map((m) => m[1].replace(/^["']|["']$/g, '').replace(/\\"/g, '"'));
-      }
-      const menu = /id:\s*documento\b[\s\S]*?options:\s*\n((?:[ \t]*-[^\n]*\n?)+)/.exec(y);
-      if (menu && !docs) docs = [...menu[1].matchAll(/-\s*(.+?)\s*$/gm)].map((m) => unquote(m[1])).filter((n) => n && !/^(nessuno|altro)$/i.test(n));
-    });
-    if (list.length) {
-      C.issueTemplate = list;
-      BC.Repo.src.issueTemplate = 'ISSUE_TEMPLATE';
-    }
-    if (dod && dod.length) C.processo.definitionOfDone = dod;
-    if (docs && docs.length) {
-      const old = Object.fromEntries(C.documenti.map((d) => [key(d.nome), d]));
-      C.documenti = docs.map((n) => old[key(n)] || { nome: n, versione: null, stato: null, file: null });
-      BC.Repo.src.documenti = 'template Attività';
-    }
-  }
-
-  // documenti di progetto: un PDF con il nome del documento nel nome del file
-  // (la versione più alta, se il nome ne contiene una)
-  function matchDocuments(files) {
-    const pdfs = files.filter((f) => /\.pdf$/i.test(f.path));
-    C.documenti.forEach((d) => {
-      const k = key(d.nome);
-      const hits = pdfs.filter((f) => key(fileName(f.path)).includes(k));
-      if (!hits.length) return;
-      const best = hits.map((f) => ({ f, v: versionOf(f.path) })).sort((a, b) => vcmp(a.v, b.v))[0];
-      d.file = best.f.path;
-      d.versione = best.v || d.versione;
-      d.stato = d.stato || 'pubblicato';
-    });
-  }
-
-  // motivazioni delle priorità: docs/capitolati/scelte_priorita/<rango>.md,
-  // letto solo se non è vuoto (il primo paragrafo diventa la motivazione)
-  async function applyPriorityNotes(files) {
-    const notes = files.filter((f) => /\/scelt[ae]_priorita\/\d+\.md$/i.test(f.path) && f.size);
-    await Promise.all(notes.map(async (f) => {
-      const rank = Number(/(\d+)\.md$/i.exec(f.path)[1]);
-      const hits = C.priorita.filter((p, i) => (p.rank || i + 1) === rank);
-      if (!hits.length) return;
-      const md = await BC.raw(f.path);
-      const para = md.split(/\n\s*\n/).map((b) => clean(b.replace(/^#+\s.*$/gm, '').replace(/[*_>#]/g, ''))).find(Boolean);
-      hits.forEach((p) => {
-        p.file = f.path;
-        if (!p.motivazione && para) p.motivazione = para;
-      });
-    }));
-  }
-
-  /* ---------- albero dei file ---------- */
   const versionOf = (p) => {
     const m = /v?(\d+)\.(\d+)\.(\d+)/i.exec(fileName(p));
     return m ? `${m[1]}.${m[2]}.${m[3]}` : null;
   };
-  const vcmp = (a, b) => {
-    const pa = (a || '0.0.0').split('.').map(Number);
-    const pb = (b || '0.0.0').split('.').map(Number);
-    return pb[0] - pa[0] || pb[1] - pa[1] || pb[2] - pa[2];
-  };
 
+  // la revisione a cui appartiene una cartella di docs/ (per sigla, nome o alias)
+  const reviewOf = (folder) => (C.milestone || [])
+    .find((r) => [r.sigla, r.nome, ...(r.alias || [])].some((n) => n && key(n) === key(folder))) || null;
+
+  // docs/<revisione>/[<categoria>/]<file>: es. docs/candidatura/Lettera….pdf,
+  // docs/rtb/documenti_esterni/Analisi_dei_Requisiti_v1.0.0.pdf
+  const DELIVERY = /^docs\/([^/]+)\/(?:([^/]+)\/)?([^/]+\.(?:pdf|pptx?|docx?|odt|odp|xlsx?))$/i;
+  function applyDeliveries(files) {
+    const old = C.consegne || [];
+    const found = [];
+    files.forEach((f) => {
+      const m = DELIVERY.exec(f.path);
+      const r = m && reviewOf(m[1]);
+      if (!r || !f.size) return;
+      const nome = canonical(prettyName(m[3]));
+      const prev = old.find((d) => d.revisione === r.sigla && docKey(d.nome) === docKey(nome)) || {};
+      found.push({
+        revisione: r.sigla,
+        nome,
+        file: f.path,
+        categoria: m[2] ? prettyName(m[2]) : null,
+        versione: versionOf(f.path) || prev.versione || null,
+        stato: prev.stato || null,
+      });
+    });
+    if (!found.length) return;
+    C.consegne = found;
+    BC.Repo.src.consegne = 'cartelle docs/';
+  }
+
+  /* ---------- albero dei file ---------- */
   function applyTree(tree) {
     const files = tree.filter((t) => t.type === 'blob');
     const size = new Map(files.map((f) => [f.path, f.size]));
-    const dirs = new Set(tree.filter((t) => t.type === 'tree').map((t) => t.path));
     BC.Repo.files = size;
-    BC.Repo.dirs = dirs;
-    const pdfs = files.filter((f) => /\.pdf$/i.test(f.path));
-
-    // capitolati: presentazione = Cnp.pdf, capitolato = l'altro PDF della cartella
-    C.capitolati.forEach((c) => {
-      const dir = `${c.dir || `docs/capitolati/${c.id}`}/`;
-      const inDir = pdfs.filter((f) => f.path.startsWith(dir));
-      const pres = inDir.find((f) => /^C\d+p\.pdf$/i.test(fileName(f.path)));
-      const doc = inDir.find((f) => f !== pres);
-      if (doc) c.capitolato = doc.path;
-      if (pres) c.presentazione = pres.path;
-    });
+    BC.Repo.dirs = new Set(tree.filter((t) => t.type === 'tree').map((t) => t.path));
 
     // verbali: preferisce la versione firmata e segnala i link rotti
     C.verbali.forEach((v) => {
@@ -497,96 +360,60 @@
       v.mancante = !size.has(v.file);
     });
 
-    // template LaTeX: "template" nel nome del file, non solo nel percorso
-    const tex = files.filter((f) => /\.tex$/i.test(f.path) && /template/i.test(fileName(f.path)));
-    if (tex.length) {
-      C.template = tex.map((f) => ({ nome: fileName(f.path).replace(/\.tex$/i, '').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/_/g, ' '), file: f.path }));
-      BC.Repo.src.template = 'albero dei file';
-    }
-
-    // diario: il PDF vuoto è "in preparazione", i link rotti spariscono
-    const D = C.diario;
-    if (D.file) {
-      if (!size.has(D.file)) D.mancante = true;
-      else if (!size.get(D.file)) D.stato = D.stato || 'In preparazione';
-      else if (/preparazione/i.test(D.stato || '')) D.stato = 'Pubblicato';
-    }
-    if (D.sorgente && !size.has(D.sorgente)) D.sorgenteMancante = true;
-
-    // struttura: file per cartella, cartelle con solo segnaposto NULL
-    const top = (p) => p.split('/')[0];
-    const count = {};
-    files.forEach((f) => {
-      const t = top(f.path);
-      if (f.path.includes('/')) (count[t] = count[t] || []).push(f);
-    });
-    BC.Repo.dirStats = Object.fromEntries(Object.entries(count).map(([dname, list]) => [dname, {
-      files: list.length,
-      vuota: list.every((f) => /(^|\/)NULL$/.test(f.path) || !f.size),
-    }]));
-    (C.struttura || []).forEach((s) => {
-      const name = s.path.replace(/\/$/, '');
-      s.esiste = dirs.has(name);
-      s.files = (BC.Repo.dirStats[name] || {}).files || 0;
-      s.vuota = !!(BC.Repo.dirStats[name] || {}).vuota;
+    // verbali già nella repo ma non ancora nel README: entrano senza data, con
+    // sigla e tipo ricavati dal nome del file
+    const base = (p) => String(p || '').toLowerCase().replace(/_firmato(?=\.pdf$)/, '');
+    const known = new Set(C.verbali.map((v) => base(v.file)));
+    files.filter((f) => /^docs\/verbali\/.*\.pdf$/i.test(f.path)).forEach((f) => {
+      const m = /verbale_(interno|esterno)_0*(\d+)/i.exec(fileName(f.path));
+      if (!m || known.has(base(f.path))) return;
+      known.add(base(f.path));
+      const tipo = m[1].toLowerCase();
+      const signed = f.path.replace(/(_firmato)?\.pdf$/i, '_firmato.pdf');
+      C.verbali.push({
+        id: `${tipo === 'esterno' ? 'E' : 'I'}${m[2].padStart(2, '0')}`, tipo, data: null, titolo: null,
+        file: size.has(signed) ? signed : f.path, firmato: size.has(signed),
+      });
     });
 
-    // Docker predisposto ma vuoto
-    const docker = C.strumenti.find((t) => /docker/i.test(t.nome));
-    if (docker && size.has('Dockerfile')) docker.uso = size.get('Dockerfile') ? docker.uso || 'Ambiente containerizzato' : null;
+    // diario di bordo: gli interventi in docs/diario_di_bordo/, dal più recente
+    // (numero più alto nel nome del file)
+    const voci = files
+      .filter((f) => /^docs\/diario_di_bordo\/[^/]+\.(pdf|pptx?|odp)$/i.test(f.path) && f.size)
+      .map((f) => {
+        const n = (/(\d+)\.[a-z0-9]+$/i.exec(f.path) || [])[1];
+        return { nome: n ? `Diario di bordo ${n.padStart(2, '0')}` : prettyName(f.path), numero: n ? Number(n) : 0, file: f.path };
+      })
+      .sort((a, b) => b.numero - a.numero);
+    if (voci.length) {
+      C.diario.voci = voci;
+      BC.Repo.src.diario = 'docs/diario_di_bordo';
+    }
+    if (C.diario.template && !size.has(C.diario.template)) C.diario.template = null;
+
     BC.Repo.src.albero = 'albero dei file';
     return files;
   }
 
-  /* ---------- metadati dell'API ---------- */
-  function applyContributors(list) {
-    const by = Object.fromEntries(list.map((c) => [key(c.login), c.contributions]));
-    C.team.forEach((m) => { m.commit = by[key(m.github)] || 0; });
-    BC.Repo.meta.contributori = list.length;
-  }
-
-  function applyRepo(r) {
-    const M = BC.Repo.meta;
-    M.descrizione = r.description || null;
-    M.topics = r.topics || [];
-    M.licenza = r.license && r.license.spdx_id !== 'NOASSERTION' ? r.license.spdx_id : null;
-    M.creata = r.created_at;
-    M.stelle = r.stargazers_count;
-    M.fork = r.forks_count;
-    M.osservatori = r.subscribers_count;
-    M.dimensione = r.size;
-    M.homepage = r.homepage || null;
-  }
-
   // copia dei dati di content.js prima di applicare la repo, per reset()
   let pristine = null;
-  function snapshot() {
-    try {
-      pristine = { content: JSON.stringify(C), ci: { ...BC.ci }, commitTypes: BC.commitTypes.slice() };
-    } catch (e) { pristine = null; }
-  }
 
   BC.Repo = {
     src: {},
     meta: {},
     files: null,
     dirs: null,
-    dirStats: null,
     // idle | loading | ok | parziale (qualche richiesta fallita) | offline
     // (nessuna risposta) | ripiego (dati della repo scartati da reset())
     status: 'idle',
     errors: [],
-    syncedAt: null,
 
     load() {
       if (this.p) return this.p;
       this.status = 'loading';
-      snapshot();
+      pristine = JSON.stringify(C);
       const jobs = {
         readme: BC.raw('README.md'),
-        ci: BC.raw('.github/workflows/ci.yml'),
-        spr: BC.raw('.spr.yml'),
-        owners: BC.raw('.github/CODEOWNERS'),
         milestones: BC.GH.milestones(),
         tree: BC.GH.tree(),
         contributors: BC.GH.contributors(),
@@ -601,29 +428,25 @@
           if (r[name].status !== 'fulfilled') return;
           try { return fn(r[name].value); } catch (e) { console.warn(`repo.js: ${name} non leggibile`, e); }
         };
-        const later = async (what, fn) => {
-          try { await fn(); } catch (e) { console.warn(`repo.js: ${what} non leggibili`, e); }
-        };
         // ordine: prima il README (elenchi), poi ciò che li arricchisce
         run('readme', (md) => applyReadme(parseReadme(md)));
         run('milestones', applyMilestones);
-        run('ci', applyCI);
-        run('spr', applySpr);
-        run('owners', applyOwners);
         const files = run('tree', applyTree);
         if (files) {
-          await later('template', () => applyTemplates(files));
-          await later('motivazioni', () => applyPriorityNotes(files));
-          await later('documenti', () => matchDocuments(files));
+          try { await applyDocNames(files); } catch (e) { console.warn('repo.js: nomi dei documenti non leggibili', e); }
+          try { applyDeliveries(files); } catch (e) { console.warn('repo.js: consegne non leggibili', e); }
         }
-        run('contributors', applyContributors);
-        run('repo', applyRepo);
+        run('contributors', (l) => { this.meta.contributori = l.length; });
+        run('repo', (x) => {
+          this.meta.licenza = x.license && x.license.spdx_id !== 'NOASSERTION' ? x.license.spdx_id : null;
+          this.meta.creata = x.created_at;
+          this.meta.stelle = x.stargazers_count;
+        });
         run('languages', (l) => { this.meta.linguaggi = l; });
         run('releases', (l) => { this.meta.release = l[0] || null; });
         this.errors = names.map((n, i) => (res[i].status === 'rejected' ? { job: n, ...pickErr(res[i].reason) } : null)).filter(Boolean);
         const okCount = res.length - this.errors.length;
         this.status = okCount === res.length ? 'ok' : okCount ? 'parziale' : 'offline';
-        this.syncedAt = Date.now();
         return this.status;
       });
       return this.p;
@@ -632,24 +455,40 @@
     // i dati della repo hanno rotto il rendering: si torna a quelli di content.js
     reset() {
       if (!pristine) return false;
-      const data = JSON.parse(pristine.content);
+      const data = JSON.parse(pristine);
       Object.keys(C).forEach((k) => { delete C[k]; });
       Object.assign(C, data);
-      BC.ci = pristine.ci;
-      BC.commitTypes = pristine.commitTypes;
       this.src = {};
-      this.ciRepo = null;
       this.status = 'ripiego';
       return true;
     },
 
+    // consegne raggruppate per revisione, dalla più recente; in ogni gruppo la
+    // lettera di presentazione viene per prima, poi l'ordine del catalogo
+    deliveries() {
+      const order = (C.milestone || []).map((m) => m.sigla);
+      const rank = (d) => {
+        const i = (C.documenti || []).findIndex((x) => docKey(x.nome) === docKey(d.nome));
+        return /lettera/i.test(d.nome) ? -1 : i < 0 ? 999 : i;
+      };
+      const groups = new Map();
+      (C.consegne || []).filter((d) => d.file).forEach((d) => {
+        if (!groups.has(d.revisione)) groups.set(d.revisione, []);
+        groups.get(d.revisione).push(d);
+      });
+      return [...groups.entries()]
+        .map(([sigla, docs]) => ({
+          rev: (C.milestone || []).find((m) => m.sigla === sigla) || { sigla, nome: sigla },
+          docs: docs.slice().sort((a, b) => rank(a) - rank(b) || a.nome.localeCompare(b.nome)),
+        }))
+        .sort((a, b) => order.indexOf(b.rev.sigla) - order.indexOf(a.rev.sigla));
+    },
+
     // nuova lettura: svuota la cache di sessione della repo e ricarica la pagina
-    // (senza intro)
     retry() {
       try {
         Object.keys(sessionStorage).filter((k) => /^bc\.(gh|raw):/.test(k)).forEach((k) => sessionStorage.removeItem(k));
       } catch (e) { /* storage bloccato: si ricarica comunque */ }
-      BC.store.sset('bc.entered', '1');
       location.reload();
     },
 
