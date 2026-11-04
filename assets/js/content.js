@@ -1,13 +1,15 @@
 /* =====================================================================
    CONTENUTI DEL SITO // Bit Crusher // Progetto SWE 26-27
    ---------------------------------------------------------------------
-   Per aggiornare il sito di solito basta modificare questo file.
+   Il sito legge i dati dalla repo di progetto (repo.js): README,
+   milestone, cartelle docs/, configurazioni. Questo file è il ripiego
+   se la repo non risponde, e contiene ciò che la repo non dice.
 
    Convenzioni:
    - Un valore `null` compare sul sito come segnaposto "DA DEFINIRE",
      così si vede subito cosa manca.
    - I percorsi dei file ("docs/...", "assets/...") sono relativi alla
-     root della repo di progetto e vengono aperti su GitHub.
+     root della repo di progetto e si aprono sempre in una nuova scheda.
    - Le date usano il formato AAAA-MM-GG.
    ===================================================================== */
 window.BC_CONTENT = {
@@ -17,6 +19,9 @@ window.BC_CONTENT = {
     branch: "main",
     // GitHub Project collegato ai template delle issue (visibile al team)
     board: "https://github.com/orgs/BitCrusher-Team/projects/4",
+    // Il sito è pubblicato dalla stessa repo: i documenti si aprono da qui, nel
+    // visualizzatore del browser (null = pagina del file su GitHub)
+    pages: "https://bitcrusher-team.github.io/Progetto_SWE_26-27/",
   },
 
   progetto: {
@@ -33,61 +38,35 @@ window.BC_CONTENT = {
     nota: "Specifiche tecniche riguardo il progetto scelto non sono disponibili per completo. Attualmente il repo agisce come wrapper generico a scopo organizzativo per il team.",
   },
 
-  panoramica: {
-    descrizione: null,            // panoramica ad alto livello del prodotto
-    durataSprintSettimane: null,  // durata dei cicli di sviluppo agile
-  },
-
-  // Revisioni di avanzamento: adattare all'edizione del corso.
+  // Revisioni di avanzamento, in ordine di calendario: adattare all'edizione del corso.
   // stato: "completata" | "in-corso" | "attesa"
   // avanzamento: 0-100, usato solo per "in-corso" (null = non quantificato).
-  // Sul sito ogni milestone è un feed disturbato che si stabilizza.
+  // Le milestone della repo le aggiornano: una milestone vale per la revisione se
+  // il titolo ne contiene la sigla, il nome o un alias.
   milestone: [
-    { sigla: "CND", nome: "Candidatura", data: null, stato: "in-corso", avanzamento: null },
+    { sigla: "CND", nome: "Candidatura", alias: ["aggiudicazione"], data: null, stato: "in-corso", avanzamento: null },
     { sigla: "RTB", nome: "Requirements and Technology Baseline", data: null, stato: "attesa", avanzamento: null },
     { sigla: "PB", nome: "Product Baseline", data: null, stato: "attesa", avanzamento: null },
     { sigla: "CA", nome: "Customer Acceptance", data: null, stato: "attesa", avanzamento: null },
   ],
 
+  // Capitolati del bando: servono al capitolato aggiudicato in home e al comando
+  // «capitolati» del terminale (i PDF stanno in docs/capitolati/ della repo)
   capitolati: [
-    { id: "C0", nome: "AIRA", descrizione: "AI Requests Automation",
-      proponente: "Sanmarco Informatica S.p.A.",
-      capitolato: "docs/capitolati/C0/C0-AIRA.pdf", presentazione: "docs/capitolati/C0/C0p.pdf" },
-    { id: "C1", nome: "AURA", descrizione: "AI for Understanding, Reasoning and Automation",
-      proponente: "Vimar S.p.A.",
-      capitolato: "docs/capitolati/C1/C1-AURA.pdf", presentazione: "docs/capitolati/C1/C1p.pdf" },
-    { id: "C2", nome: "Concierge", descrizione: "Assistente conversazionale per la piattaforma NEXUM",
-      proponente: "Eggon",
-      capitolato: "docs/capitolati/C2/C2-Concierge.pdf", presentazione: "docs/capitolati/C2/C2p.pdf" },
-    { id: "C3", nome: "Fossdot", descrizione: "Smart speaker open source, estensibile e rispettoso della privacy",
-      proponente: "Uranion EMEA Ltd",
-      capitolato: "docs/capitolati/C3/C3-Fossdot.pdf", presentazione: "docs/capitolati/C3/C3p.pdf" },
-    { id: "C4", nome: "Gestione Veicoli", descrizione: "Piattaforma per la gestione dei veicoli e dei servizi post-vendita",
-      proponente: "M31 S.r.l.",
-      capitolato: "docs/capitolati/C4/C4-GVSPV.pdf", presentazione: "docs/capitolati/C4/C4p.pdf" },
-    { id: "C5", nome: "RareCare", descrizione: "Piattaforma AI per la raccolta dati e il supporto decisionale nelle malattie rare",
-      proponente: "Miriade S.r.l.",
-      capitolato: "docs/capitolati/C5/C5-RareCare.pdf", presentazione: "docs/capitolati/C5/C5p.pdf" },
-    { id: "C6", nome: "Caching Semantico", descrizione: "Sistema AI di caching semantico e dashboard FinOps, estendendo LiteLLM",
-      proponente: "Var Group S.p.A.",
-      capitolato: "docs/capitolati/C6/C6-SCSDF.pdf", presentazione: "docs/capitolati/C6/C6p.pdf" },
-    { id: "C7", nome: "SmartDashboard", descrizione: "Piattaforma di Business Intelligence self-service potenziata da AI",
-      proponente: "Ergon Informatica S.r.l.",
-      capitolato: "docs/capitolati/C7/C7-SD.pdf", presentazione: "docs/capitolati/C7/C7p.pdf" },
-    { id: "C8", nome: "Sonar", descrizione: "Documentazione vivente di uno store Shopify",
-      proponente: "Halue S.r.l. Società Benefit",
-      capitolato: "docs/capitolati/C8/C8-Sonar.pdf", presentazione: "docs/capitolati/C8/C8p.pdf" },
-    { id: "C9", nome: "SpecCheck", descrizione: "Skills OpenCode per la tracciabilità tra casi d'uso, requisiti e codice sorgente",
-      proponente: "Zucchetti S.p.A.",
-      capitolato: "docs/capitolati/C9/C9-SpecCheck.pdf", presentazione: "docs/capitolati/C9/C9p.pdf" },
+    { id: "C0", nome: "AIRA", proponente: "Sanmarco Informatica S.p.A." },
+    { id: "C1", nome: "AURA", proponente: "Vimar S.p.A." },
+    { id: "C2", nome: "Concierge", proponente: "Eggon" },
+    { id: "C3", nome: "Fossdot", proponente: "Uranion EMEA Ltd" },
+    { id: "C4", nome: "Gestione Veicoli", proponente: "M31 S.r.l." },
+    { id: "C5", nome: "RareCare", proponente: "Miriade S.r.l." },
+    { id: "C6", nome: "Caching Semantico", proponente: "Var Group S.p.A." },
+    { id: "C7", nome: "SmartDashboard", proponente: "Ergon Informatica S.r.l." },
+    { id: "C8", nome: "Sonar", proponente: "Halue S.r.l. Società Benefit" },
+    { id: "C9", nome: "SpecCheck", proponente: "Zucchetti S.p.A." },
   ],
 
   // Ordine di preferenza dei capitolati (il primo è la priorità 1)
-  priorita: [
-    { capitolato: "C6", motivazione: null },
-    { capitolato: "C3", motivazione: null },
-    { capitolato: "C1", motivazione: null },
-  ],
+  priorita: [{ capitolato: "C6" }, { capitolato: "C3" }, { capitolato: "C1" }],
 
   // tipo: "interno" | "esterno". Redattore e verificatore della prima stesura.
   verbali: [
@@ -100,45 +79,50 @@ window.BC_CONTENT = {
     { id: "I03", tipo: "interno", data: "2026-10-24", titolo: "Formazione del primo diario di bordo ed il relativo template",
       versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Marco Bollettin, Antonio Tufano",
       file: "docs/verbali/verbali_interni/Verbale_interno_03.pdf" },
-    { id: "I04", tipo: "interno", data: "2026-10-28", titolo: "Redazione bozza dei documenti di candidatura",
-      versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Erik Giuliano",
-      file: "docs/verbali/verbali_interni/Verbale_interno_04.pdf" },
     { id: "E01", tipo: "esterno", data: "2026-10-26", titolo: "Confronto su dubbi e domande con l'azienda proponente",
       con: "Var Group", firmato: true,
       versione: "1.0.1", redattore: "Marco Bollettin", verificatore: "Alex Singh",
       file: "docs/verbali/verbali_esterni/Verbale_esterno_01_firmato.pdf" },
+    { id: "I04", tipo: "interno", data: "2026-10-28", titolo: "Redazione bozza dei documenti di candidatura",
+      versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Erik Giuliano",
+      file: "docs/verbali/verbali_interni/Verbale_interno_04.pdf" },
+    { id: "I05", tipo: "interno", data: "2026-10-29", titolo: "Revisione documenti per candidatura ed elezione responsabile",
+      file: "docs/verbali/verbali_interni/verbale_interno_05.pdf" },
   ],
 
-  // Di solito arriva dal README (sezione "Diario di Bordo"); questo è il ripiego
+  // Diario di bordo: gli interventi stanno in docs/diario_di_bordo/ (il sito li
+  // legge dalla repo, dal più recente); il template è indicato nel README
   diario: {
-    file: null,                   // percorso nella repo, quando il file c'è
-    atteso: "diario_di_bordo.pptx",
-    aggiornato: null,             // data dell'ultimo intervento
-    stato: "In preparazione",
+    voci: [
+      { nome: "Diario di bordo 01", file: "docs/diario_di_bordo/Diario_di_Bordo_01.pptx" },
+    ],
+    template: "assets/pptx_templates/Meeting_Bit_Crusher.pptx",
   },
 
-  // Documenti di progetto. stato: null | "bozza" | "in verifica" | "approvato"
+  // Nomi ufficiali dei documenti di progetto (il sito li legge dal menu
+  // "Documento" del template Attività): servono a riconoscere i file
   documenti: [
-    { nome: "Lettera di presentazione", versione: "1.0.0", stato: "approvato", file: "docs/candidatura/Lettera_Di_Candidatura_BitCrusher.pdf" },
-    { nome: "Valutazione dei capitolati", versione: "1.0.0", stato: "approvato", file: "docs/candidatura/Valutazione_Capitolati_BitCrusher.pdf" },
-    { nome: "Dichiarazione degli impegni", versione: "1.0.0", stato: "approvato", file: "docs/candidatura/Dichiarazione_Impegni_BitCrusher.pdf" },
-    { nome: "Norme di Progetto", versione: null, stato: null, file: null },
-    { nome: "Piano di Progetto", versione: null, stato: null, file: null },
-    { nome: "Piano di Qualifica", versione: null, stato: null, file: null },
-    { nome: "Analisi dei Requisiti", versione: null, stato: null, file: null },
-    { nome: "Glossario", versione: null, stato: null, file: null },
+    { nome: "Lettera di presentazione" },
+    { nome: "Valutazione dei capitolati" },
+    { nome: "Dichiarazione degli impegni" },
+    { nome: "Norme di Progetto" },
+    { nome: "Piano di Progetto" },
+    { nome: "Piano di Qualifica" },
+    { nome: "Analisi dei Requisiti" },
+    { nome: "Glossario" },
   ],
 
-  template: [
-    { nome: "Verbale interno (LaTeX)", file: "assets/latex_templates/TemplateVerbaleRiunioni/TemplateVerbaleInterno.tex" },
-  ],
-
-  // Template delle issue in .github/ISSUE_TEMPLATE/
-  issueTemplate: [
-    { nome: "Verbale riunione", file: "template_verbale.yml" },
-    { nome: "Diario di bordo", file: "template_diario_di_bordo.yml" },
-    { nome: "Attività", file: "template_attivita_generica.yml" },
-    { nome: "Segnalazione", file: "template_segnalazione.yml" },
+  // Documenti consegnati a ogni revisione (sigla di `milestone`). Il sito li legge
+  // dalle cartelle docs/<revisione>/ della repo (es. docs/candidatura/,
+  // docs/rtb/), con le sottocartelle come categorie; questo è il ripiego.
+  // stato: null | "bozza" | "in verifica" | "approvato"
+  consegne: [
+    { revisione: "CND", nome: "Lettera di presentazione", versione: "1.0.0", stato: "approvato",
+      file: "docs/candidatura/Lettera_Di_Presentazione_BitCrusher.pdf" },
+    { revisione: "CND", nome: "Valutazione dei capitolati", versione: "1.0.0", stato: "approvato",
+      file: "docs/candidatura/Valutazione_Capitolati_BitCrusher.pdf" },
+    { revisione: "CND", nome: "Dichiarazione degli impegni", versione: "1.0.0", stato: "approvato",
+      file: "docs/candidatura/Dichiarazione_Impegni_BitCrusher.pdf" },
   ],
 
   // ruolo: ruolo del periodo corrente (i ruoli sono a rotazione), null se non assegnato
@@ -150,77 +134,5 @@ window.BC_CONTENT = {
     { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: null },
     { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: null },
     { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: null },
-  ],
-
-  ruoli: ["Responsabile", "Amministratore", "Analista", "Progettista", "Programmatore", "Verificatore"],
-
-  processo: {
-    // Tipi ammessi dalla CI (.github/workflows/ci.yml): tenere allineati
-    tipiCommit: [
-      { tipo: "feat", desc: "nuova funzionalità o contenuto" },
-      { tipo: "fix", desc: "correzione di un errore" },
-      { tipo: "docs", desc: "documentazione" },
-      { tipo: "style", desc: "formattazione, senza cambi di significato" },
-      { tipo: "refactor", desc: "ristrutturazione senza cambi di comportamento" },
-      { tipo: "perf", desc: "prestazioni" },
-      { tipo: "test", desc: "aggiunta o modifica di test" },
-      { tipo: "build", desc: "build e dipendenze" },
-      { tipo: "ci", desc: "pipeline di integrazione continua" },
-      { tipo: "chore", desc: "manutenzione e attività di supporto" },
-      { tipo: "revert", desc: "annulla un commit precedente" },
-    ],
-    // Regole della CI sul titolo delle PR. Il sito le legge da .github/workflows/ci.yml
-    // e .spr.yml della repo; queste valgono solo se la repo non risponde.
-    // Con spr non c'è limite di lunghezza: dopo `git spr merge` GitHub tronca il
-    // titolo oltre 72 caratteri ("…") e la CI valida quello completo.
-    ci: { lunghezzaMax: null, troncamentoSpr: true, merge: "squash" },
-    // Configurazione di spr (.spr.yml); il metodo di merge sta in `ci.merge`
-    spr: [
-      { chiave: "Check obbligatori", valore: "sì" },
-      { chiave: "Approvazione obbligatoria", valore: "sì" },
-      { chiave: "Push dei branch", valore: "uno per volta" },
-      { chiave: "Branch dopo il merge", valore: "eliminati" },
-    ],
-    flusso: [
-      { cmd: "git config --local include.path ../.gitconfig", desc: "Attiva gli alias condivisi del team. Una volta per clone." },
-      { cmd: "git newstack <nome>", desc: "Crea stack/<nome> da origin/main appena aggiornato. Mai commit sul main locale." },
-      { cmd: "git commit", desc: "Un commit per PR: il subject del commit diventa il titolo della PR, validato dalla CI." },
-      { cmd: "git spr update", desc: "Pubblica lo stack: una pull request impilata per ogni commit." },
-      { cmd: "git spr merge", desc: "Con CI verde e approvazione, unisce lo stack su main ({merge})." },
-      { cmd: "git delstack <nome>", desc: "Riallinea main a origin/main ed elimina lo stack. Con -f anche se abbandonato." },
-    ],
-    codeowners: [
-      { path: "*", owners: ["ZiraelOneTwo", "Ahwrs", "rpozzato"], nota: "Ogni PR richiede almeno una review dall'insieme delegato" },
-      { path: "docs/verbali/", owners: ["rpozzato", "Ahwrs", "antotuf06"], nota: "I ruoli non fissi sono modificabili con permesso esplicito" },
-      { path: ".github/", owners: ["ZiraelOneTwo"], nota: "La CI e i CODEOWNERS richiedono permesso esplicito" },
-    ],
-    definitionOfDone: [
-      "Commit con «Closes #<numero issue>» nel messaggio",
-      "Verificato da un membro diverso dall'autore (PR approvata)",
-      "Registro delle modifiche del documento aggiornato",
-      "Nuovi termini aggiunti al Glossario",
-    ],
-  },
-
-  strumenti: [
-    { nome: "GitHub Actions", uso: "CI: validazione dei titoli delle PR" },
-    { nome: "GitHub Projects", uso: "Board delle attività e degli sprint" },
-    { nome: "spr", uso: "Pull request impilate (stacked PR)" },
-    { nome: "LaTeX", uso: "Verbali e documentazione" },
-    { nome: "Docker", uso: null },
-  ],
-
-  // cmd: null finché il comando non è definito
-  setup: [
-    { titolo: "Clona il repository", cmd: "git clone https://github.com/BitCrusher-Team/Progetto_SWE_26-27.git" },
-    { titolo: "Attiva gli alias del team", cmd: "git config --local include.path ../.gitconfig" },
-    { titolo: "Riproduci l'ambiente ed installa le dipendenze", cmd: null },
-    { titolo: "Esegui i test", cmd: null },
-    { titolo: "Lancia l'applicativo", cmd: null },
-  ],
-
-  riferimenti: [
-    { titolo: null, url: null, nota: "Risorse esterne e riferimenti tecnici" },
-    { titolo: null, url: null, nota: "Conformità a standard e normative nazionali ed europee" },
   ],
 };

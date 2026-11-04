@@ -5,9 +5,10 @@
    Un solo blocco componibile (codice, titolo, spiegazione, pulsanti) in
    tre formati:
    - "inline": riquadro dentro una sezione (Telemetria);
-   - "banner": striscia sotto la barra in alto del sito;
-   - schermata intera (screen): dopo l'attesa, con la fascia centrale
-     come il breach e il nero sopra e sotto.
+   - "banner": striscia in cima al contenuto, sotto la barra in alto (è
+     quella che usa il sito quando la repo non risponde);
+   - schermata intera (screen): una fascia centrale con il nero sopra e
+     sotto; anteprima con ?stage=fault&kind=…
    I casi stanno in KINDS e i pulsanti in ACTIONS: per un caso nuovo basta
    una voce. of() ricava il caso dagli errori delle richieste di BC.GH e
    BC.raw, fromRepo() dallo stato di BC.Repo.
@@ -117,13 +118,14 @@
     return el;
   }
 
-  // striscia sotto la barra in alto del sito (una sola alla volta)
+  // striscia in cima al contenuto, agganciata sotto la barra in alto (una sola
+  // alla volta)
   function banner(kind, opts = {}) {
-    const site = BC.$('#site');
-    if (!site || !kind) return null;
-    BC.$$('.fault--banner', site).forEach((x) => x.remove());
+    const host = BC.$('#screen');
+    if (!host || !kind) return null;
+    BC.$$('.fault--banner').forEach((x) => x.remove());
     const el = render(kind, { actions: ['retry', 'close'], ...opts, variant: 'banner' });
-    site.appendChild(el);
+    host.prepend(el);
     return el;
   }
 
@@ -151,7 +153,7 @@
     const core = render(kind, { actions: ['enter', 'retry', 'repo'], ...opts, variant: 'band', onClose: close });
     el = h('div', { class: 'fault-screen', role: 'alertdialog', 'aria-modal': 'true', 'aria-labelledby': `fault-band-${kind}` },
       h('div', { class: 'fault-screen__hud', 'aria-hidden': 'true' },
-        h('span', null, 'BC//LINK — SINCRONIZZAZIONE FALLITA', h('br'), h('span', { class: 'jp', lang: 'ja' }, '接続 待機中')),
+        h('span', null, 'BC//LINK — SINCRONIZZAZIONE FALLITA'),
         h('span', { 'data-clock': '' }, BC.clock())),
       h('div', { class: 'fault-screen__band' }, BC.SKULL.svg('fault-screen__skull'), core),
       h('div', { class: 'fault-screen__foot', 'aria-hidden': 'true' },
