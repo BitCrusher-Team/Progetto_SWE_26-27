@@ -117,22 +117,22 @@ window.BC_CONTENT = {
   // docs/rtb/), con le sottocartelle come categorie; questo è il ripiego.
   // stato: null | "bozza" | "in verifica" | "approvato"
   consegne: [
-    { revisione: "CND", nome: "Lettera di presentazione", versione: "1.0.0", stato: "approvato",
+    { revisione: "CND", nome: "Lettera di presentazione", versione: "Finale", stato: "approvato",
       file: "docs/candidatura/Lettera_Di_Presentazione_BitCrusher.pdf" },
-    { revisione: "CND", nome: "Valutazione dei capitolati", versione: "1.0.0", stato: "approvato",
+    { revisione: "CND", nome: "Valutazione dei capitolati", versione: "1.1.0", stato: "approvato",
       file: "docs/candidatura/Valutazione_Capitolati_BitCrusher.pdf" },
-    { revisione: "CND", nome: "Dichiarazione degli impegni", versione: "1.0.0", stato: "approvato",
+    { revisione: "CND", nome: "Dichiarazione degli impegni", versione: "1.1.0", stato: "approvato",
       file: "docs/candidatura/Dichiarazione_Impegni_BitCrusher.pdf" },
   ],
 
   // ruolo: ruolo del periodo corrente (i ruoli sono a rotazione), null se non assegnato
   team: [
-    { nome: "Alex Singh", matricola: "2148621", github: "ZiraelOneTwo", ruolo: null },
-    { nome: "Pietro Leonardo Acampora", matricola: "2146762", github: "hipietro", ruolo: null },
-    { nome: "Marco Bollettin", matricola: "2147955", github: "Ahwrs", ruolo: null },
-    { nome: "Erik Giuliano", matricola: "2138012", github: "FlameStorm199", ruolo: null },
-    { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: null },
-    { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: null },
-    { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: null },
+    { nome: "Alex Singh", matricola: "2148621", github: "ZiraelOneTwo", ruolo: "Responsabile" },
+    { nome: "Pietro Leonardo Acampora", matricola: "2146762", github: "hipietro", ruolo: "Verificatore" },
+    { nome: "Marco Bollettin", matricola: "2147955", github: "Ahwrs", ruolo: "Verificatore" },
+    { nome: "Erik Giuliano", matricola: "2138012", github: "FlameStorm199", ruolo: "Amministratore" },
+    { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: "Verificatore" },
+    { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: "Verificatore" },
+    { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: "Verificatore" },
   ],
 };
