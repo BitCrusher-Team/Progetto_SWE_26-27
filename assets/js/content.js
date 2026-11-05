@@ -103,8 +103,10 @@ window.BC_CONTENT = {
   // "Documento" del template Attività): servono a riconoscere i file
   documenti: [
     { nome: "Lettera di presentazione" },
-    { nome: "Valutazione dei capitolati" },
-    { nome: "Dichiarazione degli impegni" },
+    { nome: "Valutazione dei capitolati C6" },
+    { nome: "Dichiarazione degli impegni C6" },
+    { nome: "Valutazione dei capitolati C5" },
+    { nome: "Dichiarazione degli impegni C5" },
     { nome: "Norme di Progetto" },
     { nome: "Piano di Progetto" },
     { nome: "Piano di Qualifica" },
@@ -117,12 +119,14 @@ window.BC_CONTENT = {
   // docs/rtb/), con le sottocartelle come categorie; questo è il ripiego.
   // stato: null | "bozza" | "in verifica" | "approvato"
   consegne: [
-    { revisione: "CND", nome: "Lettera di presentazione", versione: "Finale", stato: "approvato",
-      file: "docs/candidatura/Lettera_Di_Presentazione_BitCrusher.pdf" },
-    { revisione: "CND", nome: "Valutazione dei capitolati", versione: "1.1.0", stato: "approvato",
-      file: "docs/candidatura/Valutazione_Capitolati_BitCrusher.pdf" },
-    { revisione: "CND", nome: "Dichiarazione degli impegni", versione: "1.1.0", stato: "approvato",
-      file: "docs/candidatura/Dichiarazione_Impegni_BitCrusher.pdf" },
+    { revisione: "CND", nome: "Valutazione dei capitolati C6", versione: "1.0.0", stato: "approvato",
+      file: "docs/candidatura/C6/Valutazione_Capitolati_BitCrusher.pdf" },
+    { revisione: "CND", nome: "Dichiarazione degli impegni C6", versione: "1.1.0", stato: "approvato",
+      file: "docs/candidatura/C6/Dichiarazione_Impegni_BitCrusher.pdf" },
+    { revisione: "CND", nome: "Valutazione dei capitolati C5", versione: "1.1.0", stato: "approvato",
+      file: "docs/candidatura/C5/Valutazione_Capitolati_BitCrusher.pdf" },
+    { revisione: "CND", nome: "Dichiarazione degli impegni C5", versione: "1.1.0", stato: "approvato",
+      file: "docs/candidatura/C5/Dichiarazione_Impegni_BitCrusher.pdf" },
   ],
 
   // ruolo: ruolo del periodo corrente (i ruoli sono a rotazione), null se non assegnato
