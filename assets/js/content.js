@@ -87,13 +87,19 @@ window.BC_CONTENT = {
       versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Erik Giuliano",
       file: "docs/verbali/verbali_interni/Verbale_interno_04.pdf" },
     { id: "I05", tipo: "interno", data: "2026-10-29", titolo: "Revisione documenti per candidatura ed elezione responsabile",
+      versione: "1.0.0", redattore: "Alexandru Mitu, Antonio Tufano", verificatore: "Pietro Leonardo Acampora, Riccardo Pozzato",
       file: "docs/verbali/verbali_interni/verbale_interno_05.pdf" },
+    { id: "I06", tipo: "interno", data: "2026-11-03", titolo: "Ristesura dei documenti per la candidatura",
+      versione: "1.0.0", redattore: "Erik Giuliano", verificatore: "Pietro Leonardo Acampora",
+      file: "docs/verbali/verbali_interni/Verbale_interno_06.pdf" }
   ],
 
   // Diario di bordo: gli interventi stanno in docs/diario_di_bordo/ (il sito li
   // legge dalla repo, dal più recente); il template è indicato nel README
   diario: {
     voci: [
+      { nome: "Diario di bordo 03", file: "docs/diario_di_bordo/Diario_di_Bordo_03.pptx" },
+      { nome: "Diario di bordo 02", file: "docs/diario_di_bordo/Diario_di_Bordo_02.pptx" },
       { nome: "Diario di bordo 01", file: "docs/diario_di_bordo/Diario_di_Bordo_01.pptx" },
     ],
     template: "assets/pptx_templates/Meeting_Bit_Crusher.pptx",
