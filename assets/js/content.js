@@ -44,7 +44,7 @@ window.BC_CONTENT = {
   // Le milestone della repo le aggiornano: una milestone vale per la revisione se
   // il titolo ne contiene la sigla, il nome o un alias.
   milestone: [
-    { sigla: "CND", nome: "Candidatura", alias: ["aggiudicazione"], data: null, stato: "in-corso", avanzamento: null },
+    { sigla: "CND", nome: "Candidatura", alias: ["Aggiudicazione"], data: null, stato: "Completato", avanzamento: null },
     { sigla: "RTB", nome: "Requirements and Technology Baseline", data: null, stato: "attesa", avanzamento: null },
     { sigla: "PB", nome: "Product Baseline", data: null, stato: "attesa", avanzamento: null },
     { sigla: "CA", nome: "Customer Acceptance", data: null, stato: "attesa", avanzamento: null },
@@ -91,13 +91,17 @@ window.BC_CONTENT = {
       file: "docs/verbali/verbali_interni/verbale_interno_05.pdf" },
     { id: "I06", tipo: "interno", data: "2026-11-03", titolo: "Ristesura dei documenti per la candidatura",
       versione: "1.0.0", redattore: "Erik Giuliano", verificatore: "Pietro Leonardo Acampora",
-      file: "docs/verbali/verbali_interni/Verbale_interno_06.pdf" }
+      file: "docs/verbali/verbali_interni/Verbale_interno_06.pdf" },
+    { id: "I07", tipo: "interno", data: "2026-11-07", titolo: "Decisioni su organizzazione interna",
+      versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Erik Giuliano",
+      file: "docs/verbali/verbali_interni/Verbale_interno_07.pdf" }
   ],
 
   // Diario di bordo: gli interventi stanno in docs/diario_di_bordo/ (il sito li
   // legge dalla repo, dal più recente); il template è indicato nel README
   diario: {
     voci: [
+      { nome: "Diario di bordo 04", file: "docs/diario_di_bordo/Diario_di_Bordo_04.pptx" },
       { nome: "Diario di bordo 03", file: "docs/diario_di_bordo/Diario_di_Bordo_03.pptx" },
       { nome: "Diario di bordo 02", file: "docs/diario_di_bordo/Diario_di_Bordo_02.pptx" },
       { nome: "Diario di bordo 01", file: "docs/diario_di_bordo/Diario_di_Bordo_01.pptx" },
@@ -133,12 +137,12 @@ window.BC_CONTENT = {
 
   // ruolo: ruolo del periodo corrente (i ruoli sono a rotazione), null se non assegnato
   team: [
-    { nome: "Alex Singh", matricola: "2148621", github: "ZiraelOneTwo", ruolo: "Responsabile" },
-    { nome: "Pietro Leonardo Acampora", matricola: "2146762", github: "hipietro", ruolo: "Verificatore" },
-    { nome: "Marco Bollettin", matricola: "2147955", github: "Ahwrs", ruolo: "Verificatore" },
-    { nome: "Erik Giuliano", matricola: "2138012", github: "FlameStorm199", ruolo: "Amministratore" },
-    { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: "Verificatore" },
-    { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: "Verificatore" },
-    { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: "Verificatore" },
+    { nome: "Alex Singh", matricola: "2148621", github: "ZiraelOneTwo", ruolo: null },
+    { nome: "Pietro Leonardo Acampora", matricola: "2146762", github: "hipietro", ruolo: null },
+    { nome: "Marco Bollettin", matricola: "2147955", github: "Ahwrs", ruolo: null },
+    { nome: "Erik Giuliano", matricola: "2138012", github: "FlameStorm199", ruolo: null },
+    { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: null },
+    { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: null },
+    { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: null },
   ],
 };

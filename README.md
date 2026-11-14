@@ -6,10 +6,9 @@
   />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img
-    src="./assets/images/ReadmeLogo/UnipdLogoBianco.svg"
+    src="./assets/images/ReadmeLogo/UnipdLogoRosso.png"
     alt="Emblema dell'Università di Padova, le figure di due patroni e le nove stelle su campo azzurro"
     width="150"
-    height="150"
   />
 </p>
 
