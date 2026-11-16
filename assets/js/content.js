@@ -94,7 +94,10 @@ window.BC_CONTENT = {
       file: "docs/verbali/verbali_interni/Verbale_interno_06.pdf" },
     { id: "I07", tipo: "interno", data: "2026-11-07", titolo: "Decisioni su organizzazione interna",
       versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Erik Giuliano",
-      file: "docs/verbali/verbali_interni/Verbale_interno_07.pdf" }
+      file: "docs/verbali/verbali_interni/Verbale_interno_07.pdf" },
+    { id: "I08", tipo: "interno", data: "2026-11-12", titolo: "Discussione sull'uso e funzionamento di OpenProject",
+      versione: "1.0.0", redattore: "Marco Bollettin", verificatore: "Alexandru Mitu",
+      file: "docs/verbali/verbali_interni/Verbale_interno_08.pdf" }
   ],
 
   // Diario di bordo: gli interventi stanno in docs/diario_di_bordo/ (il sito li
