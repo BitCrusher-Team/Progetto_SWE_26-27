@@ -1,0 +1,10 @@
+# I sette membri e i loro bucket. Nomi e op_user_id letti da OpenProject col mosaico-bot;
+# github e' lo username (non il link): lo vogliono le API e CODEOWNERS.
+membri:
+  - { nome: "Alex Singh", op_user_id: 7, github: "ZiraelOneTwo" }
+  - { nome: "Riccardo Pozzato", op_user_id: 8, github: "rpozzato" }
+  - { nome: "Pietro L. Acampora", op_user_id: 9, github: "hipietro" }
+  - { nome: "Antonio Tufano", op_user_id: 10, github: "antotuf06" }
+  - { nome: "Alexandru Mitu", op_user_id: 11, github: "aycollapse" }
+  - { nome: "Erik Giuliano", op_user_id: 12, github: "FlameStorm199" }
+  - { nome: "Marco Bolletin", op_user_id: 13, github: "Ahwrs" }
