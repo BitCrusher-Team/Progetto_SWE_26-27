@@ -1,0 +1,59 @@
+# Mosaico: lo specchio OpenProject -> GitHub. GitHub LEGGE OpenProject e lo copia: una issue per
+# carta (titolo, stato di lavoro, tipo, ruolo, categoria, priorita', documento, stima, avanzamento, date, artefatti, tutti
+# i legami fra le carte e la gerarchia), una milestone per sprint (obiettivo e date), gli assegnatari, aperta o chiusa.
+# NON si copiano: il consuntivo (ore spese, costi, budget), le riunioni, le notizie, le discussioni. OpenProject non chiama
+# mai GitHub. Una issue speculare porta un marcatore nascosto; le modifiche fatte qui si riscrivono al giro dopo, i commenti restano.
+# I login GitHub vengono da .github/mosaico/membri.yml.
+name: Mosaico, specchio
+
+on:
+  schedule:
+    - cron: "*/15 6-21 * * *"  # ogni quarto d'ora, dalle 7 alle 22 ora italiana (in inverno)
+  workflow_dispatch:
+    inputs:
+      prova:
+        description: "Solo prova: legge e dice cosa scriverebbe, senza scrivere"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: mosaico-specchio
+  cancel-in-progress: false
+
+jobs:
+  specchio:
+    name: Specchio di OpenProject
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/mosaico
+          persist-credentials: false
+
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/strumenti
+          ssh-key: ${{ secrets.STRUMENTI_SSH_KEY }}
+          path: strumenti
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Mosaico
+        run: python -m pip install --quiet ./strumenti
+
+      - name: Un giro dello specchio
+        env:
+          OP_URL: ${{ secrets.OP_URL }}
+          OP_TOKEN: ${{ secrets.OP_TOKEN }}
+          MOSAICO_PROGETTO: ${{ vars.MOSAICO_PROGETTO }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROVA: ${{ inputs.prova && '--prova' || '' }}
+        run: python -m mosaico specchio --membri .github/mosaico/membri.yml $PROVA
