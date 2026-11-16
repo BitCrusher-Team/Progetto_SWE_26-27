@@ -1,0 +1,232 @@
+% ==========================================
+% COME USARE QUESTO FILE SU OVERLEAF
+% ==========================================
+% 1. Creare un progetto vuoto su Overleaf.
+% 2. Sostituire tutto il contenuto di main.tex con il sorgente di questo file.
+% 3. Premere Recompile, usando il compilatore pdfLaTeX.
+% Questo e' l'unico sorgente necessario: non ci sono altri .tex da caricare.
+% In alternativa, caricare Glossario.tex e impostarlo come documento principale.
+% Sostituire i metadati qui sotto e i testi tra parentesi quadre.
+% Nella sezione TERMINI, duplicare i blocchi \VoceGlossario per le nuove voci.
+% I loghi sono facoltativi: senza immagini vengono mostrati due riquadri.
+% Per inserirli, caricare nella radice del progetto Overleaf le immagini
+% UnipdLogoRosso.png e BitCrusherTeamNero.png (con questi nomi esatti).
+
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage[hidelinks, hypertexnames=false]{hyperref}
+
+% --- METADATI: sostituire i segnaposto alla prima stesura ---
+\newcommand{\VersioneDocumento}{0.0.1}
+\newcommand{\DataDocumento}{[AAAA-MM-GG]}
+\newcommand{\RedattoriDocumento}{[Nome Cognome]}
+\newcommand{\VerificatoriDocumento}{[Nome Cognome]}
+\newcommand{\ApprovatoreDocumento}{[Nome Cognome]}
+
+\hypersetup{
+    pdftitle={Glossario},
+    pdfauthor={Bit Crusher},
+    pdfsubject={Glossario del progetto di Ingegneria del Software}
+}
+
+% --- HEADER E FOOTER, come nei verbali ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Glossario}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ==========================================
+% COMANDI PER LE VOCI E I COLLEGAMENTI
+% ==========================================
+% Questi comandi sono gia' pronti. Per scrivere il glossario basta usare
+% \VoceGlossario nella sezione TERMINI, senza modificare le definizioni qui.
+%
+% 1. \VoceGlossario{id}{nome visualizzato}{definizione}
+%    - id: chiave unica del concetto, per esempio termine-a.
+%      Usare lettere minuscole ASCII, cifre e trattini, senza spazi o accenti.
+%      Scegliere la chiave definitiva prima di pubblicare collegamenti e
+%      mantenerla anche se cambiano il nome, la definizione o la pagina.
+%    - nome visualizzato: testo del termine che compare nel PDF.
+%    - definizione: testo della spiegazione, anche su piu' righe.
+%    Il comando stampa la voce e crea l'ancora PDF gls-<id>.
+%    Una chiave ripetuta produce un errore di compilazione.
+%    Le voci NON vengono ordinate automaticamente: disporle per lettera.
+%
+%    Esempio: \VoceGlossario{termine-a}{[Termine A]}{[Definizione A.]}
+%    crea l'ancora gls-termine-a.
+\newcommand{\VoceGlossario}[3]{%
+    \ifcsname bitcrusherglossario@#1\endcsname
+        \PackageError{Glossario}{Identificatore duplicato: #1}%
+            {Assegnare un identificatore diverso a ogni voce.}%
+    \else
+        \expandafter\gdef\csname bitcrusherglossario@#1\endcsname{}%
+        \par\addvspace{\baselineskip}%
+        \noindent\hypertarget{gls-#1}{\textbf{#2}}\par
+        \nopagebreak\smallskip
+        \noindent #3\par
+    \fi
+}
+
+% 2. \RifGlossario{id}{testo del collegamento}
+%    Rimanda a una voce nello STESSO PDF. L'id deve esistere tra le voci.
+%    Funziona anche se la voce di destinazione si trova piu' avanti.
+%    Esempio: Vedere \RifGlossario{termine-a}{[Termine A]}.
+\newcommand{\RifGlossario}[2]{%
+    \hyperlink{gls-#1}{#2}%
+}
+
+% 3. \RifGlossarioEsterno{percorso del PDF}{id}{testo del collegamento}
+%    Da un ALTRO documento, rimanda a una copia locale di Glossario.pdf.
+%    Per usarlo in un altro progetto Overleaf, copiare SOLO la definizione
+%    di questo comando nel suo preambolo e caricare \usepackage{hyperref},
+%    se non e' gia' presente. Non importare tutto questo Glossario.tex.
+%    Esempio, se i due PDF scaricati sono nella stessa cartella:
+%    \RifGlossarioEsterno{Glossario.pdf}{termine-a}{[Termine A]}
+%    Il percorso e' relativo al PDF chiamante, non al sorgente .tex.
+%    Il PDF del glossario deve essere distribuito insieme al PDF chiamante.
+%    Per seguire l'esempio, rinominare il PDF scaricato in Glossario.pdf.
+\newcommand{\RifGlossarioEsterno}[3]{%
+    \href{#1\#gls-#2}{#3}%
+}
+
+% 4. \RifGlossarioWeb{URL del PDF}{id}{testo del collegamento}
+%    Rimanda a Glossario.pdf pubblicato a un indirizzo HTTP(S) stabile.
+%    In un altro progetto LaTeX, copiare la definizione del comando nel
+%    preambolo e caricare hyperref, come per \RifGlossarioEsterno.
+%    Esempio (sostituire l'URL con quello reale dopo la pubblicazione):
+%    \RifGlossarioWeb{https://esempio.it/Glossario.pdf}{termine-a}{[Termine A]}
+%    Da Word, Markdown o altri documenti basta un normale collegamento a:
+%    https://esempio.it/Glossario.pdf#nameddest=gls-termine-a
+%    Il link va al PDF pubblicato, non all'editor Overleaf o al .tex su GitHub.
+%    Alcuni lettori PDF aprono il documento senza saltare alla voce:
+%    verificare il comportamento nei lettori usati dal gruppo.
+\newcommand{\RifGlossarioWeb}[3]{%
+    \href{#1\#nameddest=gls-#2}{#3}%
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \IfFileExists{UnipdLogoRosso.png}{%
+            \includegraphics[width=0.7\textwidth]{UnipdLogoRosso.png}
+        }{%
+            \fbox{\parbox[c][2cm][c]{0.7\textwidth}{\centering [Logo Università]}}
+        }
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \IfFileExists{BitCrusherTeamNero.png}{%
+            \includegraphics[width=0.7\textwidth]{BitCrusherTeamNero.png}
+        }{%
+            \fbox{\parbox[c][2cm][c]{0.7\textwidth}{\centering [Logo Bit Crusher]}}
+        }
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large\textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}\par}
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica\par}
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software\par}
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027\par}
+
+    \vspace{1.5cm}
+    {\Huge\textbf{Glossario}\par}
+    \vspace{0.5cm}
+    {\Large Versione \VersioneDocumento\par}
+
+    \vspace{1.5cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \vspace{0.1cm}
+        \textbf{Email:} \href{mailto:bitcrusherteam@gmail.com}{bitcrusherteam@gmail.com} \\
+        \vspace{0.1cm}
+        %da mettere redattori e verificatori?
+        \textbf{Data ultima modifica:} 16-11-2026
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE
+% ==========================================
+\section*{Registro delle Modifiche}
+\addcontentsline{toc}{section}{Registro delle Modifiche}
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|l|l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+        \VersioneDocumento & 16-11-2026 & Pietro Leonardo Acampora & Antonio Tufano & Stesura template \\ \hline
+    \end{tabularx}
+\end{center}
+\newpage
+
+% ==========================================
+% INDICE
+% ==========================================
+\tableofcontents
+\newpage
+
+% ==========================================
+% INTRODUZIONE
+% ==========================================
+\section{Introduzione}
+\label{sec:introduzione}
+
+\subsection{Scopo del documento}
+[Indicare lo scopo del glossario e i documenti di progetto a cui si applica.]
+
+\subsection{Convenzioni di lettura}
+[Descrivere l'ordinamento alfabetico e le eventuali convenzioni per sigle,
+sinonimi e rimandi tra termini.]
+
+\newpage
+
+% ==========================================
+% TERMINI: aggiungere e modificare le voci qui sotto
+% ==========================================
+% Questi sono solo segnaposto, non definizioni di progetto.
+% Sostituire id, nome e definizione; duplicare il blocco per altre voci.
+% Aggiungere \section{C}, \section{D}, ecc. solo quando servono.
+
+\section{A  }
+
+\VoceGlossario{identificatore-della-parola-A}{[Termine A]}{
+    [Definizione del termine A.].
+}
+
+\section{B}
+
+\VoceGlossario{termine-b}{[Termine B]}{
+    [Definizione del termine B.]
+    % Rimando dimostrativo: serve solo a rimandare ad un'altra parola all'interno del glossario
+    Vedere anche \RifGlossario{identificatore-della-parola-A}{[Termine A]}.
+}
+
+% \VoceGlossario{id-del-termine}{[Nome del termine]}{
+%     [Definizione del termine.]
+% }
+
+\end{document}
