@@ -97,6 +97,11 @@
   </thead>
   <tbody>
     <tr>
+      <td>2026-11-12</td>
+      <td>Discussione dell'organizzazione tramite OP</td>
+      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_08.pdf">Verbale I08</a></td>
+    </tr>
+    <tr>
       <td>2026-11-07</td>
       <td>Decisioni su organizzazione interna</td>
       <td><a href="./docs/verbali/verbali_interni/Verbale_interno_07.pdf">Verbale I07</a></td>
