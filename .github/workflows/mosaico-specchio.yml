@@ -2,7 +2,8 @@
 # carta (titolo, stato di lavoro, tipo, ruolo, categoria, priorita', documento, stima, avanzamento, date, artefatti, tutti
 # i legami fra le carte e la gerarchia), una milestone per sprint (obiettivo e date), gli assegnatari, aperta o chiusa.
 # NON si copiano: il consuntivo (ore spese, costi, budget), le riunioni, le notizie, le discussioni. OpenProject non chiama
-# mai GitHub. Una issue speculare porta un marcatore nascosto; le modifiche fatte qui si riscrivono al giro dopo, i commenti restano.
+# mai GitHub. Una issue speculare porta un marcatore nascosto; le modifiche fatte qui si riscrivono al giro
+# dopo, i commenti restano.
 # I login GitHub vengono da .github/mosaico/membri.yml.
 name: Mosaico, specchio
 
@@ -30,6 +31,41 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: I segreti e la variabile
+        env:
+          STRUMENTI_SSH_KEY: ${{ secrets.STRUMENTI_SSH_KEY }}
+          OP_URL: ${{ secrets.OP_URL }}
+          OP_TOKEN: ${{ secrets.OP_TOKEN }}
+          MOSAICO_PROGETTO: ${{ vars.MOSAICO_PROGETTO }}
+        run: |
+          mancano=""
+          for n in STRUMENTI_SSH_KEY OP_URL OP_TOKEN MOSAICO_PROGETTO; do [ -n "${!n}" ] || mancano="$mancano $n"; done
+          if [ -n "$mancano" ]; then
+            echo "::error::mancano nel repo:$mancano (Settings, Secrets and variables, Actions: i primi tre sono segreti, MOSAICO_PROGETTO e' una variabile)"
+            exit 1
+          fi
+          echo "segreti e variabile: presenti"
+
+      - name: La deploy key apre strumenti?
+        env:
+          CHIAVE: ${{ secrets.STRUMENTI_SSH_KEY }}
+          REPO: ${{ github.repository_owner }}/strumenti
+        run: |
+          k=$(mktemp); trap 'rm -f "$k"' EXIT
+          case "$CHIAVE" in *$'\r'*) echo "::warning::STRUMENTI_SSH_KEY contiene a capo di Windows (CR): qui si tolgono, ma il checkout potrebbe non leggerla. Meglio rimetterla copiata da un terminale Linux o Termux" ;; esac
+          printf '%s\n' "$CHIAVE" | tr -d '\r' > "$k"; chmod 600 "$k"
+          if ! ssh-keygen -y -f "$k" > /dev/null 2>&1; then
+            echo "::error::STRUMENTI_SSH_KEY non e' una chiave privata leggibile: incollata a meta', senza le righe BEGIN/END, o e' la pubblica?"
+            exit 1
+          fi
+          echo "impronta della chiave privata: $(ssh-keygen -l -f "$k" | cut -d' ' -f2) (deve essere quella della deploy key di $REPO)"
+          if out=$(GIT_SSH_COMMAND="ssh -i $k -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new" git ls-remote "git@github.com:$REPO.git" HEAD 2>&1); then
+            [ -n "$out" ] && echo "$REPO: si legge" || { echo "::error::$REPO e' vuoto: manca il push del codice di Mosaico"; exit 1; }
+          else
+            echo "::error::git non legge $REPO: $(printf '%s' "$out" | tr '\n' ' ' | cut -c1-300)"
+            exit 1
+          fi
+
       - uses: actions/checkout@v4
         with:
           sparse-checkout: .github/mosaico
