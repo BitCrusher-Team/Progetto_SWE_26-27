@@ -26,9 +26,9 @@
 \usepackage[hidelinks, hypertexnames=false]{hyperref}
 
 % --- METADATI: sostituire i segnaposto alla prima stesura ---
-\newcommand{\VersioneDocumento}{0.0.1}
-\newcommand{\DataDocumento}{[AAAA-MM-GG]}
-\newcommand{\RedattoriDocumento}{[Nome Cognome]}
+\newcommand{\VersioneDocumento}{0.1.0}
+\newcommand{\DataDocumento}{2026-11-16}
+\newcommand{\RedattoriDocumento}{Antonio Tufano}
 \newcommand{\VerificatoriDocumento}{[Nome Cognome]}
 \newcommand{\ApprovatoreDocumento}{[Nome Cognome]}
 
@@ -125,20 +125,15 @@
     \centering
     \begin{minipage}{0.45\textwidth}
         \centering
-        \IfFileExists{UnipdLogoRosso.png}{%
             \includegraphics[width=0.7\textwidth]{UnipdLogoRosso.png}
-        }{%
-            \fbox{\parbox[c][2cm][c]{0.7\textwidth}{\centering [Logo Università]}}
-        }
+        
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
-        \IfFileExists{BitCrusherTeamNero.png}{%
+
             \includegraphics[width=0.7\textwidth]{BitCrusherTeamNero.png}
-        }{%
-            \fbox{\parbox[c][2cm][c]{0.7\textwidth}{\centering [Logo Bit Crusher]}}
-        }
+
     \end{minipage}
 
     \vspace{1.5cm}
@@ -163,7 +158,7 @@
         \textbf{Email:} \href{mailto:bitcrusherteam@gmail.com}{bitcrusherteam@gmail.com} \\
         \vspace{0.1cm}
         %da mettere redattori e verificatori?
-        \textbf{Data ultima modifica:} 16-11-2026
+        \textbf{Data ultima modifica:} \DataDocumento
     \end{flushleft}
     \vfill
 \end{titlepage}
@@ -178,7 +173,9 @@
     \begin{tabularx}{\textwidth}{|l|l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
         \textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
-        \VersioneDocumento & 16-11-2026 & Pietro Leonardo Acampora & Antonio Tufano & Stesura template \\ \hline
+        1.0.0 & 16-11-2026 & Erik Giuliano & - & Approvazione per il rilascio. \\ \hline
+        0.1.0 & 16-11-2026 & Antonio Tufano & Alex Singh & Stesura dell'introduzione e prima stesura delle voci del glossario \\ \hline
+        0.0.1 & 16-11-2026 & Pietro Leonardo Acampora & Antonio Tufano & Stesura template \\ \hline
     \end{tabularx}
 \end{center}
 \newpage
@@ -196,37 +193,944 @@
 \label{sec:introduzione}
 
 \subsection{Scopo del documento}
-[Indicare lo scopo del glossario e i documenti di progetto a cui si applica.]
+Il presente documento raccoglie e definisce i termini tecnici, le sigle e i termini potenzialmente ambigui che ricorrono nella documentazione prodotta dal gruppo Bit Crusher nell'ambito del progetto didattico del corso di Ingegneria del Software, relativo al capitolato C6 «Sistema AI di caching semantico e dashboard FinOps», proposto da Var Group S.p.A.
+
+Lo scopo del glossario è garantire un'interpretazione univoca dei termini da parte di tutti i soggetti coinvolti (componenti del gruppo, committente e proponente), evitando ambiguità e fraintendimenti dovuti all'uso di termini specialistici, di sigle o di parole che assumono un significato particolare nel contesto del progetto. Le voci riguardano in particolare:
+\begin{itemize}
+    \item i processi, i ruoli e i documenti del progetto didattico;
+    \item il way of working del gruppo e gli strumenti adottati a suo supporto;
+    \item il dominio applicativo e le tecnologie del capitolato C6.
+\end{itemize}
+
+Il glossario si applica a tutti i documenti di progetto, interni ed esterni, tra cui verbali, diari di bordo, documenti di candidatura, Norme di Progetto e Piano di Progetto. Si tratta di un documento in continua evoluzione: viene aggiornato man mano che nella documentazione compaiono nuovi termini che necessitano di una definizione.
 
 \subsection{Convenzioni di lettura}
-[Descrivere l'ordinamento alfabetico e le eventuali convenzioni per sigle,
-sinonimi e rimandi tra termini.]
+Per la consultazione del glossario valgono le seguenti convenzioni:
+\begin{itemize}
+    \item \textbf{Ordinamento:} le voci sono disposte in ordine alfabetico e raggruppate in sezioni secondo la lettera iniziale; l'ordinamento non distingue tra lettere maiuscole e minuscole e le lettere prive di voci non compaiono.
+    \item \textbf{Sigle e acronimi:} le voci corrispondenti a una sigla riportano la sigla seguita, tra parentesi, dalla sua forma estesa, ad esempio \RifGlossario{rtb}{RTB (Requirements and Technology Baseline)}; la voce è collocata sotto la lettera iniziale della sigla.
+    \item \textbf{Termini in lingua straniera:} i termini in lingua inglese sono riportati nella forma in cui compaiono nella documentazione; l'eventuale traduzione italiana è indicata nella definizione.
+    \item \textbf{Sinonimi e varianti:} quando un concetto è noto con più nomi, la definizione è riportata sotto la forma più usata nella documentazione e le forme alternative sono indicate nella definizione stessa; alcune voci, come \RifGlossario{recall}{\textit{Recall}}, si limitano a rimandare alla voce che contiene la definizione.
+    \item \textbf{Rimandi:} i riferimenti ad altre voci del glossario sono scritti in corsivo e sono collegamenti cliccabili che portano alla voce citata, ad esempio \RifGlossario{falso-hit}{\textit{Falso hit}}.
+\end{itemize}
 
 \newpage
 
 % ==========================================
 % TERMINI: aggiungere e modificare le voci qui sotto
 % ==========================================
-% Questi sono solo segnaposto, non definizioni di progetto.
-% Sostituire id, nome e definizione; duplicare il blocco per altre voci.
-% Aggiungere \section{C}, \section{D}, ecc. solo quando servono.
+% Le voci sono in ordine alfabetico e raggruppate per lettera iniziale.
+% Per una nuova voce, duplicare un blocco \VoceGlossario nella sezione giusta.
+% Aggiungere una nuova \section{<lettera>} solo quando serve.
 
-\section{A  }
+\section{A}
 
-\VoceGlossario{identificatore-della-parola-A}{[Termine A]}{
-    [Definizione del termine A.].
+\VoceGlossario{adr}{ADR (Architecture Decision Record)}{
+    Documento breve che registra una singola decisione architetturale significativa, riportandone il contesto, le alternative considerate, la scelta effettuata e le sue conseguenze. L'insieme degli ADR costituisce lo storico motivato delle scelte tecniche del progetto ed è uno dei prodotti richiesti dal capitolato C6.
+}
+
+\VoceGlossario{ai-act}{AI Act}{
+    Regolamento (UE) 2024/1689 dell'Unione Europea che disciplina lo sviluppo, l'immissione sul mercato e l'utilizzo dei sistemi di Intelligenza Artificiale, classificandoli in base al livello di rischio e imponendo obblighi di trasparenza, sicurezza e supervisione umana.
+}
+
+\VoceGlossario{ai-gateway}{AI Gateway}{
+    Componente che si interpone tra le applicazioni e i fornitori di modelli di IA, offrendo un unico punto di accesso attraverso cui gestire l'instradamento delle richieste, l'autenticazione, i limiti di utilizzo, il monitoraggio e i costi (vedi \RifGlossario{proxy}{\textit{Proxy}}).
+}
+
+\VoceGlossario{alert}{Alert}{
+    Notifica automatica generata da un sistema al verificarsi di una condizione prestabilita. Nel capitolato C6 indica l'avviso emesso dal servizio FinOps quando la spesa si avvicina al budget assegnato o lo supera.
+}
+
+\VoceGlossario{alias}{Alias (Git)}{
+    Scorciatoia definita nella configurazione di Git che associa un nome breve a un comando o a una sequenza di comandi. Il gruppo ne fa uso per ovviare ai limiti di tracciamento remoto dello strumento SPR.
+}
+
+\VoceGlossario{amministratore}{Amministratore}{
+    Ruolo di progetto responsabile dell'ambiente di lavoro: sceglie, configura e mantiene gli strumenti a supporto dei processi (repository, sistemi di tracciamento delle attività, pipeline di CI, ambienti containerizzati) e gestisce la configurazione e il versionamento dei prodotti. Il costo orario previsto è di 20 €/h.
+}
+
+\VoceGlossario{analisi-dei-rischi}{Analisi dei rischi}{
+    Attività di pianificazione che individua gli eventi incerti in grado di compromettere il progetto, ne stima probabilità e impatto e definisce per ciascuno una contromisura. Il gruppo classifica i rischi in tecnologici (RT), legati ai requisiti (RR), economici (RE) e organizzativi (RO).
+}
+
+\VoceGlossario{analista}{Analista}{
+    Ruolo che studia il dominio del problema e i bisogni della proponente e degli utenti, individuando, classificando e documentando i requisiti del prodotto. È il ruolo predominante nella fase che precede la RTB. Il costo orario previsto è di 25 €/h.
+}
+
+\VoceGlossario{anonymizer}{Anonymizer}{
+    Componente che rimuove o maschera i dati personali e sensibili (vedi \RifGlossario{pii}{\textit{PII}}) contenuti in una richiesta prima che questa venga elaborata o inoltrata a servizi esterni. Nel contesto del capitolato C6 è necessario stabilire in quale punto del flusso, rispetto all'Anonymizer di Var Group, debba operare la cache semantica.
+}
+
+\VoceGlossario{api}{API (Application Programming Interface)}{
+    Insieme di regole, operazioni e formati di dati attraverso cui un componente software espone le proprie funzionalità ad altri programmi. Nel contesto del capitolato C6 i modelli di IA vengono utilizzati come servizio tramite API, pagando in base ai token elaborati.
+}
+
+\VoceGlossario{api-key}{API key}{
+    Stringa segreta che identifica e autentica un client presso un servizio accessibile tramite API, consentendo il controllo degli accessi e l'attribuzione dei consumi.
+}
+
+\VoceGlossario{approvazione}{Approvazione}{
+    Atto formale con cui il Responsabile dichiara un prodotto, già verificato, idoneo al rilascio. Secondo il way of working del gruppo non costituisce una forma di corroborazione e non richiede a sua volta verifica.
+}
+
+\VoceGlossario{audit}{Audit}{
+    Esame sistematico e documentato di processi, sistemi o dati, volto ad accertarne la conformità a leggi, regolamenti o politiche interne; presuppone la tracciabilità delle operazioni svolte.
+}
+
+\VoceGlossario{aws}{AWS (Amazon Web Services)}{
+    Piattaforma di cloud computing di Amazon che offre su richiesta servizi di calcolo, archiviazione, database e Intelligenza Artificiale. Var Group la utilizza per ospitare il proprio ambiente privato (vedi \RifGlossario{layer-1-layer-2}{\textit{Layer 1 / Layer 2}}).
 }
 
 \section{B}
 
-\VoceGlossario{termine-b}{[Termine B]}{
-    [Definizione del termine B.]
-    % Rimando dimostrativo: serve solo a rimandare ad un'altra parola all'interno del glossario
-    Vedere anche \RifGlossario{identificatore-della-parola-A}{[Termine A]}.
+\VoceGlossario{backend}{Backend}{
+    Parte di un sistema software che non è a diretto contatto con l'utente e si occupa della logica applicativa, dell'elaborazione e della persistenza dei dati. Si contrappone al \RifGlossario{frontend}{\textit{Frontend}}.
 }
 
-% \VoceGlossario{id-del-termine}{[Nome del termine]}{
-%     [Definizione del termine.]
-% }
+\VoceGlossario{backlog}{Backlog}{
+    Elenco, ordinato per priorità, delle attività ancora da svolgere. Durante lo sprint planning se ne seleziona la parte da completare nello sprint; le attività che a fine sprint non risultano completate e corroborate vi fanno ritorno.
+}
+
+\VoceGlossario{baseline}{Baseline}{
+    Insieme di prodotti (documenti, codice, configurazioni) verificati e approvati in un dato momento, che costituisce un punto di riferimento stabile per l'avanzamento successivo e può essere modificato solo tramite procedure controllate. Il preventivo è detto \textit{baseline economica} in quanto riferimento rispetto al quale confrontare i costi effettivamente sostenuti.
+}
+
+\VoceGlossario{bi-encoder}{Bi-encoder}{
+    Architettura di modello neurale che trasforma separatamente due testi in due embedding, la cui somiglianza viene poi calcolata con una misura di similarità (ad esempio la similarità del coseno). È veloce e adatto alla ricerca su grandi quantità di dati, poiché gli embedding possono essere calcolati in anticipo, ma è meno preciso di un \RifGlossario{cross-encoder}{\textit{Cross-encoder}}.
+}
+
+\VoceGlossario{bitbucket}{Bitbucket}{
+    Servizio di hosting di repository Git sviluppato da Atlassian, alternativo a GitHub.
+}
+
+\VoceGlossario{branch}{Branch}{
+    Ramo di sviluppo di un sistema di controllo di versione: linea indipendente di commit che permette di lavorare a una modifica senza interferire con il ramo principale fino al momento dell'integrazione.
+}
+
+\VoceGlossario{breaking-change}{Breaking change}{
+    Modifica a una libreria, a un'API o a un protocollo che ne rompe la retrocompatibilità, costringendo chi la utilizza ad adattare il proprio codice.
+}
+
+\VoceGlossario{budget}{Budget}{
+    Somma di denaro stanziata per un determinato scopo in un arco di tempo. Nel capitolato C6 il servizio FinOps deve consentire di definire budget di spesa per team, progetto e utente e di monitorarne il rispetto.
+}
+
+\VoceGlossario{bug-report}{Bug report}{
+    Segnalazione documentata di un difetto del software, che ne descrive il comportamento errato, le condizioni e i passi per riprodurlo e il comportamento atteso. Il capitolato C6 richiede la consegna dei bug report emersi in fase di collaudo.
+}
+
+\section{C}
+
+\VoceGlossario{ca}{CA (Customer Acceptance)}{
+    Terza e ultima revisione di avanzamento del progetto didattico, in cui il prodotto viene sottoposto a collaudo e accettato da committente e proponente.
+}
+
+\VoceGlossario{cache}{Cache}{
+    Memoria di appoggio che conserva i risultati di operazioni già eseguite per restituirli rapidamente quando vengono richiesti di nuovo, evitando di ripetere l'operazione. Una cache tradizionale restituisce un risultato solo se la richiesta è identica a una già memorizzata.
+}
+
+\VoceGlossario{cache-hit}{Cache hit}{
+    Evento in cui la risposta a una richiesta è già presente in cache e viene restituita senza interpellare il modello (vedi anche \RifGlossario{falso-hit}{\textit{Falso hit}}).
+}
+
+\VoceGlossario{cache-miss}{Cache miss}{
+    Evento in cui la risposta a una richiesta non è presente in cache, per cui la richiesta deve essere elaborata dal modello.
+}
+
+\VoceGlossario{cacheabilita}{Cacheabilità}{
+    Proprietà di una richiesta di poter essere servita correttamente da una risposta memorizzata in cache. Non sono cacheabili, ad esempio, le domande la cui risposta dipende dal momento in cui vengono poste (come «Che tempo fa a Milano oggi?») o da un contesto lungo e specifico. Il \textit{gate di cacheabilità} è il filtro che stabilisce quali richieste possono essere servite dalla cache e quali vanno rigenerate.
+}
+
+\VoceGlossario{caching-semantico}{Caching semantico}{
+    Tecnica di caching che riconosce come equivalenti richieste formulate in modo diverso ma con lo stesso significato, confrontandone gli embedding tramite una misura di similarità anziché richiedere l'uguaglianza esatta del testo. È uno dei due componenti originali richiesti dal capitolato C6.
+}
+
+\VoceGlossario{calibrazione}{Calibrazione}{
+    Procedura con cui si regolano i parametri di un sistema (ad esempio la soglia di similarità della cache) sulla base di dati di riferimento, affinché i risultati prodotti rispettino un livello di accuratezza o un tasso d'errore stabilito.
+}
+
+\VoceGlossario{callback}{Callback}{
+    Funzione passata come parametro a un altro componente, che la invoca automaticamente al verificarsi di un determinato evento. Le callback personalizzabili di LiteLLM costituiscono uno dei suoi punti di estensione.
+}
+
+\VoceGlossario{capitolato}{Capitolato (d'appalto)}{
+    Documento con cui un'azienda proponente descrive il prodotto che desidera far realizzare, specificandone obiettivi, requisiti, vincoli e tecnologie consigliate. Nel progetto didattico i gruppi si candidano per l'aggiudicazione di uno dei capitolati presentati (C0--C9).
+}
+
+\VoceGlossario{caso-d-uso}{Caso d'uso (Use Case)}{
+    Descrizione di una sequenza di interazioni tra uno o più attori e il sistema, finalizzata al raggiungimento di uno scopo osservabile dall'attore. I casi d'uso possono essere rappresentati graficamente tramite i diagrammi dei casi d'uso UML.
+}
+
+\VoceGlossario{chart-js}{Chart.js}{
+    Libreria JavaScript open source per la realizzazione di grafici interattivi in pagine web; è suggerita dal capitolato C6, insieme a React, per la dashboard FinOps.
+}
+
+\VoceGlossario{ci}{CI (Continuous Integration)}{
+    Pratica di sviluppo in cui le modifiche al codice vengono integrate frequentemente nel ramo principale e ogni integrazione è validata automaticamente da una pipeline di controlli (compilazione, test, verifiche di formato e di stile). Nel repository del gruppo il superamento della pipeline di CI è condizione necessaria per l'integrazione di una pull request.
+}
+
+\VoceGlossario{collaudo}{Collaudo}{
+    Attività conclusiva di verifica in cui il prodotto viene esaminato insieme a committente e proponente per accertare che soddisfi i requisiti concordati, prima della sua accettazione.
+}
+
+\VoceGlossario{commit}{Commit}{
+    Operazione di Git che registra nel repository un insieme di modifiche, associandole a un messaggio descrittivo, a un autore e a un identificativo univoco; per estensione, indica la modifica registrata stessa.
+}
+
+\VoceGlossario{committente}{Committente}{
+    Soggetto che commissiona formalmente il progetto e ne valuta l'avanzamento. Nel progetto didattico il ruolo è ricoperto dai docenti del corso di Ingegneria del Software, prof. Tullio Vardanega e prof. Riccardo Cardin.
+}
+
+\VoceGlossario{compliance}{Compliance}{
+    Conformità di un'organizzazione, di un processo o di un sistema alle leggi, ai regolamenti e agli standard applicabili (ad esempio GDPR, NIS2 e AI Act).
+}
+
+\VoceGlossario{concorrenza}{Concorrenza}{
+    Situazione in cui più operazioni vengono eseguite contemporaneamente accedendo alle stesse risorse. Nel caching semantico può causare più miss simultanei per richieste equivalenti, con conseguenti chiamate multiple al modello, o la scrittura di entry in conflitto tra loro.
+}
+
+\VoceGlossario{config-drift}{Config drift}{
+    Progressivo e non tracciato discostamento della configurazione di un ambiente da quella prevista o da quella degli altri ambienti (ad esempio tra le macchine dei diversi componenti), che rende i risultati difficilmente riproducibili.
+}
+
+\VoceGlossario{consuntivo}{Consuntivo}{
+    Rendiconto delle ore effettivamente lavorate e dei costi effettivamente sostenuti in un periodo. Il gruppo lo registra a ogni sprint e lo confronta con il preventivo.
+}
+
+\VoceGlossario{container}{Container}{
+    Unità software leggera e isolata che racchiude un'applicazione insieme a tutte le sue dipendenze, garantendone un'esecuzione identica su qualsiasi macchina. La \textit{containerizzazione} è il processo di impacchettamento di un'applicazione in uno o più container (vedi \RifGlossario{docker}{\textit{Docker}}).
+}
+
+\VoceGlossario{corroborazione}{Corroborazione (principio di)}{
+    Principio cardine del way of working del gruppo, secondo cui nessun prodotto, decisione o norma è considerato valido finché non è corroborato. La corroborazione può essere \textit{interna} (un componente diverso dall'autore ne verifica il contenuto), \textit{documentale} (ne esiste un'evidenza tracciabile, come una issue, una pull request, un commit o un verbale) o \textit{esterna} (la controparte, committente o proponente, lo conferma in modo esplicito). Ne derivano tre corollari: ciò che non è tracciato non è avvenuto; il silenzio non corrobora; nessuno corrobora il proprio lavoro.
+}
+
+\VoceGlossario{coverage}{Coverage (copertura del codice)}{
+    Metrica che indica la percentuale di codice sorgente eseguita durante l'esecuzione dei test automatici. Il capitolato C6 richiede una copertura di almeno il 70\%.
+}
+
+\VoceGlossario{criteri-di-accettazione}{Criteri di accettazione}{
+    Condizioni verificabili che un prodotto o un'attività deve soddisfare per essere considerato completato e accettato. Il gruppo adotta criteri di accettazione non binari, che non si limitano all'esito superato/non superato ma ammettono gradi intermedi di soddisfacimento.
+}
+
+\VoceGlossario{crm}{CRM (Customer Relationship Management)}{
+    Sistema software per la gestione delle relazioni e delle interazioni di un'azienda con i propri clienti.
+}
+
+\VoceGlossario{cross-encoder}{Cross-encoder}{
+    Architettura di modello neurale che riceve in ingresso contemporaneamente una coppia di testi e ne stima direttamente il grado di equivalenza. È più accurato di un \RifGlossario{bi-encoder}{\textit{Bi-encoder}} ma anche più costoso, per cui viene tipicamente utilizzato per verificare un numero ridotto di candidati già selezionati.
+}
+
+\section{D}
+
+\VoceGlossario{dashboard}{Dashboard}{
+    Interfaccia grafica, detta anche cruscotto, che presenta in un'unica vista, tramite grafici e indicatori, le informazioni principali su un sistema o un fenomeno. Nel capitolato C6 la dashboard FinOps mostra consumi, costi, risparmi e previsioni di spesa.
+}
+
+\VoceGlossario{data-model}{Data model}{
+    Rappresentazione strutturata delle entità che un sistema deve gestire, dei loro attributi e delle relazioni tra di esse; guida la progettazione del database.
+}
+
+\VoceGlossario{data-obiettivo-e-data-limite}{Data obiettivo e data limite}{
+    La data obiettivo è quella entro cui si pianifica di raggiungere una milestone; la data limite è l'ultima data accettabile, superata la quale è necessario ripianificare. Per la RTB e la PB il gruppo ha fissato una data limite che lascia uno sprint di margine rispetto alla data obiettivo.
+}
+
+\VoceGlossario{dataset}{Dataset}{
+    Insieme strutturato di dati raccolti per uno scopo specifico, ad esempio per addestrare, calibrare o valutare un modello. Nel contesto del capitolato C6 è costituito da coppie di domande etichettate come equivalenti o non equivalenti.
+}
+
+\VoceGlossario{deploy}{Deploy}{
+    Insieme delle operazioni con cui un software viene installato, configurato e reso operativo in un ambiente di esecuzione, ad esempio un server o un servizio cloud.
+}
+
+\VoceGlossario{design-pattern}{Design pattern}{
+    Soluzione progettuale generale, documentata e riutilizzabile, a un problema ricorrente nella progettazione del software (ad esempio Strategy, Adapter o Observer).
+}
+
+\VoceGlossario{design-thinking}{Design thinking}{
+    Metodologia di progettazione centrata sull'utente che, attraverso fasi di comprensione del problema, definizione dei bisogni, ideazione e prototipazione, conduce alla definizione condivisa dei requisiti. Il capitolato C6 prevede una sessione di design thinking in presenza con la proponente.
+}
+
+\VoceGlossario{diagramma-dei-componenti}{Diagramma dei componenti}{
+    Diagramma UML che rappresenta l'organizzazione di un sistema in componenti software, evidenziandone le interfacce e le dipendenze reciproche.
+}
+
+\VoceGlossario{diagramma-di-sequenza}{Diagramma di sequenza}{
+    Diagramma UML che descrive l'interazione tra oggetti o componenti come sequenza, ordinata nel tempo, dei messaggi che si scambiano.
+}
+
+\VoceGlossario{diario-di-bordo}{Diario di bordo}{
+    Breve presentazione periodica con cui il gruppo riferisce al committente lo stato di avanzamento del progetto, gli obiettivi a breve termine e le difficoltà incontrate nel periodo.
+}
+
+\VoceGlossario{dichiarazione-degli-impegni}{Dichiarazione degli impegni}{
+    Documento di candidatura con cui il gruppo dichiara formalmente le ore che si impegna a erogare, la loro ripartizione per ruolo, il preventivo dei costi e la data di consegna prevista.
+}
+
+\VoceGlossario{discord}{Discord}{
+    Piattaforma di comunicazione che offre canali testuali e vocali, videochiamate e condivisione dello schermo; è adottata dal gruppo come piattaforma principale per le riunioni interne.
+}
+
+\VoceGlossario{docker}{Docker}{
+    Piattaforma open source per creare, distribuire ed eseguire applicazioni all'interno di container.
+}
+
+\VoceGlossario{docker-compose}{Docker Compose}{
+    Strumento che permette di definire, tramite un file di configurazione, ed eseguire con un solo comando applicazioni composte da più container (ad esempio proxy, cache e database), garantendo ambienti riproducibili.
+}
+
+\VoceGlossario{drop-in-replacement}{Drop-in replacement}{
+    Componente che può sostituirne un altro senza richiedere modifiche al codice che lo utilizza, poiché ne espone la stessa interfaccia. LiteLLM, ad esempio, è utilizzabile come drop-in replacement delle API di OpenAI.
+}
+
+\section{E}
+
+\VoceGlossario{embedding}{Embedding}{
+    Rappresentazione di un testo (o di un altro dato) come vettore di numeri reali, prodotta da un modello di Machine Learning in modo che testi di significato simile corrispondano a vettori vicini nello spazio. È alla base del caching semantico.
+}
+
+\VoceGlossario{end-to-end}{End-to-end}{
+    Riferito a un flusso o a un test, indica che esso coinvolge l'intero sistema, dall'ingresso della richiesta fino alla risposta finale, attraversando tutti i componenti. L'MVP del capitolato C6 deve essere funzionante end-to-end, con proxy, cache semantica e dashboard integrati.
+}
+
+\VoceGlossario{endpoint}{Endpoint}{
+    Indirizzo, tipicamente un URL, attraverso cui un servizio espone una specifica operazione delle proprie API.
+}
+
+\VoceGlossario{enterprise}{Enterprise}{
+    Riferito a contesti, prodotti o servizi destinati a organizzazioni di grandi dimensioni, con esigenze elevate di scalabilità, sicurezza, governo dei dati e conformità normativa.
+}
+
+\VoceGlossario{entry}{Entry}{
+    Singolo elemento memorizzato in una cache, costituito tipicamente da una chiave (la richiesta o il suo embedding), da un valore (la risposta) e da metadati quali scadenza e versione.
+}
+
+\VoceGlossario{erp}{ERP (Enterprise Resource Planning)}{
+    Sistema software gestionale che integra in un'unica piattaforma i principali processi aziendali, come contabilità, acquisti, produzione e gestione del personale.
+}
+
+\VoceGlossario{error-rate}{Error rate}{
+    Tasso d'errore, ovvero la frazione di risposte errate sul totale delle risposte fornite da un sistema. Nel caching semantico corrisponde alla frequenza dei falsi hit.
+}
+
+\section{F}
+
+\VoceGlossario{falso-hit}{Falso hit}{
+    Cache hit errato, in cui la cache restituisce la risposta memorizzata per una richiesta ritenuta simile ma in realtà non equivalente a quella posta. Un falso hit è più dannoso di un miss, poiché fornisce all'utente una risposta sbagliata.
+}
+
+\VoceGlossario{fastapi}{FastAPI}{
+    Framework web per Python, moderno e ad alte prestazioni, per la realizzazione di API REST.
+}
+
+\VoceGlossario{finops}{FinOps (Financial Operations)}{
+    Disciplina che unisce finanza, tecnologia e gestione aziendale con l'obiettivo di rendere visibili, attribuibili e controllabili i costi dei servizi cloud e, nel contesto del capitolato C6, dei servizi di Intelligenza Artificiale. Il servizio FinOps richiesto aggrega i consumi per team, progetto e utente, calcola il risparmio prodotto dalla cache, gestisce budget e alert e prevede la spesa mensile.
+}
+
+\VoceGlossario{flask}{Flask}{
+    Framework web per Python, minimale e leggero, per la realizzazione di applicazioni web e API.
+}
+
+\VoceGlossario{follow-up}{Follow-up}{
+    Incontro successivo a un'attività principale, volto a chiarire o approfondire quanto emerso. Il capitolato C6 prevede un follow-up di raccolta dei requisiti dopo la sessione di design thinking.
+}
+
+\VoceGlossario{forecast}{Forecast}{
+    Previsione dell'andamento futuro di una grandezza basata sui dati storici. Nel capitolato C6 indica la previsione della spesa mensile per l'utilizzo dei modelli di IA.
+}
+
+\VoceGlossario{fork}{Fork}{
+    Copia indipendente di un repository o di un progetto software, sulla quale si sviluppano modifiche separate rispetto al progetto originale.
+}
+
+\VoceGlossario{fornitore}{Fornitore}{
+    Soggetto che si impegna a realizzare il prodotto commissionato. Nel progetto didattico il ruolo è ricoperto dal gruppo di studenti.
+}
+
+\VoceGlossario{framework}{Framework}{
+    Insieme di librerie, strumenti e convenzioni che fornisce una struttura di base riutilizzabile su cui sviluppare un'applicazione.
+}
+
+\VoceGlossario{frontend}{Frontend}{
+    Parte di un sistema software con cui l'utente interagisce direttamente, ovvero l'interfaccia grafica. Si contrappone al \RifGlossario{backend}{\textit{Backend}}.
+}
+
+\section{G}
+
+\VoceGlossario{gdpr}{GDPR (General Data Protection Regulation)}{
+    Regolamento (UE) 2016/679 che disciplina il trattamento dei dati personali delle persone fisiche nell'Unione Europea, stabilendone i principi, i diritti degli interessati e gli obblighi per chi tratta i dati.
+}
+
+\VoceGlossario{git}{Git}{
+    Sistema di controllo di versione distribuito e open source, che traccia le modifiche ai file di un progetto e permette a più persone di collaborare in parallelo.
+}
+
+\VoceGlossario{gitflow}{GitFlow}{
+    Modello di gestione dei branch per Git che prevede più rami a lunga durata (ad esempio \textit{main} e \textit{develop}) e rami dedicati a funzionalità, rilasci e correzioni. Il gruppo lo ha inizialmente adottato e poi sostituito con il \RifGlossario{trunk-based-development}{\textit{Trunk-Based Development}}.
+}
+
+\VoceGlossario{github}{GitHub}{
+    Piattaforma web di hosting per repository Git che offre strumenti di collaborazione come issue, pull request, revisione del codice e automazioni. Ospita il repository del gruppo.
+}
+
+\VoceGlossario{github-pages}{GitHub Pages}{
+    Servizio di GitHub che pubblica un sito web statico direttamente a partire dai file di un repository; il gruppo lo utilizza per il proprio sito.
+}
+
+\VoceGlossario{glossario}{Glossario}{
+    Documento che raccoglie e definisce i termini tecnici, le sigle e i termini potenzialmente ambigui utilizzati nella documentazione di progetto, al fine di garantirne un'interpretazione univoca.
+}
+
+\VoceGlossario{gold-silver-bronze}{Gold, Silver, Bronze}{
+    Livelli di sensibilità con cui Var Group classifica i dati strutturati del proprio ambiente privato (Layer 2), dal più riservato (Gold) al meno riservato (Bronze); determinano chi può accedere a un dato e dove può essere elaborato.
+}
+
+\VoceGlossario{google-meet}{Google Meet}{
+    Servizio di videoconferenza di Google, utilizzato dal gruppo per alcune riunioni.
+}
+
+\section{H}
+
+\VoceGlossario{hands-on}{Hands-on}{
+    Modalità di formazione pratica in cui i partecipanti applicano direttamente gli argomenti trattati utilizzando gli strumenti presentati.
+}
+
+\VoceGlossario{hash}{Hash}{
+    Valore di lunghezza fissa calcolato da una funzione (detta funzione di hash) a partire da un dato di lunghezza arbitraria, in modo che dati identici producano sempre lo stesso valore. Le cache tradizionali usano l'hash della richiesta come chiave e per questo riconoscono soltanto richieste identiche.
+}
+
+\VoceGlossario{hit-rate}{Hit rate}{
+    Percentuale di richieste servite direttamente dalla cache (hit) sul totale delle richieste ricevute; misura l'efficacia di una cache.
+}
+
+\VoceGlossario{hook}{Hook}{
+    Punto predefinito di un software in cui è possibile inserire codice personalizzato, eseguito automaticamente al verificarsi di un evento, per estenderne o modificarne il comportamento senza alterarne il codice sorgente.
+}
+
+\section{I}
+
+\VoceGlossario{ia}{IA (Intelligenza Artificiale)}{
+    Disciplina dell'informatica, nota anche con la sigla inglese AI (Artificial Intelligence), che studia e sviluppa sistemi in grado di svolgere compiti che normalmente richiedono l'intelligenza umana, come comprendere il linguaggio, riconoscere schemi e prendere decisioni.
+}
+
+\VoceGlossario{ia-generativa}{IA generativa}{
+    Branca dell'Intelligenza Artificiale che si occupa di modelli in grado di generare nuovi contenuti (testo, immagini, codice, audio) a partire da una richiesta (vedi \RifGlossario{prompt}{\textit{Prompt}}).
+}
+
+\VoceGlossario{incremento}{Incremento}{
+    Porzione di prodotto funzionante e verificata, che si aggiunge al prodotto esistente al termine di un ciclo di sviluppo.
+}
+
+\VoceGlossario{inferenza}{Inferenza}{
+    Processo con cui un modello di Machine Learning già addestrato elabora un input per produrre un output; nel caso di un LLM, è il calcolo della risposta a un prompt. Il suo costo è proporzionale al numero di token elaborati.
+}
+
+\VoceGlossario{invalidazione}{Invalidazione}{
+    Operazione con cui una entry della cache viene dichiarata non più valida e quindi rimossa o ignorata, ad esempio perché scaduta (vedi \RifGlossario{ttl}{\textit{TTL}}) o perché relativa a una versione superata (vedi \RifGlossario{versionamento}{\textit{Versionamento}}).
+}
+
+\VoceGlossario{issue}{Issue}{
+    Elemento di un sistema di tracciamento (ad esempio GitHub o OpenProject) che descrive un'attività da svolgere, un problema o una richiesta, consentendo di assegnarla, discuterla e seguirne lo stato fino alla chiusura.
+}
+
+\VoceGlossario{iterativo}{Iterativo (processo)}{
+    Modello di sviluppo in cui il lavoro è organizzato in cicli ripetuti (iterazioni), ciascuno dei quali produce un risultato valutabile e consente di correggere la pianificazione sulla base di quanto appreso.
+}
+
+\section{J}
+
+\VoceGlossario{json}{JSON (JavaScript Object Notation)}{
+    Formato testuale leggero e leggibile per la rappresentazione e lo scambio di dati strutturati, basato su coppie chiave-valore e liste; è il formato più diffuso nelle API REST.
+}
+
+\VoceGlossario{jupyter-notebook}{Jupyter Notebook}{
+    Ambiente interattivo, utilizzabile da browser, che consente di combinare in un unico documento codice eseguibile (tipicamente Python), risultati, grafici e testo descrittivo; è molto usato per esperimenti e analisi di dati.
+}
+
+\section{L}
+
+\VoceGlossario{latex}{LaTeX}{
+    Sistema di composizione tipografica basato su un linguaggio di markup, che produce documenti di elevata qualità separando il contenuto dalla formattazione. È adottato dal gruppo per la stesura della documentazione di progetto.
+}
+
+\VoceGlossario{latenza}{Latenza}{
+    Tempo che intercorre tra l'invio di una richiesta e la ricezione della relativa risposta. Una risposta servita dalla cache ha una latenza molto inferiore rispetto a una generata dal modello.
+}
+
+\VoceGlossario{layer-1-layer-2}{Layer 1 / Layer 2}{
+    I due livelli dell'architettura di IA di Var Group. Il Layer 1 aggrega modelli pubblici, adatti ad attività che non coinvolgono informazioni riservate; il Layer 2 è un ambiente privato, gestito da Var Group su AWS, che ospita modelli proprietari, agenti e connettori verso i sistemi aziendali e in cui vengono elaborati i dati sensibili.
+}
+
+\VoceGlossario{lettera-di-presentazione}{Lettera di presentazione}{
+    Documento di candidatura con cui il gruppo si presenta a committente e proponente, dichiara il capitolato per cui si candida e ne riporta il costo preventivato e la data di consegna prevista.
+}
+
+\VoceGlossario{litellm}{LiteLLM}{
+    Proxy open source che offre un'interfaccia unica, compatibile con le API di OpenAI, per accedere ai modelli di numerosi provider, occupandosi dell'instradamento delle richieste, della gestione delle API key e del tracciamento dei consumi. È già in produzione presso Var Group e il capitolato C6 ne richiede l'estensione.
+}
+
+\VoceGlossario{llm}{LLM (Large Language Model)}{
+    Modello di Machine Learning di grandi dimensioni, addestrato su enormi quantità di testo, in grado di comprendere e generare linguaggio naturale. Elabora il testo sotto forma di token.
+}
+
+\VoceGlossario{log}{Log}{
+    Registro cronologico degli eventi e delle operazioni eseguite da un sistema; \textit{loggare} significa registrare un'informazione nel log.
+}
+
+\section{M}
+
+\VoceGlossario{machine-learning}{Machine Learning}{
+    Apprendimento automatico: branca dell'Intelligenza Artificiale che studia algoritmi in grado di apprendere dai dati, migliorando le proprie prestazioni in un compito senza essere stati programmati esplicitamente per esso.
+}
+
+\VoceGlossario{main}{Main}{
+    Nome convenzionale del ramo principale di un repository Git, che contiene la versione di riferimento del progetto. Nel Trunk-Based Development coincide con il \RifGlossario{trunk}{\textit{Trunk}}.
+}
+
+\VoceGlossario{microservizi}{Microservizi (architettura a)}{
+    Stile architetturale in cui un'applicazione è composta da servizi piccoli, indipendenti e con responsabilità ben delimitate, che comunicano tra loro tramite API e possono essere sviluppati e rilasciati separatamente.
+}
+
+\VoceGlossario{microsoft-teams}{Microsoft Teams}{
+    Piattaforma di comunicazione e collaborazione di Microsoft, utilizzata dalla proponente Var Group per le riunioni esterne e le sessioni di formazione.
+}
+
+\VoceGlossario{milestone}{Milestone}{
+    Punto di controllo significativo nella pianificazione di un progetto, associato a una data e a un obiettivo verificabile. Il gruppo ha fissato le milestone intermedie M1, M2 e M3, oltre alle revisioni RTB, PB e CA.
+}
+
+\VoceGlossario{monte-ore}{Monte ore}{
+    Numero complessivo di ore di lavoro che un componente o l'intero gruppo si impegna a dedicare al progetto.
+}
+
+\VoceGlossario{multi-provider}{Multi-provider}{
+    Caratteristica di un sistema in grado di utilizzare modelli o servizi offerti da più provider diversi tramite un'unica interfaccia.
+}
+
+\VoceGlossario{multi-tenancy}{Multi-tenancy}{
+    Architettura in cui un'unica istanza di un sistema serve più tenant (ad esempio team o progetti diversi), che ne condividono le risorse mantenendo però i propri dati isolati e inaccessibili agli altri.
+}
+
+\VoceGlossario{mvp}{MVP (Minimum Viable Product)}{
+    Versione di un prodotto dotata delle sole funzionalità essenziali, sufficienti a soddisfare i requisiti minimi concordati e a dimostrarne il valore. Nel capitolato C6 è un sistema funzionante end-to-end, con proxy, cache semantica e dashboard FinOps integrati.
+}
+
+\section{N}
+
+\VoceGlossario{near-real-time}{Near real-time}{
+    Quasi in tempo reale: detto di un sistema che elabora e rende disponibili i dati con un ritardo minimo, tipicamente di pochi secondi, rispetto al momento in cui si verificano gli eventi.
+}
+
+\VoceGlossario{nis2}{NIS2}{
+    Direttiva (UE) 2022/2555 sulla sicurezza delle reti e dei sistemi informativi, che impone ai soggetti operanti in settori critici misure di gestione dei rischi informatici e obblighi di notifica degli incidenti.
+}
+
+\VoceGlossario{norme-di-progetto}{Norme di Progetto}{
+    Documento che raccoglie in modo strutturato le regole, le convenzioni, le procedure e gli strumenti adottati dal gruppo per lo svolgimento di tutti i processi di progetto; ne costituisce il way of working codificato.
+}
+
+\VoceGlossario{numpy}{NumPy}{
+    Libreria Python per il calcolo numerico, che fornisce strutture dati efficienti per vettori e matrici e le relative operazioni matematiche.
+}
+
+\section{O}
+
+\VoceGlossario{odg}{OdG (Ordine del Giorno)}{
+    Elenco degli argomenti da trattare durante una riunione, riportato nei verbali.
+}
+
+\VoceGlossario{open-source}{Open source}{
+    Modello di distribuzione del software in cui il codice sorgente è pubblicamente disponibile e può essere consultato, modificato e ridistribuito secondo i termini di una licenza.
+}
+
+\VoceGlossario{openai}{OpenAI}{
+    Azienda statunitense che sviluppa modelli di Intelligenza Artificiale e li offre tramite API. Il formato delle sue API è diventato uno standard di fatto, adottato anche da LiteLLM.
+}
+
+\VoceGlossario{openproject}{OpenProject}{
+    Piattaforma open source per la gestione di progetti, che offre pianificazione, tracciamento delle attività, gestione degli sprint e registrazione delle ore. È adottata dal gruppo per la gestione delle proprie attività.
+}
+
+\VoceGlossario{orchestratore}{Orchestratore}{
+    Componente che riceve ogni richiesta rivolta all'IA e decide in autonomia verso quale modello o ambiente inoltrarla, in base al contesto, all'identità dell'utente e alla sensibilità dei dati coinvolti. Nell'architettura di Var Group (IA Orchestrator) fa da collante tra Layer 1 e Layer 2.
+}
+
+\VoceGlossario{ore-produttive}{Ore produttive}{
+    Ore di lavoro effettivo dedicate alle attività di progetto, con esclusione di quelle impiegate per l'autoformazione; sono le ore rendicontate e conteggiate nel preventivo.
+}
+
+\section{P}
+
+\VoceGlossario{pb}{PB (Product Baseline)}{
+    Seconda revisione di avanzamento del progetto didattico, in cui si valuta la baseline di prodotto, ovvero l'architettura consolidata e l'MVP sviluppato su di essa.
+}
+
+\VoceGlossario{persistenza}{Persistenza}{
+    Capacità di un sistema di conservare i dati in modo durevole (ad esempio in un database o su disco), così che sopravvivano al termine dell'esecuzione del programma che li ha prodotti.
+}
+
+\VoceGlossario{pgvector}{pgvector}{
+    Estensione open source di PostgreSQL che aggiunge un tipo di dato vettoriale e operatori per la ricerca per similarità, permettendo di utilizzare il database come vector store.
+}
+
+\VoceGlossario{piano-di-progetto}{Piano di Progetto}{
+    Documento che contiene la pianificazione delle attività, l'analisi dei rischi, il preventivo e il consuntivo di ciascun periodo; viene aggiornato nel corso dell'intero progetto.
+}
+
+\VoceGlossario{pii}{PII (Personally Identifiable Information)}{
+    Qualsiasi informazione che permette di identificare, direttamente o indirettamente, una persona fisica, come il nome, l'indirizzo email o il codice fiscale.
+}
+
+\VoceGlossario{pipeline}{Pipeline}{
+    Sequenza automatizzata di fasi eseguite in ordine, in cui l'uscita di una fase costituisce l'ingresso della successiva. Nel contesto della CI indica l'insieme dei controlli eseguiti automaticamente su ogni modifica proposta.
+}
+
+\VoceGlossario{poc}{PoC (Proof of Concept)}{
+    Prototipo o esperimento di portata limitata, realizzato per dimostrare la fattibilità tecnica di un'idea o di una tecnologia prima di investire nell'implementazione completa. Il capitolato C6 richiede un PoC di fattibilità prima dell'implementazione, che il gruppo prevede di realizzare prima della RTB.
+}
+
+\VoceGlossario{postgresql}{PostgreSQL}{
+    Sistema di gestione di database relazionali open source; è suggerito dal capitolato C6 per la memorizzazione delle metriche FinOps.
+}
+
+\VoceGlossario{pptx}{PPTX}{
+    Formato di file delle presentazioni di Microsoft PowerPoint, utilizzato dal gruppo per i diari di bordo.
+}
+
+\VoceGlossario{precision-e-recall}{Precision e recall}{
+    Metriche di valutazione di un sistema di classificazione o di ricerca. La precision è la frazione dei risultati restituiti che sono corretti; la recall è la frazione dei risultati corretti esistenti che il sistema riesce effettivamente a restituire. Nel caching semantico una precision bassa corrisponde a un elevato numero di falsi hit.
+}
+
+\VoceGlossario{preventivo}{Preventivo}{
+    Stima, effettuata prima dello svolgimento del lavoro, delle ore e dei costi necessari a realizzare il progetto. Il \textit{preventivo a finire} è la stima aggiornata delle ore e dei costi ancora necessari per completare il progetto, ricalcolata a partire dal consuntivo.
+}
+
+\VoceGlossario{progettista}{Progettista}{
+    Ruolo responsabile della progettazione: a partire dai requisiti definisce l'architettura del prodotto e ne motiva le scelte tecniche. Il costo orario previsto è di 25 €/h.
+}
+
+\VoceGlossario{programmatore}{Programmatore}{
+    Ruolo responsabile dell'implementazione del prodotto secondo quanto definito in progettazione: scrive il codice e i relativi test. Il costo orario previsto è di 15 €/h.
+}
+
+\VoceGlossario{prompt}{Prompt}{
+    Testo o istruzione fornita in ingresso a un modello di IA generativa per ottenerne una risposta. Il \textit{system prompt} è l'insieme di istruzioni preliminari, generalmente non visibili all'utente, che definisce il comportamento del modello per un'intera conversazione.
+}
+
+\VoceGlossario{proponente}{Proponente}{
+    Azienda che presenta un capitolato e segue il gruppo durante lo sviluppo, fornendo requisiti, supporto e valutazione del prodotto. Per il capitolato C6 la proponente è Var Group S.p.A.
+}
+
+\VoceGlossario{provider}{Provider}{
+    Fornitore di un servizio. Nel contesto del capitolato C6 indica le aziende che offrono l'accesso a modelli di IA tramite API. Un \textit{provider gestito} offre tali modelli tramite infrastrutture enterprise che garantiscono conformità normativa e riservatezza dei dati.
+}
+
+\VoceGlossario{proxy}{Proxy}{
+    Componente che si interpone tra un client e uno o più servizi, ricevendo le richieste del primo e inoltrandole ai secondi; può aggiungere funzionalità come instradamento, autenticazione, caching e registrazione dei consumi.
+}
+
+\VoceGlossario{pull-request}{Pull Request (PR)}{
+    Richiesta di integrare le modifiche di un branch in un altro, tipicamente nel ramo principale, che consente la revisione del codice e l'esecuzione dei controlli automatici prima dell'integrazione. Nel repository del gruppo richiede l'approvazione di due revisori e il superamento della pipeline di CI.
+}
+
+\VoceGlossario{pytest}{pytest}{
+    Framework Python per la scrittura e l'esecuzione di test automatici.
+}
+
+\VoceGlossario{python}{Python}{
+    Linguaggio di programmazione ad alto livello, interpretato e multiparadigma, molto diffuso nell'analisi dei dati e nel Machine Learning; il capitolato C6 ne richiede la versione 3.10 o successiva.
+}
+
+\section{Q}
+
+\VoceGlossario{qa}{Q\&A (Questions and Answers)}{
+    Sessione dedicata a domande e risposte. Il capitolato C6 prevede una sessione di Q\&A con la proponente ogni due settimane.
+}
+
+\VoceGlossario{qdrant}{Qdrant}{
+    Database vettoriale open source, ottimizzato per la memorizzazione di embedding e la ricerca per similarità (vedi \RifGlossario{vector-store}{\textit{Vector store}}).
+}
+
+\VoceGlossario{query}{Query}{
+    Richiesta di informazioni rivolta a un sistema; nel contesto del capitolato C6 indica la domanda o la richiesta inviata a un LLM.
+}
+
+\section{R}
+
+\VoceGlossario{react}{React}{
+    Libreria JavaScript open source per la realizzazione di interfacce utente basate su componenti.
+}
+
+\VoceGlossario{readme}{README}{
+    File di testo, solitamente posto nella cartella principale di un repository, che presenta il progetto e ne descrive la struttura, l'utilizzo e le informazioni principali.
+}
+
+\VoceGlossario{recall}{Recall}{
+    Vedi \RifGlossario{precision-e-recall}{\textit{Precision e recall}}.
+}
+
+\VoceGlossario{redis}{Redis}{
+    Database open source che conserva i dati in memoria principale sotto forma di coppie chiave-valore; è molto usato come cache per la sua velocità e supporta la scadenza automatica dei dati (vedi \RifGlossario{ttl}{\textit{TTL}}).
+}
+
+\VoceGlossario{referente}{Referente}{
+    Persona incaricata dalla proponente di fare da punto di contatto con il gruppo, partecipando agli incontri e rispondendo alle richieste di chiarimento.
+}
+
+\VoceGlossario{registro-delle-modifiche}{Registro delle modifiche}{
+    Tabella posta all'inizio di ogni documento che riporta, per ciascuna versione, la data, l'autore, il verificatore e la descrizione delle modifiche apportate.
+}
+
+\VoceGlossario{reificazione}{Reificazione}{
+    Processo con cui un concetto astratto viene reso concreto; nel contesto del gruppo indica la traduzione delle decisioni organizzative in pratiche, strumenti e regole effettivamente applicate.
+}
+
+\VoceGlossario{repository}{Repository}{
+    Archivio, gestito da un sistema di controllo di versione, che contiene i file di un progetto e la cronologia completa delle loro modifiche.
+}
+
+\VoceGlossario{requisito}{Requisito}{
+    Capacità o condizione che il prodotto deve possedere per soddisfare un bisogno della proponente o degli utenti, oppure per rispettare un vincolo imposto.
+}
+
+\VoceGlossario{responsabile}{Responsabile}{
+    Ruolo che pianifica e coordina le attività del gruppo, gestisce risorse e rischi, mantiene i rapporti con l'esterno (committente e proponente) e approva i prodotti per il rilascio. Il costo orario previsto è di 30 €/h.
+}
+
+\VoceGlossario{rest}{REST (Representational State Transfer)}{
+    Stile architetturale per la progettazione di servizi web, in cui le risorse sono identificate da URL e manipolate tramite i metodi standard del protocollo HTTP (GET, POST, PUT, DELETE), scambiando tipicamente dati in formato JSON.
+}
+
+\VoceGlossario{retrospettiva}{Retrospettiva}{
+    Riunione svolta al termine di uno sprint in cui il gruppo analizza l'andamento del lavoro, individuando cosa ha funzionato, cosa no e quali miglioramenti adottare nello sprint successivo.
+}
+
+\VoceGlossario{revisione-di-avanzamento}{Revisione di avanzamento}{
+    Momento formale di valutazione dello stato del progetto, in cui il gruppo presenta i prodotti realizzati fino a quel punto. Le revisioni previste sono la RTB, la PB e la CA.
+}
+
+\VoceGlossario{rilascio}{Rilascio}{
+    Messa a disposizione dei destinatari di una versione approvata di un prodotto, sia esso un documento o un software.
+}
+
+\VoceGlossario{rotazione-dei-ruoli}{Rotazione dei ruoli}{
+    Pratica per cui ogni componente del gruppo ricopre, a turno, tutti i ruoli di progetto. Il gruppo ridefinisce l'assegnazione dei ruoli a ogni sprint, durante lo sprint planning.
+}
+
+\VoceGlossario{routing}{Routing}{
+    Instradamento: processo con cui un sistema decide verso quale destinazione inoltrare una richiesta. Nel contesto del capitolato C6 è la scelta del modello o del provider a cui inviare una richiesta.
+}
+
+\VoceGlossario{rtb}{RTB (Requirements and Technology Baseline)}{
+    Prima revisione di avanzamento del progetto didattico, in cui si valuta la baseline di requisiti e tecnologie: requisiti definiti e condivisi con la proponente, tecnologie scelte e loro adeguatezza dimostrata tramite un PoC.
+}
+
+\VoceGlossario{ruleset}{Ruleset}{
+    Insieme di regole configurabili su GitHub che limitano le operazioni consentite su branch o tag di un repository. Nel repository del gruppo il ramo principale è protetto da un ruleset che vieta le modifiche dirette.
+}
+
+\section{S}
+
+\VoceGlossario{scikit-learn}{scikit-learn}{
+    Libreria Python open source per il Machine Learning, che fornisce algoritmi e funzioni di utilità, tra cui il calcolo della similarità del coseno.
+}
+
+\VoceGlossario{scope}{Scope}{
+    Perimetro di un progetto, ovvero l'insieme delle funzionalità e delle attività che vi rientrano e, per esclusione, di quelle che ne restano fuori.
+}
+
+\VoceGlossario{scriba}{Scriba}{
+    Componente del gruppo incaricato di prendere nota di quanto discusso durante una riunione e di redigerne il verbale.
+}
+
+\VoceGlossario{seat}{Seat}{
+    Licenza d'uso individuale di un servizio, assegnata a un singolo utente e pagata solitamente con un canone fisso (abbonamento per seat), in contrapposizione al pagamento a consumo.
+}
+
+\VoceGlossario{sentence-transformers}{Sentence-transformers}{
+    Libreria Python open source che fornisce modelli pre-addestrati per calcolare gli embedding di frasi e testi (bi-encoder) e per confrontarne coppie (cross-encoder).
+}
+
+\VoceGlossario{similarita-del-coseno}{Similarità del coseno}{
+    Misura della somiglianza tra due vettori, pari al coseno dell'angolo che formano: si calcola come prodotto scalare dei due vettori diviso il prodotto delle loro norme e assume valori compresi tra $-1$ e $1$, dove valori prossimi a $1$ indicano vettori orientati nella stessa direzione. Applicata agli embedding, stima la vicinanza semantica di due testi.
+}
+
+\VoceGlossario{similarity-search}{Similarity search}{
+    Ricerca per similarità: individuazione, all'interno di un insieme di vettori, di quelli più simili a un vettore dato secondo una misura di similarità; è detta anche \textit{vector search}.
+}
+
+\VoceGlossario{single-shot}{Single-shot}{
+    Detto di un'interazione con un LLM composta da una sola domanda e una sola risposta, senza un contesto di conversazione precedente.
+}
+
+\VoceGlossario{soglia-di-similarita}{Soglia di similarità}{
+    Valore minimo di similarità oltre il quale due richieste sono considerate equivalenti e la risposta memorizzata in cache può essere restituita. Nel capitolato C6 deve essere configurabile e tarabile sui dati.
+}
+
+\VoceGlossario{sovranita-del-dato}{Sovranità del dato}{
+    Principio secondo cui i dati sono soggetti alle leggi del luogo in cui vengono raccolti ed elaborati, e chi li detiene deve poter controllare dove e da chi vengono elaborati e conservati.
+}
+
+\VoceGlossario{spr}{SPR}{
+    Strumento a riga di comando per GitHub che automatizza la gestione delle stacked PR, creando una pull request per ciascun commit e mantenendole allineate tra loro.
+}
+
+\VoceGlossario{sprint}{Sprint}{
+    Intervallo di tempo di durata fissa in cui si svolge un insieme di attività pianificate, al termine del quale si valuta quanto prodotto. Il gruppo adotta sprint di due settimane; il progetto è organizzato in 11 sprint.
+}
+
+\VoceGlossario{sprint-planning}{Sprint planning}{
+    Riunione di inizio sprint in cui il gruppo seleziona dal backlog le attività da svolgere, assegna ruoli e compiti e raccoglie le disponibilità dei componenti.
+}
+
+\VoceGlossario{stack-tecnologico}{Stack tecnologico}{
+    Insieme delle tecnologie (linguaggi, framework, librerie, database e strumenti) utilizzate per realizzare un prodotto software.
+}
+
+\VoceGlossario{stacked-pr}{Stacked PR}{
+    Tecnica di sviluppo in cui una modifica ampia viene suddivisa in una sequenza di pull request piccole e dipendenti, ciascuna costruita sulla precedente, così da facilitarne la revisione e l'integrazione incrementale.
+}
+
+\VoceGlossario{stand-up}{Stand-up}{
+    Riunione breve e periodica in cui i partecipanti si aggiornano a vicenda sullo stato del lavoro, sui passi successivi e sugli eventuali ostacoli. Il capitolato C6 prevede stand-up di allineamento di 30 minuti con il referente di Var Group.
+}
+
+\VoceGlossario{streamlit}{Streamlit}{
+    Framework Python open source che permette di realizzare rapidamente applicazioni web e dashboard interattive per la visualizzazione di dati, senza sviluppare un frontend dedicato.
+}
+
+\VoceGlossario{stub}{Stub}{
+    Implementazione fittizia e semplificata di un componente o di una sorgente di dati, che restituisce risposte predefinite e viene utilizzata per sviluppare o testare altre parti del sistema in sua assenza.
+}
+
+\VoceGlossario{system-prompt}{System prompt}{
+    Vedi \RifGlossario{prompt}{\textit{Prompt}}.
+}
+
+\section{T}
+
+\VoceGlossario{task}{Task}{
+    Singola unità di lavoro assegnata a uno o più componenti, con una scadenza.
+}
+
+\VoceGlossario{template}{Template}{
+    Modello predefinito di documento o di file, con struttura e formattazione già impostate, da cui partire per crearne di nuovi in modo uniforme.
+}
+
+\VoceGlossario{tenant}{Tenant}{
+    Utente o gruppo di utenti (ad esempio un team o un progetto) che condivide con altri le risorse di un sistema multi-tenant, disponendo però di dati e configurazioni propri e isolati.
+}
+
+\VoceGlossario{test-deterministico}{Test deterministico}{
+    Test il cui esito è sempre lo stesso a parità di input, in quanto verifica un comportamento esattamente prevedibile. Il capitolato C6 richiede di mantenere separati i test deterministici dalla valutazione probabilistica.
+}
+
+\VoceGlossario{test-di-integrazione}{Test di integrazione}{
+    Test che verifica la corretta interazione tra più unità o componenti del sistema una volta combinati.
+}
+
+\VoceGlossario{test-di-unita}{Test di unità}{
+    Test che verifica, in isolamento, il corretto funzionamento della più piccola parte di software dotata di comportamento autonomo (unità), come una funzione o una classe.
+}
+
+\VoceGlossario{text-embedding-3-small}{text-embedding-3-small}{
+    Modello di OpenAI, accessibile tramite API, che genera embedding a partire da testi; è suggerito dal capitolato C6.
+}
+
+\VoceGlossario{to-do}{To-Do}{
+    Elenco delle azioni da svolgere decise durante una riunione e riportate nel verbale, ciascuna con codice, descrizione, assegnatario e scadenza.
+}
+
+\VoceGlossario{token}{Token}{
+    Unità minima di testo (una parola, una parte di parola o un segno di punteggiatura) in cui un LLM scompone il testo in ingresso e in uscita; in media un token corrisponde a circa tre quarti di parola. Il costo di utilizzo dei modelli tramite API è calcolato in base al numero di token elaborati.
+}
+
+\VoceGlossario{tracciabilita}{Tracciabilità}{
+    Proprietà che consente di ricostruire l'origine, le motivazioni e l'evoluzione di ogni prodotto, decisione o modifica, collegandoli tra loro (ad esempio requisito, issue, commit, pull request e verbale).
+}
+
+\VoceGlossario{training}{Training}{
+    Addestramento: fase in cui un modello di Machine Learning apprende i propri parametri a partire da un insieme di dati.
+}
+
+\VoceGlossario{trunk}{Trunk}{
+    Ramo principale di un repository nel Trunk-Based Development, in cui convergono tutte le modifiche (vedi \RifGlossario{main}{\textit{Main}}).
+}
+
+\VoceGlossario{trunk-based-development}{Trunk-Based Development}{
+    Modello di gestione dei branch in cui tutti gli sviluppatori integrano frequentemente piccole modifiche in un unico ramo principale (trunk), utilizzando branch di breve durata. Il gruppo lo ha adottato al posto di GitFlow, adattandolo al contesto di progetto.
+}
+
+\VoceGlossario{ttl}{TTL (Time To Live)}{
+    Durata di validità assegnata a un dato memorizzato, trascorsa la quale il dato è considerato scaduto e viene invalidato. Nella cache semantica stabilisce per quanto tempo una risposta può essere riutilizzata.
+}
+
+\section{U}
+
+\VoceGlossario{uml}{UML (Unified Modeling Language)}{
+    Linguaggio di modellazione visuale standardizzato per specificare, descrivere e documentare sistemi software tramite diagrammi, come quelli dei casi d'uso, delle classi, di sequenza e dei componenti.
+}
+
+\VoceGlossario{user-story}{User Story}{
+    Breve descrizione di una funzionalità espressa dal punto di vista dell'utente, generalmente nella forma «Come \textit{tipo di utente} voglio \textit{obiettivo} per \textit{beneficio}».
+}
+
+\VoceGlossario{user-story-mapping}{User Story Mapping}{
+    Tecnica di analisi che dispone le user story su una mappa bidimensionale: in orizzontale secondo la sequenza delle attività svolte dall'utente, in verticale secondo la priorità. Aiuta a individuare l'MVP e a pianificare i rilasci ed è richiesta dal capitolato C6.
+}
+
+\section{V}
+
+\VoceGlossario{validation-set}{Validation set}{
+    Insieme di dati etichettati, distinto da quello usato per l'addestramento o la calibrazione, impiegato per valutare le prestazioni di un modello o la bontà di una soglia. Nel contesto del capitolato C6 è composto da coppie di domande etichettate come equivalenti o non equivalenti.
+}
+
+\VoceGlossario{valutazione-dei-capitolati}{Valutazione dei capitolati}{
+    Documento di candidatura in cui il gruppo analizza i capitolati proposti, ne evidenzia aspetti positivi e criticità e motiva la scelta di quello per cui si candida.
+}
+
+\VoceGlossario{valutazione-probabilistica}{Valutazione probabilistica}{
+    Valutazione di un comportamento non deterministico, come la correttezza delle risposte della cache semantica, condotta in termini statistici su un insieme di casi (ad esempio tramite tasso di falsi hit, precision e recall) anziché con un esito superato/non superato.
+}
+
+\VoceGlossario{vector-store}{Vector store}{
+    Database vettoriale: database specializzato nella memorizzazione di vettori, come gli embedding, e nella ricerca efficiente di quelli più simili a un vettore dato (ad esempio Qdrant o pgvector).
+}
+
+\VoceGlossario{verbale}{Verbale}{
+    Documento che riporta in forma ufficiale lo svolgimento di una riunione: partecipanti, argomenti trattati, decisioni prese e azioni da svolgere. È \textit{interno} se la riunione coinvolge solo i componenti del gruppo, \textit{esterno} se coinvolge soggetti esterni come la proponente o il committente; il verbale esterno viene firmato dalla controparte.
+}
+
+\VoceGlossario{verifica}{Verifica}{
+    Attività che accerta, tramite analisi e test, che un prodotto sia stato realizzato correttamente e nel rispetto delle norme e dei requisiti fissati. Nel way of working del gruppo è svolta da un componente diverso dall'autore del prodotto.
+}
+
+\VoceGlossario{verificatore}{Verificatore}{
+    Ruolo responsabile della verifica dei prodotti e dei processi, che ne controlla la conformità alle norme e ai requisiti; è presente in tutte le fasi del progetto. Il costo orario previsto è di 15 €/h.
+}
+
+\VoceGlossario{versionamento}{Versionamento}{
+    Pratica di identificare e tracciare le successive versioni di un prodotto (documento, codice o dato). Nella documentazione del gruppo le versioni sono numerate nella forma X.Y.Z; nella cache semantica il versionamento (\textit{versioning}) consente di invalidare le entry prodotte con una versione superata, ad esempio di un modello o di un prompt.
+}
+
+\section{W}
+
+\VoceGlossario{way-of-working}{Way of Working}{
+    Insieme delle pratiche, delle regole, delle convenzioni e degli strumenti che il gruppo adotta per svolgere il proprio lavoro in modo sistematico, disciplinato e ripetibile; viene codificato nelle Norme di Progetto.
+}
+
+\VoceGlossario{whatsapp}{WhatsApp}{
+    Applicazione di messaggistica istantanea, utilizzata dal gruppo per le comunicazioni quotidiane e gli aggiornamenti rapidi.
+}
+
+\VoceGlossario{workflow}{Workflow}{
+    Flusso di lavoro: sequenza strutturata di attività, ruoli e passaggi attraverso cui un lavoro viene svolto dall'inizio alla fine, ad esempio dall'apertura di una issue fino all'integrazione della relativa pull request.
+}
+
+\section{Z}
+
+\VoceGlossario{zoom}{Zoom}{
+    Piattaforma di videoconferenza, prevista dal gruppo tra gli strumenti per le riunioni esterne.
+}
 
 \end{document}
