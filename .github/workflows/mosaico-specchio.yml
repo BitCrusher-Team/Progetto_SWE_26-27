@@ -1,15 +1,14 @@
 # Mosaico: lo specchio OpenProject -> GitHub. GitHub LEGGE OpenProject e lo copia: una issue per
 # carta (titolo, stato di lavoro, tipo, ruolo, categoria, priorita', documento, stima, avanzamento, date, artefatti, tutti
 # i legami fra le carte e la gerarchia), una milestone per sprint (obiettivo e date), gli assegnatari, aperta o chiusa.
-# NON si copiano: il consuntivo (ore spese, costi, budget), le riunioni, le notizie, le discussioni. OpenProject non chiama
-# mai GitHub. Una issue speculare porta un marcatore nascosto; le modifiche fatte qui si riscrivono al giro
+# OpenProject non chiama mai GitHub. Una issue speculare porta un marcatore nascosto; le modifiche fatte qui si riscrivono al giro
 # dopo, i commenti restano.
 # I login GitHub vengono da .github/mosaico/membri.yml.
 name: Mosaico, specchio
 
 on:
   schedule:
-    - cron: "*/15 6-21 * * *"  # ogni quarto d'ora, dalle 7 alle 22 ora italiana (in inverno)
+    - cron: "*/15 3-21 * * *"  # in UTC: copre la finestra italiana d'inverno e d'estate; decide il passo degli orari
   workflow_dispatch:
     inputs:
       prova:
@@ -31,7 +30,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      # Il server di OpenProject e' spento di notte: fuori dalla finestra non si prova nemmeno.
+      - name: Gli orari del server
+        id: orari
+        env:
+          DA: ${{ vars.MOSAICO_ACCESO_DA || '0530' }}
+          A: ${{ vars.MOSAICO_ACCESO_A || '2215' }}
+        run: |
+          ora=$(TZ=Europe/Rome date +%H%M)
+          if (( 10#$ora >= 10#$DA && 10#$ora < 10#$A )); then
+            echo "acceso=si" >> "$GITHUB_OUTPUT"
+          else
+            echo "acceso=no" >> "$GITHUB_OUTPUT"
+            echo "::notice::sono le $ora (ora italiana): il server di OpenProject e' acceso dalle $DA alle $A"
+          fi
+
       - name: I segreti e la variabile
+        if: steps.orari.outputs.acceso == 'si'
         env:
           STRUMENTI_SSH_KEY: ${{ secrets.STRUMENTI_SSH_KEY }}
           OP_URL: ${{ secrets.OP_URL }}
@@ -45,8 +60,20 @@ jobs:
             exit 1
           fi
           echo "segreti e variabile: presenti"
+          # la forma del token, mai il token: si confronta con quella del token di mosaico-bot
+          python3 - <<'PY'
+          import hashlib, os
+          t = os.environ["OP_TOKEN"]
+          s = t.strip()
+          print(f"OP_TOKEN: {len(s)} caratteri, prefisso opapi-: {s.startswith('opapi-')}, spazi attorno: {s != t}, "
+                f"impronta {hashlib.sha256(s.encode()).hexdigest()[:12]}")
+          if s.lower().startswith("bearer"):
+              print("::error::OP_TOKEN comincia con «Bearer»: va solo il token")
+              raise SystemExit(1)
+          PY
 
       - name: La deploy key apre strumenti?
+        if: steps.orari.outputs.acceso == 'si'
         env:
           CHIAVE: ${{ secrets.STRUMENTI_SSH_KEY }}
           REPO: ${{ github.repository_owner }}/strumenti
@@ -67,11 +94,13 @@ jobs:
           fi
 
       - uses: actions/checkout@v4
+        if: steps.orari.outputs.acceso == 'si'
         with:
           sparse-checkout: .github/mosaico
           persist-credentials: false
 
       - uses: actions/checkout@v4
+        if: steps.orari.outputs.acceso == 'si'
         with:
           repository: ${{ github.repository_owner }}/strumenti
           ssh-key: ${{ secrets.STRUMENTI_SSH_KEY }}
@@ -79,13 +108,16 @@ jobs:
           persist-credentials: false
 
       - uses: actions/setup-python@v5
+        if: steps.orari.outputs.acceso == 'si'
         with:
           python-version: "3.12"
 
       - name: Mosaico
+        if: steps.orari.outputs.acceso == 'si'
         run: python -m pip install --quiet ./strumenti
 
       - name: Un giro dello specchio
+        if: steps.orari.outputs.acceso == 'si'
         env:
           OP_URL: ${{ secrets.OP_URL }}
           OP_TOKEN: ${{ secrets.OP_TOKEN }}
