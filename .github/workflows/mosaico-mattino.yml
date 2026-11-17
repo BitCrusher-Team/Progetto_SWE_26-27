@@ -1,0 +1,35 @@
+# Mosaico: il mattino. Rilancia i job della notte falliti perche' il server di OpenProject era spento: gli eventi (che
+# altrimenti si perderebbero: una PR aperta o un merge di notte non sposterebbero la carta) e il controllo del perimetro
+# delle PR. Sono idempotenti: rilanciati non fanno niente due volte. Lo specchio no: di notte salta, e il primo giro del
+# mattino rimette tutto in pari da solo.
+name: Mosaico, mattino
+
+on:
+  schedule:
+    - cron: "45 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  rilancia:
+    name: Rilancia i job della notte
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: I falliti delle ultime 12 ore
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          da=$(date -u -d '12 hours ago' +%Y-%m-%dT%H:%M:%SZ)
+          n=0
+          for wf in mosaico-eventi.yml mosaico-perimetro.yml; do
+            if ! gh workflow view "$wf" > /dev/null 2>&1; then echo "::notice::$wf non c'e' nel repo"; continue; fi
+            for id in $(gh run list --workflow "$wf" --status failure --created ">=$da" --limit 100 --json databaseId --jq '.[].databaseId'); do
+              gh run rerun "$id" --failed && n=$((n + 1))
+            done
+          done
+          echo "rilanciati: $n"

@@ -1,0 +1,83 @@
+# Mosaico: gli eventi di GitHub che portano le carte di OpenProject fra gli stati. GitHub legge e
+# da' garanzia: OpenProject non chiama mai GitHub.
+#  - PR aperta (non bozza) che nomina OP#n           -> la carta passa a «In verifica», col link della PR;
+#  - commit sul ramo principale con «Closes OP#n»    -> la carta passa a «In attesa delle ore»; se le ore ci sono gia'
+#    OpenProject la chiude subito, se no la chiude da solo quando arrivano (le regole dentro OpenProject). Si guarda il
+#    push, non la PR fusa: con `git spr merge` le PR sotto la cima della pila si chiudono senza merge;
+#  - CI rossa su una PR                               -> un commento sulle sue carte, col link all'esecuzione.
+name: Mosaico, eventi
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, edited]
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  # un gruppo per PR, per commit o per esecuzione: niente eventi scartati, e la stessa cosa non gira due volte insieme
+  group: mosaico-eventi-${{ github.event.pull_request.number || github.event.workflow_run.id || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  sincronia:
+    name: Eventi verso OpenProject
+    # le PR da un fork non hanno i segreti: niente rosso inutile
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Il server di OpenProject e' spento di notte: fuori dalla finestra non si prova nemmeno.
+      - name: Gli orari del server
+        id: orari
+        env:
+          DA: ${{ vars.MOSAICO_ACCESO_DA || '0530' }}
+          A: ${{ vars.MOSAICO_ACCESO_A || '2215' }}
+        run: |
+          ora=$(TZ=Europe/Rome date +%H%M)
+          if (( 10#$ora >= 10#$DA && 10#$ora < 10#$A )); then
+            echo "acceso=si" >> "$GITHUB_OUTPUT"
+          else
+            echo "acceso=no" >> "$GITHUB_OUTPUT"
+            echo "::notice::sono le $ora (ora italiana): il server di OpenProject e' acceso dalle $DA alle $A"
+          fi
+
+      - name: Di notte il server e' spento
+        if: steps.orari.outputs.acceso == 'no'
+        run: |
+          echo "::error::il server di OpenProject e' spento a quest'ora: lo rilancia da solo il workflow «Mosaico, mattino», o lo si rilancia a mano dopo le 5:30"
+          exit 1
+
+      - name: I segreti
+        if: steps.orari.outputs.acceso == 'si'
+        env:
+          STRUMENTI_SSH_KEY: ${{ secrets.STRUMENTI_SSH_KEY }}
+          OP_URL: ${{ secrets.OP_URL }}
+          OP_EVENTI_TOKEN: ${{ secrets.OP_EVENTI_TOKEN }}
+        run: |
+          mancano=""
+          for n in STRUMENTI_SSH_KEY OP_URL OP_EVENTI_TOKEN; do [ -n "${!n}" ] || mancano="$mancano $n"; done
+          if [ -n "$mancano" ]; then echo "::error::mancano i segreti:$mancano"; exit 1; fi
+
+      - uses: actions/checkout@v4
+        if: steps.orari.outputs.acceso == 'si'
+        with:
+          repository: ${{ github.repository_owner }}/strumenti
+          ssh-key: ${{ secrets.STRUMENTI_SSH_KEY }}
+          path: strumenti
+          persist-credentials: false
+
+      - name: Sincronia
+        if: steps.orari.outputs.acceso == 'si'
+        working-directory: strumenti
+        env:
+          OP_URL: ${{ secrets.OP_URL }}
+          OP_TOKEN: ${{ secrets.OP_EVENTI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 -m mosaico.eventi_github
