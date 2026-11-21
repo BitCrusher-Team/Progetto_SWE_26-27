@@ -1,0 +1,150 @@
+# Mosaico, documenti. I sorgenti stanno in docs/tex/, i compilati in docs/compiled/ con le
+# stesse cartelle: un documento (un .tex con \documentclass) docs/tex/a/b/X.tex ha il suo PDF in docs/compiled/a/b/X.pdf.
+# Le parti incluse e le figure stanno accanto al loro documento e non hanno un PDF. I verbali:
+# docs/tex/verbali/verbali_interni/Verbale_interno_NN.tex e .../verbali_esterni/Verbale_esterno_NN.tex.
+# - PR e coda di merge, «Mosaico, documenti»: le regole dei verbali (nomi; numeri, sorgenti e PDF insieme, da 1 al massimo senza buchi; 
+#   il numero scritto nel .tex; la riga «% Titolo: …»), e la
+#   compilazione di tutto cio' che il main compilerebbe. Una PR che non tocca i documenti passa subito.
+# - Sul main (push che tocca docs/tex, docs/compiled o i loghi, o a mano): compila i documenti senza PDF o con gli
+#   ingressi cambiati, toglie i PDF compilati da lui il cui sorgente non c'e' piu' (l'elenco docs/compiled/.compilati.json;
+#   un PDF messo a mano, come il firmato di un verbale esterno, non è toccato dall'automazione), aggiorna la riga del README e la voce
+#   di assets/js/content.js di ogni verbale. Il commit del bot non fa ripartire questo lavoro.
+name: Mosaico, documenti
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  merge_group:
+  push:
+    branches: [main]
+    paths:
+      - "docs/tex/**"
+      - "docs/compiled/**"
+      - "assets/images/LogoVerbali/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  controllo:
+    name: Mosaico, documenti
+    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: mosaico-documenti-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+    env:
+      BASE: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Ci sono documenti?
+        id: tocca
+        run: |
+          if git diff --quiet "$BASE" HEAD -- docs/tex docs/compiled assets/images/LogoVerbali; then
+            echo "si=no" >> "$GITHUB_OUTPUT"
+            echo "niente documenti in questa modifica: niente da controllare"
+          else
+            echo "si=si" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.tocca.outputs.si == 'si'
+        with:
+          repository: ${{ github.repository_owner }}/strumenti
+          ssh-key: ${{ secrets.STRUMENTI_SSH_KEY }}
+          path: strumenti
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        if: steps.tocca.outputs.si == 'si'
+        with:
+          python-version: "3.12"
+
+      - name: Mosaico
+        if: steps.tocca.outputs.si == 'si'
+        run: |
+          python -m pip install --quiet ./strumenti
+          rm -rf strumenti
+
+      # Lo stesso TeX di Mosaico sul server: latex base, recommended, extra, l'italiano e cm-super (la codifica T1)
+      - name: Il TeX
+        if: steps.tocca.outputs.si == 'si'
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+            texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-lang-italian cm-super > /dev/null
+          pdflatex -version | head -1
+
+      - name: I documenti
+        if: steps.tocca.outputs.si == 'si'
+        env:
+          MOSAICO_BASE: ${{ env.BASE }}
+        run: python -m mosaico documenti controlla --radice .
+
+  pubblica:
+    name: Mosaico, documenti sul main
+    # il commit del runner tocca docs/compiled: non riparte per lui (il messaggio e' il suo)
+    if: >-
+      github.event_name == 'workflow_dispatch' || (github.event_name == 'push'
+      && !startsWith(github.event.head_commit.message, 'docs(compiled): i PDF dei documenti, il README e il sito.'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: mosaico-documenti-main
+      cancel-in-progress: false
+    steps:
+      - name: Il segreto
+        env:
+          MOSAICO_TOKEN: ${{ secrets.MOSAICO_TOKEN }}
+        run: |
+          [ -n "$MOSAICO_TOKEN" ] || { echo "::error::manca il segreto MOSAICO_TOKEN (Settings, Secrets and variables, Actions)"; exit 1; }
+
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.MOSAICO_TOKEN }}
+
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/strumenti
+          ssh-key: ${{ secrets.STRUMENTI_SSH_KEY }}
+          path: strumenti
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Mosaico
+        run: |
+          python -m pip install --quiet ./strumenti
+          rm -rf strumenti
+
+      - name: Il TeX
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+            texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-lang-italian cm-super > /dev/null
+          pdflatex -version | head -1
+
+      - name: I PDF, il README e il sito
+        run: python -m mosaico documenti pubblica --radice .
+
+      - name: Il commit
+        run: |
+          git add -A -- docs/compiled README.md assets/js/content.js
+          if git diff --cached --quiet; then
+            echo "niente da pubblicare"
+            exit 0
+          fi
+          git diff --cached --stat
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "docs(compiled): i PDF dei documenti, il README e il sito."
+          git push origin HEAD:main
