@@ -1,0 +1,207 @@
+% Titolo: Mosaico e pianificazione sprint
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI ---
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+% --- CONFIGURAZIONE HEADER E FOOTER ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Verbale Interno N. 9}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Configurazione link indice
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+    
+    % --- LOGHI ---
+    % Sostituisci i \framebox con i comandi \includegraphics corretti
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        % Esempio: \includegraphics[width=0.7\textwidth]{logo_unipd.png}
+        \includegraphics[width=0.7\textwidth]{unipd_logo.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        % Esempio: \includegraphics[width=0.7\textwidth]{WhatsApp Image 2026-10-15 at 17.29.12.jpeg}
+        \includegraphics[width=0.7\textwidth]{Logo-BitCrusher-Nero.png}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large \textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}} \\
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica} \\
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software} \\
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027} \\
+
+    \vspace{2cm}
+    {\Huge \textbf{Verbale di Riunione}} \\
+    \vspace{0.5cm}
+    {\Large Riunione Interna \#9}
+
+    \vspace{2cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \textbf{Email:} bitcrusherteam@gmail.com \\
+        \textbf{Versione:} v1.0.0 \\
+        \textbf{Data della riunione:} 2026-11-16 \\
+        \textbf{Data ultima modifica:} 18 Novembre 2026
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+\newpage
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE
+% ==========================================
+\section*{Registro delle Modifiche}
+\vspace{0.5cm}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|l|l|l|l|X|}
+\hline
+\textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+1.0.0 & 2026-10-21 & Erik Giuliano & - & Approvazione per il
+rilascio. \\ \hline
+0.1.0 & 2026-10-21 & Riccardo Pozzato & Antonio Tufano & Punto della situazione sui vecchi To-Do e creazione nuovi To-Do. \\ \hline
+
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==========================================
+% INDICE
+% ==========================================
+\tableofcontents
+\newpage
+% ==========================================
+% 1. INFORMAZIONI GENERALI
+% ==========================================
+\section{Informazioni Generali}
+\begin{itemize}
+    \item \textbf{Luogo/Piattaforma:} Riunione Discord
+    \item \textbf{Data:} 2026-11-16
+    \item \textbf{Orario di inizio:} 17:30
+    \item \textbf{Orario di fine:} 19:15
+    \item \textbf{Responsabile:} Erik Giuliano
+    \item \textbf{Scriba:} Riccardo Pozzato
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Partecipanti presenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Pietro Leonardo Acampora & 2146762 \\ \hline
+Marco Bollettin & 2147955 \\ \hline
+Riccardo Pozzato & 2147988 \\ \hline
+Alex Singh & 2148621 \\ \hline
+Antonio Tufano & 2137972 \\ \hline
+Erik Giuliano & 2138012 \\ \hline
+\end{tabularx}
+
+\vspace{0.5cm}
+\textbf{Partecipanti assenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+ Alexandru Mitu & 2101083 \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 2. ORDINE DEL GIORNO
+% ==========================================
+\vspace{0.5cm}
+\section{Ordine del Giorno}
+Gli argomenti previsti per la riunione odierna sono:
+\begin{enumerate}
+    \item Verifica dello stato di svolgimento dei vecchi To-Do.
+    \item Creazione ed assegnazione nuovi To-Do.
+\end{enumerate}
+
+% ==========================================
+% 3. RESOCONTO DELLA RIUNIONE
+% ==========================================
+\newpage
+\section{Resoconto della Riunione}
+
+\subsection{Verifica dello stato di svolgimento dei vecchi To-Do}
+\begin{itemize}
+    \item OP\#42 (redazione dei contenuti preliminari del glossario strutturato): chiusa.
+    \item OP\#43 (definizione del calendario degli incontri con Var Group): chiusa.
+    \item OP\#44 (stesura delle Norme di Progetto): in corso.
+    \item OP\#45 (automatizzazione della documentazione): in corso; mancano il rendering del PDF, la configurazione del bot di GitHub per l'invio diretto dei commit e il runner per la compilazione del codice LaTeX.
+    \item OP\#46 (miglioramento della tabella di tracciamento): aperta; l'attività è stata completata, ma le modifiche non sono ancora state caricate sul repository in attesa della risoluzione di un'attività bloccante.
+    \item OP\#47 (valutazione del calendario condiviso): aperta.
+    \item OP\#48 (sincronizzazione delle pull request di GitHub con la vista a mosaico): chiusa.
+    \item OP\#49 (definizione di una struttura compatibile con il sorgente LaTeX del glossario): chiusa.
+    \item OP\#52 (approvazione del quarto diario di bordo): chiusa.
+\end{itemize}
+
+
+% ==========================================
+% 4. AZIONI DA SVOLGERE (TO-DO)
+% ==========================================
+\vspace{0.5cm}
+\section{Azioni da Svolgere (To-Do)}
+\begin{tabularx}{\textwidth}{|c|X|l|l|}
+\hline
+\textbf{Codice Rif.} & \textbf{Descrizione Task} & \textbf{Assegnatario} & \textbf{Scadenza} \\ \hline
+OP\#53 & Redazione del Diario di Bordo \#5 & Marco Bolletin
+ & 2026-11-20 \\ \hline
+OP\#54 & Approvazione quinto Diario di Bordo & Erik Giuliano
+ & 2026-11-23 \\ \hline
+OP\#55 & Redazione del Verbale Interno \#9 & Riccardo Pozzato
+ & 2026-11-19 \\ \hline
+OP\#56 & Verifica del Verbale Interno \#9 & Antonio Tufano
+ & 2026-11-20 \\ \hline
+OP\#57 & Perimetrare gli artefatti sulla repo da OpenProject & Antonio Tufano
+ & 2026-11-17 \\ \hline
+OP\#58 & Rendere la vista web più fruibile & Pietro L. Acampora
+ & 2026-11-20 \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 5. PROSSIMA RIUNIONE
+% ==========================================
+\vspace{0.5cm}
+\section{Prossima Riunione}
+\begin{itemize}
+    \item \textbf{Data:}  2026-11-19
+    \item \textbf{Ora:} 17:30
+    \item \textbf{OdG preliminare:} Definizione delle convenzioni per i verbali (formato delle date, codici univoci e regole di nomenclatura).
+\end{itemize}
+
+\end{document}

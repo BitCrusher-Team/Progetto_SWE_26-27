@@ -97,29 +97,34 @@
   </thead>
   <tbody>
     <tr>
+      <td>2026-11-16</td>
+      <td>Mosaico e pianificazione sprint</td>
+      <td><a href="./docs/compiled/verbali/verbali_interni/Verbale_interno_09.pdf">Verbale I09</a></td>
+    </tr>
+    <tr>
       <td>2026-11-12</td>
       <td>Discussione sull'uso e funzionamento di OpenProject</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_08.pdf">Verbale I08</a></td>
+      <td><a href="./docs/compiled/verbali/verbali_interni/Verbale_interno_08.pdf">Verbale I08</a></td>
     </tr>
     <tr>
       <td>2026-11-07</td>
       <td>Decisioni su organizzazione interna</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_07.pdf">Verbale I07</a></td>
+      <td><a href="./docs/compiled/verbali/verbali_interni/Verbale_interno_07.pdf">Verbale I07</a></td>
     </tr>
     <tr>
       <td>2026-11-03</td>
       <td>Ristesura dei documenti per la candidatura</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_06.pdf">Verbale I06</a></td>
+      <td><a href="./docs/compiled/verbali/verbali_interni/Verbale_interno_06.pdf">Verbale I06</a></td>
     </tr>
     <tr>
       <td>2026-10-29</td>
       <td>Revisione documenti per candidatura ed elezione responsabile</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_05.pdf">Verbale I05</a></td>
+      <td><a href="./docs/compiled/verbali/verbali_interni/Verbale_interno_05.pdf">Verbale I05</a></td>
     </tr>
     <tr>
       <td>2026-10-28</td>
       <td>Redazione bozza dei documenti di candidatura</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_04.pdf">Verbale I04</a></td>
+      <td><a href="./docs/compiled/verbali/verbali_interni/Verbale_interno_04.pdf">Verbale I04</a></td>
     </tr>
     <tr>
       <td>2026-10-26</td>
@@ -129,17 +134,17 @@
     <tr>
       <td>2026-10-24</td>
       <td>Formazione del primo diario di bordo ed il relativo template</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_03.pdf">Verbale I03</a></td>
+      <td><a href="./docs/compiled/verbali/verbali_interni/Verbale_interno_03.pdf">Verbale I03</a></td>
     </tr>
     <tr>
       <td>2026-10-21</td>
       <td>Organizzazione repo, stesura domande ed invio mail ai proponenti</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_02.pdf">Verbale I02</a></td>
+      <td><a href="./docs/compiled/verbali/verbali_interni/Verbale_interno_02.pdf">Verbale I02</a></td>
     </tr>
     <tr>
       <td>2026-10-17</td>
       <td>Primo incontro conoscitivo</td>
-      <td><a href="./docs/verbali/verbali_interni/Verbale_interno_01.pdf">Verbale I01</a></td>
+      <td><a href="./docs/compiled/verbali/verbali_interni/Verbale_interno_01.pdf">Verbale I01</a></td>
     </tr>
   </tbody>
 </table>

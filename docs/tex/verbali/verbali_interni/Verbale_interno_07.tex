@@ -1,0 +1,230 @@
+% Titolo: Decisioni su organizzazione interna
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI ---
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+% Rientro uniforme per tutti i paragrafi.
+\setlength{\parindent}{0pt}
+
+% Percorsi per compilare dalla radice del repository, dalla cartella
+% dei sorgenti oppure da Overleaf caricando i due loghi accanto al .tex.
+\graphicspath{{assets/images/LogoVerbali/}{../images/LogoVerbali/}{./}}
+
+% --- CONFIGURAZIONE HEADER E FOOTER ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Verbale Interno N. 7}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+
+    % --- LOGHI ---
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{unipd_logo.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{Logo-BitCrusher-Nero.png}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large \textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}} \\
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica} \\
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software} \\
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027} \\
+
+    \vspace{2cm}
+    {\Huge \textbf{Verbale di Riunione}} \\
+    \vspace{0.5cm}
+    {\Large Riunione Interna \#7}
+
+    \vspace{2cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \textbf{Email:} bitcrusherteam@gmail.com \\
+        \textbf{Versione:} v0.1.1 \\
+        \textbf{Data della riunione:} 2026-11-07 \\
+        \textbf{Data ultima modifica:} 10 novembre 2026
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+\newpage
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE
+% ==========================================
+\section*{Registro delle Modifiche}
+\vspace{0.5cm}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|l|l|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{3.5cm}|X|}
+\hline
+\textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+1.0.0 & 2026-11-10 & Alex Singh & - & Approvazione per il
+rilascio.\\ \hline
+0.1.1 & 2026-11-10 & Pietro Leonardo Acampora & Erik Giuliano & Correzione dei rientri e delle modalità di partecipazione degli studenti lavoratori. \\ \hline
+0.1.0 & 2026-11-10 & Pietro Leonardo Acampora & Erik Giuliano & Prima stesura del verbale di riunione. \\ \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==========================================
+% INDICE
+% ==========================================
+\tableofcontents
+\newpage
+
+% ==========================================
+% 1. INFORMAZIONI GENERALI
+% ==========================================
+\section{Informazioni Generali}
+\begin{itemize}
+    \item \textbf{Luogo/Piattaforma:} Riunione Discord
+    \item \textbf{Data:} 2026-11-07
+    \item \textbf{Orario di inizio:} 17:30
+    \item \textbf{Orario di fine:} 19:10
+    \item \textbf{Responsabile:} Alex Singh
+    \item \textbf{Scriba:} Pietro Leonardo Acampora
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Partecipanti presenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Pietro Leonardo Acampora & 2146762 \\ \hline
+Alexandru Mitu & 2101083 \\ \hline
+Riccardo Pozzato & 2147988 \\ \hline
+Alex Singh & 2148621 \\ \hline
+Antonio Tufano & 2137972 \\ \hline
+Erik Giuliano & 2138012 \\ \hline
+\end{tabularx}
+
+\vspace{0.5cm}
+\textbf{Partecipanti assenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Marco Bollettin & 2147955 \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 2. ORDINE DEL GIORNO
+% ==========================================
+\vspace{0.5cm}
+\section{Ordine del Giorno}
+Gli argomenti previsti per la riunione sono:
+\begin{enumerate}
+    \item Redazione del diario di bordo N. 3.
+    \item Definizione degli incontri interni e delle modalità di allineamento.
+    \item Partecipazione degli studenti lavoratori alle riunioni del gruppo.
+    \item Discussione sulla candidatura e sui contatti con i proponenti.
+    \item Aggiornamento dei loghi dell'Università di Padova.
+    \item Introduzione di OpenProject per la gestione delle attività.
+\end{enumerate}
+
+% ==========================================
+% 3. RESOCONTO DELLA RIUNIONE
+% ==========================================
+\newpage
+\section{Resoconto della Riunione}
+
+\subsection{Redazione del diario di bordo N. 3}
+Il gruppo ha redatto il diario di bordo N. 3, raccogliendo i contenuti relativi all'avanzamento delle attività da presentare nel successivo incontro del corso. Il file è stato inserito nel repository il 07/11/2026 (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/48}{PR \#48}).
+
+\subsection{Pianificazione delle riunioni interne e di allineamento}
+È stato fissato un appuntamento ricorrente per la riunione interna del gruppo, ogni lunedì alle ore 17:30. È stata inoltre concordata una riunione di allineamento per sabato alle ore 16:00.
+
+È stata valutata la possibilità di convocare una riunione straordinaria durante la settimana, qualora emergano necessità urgenti. Non sono stati fissati una data e un orario per tale eventuale incontro.
+
+\subsection{Partecipazione degli studenti lavoratori}
+Il gruppo ha concordato la partecipazione regolare degli studenti lavoratori alle riunioni del gruppo, così da mantenere un allineamento costante sui punti discussi e sulle decisioni prese.
+
+\subsection{Discussione sulla candidatura e contatto per il capitolato C3}
+Il gruppo ha discusso la situazione della candidatura, valutando l'opportunità di contattare il proponente del capitolato C3 nel caso in cui Var Group non accogliesse la richiesta di ampliamento del numero di gruppi di lavoro.
+
+Nel corso della riunione è stata redatta e inviata un'email al proponente del capitolato C3, \emph{Fossdot}, per manifestare l'interesse del gruppo e verificare la possibilità di aggiudicarsi il capitolato, già individuato tra le prime scelte.
+
+\subsection{Aggiornamento dei loghi dell'Università di Padova}
+Sono stati aggiornati i loghi dell'Università di Padova nel README del repository, nel sito del gruppo e nella cartella degli asset.
+
+\subsection{Introduzione di OpenProject}
+È stata introdotta la piattaforma OpenProject per la gestione delle attività del gruppo.
+
+\subsection{Attività e seguiti tracciati}
+\begin{itemize}
+    \item \href{https://openproject.tail1be59a.ts.net/work_packages/38}{OP\#38} (attesa di una risposta da Var Group). La carta relativa al preventivo C6 riporta il periodo dal 05/11/2026 al 09/11/2026, che comprende la data della riunione.
+    \item OP\#41 (pubblicazione del verbale interno \#7 e aggiornamento del README). Il PDF e il riferimento nel README sono stati pubblicati l'11/11/2026 nella \href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/51}{PR \#51}, che cita il codice della carta.
+\end{itemize}
+
+\subsection{Decisioni prese}
+\begin{itemize}
+    \item Fissare la riunione interna ricorrente il lunedì alle 17:30 e una riunione di allineamento il sabato alle 16:00.
+    \item Concordare la partecipazione regolare degli studenti lavoratori alle riunioni del gruppo.
+    \item Contattare il proponente del capitolato C3 per verificare la possibilità di assegnazione al gruppo. L’email è stata redatta e inviata durante la riunione.
+    \item Utilizzare OpenProject per la gestione delle attività del gruppo.
+\end{itemize}
+
+% ==========================================
+% 4. AZIONI DA SVOLGERE (TO-DO)
+% ==========================================
+\vspace{0.5cm}
+\section{Azioni da Svolgere (To-Do)}
+\begin{tabularx}{\textwidth}{|c|X|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{2.5cm}|}
+\hline
+\textbf{Codice Rif.} & \textbf{Descrizione Task} & \textbf{Assegnatario} & \textbf{Scadenza} \\ \hline
+--- & Svolgere la riunione interna ricorrente e la riunione di allineamento concordata. & Gruppo & Ogni lunedì, ore 17:30\newline Sabato, ore 16:00 \\ \hline
+OP\#38 & Attendere la risposta da Var Group sulla candidatura C6. & --- & 2026-11-09 \\ \hline
+OP\#41 & Pubblicare il verbale interno \#7 e aggiungere il riferimento nel README. & --- & --- \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 5. PROSSIMA RIUNIONE
+% ==========================================
+\vspace{0.5cm}
+\section{Prossima Riunione}
+\begin{itemize}
+    \item \textbf{Data:} 2026-11-09 (lunedì)
+    \item \textbf{Ora:} 17:30
+    \item \textbf{OdG preliminare:} Da concordare.
+\end{itemize}
+
+È inoltre previsto un incontro di allineamento sabato alle ore 16:00. Resta possibile la convocazione di una riunione straordinaria durante la settimana, se necessaria.
+
+\end{document}

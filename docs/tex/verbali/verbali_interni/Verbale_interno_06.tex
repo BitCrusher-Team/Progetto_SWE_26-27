@@ -1,0 +1,220 @@
+% Titolo: Ristesura dei documenti per la candidatura
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI ---
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+% --- CONFIGURAZIONE HEADER E FOOTER ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Verbale Interno N. 6}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Configurazione link indice
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+
+    % --- LOGHI ---
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{unipd_logo.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{Logo-BitCrusher-Nero.png}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large \textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}} \\
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica} \\
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software} \\
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027} \\
+
+    \vspace{2cm}
+    {\Huge \textbf{Verbale di Riunione}} \\
+    \vspace{0.5cm}
+    {\Large Riunione Interna \#6}
+
+    \vspace{2cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \textbf{Email:} bitcrusherteam@gmail.com \\
+        \textbf{Versione:} v1.0.0 \\
+        \textbf{Data della riunione:} 03/11/2026 \\
+        \textbf{Data ultima modifica:} 4 novembre 2026
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+\newpage
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE
+% ==========================================
+\section*{Registro delle Modifiche}
+\vspace{0.5cm}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|l|l|l|l|X|}
+\hline
+\textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+1.0.0 & 04/11/2026 & Alex Singh & - & Approvazione per il rilascio. \\ \hline
+0.1.0 & 04/11/2026 & Erik Giuliano & Pietro Leonardo Acampora & Prima stesura del verbale. \\ \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==========================================
+% INDICE
+% ==========================================
+\tableofcontents
+\newpage
+
+% ==========================================
+% 1. INFORMAZIONI GENERALI
+% ==========================================
+\section{Informazioni Generali}
+\begin{itemize}
+    \item \textbf{Luogo/Piattaforma:} Riunione Discord
+    \item \textbf{Data:} 03/11/2026
+    \item \textbf{Orario di inizio:} 17:30
+    \item \textbf{Orario di fine:} 20:15
+    \item \textbf{Responsabile:} Alex Singh
+    \item \textbf{Scriba:} Erik Giuliano
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Partecipanti presenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Pietro Leonardo Acampora & 2146762 \\ \hline
+Marco Bollettin & 2147955 \\ \hline
+Erik Giuliano & 2138012 \\ \hline
+Alexandru Mitu & 2101083 \\ \hline
+Riccardo Pozzato & 2147988 \\ \hline
+Alex Singh & 2148621 \\ \hline
+Antonio Tufano & 2137972 \\ \hline
+\end{tabularx}
+
+\vspace{0.5cm}
+\textbf{Partecipanti assenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Nessuno & - \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 2. ORDINE DEL GIORNO
+% ==========================================
+\vspace{0.5cm}
+\section{Ordine del Giorno}
+Gli argomenti previsti per la riunione odierna sono:
+\begin{enumerate}
+    \item Scelta del nuovo capitolato e rifacimento dei documenti di candidatura
+    \item Rifacimento del sito web
+    \item Modifica del registro delle modifiche dei verbali interni
+    \item Scelta di un responsabile per l'approvazione delle Pull Request
+    \item Apertura diretta dei PDF dal sito web
+\end{enumerate}
+
+% ==========================================
+% 3. RESOCONTO DELLA RIUNIONE
+% ==========================================
+\newpage
+\section{Resoconto della Riunione}
+
+\subsection{Verifica delle azioni precedenti}
+\begin{itemize}
+    \item La valutazione dei capitolati e la dichiarazione degli impegni discusse nella riunione del 29/10 sono state pubblicate il 30/10/2026 (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/27}{PR \#27}). Con la nuova candidatura C5 si è resa necessaria una revisione di quei documenti.
+\end{itemize}
+
+\subsection{Scelta del capitolato e documenti di candidatura}
+A seguito della mancata aggiudicazione del capitolato C6, il gruppo si è riorganizzato e ha scelto all'unanimità di candidarsi al capitolato C5 (RareCare), proposto da Miriade. I documenti di candidatura verranno rifatti e il lavoro è stato suddiviso come segue:
+\begin{itemize}
+    \item \textbf{Lettera di presentazione:} Alexandru Mitu
+    \item \textbf{Valutazione dei capitolati:} Pietro Leonardo Acampora e Marco Bollettin
+    \item \textbf{Dichiarazione degli impegni:} Riccardo Pozzato e Antonio Tufano
+\end{itemize}
+
+\subsection{Rifacimento del sito web}
+Il sito web verrà rifatto in una versione più semplice: un sito vetrina espositivo, rivolto alle persone esterne al gruppo e privo di funzionalità a uso interno, come quelle legate alle Pull Request. Se ne occuperà Erik Giuliano.
+
+\subsection{Modifica del registro delle modifiche}
+Antonio Tufano e Riccardo Pozzato modificheranno il registro delle modifiche dei verbali interni. Il verbale esterno resta invariato, in quanto firmato dalla proponente e quindi non modificabile.
+
+\subsection{Responsabile per l'approvazione delle Pull Request}
+Il gruppo ha discusso la necessità di scegliere un responsabile che approvi le Pull Request.
+
+\subsection{Apertura diretta dei PDF dal sito web}
+I PDF pubblicati sul sito non dovranno più reindirizzare a GitHub, ma aprirsi direttamente. Se ne occuperà Erik Giuliano.
+
+\subsection{Decisioni prese}
+\begin{itemize}
+    \item Scelta unanime del capitolato C5 per la nuova candidatura
+    \item Rifacimento dei documenti di candidatura per il capitolato C5
+    \item Rifacimento del sito web come vetrina per il pubblico, con apertura diretta dei PDF.
+    \item Modifica del registro delle modifiche dei soli verbali interni
+\end{itemize}
+
+% ==========================================
+% 4. AZIONI DA SVOLGERE (TO-DO)
+% ==========================================
+\vspace{0.5cm}
+\section{Azioni da Svolgere (To-Do)}
+\begin{tabularx}{\textwidth}{|c|X|>{\raggedright\arraybackslash}p{3.6cm}|l|}
+\hline
+\textbf{Codice Rif.} & \textbf{Descrizione Task} & \textbf{Assegnatario} & \textbf{Scadenza} \\ \hline
+--- & Rifare la Lettera di presentazione (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/40}{PR \#40}, 04/11/2026). & Alexandru Mitu & 04/11/2026 \\ \hline
+--- & Rifare la Valutazione dei capitolati (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/41}{PR \#41}, 04/11/2026). & Pietro Leonardo Acampora, Marco Bollettin & 04/11/2026 \\ \hline
+--- & Rifare la Dichiarazione degli impegni (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/40}{PR \#40}, 04/11/2026). & Riccardo Pozzato, Antonio Tufano & 04/11/2026 \\ \hline
+--- & Modificare il registro delle modifiche dei verbali interni (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/36}{PR \#36}, 03/11/2026). & Antonio Tufano, Riccardo Pozzato & 04/11/2026 \\ \hline
+--- & Rifare il sito web in versione semplificata e aprire direttamente i PDF dal sito (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/43}{PR \#43}, 04/11/2026). & Erik Giuliano & 04/11/2026 \\ \hline
+--- & Redigere il verbale della riunione (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/43}{PR \#43}, 04/11/2026). & Erik Giuliano & 04/11/2026 \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 5. PROSSIMA RIUNIONE
+% ==========================================
+\vspace{0.5cm}
+\section{Prossima Riunione}
+\begin{itemize}
+    \item \textbf{Data:} 04/11/2026
+    \item \textbf{Ora:} 17:30
+    \item \textbf{OdG preliminare:} Rifinitura candidatura e consegna
+\end{itemize}
+
+\end{document}
