@@ -2,82 +2,28 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Bit Crusher // Progetto SWE 26-27</title>
-  <meta name="description" content="Bit Crusher, gruppo del corso di Ingegneria del Software dell'Università degli Studi di Padova (A.A. 2026/2027): documenti consegnati, verbali, squadra e attività della repo di progetto.">
-  <meta name="theme-color" content="#050605">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Bit Crusher // Progetto SWE 26-27">
-  <meta property="og:description" content="Documenti, verbali e stato del progetto del gruppo Bit Crusher, Ingegneria del Software, UniPD A.A. 2026/2027.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bit Crusher – Documentazione di progetto</title>
+  <meta name="description" content="Documentazione di progetto del gruppo Bit Crusher, corso di Ingegneria del Software, Università degli Studi di Padova (A.A. 2026/2027): documenti, verbali e diari di bordo per ogni consegna.">
+  <meta name="theme-color" content="#f5f6f7">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <link rel="preload" href="assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">Salta al contenuto</a>
+  <a class="salta" href="#contenuto">Vai ai documenti</a>
   <noscript>
-    <div class="noscript">Questo sito richiede JavaScript. I documenti del progetto sono nella
-      <a href="https://github.com/BitCrusher-Team/Progetto_SWE_26-27/tree/main/docs" target="_blank" rel="noopener">cartella docs della repo GitHub</a>.</div>
+    <p class="avviso">Questa pagina ha bisogno di JavaScript. I documenti del progetto sono nella
+      <a href="https://github.com/BitCrusher-Team/Progetto_SWE_26-27/tree/main/docs" target="_blank" rel="noopener">cartella docs della repository</a>.</p>
   </noscript>
-
-  <div id="site" class="site">
-    <header class="topbar">
-      <a class="brand" href="#home" aria-label="Bit Crusher, torna all'inizio">
-        <span class="brand__mark"></span>
-        <span class="brand__name">BIT<i>//</i>CRUSHER</span>
-        <span class="brand__sub">SWE 26—27</span>
-      </a>
-      <nav id="nav" class="nav" aria-label="Sezioni del sito"><ol data-nav></ol></nav>
-      <div class="sys">
-        <button type="button" class="ctl" data-console-open aria-label="Apri il terminale" aria-expanded="false">&gt;_</button>
-        <button type="button" class="ctl nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="nav">Menu</button>
-      </div>
-    </header>
-    <div id="screen" class="screen" tabindex="-1">
-      <main id="main"></main>
-      <div id="footer-slot"></div>
-    </div>
-    <div id="console" class="console" role="dialog" aria-label="Terminale della repo" hidden>
-      <div class="console__bar">
-        <span>Terminale // sola lettura</span>
-        <span class="console__hint">\ oppure ESC per chiudere</span>
-        <button type="button" class="ctl" data-console-close>Chiudi ×</button>
-      </div>
-      <div class="term__out" data-term-out role="log" aria-live="polite"></div>
-      <form class="term__line" data-term-form autocomplete="off">
-        <label class="term__prompt" for="console-input" data-term-prompt></label>
-        <span class="term__field">
-          <input id="console-input" class="term__input" data-term-input type="text" spellcheck="false" autocapitalize="off" autocomplete="off" enterkeyhint="send">
-          <span class="term__caret" aria-hidden="true"></span>
-        </span>
-      </form>
-    </div>
-    <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  <div id="pagina">
+    <p class="caricamento">Caricamento dei documenti…</p>
   </div>
-
-  <!-- glifi micrografici -->
-  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
-    <defs>
-      <symbol id="g-x" viewBox="0 0 10 10"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="currentColor" stroke-width="1.4" fill="none"/></symbol>
-      <symbol id="g-sq" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="3.5" y="3.5" width="3" height="3" fill="currentColor"/></symbol>
-      <symbol id="g-ring" viewBox="0 0 10 10"><circle cx="5" cy="5" r="3.8" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5" cy="5" r="1.4" fill="currentColor"/></symbol>
-      <symbol id="g-dia" viewBox="0 0 10 10"><path d="M5 .8L9.2 5 5 9.2.8 5z" fill="currentColor"/></symbol>
-      <symbol id="g-tri" viewBox="0 0 10 10"><path d="M5 1.2L9 8.8H1z" fill="none" stroke="currentColor" stroke-width="1.2"/></symbol>
-      <symbol id="g-bars" viewBox="0 0 10 10"><path d="M1 1h1.4v8H1zM4.3 1h1.4v8H4.3zM7.6 1H9v8H7.6z" fill="currentColor"/></symbol>
-      <symbol id="g-plus" viewBox="0 0 10 10"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.4"/></symbol>
-      <symbol id="g-dot" viewBox="0 0 10 10"><rect x="3" y="3" width="4" height="4" fill="currentColor"/></symbol>
-      <symbol id="g-half" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M1 1h8v4H1z" fill="currentColor"/></symbol>
-    </defs>
-  </svg>
 
   <script src="assets/js/content.js" defer></script>
   <script src="assets/js/lib.js" defer></script>
   <script src="assets/js/repo.js" defer></script>
-  <script src="assets/js/fault.js" defer></script>
-  <script src="assets/js/terminal.js" defer></script>
   <script src="assets/js/site.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>

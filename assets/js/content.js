@@ -1,155 +1,150 @@
 /* =====================================================================
    CONTENUTI DEL SITO // Bit Crusher // Progetto SWE 26-27
    ---------------------------------------------------------------------
-   Il sito legge i dati dalla repo di progetto (repo.js): README,
-   milestone, cartelle docs/, configurazioni. Questo file è il ripiego
-   se la repo non risponde, e contiene ciò che la repo non dice.
+   La pagina legge i documenti dalla repo di progetto (repo.js):
+   - i documenti di ogni consegna da docs/<consegna>/ o da
+     docs/compiled/<consegna>/ (es. docs/candidatura/, docs/rtb/); una
+     sottocartella con "esterni" o "interni" nel nome decide il riquadro,
+     altrimenti decide il catalogo qui sotto;
+   - i verbali dalla tabella del README e da docs/verbali/ (o
+     docs/compiled/verbali/);
+   - i diari di bordo da docs/diario_di_bordo/;
+   - i componenti dalla tabella del team nel README.
+   La pagina del Glossario (glossario.html) legge i file scelti in
+   «glossari», più sotto.
+   Questo file contiene i testi della pagina, le consegne con le loro date
+   e i dati di ripiego, usati se la repo non risponde.
 
    Convenzioni:
-   - Un valore `null` compare sul sito come segnaposto "DA DEFINIRE",
-     così si vede subito cosa manca.
-   - I percorsi dei file ("docs/...", "assets/...") sono relativi alla
-     root della repo di progetto e si aprono sempre in una nuova scheda.
+   - I percorsi dei file sono relativi alla root della repo e si aprono
+     sempre in una nuova scheda.
    - Le date usano il formato AAAA-MM-GG.
+   - Verbali e diari vanno nella prima consegna con data uguale o
+     successiva alla loro; senza data, o dopo l'ultima consegna datata,
+     vanno nella prima consegna ancora senza data (quella in corso).
    ===================================================================== */
 window.BC_CONTENT = {
   repo: {
     owner: "BitCrusher-Team",
     name: "Progetto_SWE_26-27",
     branch: "main",
-    // GitHub Project collegato ai template delle issue (visibile al team)
-    board: "https://github.com/orgs/BitCrusher-Team/projects/4",
     // Il sito è pubblicato dalla stessa repo: i documenti si aprono da qui, nel
     // visualizzatore del browser (null = pagina del file su GitHub)
     pages: "https://bitcrusher-team.github.io/Progetto_SWE_26-27/",
   },
 
-  progetto: {
+  sito: {
     gruppo: "Bit Crusher",
-    titolo: "Progetto di Ingegneria del Software",
-    universita: "Università degli Studi di Padova",
-    corso: "Informatica (cod. SC1167)",
-    annoAccademico: "2026/2027",
-    relatore: "Prof. Tullio Vardanega",
+    corso: "Ingegneria del Software · Università degli Studi di Padova · A.A. 2026/2027",
+    // capitolato aggiudicato (dalla scheda del README, se c'è "Capitolato aggiudicato")
+    capitolato: { id: "C6", titolo: "Sistema AI di caching semantico e dashboard FinOps", proponente: "Var Group S.p.A." },
+    presentazione: "Siamo sette studenti del corso di Ingegneria del Software. In questa pagina " +
+      "trovate i documenti del nostro progetto, raccolti per consegna e divisi tra documentazione " +
+      "esterna e interna. I ruoli ruotano tra i componenti nel corso del progetto.",
     email: "bitcrusherteam@gmail.com",
-    fase: "Candidatura",          // fase corrente, mostrata in apertura
-    capitolatoAggiudicato: null,  // es. "C6", quando arriva l'aggiudicazione
-    proponente: null,             // azienda del capitolato aggiudicato
-    nota: "Specifiche tecniche riguardo il progetto scelto non sono disponibili per completo. Attualmente il repo agisce come wrapper generico a scopo organizzativo per il team.",
   },
 
-  // Revisioni di avanzamento, in ordine di calendario: adattare all'edizione del corso.
-  // stato: "completata" | "in-corso" | "attesa"
-  // avanzamento: 0-100, usato solo per "in-corso" (null = non quantificato).
-  // Le milestone della repo le aggiornano: una milestone vale per la revisione se
-  // il titolo ne contiene la sigla, il nome o un alias.
-  milestone: [
-    { sigla: "CND", nome: "Candidatura", alias: ["Aggiudicazione"], data: null, stato: "Completato", avanzamento: null },
-    { sigla: "RTB", nome: "Requirements and Technology Baseline", data: null, stato: "attesa", avanzamento: null },
-    { sigla: "PB", nome: "Product Baseline", data: null, stato: "attesa", avanzamento: null },
-    { sigla: "CA", nome: "Customer Acceptance", data: null, stato: "attesa", avanzamento: null },
-  ],
-
-  // Capitolati del bando: servono al capitolato aggiudicato in home e al comando
-  // «capitolati» del terminale (i PDF stanno in docs/capitolati/ della repo)
-  capitolati: [
-    { id: "C0", nome: "AIRA", proponente: "Sanmarco Informatica S.p.A." },
-    { id: "C1", nome: "AURA", proponente: "Vimar S.p.A." },
-    { id: "C2", nome: "Concierge", proponente: "Eggon" },
-    { id: "C3", nome: "Fossdot", proponente: "Uranion EMEA Ltd" },
-    { id: "C4", nome: "Gestione Veicoli", proponente: "M31 S.r.l." },
-    { id: "C5", nome: "RareCare", proponente: "Miriade S.r.l." },
-    { id: "C6", nome: "Caching Semantico", proponente: "Var Group S.p.A." },
-    { id: "C7", nome: "SmartDashboard", proponente: "Ergon Informatica S.r.l." },
-    { id: "C8", nome: "Sonar", proponente: "Halue S.r.l. Società Benefit" },
-    { id: "C9", nome: "SpecCheck", proponente: "Zucchetti S.p.A." },
-  ],
-
-  // Ordine di preferenza dei capitolati (il primo è la priorità 1)
-  priorita: [{ capitolato: "C6" }, { capitolato: "C3" }, { capitolato: "C1" }],
-
-  // tipo: "interno" | "esterno". Redattore e verificatore della prima stesura.
-  verbali: [
-    { id: "I01", tipo: "interno", data: "2026-10-17", titolo: "Primo incontro conoscitivo",
-      versione: "1.0.2", redattore: "Riccardo Pozzato", verificatore: "Antonio Tufano",
-      file: "docs/verbali/verbali_interni/Verbale_interno_01.pdf" },
-    { id: "I02", tipo: "interno", data: "2026-10-21", titolo: "Organizzazione repo, stesura domande ed invio mail ai proponenti",
-      versione: "1.0.0", redattore: "Antonio Tufano", verificatore: "Riccardo Pozzato",
-      file: "docs/verbali/verbali_interni/Verbale_interno_02.pdf" },
-    { id: "I03", tipo: "interno", data: "2026-10-24", titolo: "Formazione del primo diario di bordo ed il relativo template",
-      versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Marco Bollettin, Antonio Tufano",
-      file: "docs/verbali/verbali_interni/Verbale_interno_03.pdf" },
-    { id: "E01", tipo: "esterno", data: "2026-10-26", titolo: "Confronto su dubbi e domande con l'azienda proponente",
-      con: "Var Group", firmato: true,
-      versione: "1.0.1", redattore: "Marco Bollettin", verificatore: "Alex Singh",
-      file: "docs/verbali/verbali_esterni/Verbale_esterno_01_firmato.pdf" },
-    { id: "I04", tipo: "interno", data: "2026-10-28", titolo: "Redazione bozza dei documenti di candidatura",
-      versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Erik Giuliano",
-      file: "docs/verbali/verbali_interni/Verbale_interno_04.pdf" },
-    { id: "I05", tipo: "interno", data: "2026-10-29", titolo: "Revisione documenti per candidatura ed elezione responsabile",
-      versione: "1.0.0", redattore: "Alexandru Mitu, Antonio Tufano", verificatore: "Pietro Leonardo Acampora, Riccardo Pozzato",
-      file: "docs/verbali/verbali_interni/verbale_interno_05.pdf" },
-    { id: "I06", tipo: "interno", data: "2026-11-03", titolo: "Ristesura dei documenti per la candidatura",
-      versione: "1.0.0", redattore: "Erik Giuliano", verificatore: "Pietro Leonardo Acampora",
-      file: "docs/verbali/verbali_interni/Verbale_interno_06.pdf" },
-    { id: "I07", tipo: "interno", data: "2026-11-07", titolo: "Decisioni su organizzazione interna",
-      versione: "1.0.0", redattore: "Pietro Leonardo Acampora", verificatore: "Erik Giuliano",
-      file: "docs/verbali/verbali_interni/Verbale_interno_07.pdf" },
-    { id: "I08", tipo: "interno", data: "2026-11-12", titolo: "Discussione sull'uso e funzionamento di OpenProject",
-      versione: "1.0.0", redattore: "Marco Bollettin", verificatore: "Alexandru Mitu",
-      file: "docs/verbali/verbali_interni/Verbale_interno_08.pdf" },
-    { id: "I09", tipo: "interno", data: "2026-11-16", titolo: "Mosaico",
-      versione: "1.0.0", redattore: "Riccardo Pozzato", verificatore: "Antonio Tufano",
-      file: "docs/verbali/verbali_interni/Verbale_interno_09.pdf" }
-  ],
-
-  // Diario di bordo: gli interventi stanno in docs/diario_di_bordo/ (il sito li
-  // legge dalla repo, dal più recente); il template è indicato nel README
-  diario: {
-    voci: [
-      { nome: "Diario di bordo 05", file: "docs/diario_di_bordo/Diario_di_Bordo_05.pptx" },
-      { nome: "Diario di bordo 04", file: "docs/diario_di_bordo/Diario_di_Bordo_04.pptx" },
-      { nome: "Diario di bordo 03", file: "docs/diario_di_bordo/Diario_di_Bordo_03.pptx" },
-      { nome: "Diario di bordo 02", file: "docs/diario_di_bordo/Diario_di_Bordo_02.pptx" },
-      { nome: "Diario di bordo 01", file: "docs/diario_di_bordo/Diario_di_Bordo_01.pptx" },
-    ],
-    template: "assets/pptx_templates/Meeting_Bit_Crusher.pptx",
-  },
-
-  // Nomi ufficiali dei documenti di progetto (il sito li legge dal menu
-  // "Documento" del template Attività): servono a riconoscere i file
-  documenti: [
-    { nome: "Lettera di presentazione" },
-    { nome: "Valutazione dei capitolati" },
-    { nome: "Dichiarazione degli impegni" },
-    { nome: "Norme di Progetto" },
-    { nome: "Piano di Progetto" },
-    { nome: "Piano di Qualifica" },
-    { nome: "Analisi dei Requisiti" },
-    { nome: "Glossario" },
-  ],
-
-  // Documenti consegnati a ogni revisione (sigla di `milestone`). Il sito li legge
-  // dalle cartelle docs/<revisione>/ della repo (es. docs/candidatura/,
-  // docs/rtb/), con le sottocartelle come categorie; questo è il ripiego.
-  // stato: null | "bozza" | "in verifica" | "approvato"
+  // Consegne, dalla prima all'ultima. id = nome della cartella in docs/,
+  // data = scadenza della consegna (null finché non è fissata)
   consegne: [
-    { revisione: "CND", nome: "Lettera di presentazione", versione: "finale", stato: "approvato",
+    // primo invio il 30/10, documenti rifatti per C6 e inviati di nuovo il 9/11
+    { id: "candidatura", titolo: "Candidatura", data: "2026-11-09" },
+    { id: "rtb", titolo: "Requirements and Technology Baseline", data: null },
+    { id: "pb", titolo: "Product Baseline", data: null },
+  ],
+
+  // Nomi ufficiali dei documenti e riquadro in cui vanno (esterno o interno).
+  // Servono a riconoscere i PDF: "Valutazione_Capitolati_BitCrusher.pdf"
+  // diventa "Valutazione dei capitolati"
+  catalogo: [
+    { nome: "Lettera di presentazione", uso: "esterno" },
+    { nome: "Valutazione dei capitolati", uso: "esterno" },
+    { nome: "Dichiarazione degli impegni", uso: "esterno" },
+    { nome: "Analisi dei Requisiti", uso: "esterno" },
+    { nome: "Piano di Progetto", uso: "esterno" },
+    { nome: "Piano di Qualifica", uso: "esterno" },
+    { nome: "Glossario", uso: "esterno" },
+    { nome: "Norme di Progetto", uso: "interno" },
+  ],
+
+  // ---------------------------------------------------------------------
+  // Glossari: la pagina «Glossario» (glossario.html, pulsante in testata)
+  // li mostra uno dopo l'altro, in questo ordine, con le voci in ordine
+  // alfabetico, la ricerca e i rimandi tra le voci.
+  // - file: il sorgente LaTeX nella repo, oppure un elenco di sorgenti che
+  //   formano lo stesso glossario (es. ["docs/tex/rtb/A.tex", "docs/tex/rtb/B.tex"]).
+  //   Le voci si scrivono come nel modello del glossario:
+  //   \VoceGlossario{id}{termine}{definizione}; il resto del file si ignora.
+  //   Con file: null il glossario non compare.
+  // - pdf: la versione da stampare, se c'è (facoltativo).
+  // - id: minuscole e trattini, usato negli indirizzi della pagina.
+  // Una voce si apre con glossario.html#gls-<id>, come l'ancora gls-<id> del PDF.
+  // ---------------------------------------------------------------------
+  glossari: [
+    { id: "progetto", titolo: "Glossario di progetto",
+      descrizione: "I termini usati in tutti i documenti del progetto: processi, ruoli, strumenti e capitolato.",
+      file: "assets/latex_templates/Glossario.tex", pdf: null },
+    { id: "c6", titolo: "Glossario del capitolato C6",
+      descrizione: "I termini del capitolato C6 usati nell'Analisi dei Requisiti, nella progettazione e nei casi d'uso.",
+      file: null, pdf: null },
+  ],
+
+  // ---------------------------------------------------------------------
+  // Ripiego: la repo resta la fonte. La versione dei documenti si legge dal
+  // nome del file (_v1.2.0); se manca, vale quella scritta qui
+  // ---------------------------------------------------------------------
+  documenti: [
+    { consegna: "candidatura", nome: "Lettera di presentazione", versione: "finale",
       file: "docs/candidatura/Lettera_Presentazione_BitCrusher.pdf" },
-    { revisione: "CND", nome: "Valutazione dei capitolati", versione: "1.1.0", stato: "approvato",
+    { consegna: "candidatura", nome: "Valutazione dei capitolati", versione: "1.1.0",
       file: "docs/candidatura/Valutazione_Capitolati_BitCrusher.pdf" },
-    { revisione: "CND", nome: "Dichiarazione degli impegni", versione: "1.2.0", stato: "approvato",
+    { consegna: "candidatura", nome: "Dichiarazione degli impegni", versione: "1.2.0",
       file: "docs/candidatura/Dichiarazione_Impegni_BitCrusher.pdf" },
   ],
 
-  // ruolo: ruolo del periodo corrente (i ruoli sono a rotazione), null se non assegnato
-  team: [
-    { nome: "Alex Singh", matricola: "2148621", github: "ZiraelOneTwo", ruolo: null },
-    { nome: "Pietro Leonardo Acampora", matricola: "2146762", github: "hipietro", ruolo: null },
-    { nome: "Marco Bollettin", matricola: "2147955", github: "Ahwrs", ruolo: null },
-    { nome: "Erik Giuliano", matricola: "2138012", github: "FlameStorm199", ruolo: null },
-    { nome: "Alexandru Mitu", matricola: "2101083", github: "aycollapse", ruolo: null },
-    { nome: "Riccardo Pozzato", matricola: "2147988", github: "rpozzato", ruolo: null },
-    { nome: "Antonio Tufano", matricola: "2137972", github: "antotuf06", ruolo: null },
+  // tipo: "interno" | "esterno"
+  verbali: [
+    { tipo: "interno", data: "2026-10-17", titolo: "Primo incontro conoscitivo", versione: "1.0.2",
+      file: "docs/verbali/verbali_interni/Verbale_interno_01.pdf" },
+    { tipo: "interno", data: "2026-10-21", titolo: "Organizzazione repo, stesura domande ed invio mail ai proponenti", versione: "1.0.0",
+      file: "docs/verbali/verbali_interni/Verbale_interno_02.pdf" },
+    { tipo: "interno", data: "2026-10-24", titolo: "Formazione del primo diario di bordo ed il relativo template", versione: "1.0.0",
+      file: "docs/verbali/verbali_interni/Verbale_interno_03.pdf" },
+    { tipo: "esterno", data: "2026-10-26", titolo: "Confronto su dubbi e domande con l'azienda proponente", con: "Var Group", versione: "1.0.1",
+      file: "docs/verbali/verbali_esterni/Verbale_esterno_01_firmato.pdf" },
+    { tipo: "interno", data: "2026-10-28", titolo: "Redazione bozza dei documenti di candidatura", versione: "1.0.0",
+      file: "docs/verbali/verbali_interni/Verbale_interno_04.pdf" },
+    { tipo: "interno", data: "2026-10-29", titolo: "Revisione documenti per candidatura ed elezione responsabile", versione: "1.0.0",
+      file: "docs/verbali/verbali_interni/Verbale_interno_05.pdf" },
+    { tipo: "interno", data: "2026-11-03", titolo: "Ristesura dei documenti per la candidatura", versione: "1.0.0",
+      file: "docs/verbali/verbali_interni/Verbale_interno_06.pdf" },
+    { tipo: "interno", data: "2026-11-07", titolo: "Decisioni su organizzazione interna", versione: "1.0.0",
+      file: "docs/verbali/verbali_interni/Verbale_interno_07.pdf" },
+    { tipo: "interno", data: "2026-11-12", titolo: "Discussione sull'uso e funzionamento di OpenProject", versione: "1.0.0",
+      file: "docs/verbali/verbali_interni/Verbale_interno_08.pdf" },
+    { tipo: "interno", data: "2026-11-16", titolo: "Mosaico e pianificazione sprint", versione: "1.0.0",
+      file: "docs/verbali/verbali_interni/Verbale_interno_09.pdf" },
+  ],
+
+  // Diari di bordo: il numero si legge dal nome del file. La data è quella
+  // della presentazione (è scritta sulla prima slide): compare sulla pagina
+  // e mette il diario nella consegna giusta. Un diario nuovo va aggiunto qui
+  // con la sua data; finché manca, sta nella consegna in corso senza data
+  diari: [
+    { numero: 1, data: "2026-10-26", file: "docs/diario_di_bordo/Diario_di_Bordo_01.pptx" },
+    { numero: 2, data: "2026-11-02", file: "docs/diario_di_bordo/Diario_di_Bordo_02.pptx" },
+    { numero: 3, data: "2026-11-09", file: "docs/diario_di_bordo/Diario_di_Bordo_03.pptx" },
+    { numero: 4, data: "2026-11-16", file: "docs/diario_di_bordo/Diario_di_Bordo_04.pptx" },
+    { numero: 5, data: "2026-11-21", file: "docs/diario_di_bordo/Diario_di_Bordo_05.pptx" },
+  ],
+
+  componenti: [
+    "Alex Singh",
+    "Pietro Leonardo Acampora",
+    "Marco Bollettin",
+    "Erik Giuliano",
+    "Alexandru Mitu",
+    "Riccardo Pozzato",
+    "Antonio Tufano",
   ],
 };
