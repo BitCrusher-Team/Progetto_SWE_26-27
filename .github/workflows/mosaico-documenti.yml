@@ -2,13 +2,16 @@
 # stesse cartelle: un documento (un .tex con \documentclass) docs/tex/a/b/X.tex ha il suo PDF in docs/compiled/a/b/X.pdf.
 # Le parti incluse e le figure stanno accanto al loro documento e non hanno un PDF. I verbali:
 # docs/tex/verbali/verbali_interni/Verbale_interno_NN.tex e .../verbali_esterni/Verbale_esterno_NN.tex.
-# - PR e coda di merge, «Mosaico, documenti»: le regole dei verbali (nomi; numeri, sorgenti e PDF insieme, da 1 al massimo senza buchi; 
-#   il numero scritto nel .tex; la riga «% Titolo: …»), e la
+# - PR e coda di merge, «Mosaico, documenti» (da mettere fra i controlli richiesti): le regole dei verbali (nomi; numeri,
+#   sorgenti e PDF insieme, da 1 al massimo senza buchi; il numero scritto nel .tex; la riga «% Titolo: …»), e la
 #   compilazione di tutto cio' che il main compilerebbe. Una PR che non tocca i documenti passa subito.
 # - Sul main (push che tocca docs/tex, docs/compiled o i loghi, o a mano): compila i documenti senza PDF o con gli
 #   ingressi cambiati, toglie i PDF compilati da lui il cui sorgente non c'e' piu' (l'elenco docs/compiled/.compilati.json;
-#   un PDF messo a mano, come il firmato di un verbale esterno, non è toccato dall'automazione), aggiorna la riga del README e la voce
-#   di assets/js/content.js di ogni verbale. Il commit del bot non fa ripartire questo lavoro.
+#   un PDF messo a mano, come il firmato di un verbale esterno, non si tocca mai), aggiorna la riga del README e la voce
+#   di assets/js/content.js di ogni verbale, e fa il commit col token del segreto MOSAICO_TOKEN, che nelle regole del main
+#   deve poter scrivere. Il suo commit non fa ripartire questo lavoro.
+# - «Run workflow» (a mano) fa lo stesso sul RAMO che si sceglie, e il commit va su quel ramo: serve a provare un ramo
+#   prima del merge. Se il ramo ha una PR aperta, il commit del runner fa ripartire il controllo della PR, che trova i PDF gia' al loro posto.
 name: Mosaico, documenti
 
 on:
@@ -88,16 +91,21 @@ jobs:
         run: python -m mosaico documenti controlla --radice .
 
   pubblica:
-    name: Mosaico, documenti sul main
+    # sul main dopo un push; a mano, sul ramo scelto (un tag no: non c'e' un ramo su cui scrivere)
+    name: ${{ github.event_name == 'workflow_dispatch' && format('Mosaico, documenti su {0}', github.ref_name) || 'Mosaico, documenti sul main' }}
     # il commit del runner tocca docs/compiled: non riparte per lui (il messaggio e' il suo)
     if: >-
-      github.event_name == 'workflow_dispatch' || (github.event_name == 'push'
+      (github.event_name == 'workflow_dispatch' && github.ref_type == 'branch') || (github.event_name == 'push'
       && !startsWith(github.event.head_commit.message, 'docs(compiled): i PDF dei documenti, il README e il sito.'))
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    # uno alla volta PER RAMO: i lavori di uno stesso ramo si mettono in fila, e ognuno prende la cima del ramo
     concurrency:
-      group: mosaico-documenti-main
+      group: mosaico-documenti-sul-ramo-${{ github.ref_name }}
       cancel-in-progress: false
+    env:
+      # il nome del ramo arriva agli script dall'ambiente, mai scritto dentro il comando
+      RAMO: ${{ github.ref_name }}
     steps:
       - name: Il segreto
         env:
@@ -105,9 +113,10 @@ jobs:
         run: |
           [ -n "$MOSAICO_TOKEN" ] || { echo "::error::manca il segreto MOSAICO_TOKEN (Settings, Secrets and variables, Actions)"; exit 1; }
 
+      # la cima del ramo quando il lavoro parte (non il commit che l'ha fatto partire): cosi' il push e' un avanzamento
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
           token: ${{ secrets.MOSAICO_TOKEN }}
 
@@ -147,4 +156,4 @@ jobs:
           git diff --cached --stat
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "docs(compiled): i PDF dei documenti, il README e il sito."
-          git push origin HEAD:main
+          git push origin "HEAD:refs/heads/$RAMO"
