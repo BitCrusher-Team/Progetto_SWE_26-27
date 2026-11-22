@@ -107,6 +107,7 @@ window.BC_CONTENT = {
   // legge dalla repo, dal più recente); il template è indicato nel README
   diario: {
     voci: [
+      { nome: "Diario di bordo 05", file: "docs/diario_di_bordo/Diario_di_Bordo_05.pptx" },
       { nome: "Diario di bordo 04", file: "docs/diario_di_bordo/Diario_di_Bordo_04.pptx" },
       { nome: "Diario di bordo 03", file: "docs/diario_di_bordo/Diario_di_Bordo_03.pptx" },
       { nome: "Diario di bordo 02", file: "docs/diario_di_bordo/Diario_di_Bordo_02.pptx" },
