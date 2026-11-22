@@ -1,0 +1,1093 @@
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI ---
+% Si compila con pdfLaTeX e i soli pacchetti di TeX Live latex base, recommended,
+% extra, italiano e cm-super: gli stessi del runner e di Mosaico (Norma CNV-06).
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage[hypertexnames=false]{hyperref}
+
+% --- METADATI ---
+\newcommand{\VersioneDocumento}{1.0.0}
+\newcommand{\DataDocumento}{2026-11-21}
+\newcommand{\RedattoriDocumento}{Alexandru Mitu}
+\newcommand{\VerificatoriDocumento}{[Alex Singh]}
+\newcommand{\ApprovatoreDocumento}{[Erik Giuliano]}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdftitle={Norme di Progetto},
+    pdfauthor={Bit Crusher},
+    pdfsubject={Norme di Progetto del gruppo Bit Crusher}
+}
+
+% --- HEADER E FOOTER, come negli altri documenti ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Norme di Progetto}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% --- LISTE, NUMERAZIONE, INDICE ---
+\setlist[itemize]{itemsep=2pt, topsep=4pt}
+\setlist[enumerate]{itemsep=2pt, topsep=4pt}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\emergencystretch=3em
+\renewcommand{\arraystretch}{1.25}
+
+% =====================================================================
+%  NORME
+%  \norma[etichetta]{DOMINIO}{Testo prescrittivo}{Come se ne corrobora il rispetto}
+%  DOMINIO: ORG, BUR, CNV, CRT, CVS. L'identificativo (es. CRT-02) è generato
+%  in automatico; con l'etichetta la si richiama con \ref{...}.
+% =====================================================================
+\newcommand{\duecifre}[1]{\ifnum\value{#1}<10 0\fi\arabic{#1}}
+\newcounter{nORG}\renewcommand{\thenORG}{ORG-\duecifre{nORG}}
+\newcounter{nBUR}\renewcommand{\thenBUR}{BUR-\duecifre{nBUR}}
+\newcounter{nCNV}\renewcommand{\thenCNV}{CNV-\duecifre{nCNV}}
+\newcounter{nCRT}\renewcommand{\thenCRT}{CRT-\duecifre{nCRT}}
+\newcounter{nCVS}\renewcommand{\thenCVS}{CVS-\duecifre{nCVS}}
+
+\newlist{norme}{description}{1}
+\setlist[norme]{style=sameline, leftmargin=1.95cm, labelwidth=1.75cm,
+  labelsep=0.2cm, itemsep=5pt, topsep=5pt, font=\normalfont\bfseries}
+
+\NewDocumentCommand{\norma}{o m m m}{%
+  \refstepcounter{n#2}\IfValueT{#1}{\label{#1}}%
+  \item[\csname then#2\endcsname] #3\par\nopagebreak
+  {\small\textit{Corroborazione:} #4}}
+
+% Segnaposto per decisioni aperte e attività non ancora normate
+\newcommand{\dadefinire}[1]{\textcolor{red}{\textbf{[DA DEFINIRE: #1]}}}
+\newcommand{\danormare}[1]{\textcolor{red}{\textbf{[DA NORMARE prima dell'avvio di: #1]}}}
+
+% Testo tecnico: percorsi, comandi, codici dei controlli
+\DeclareUrlCommand\percorso{\urlstyle{tt}}
+% \cod: carattere a spaziatura fissa, con possibili a capo dopo «-», «/», «_» e «}»
+\ExplSyntaxOn
+\tl_new:N \l__ndp_cod_tl
+\NewDocumentCommand{\cod}{m}
+  {
+    \tl_set:Nn \l__ndp_cod_tl {#1}
+    \tl_replace_all:Nnn \l__ndp_cod_tl { - } { -\allowbreak }
+    \tl_replace_all:Nnn \l__ndp_cod_tl { / } { /\allowbreak }
+    \tl_replace_all:Nnn \l__ndp_cod_tl { \_ } { \_\allowbreak }
+    \tl_replace_all:Nnn \l__ndp_cod_tl { \} } { \}\allowbreak }
+    \texttt { \tl_use:N \l__ndp_cod_tl }
+  }
+\ExplSyntaxOff
+\newcommand{\cmd}[1]{\texttt{\textbackslash #1}}
+% Rimando a una decisione dell'Appendice A
+\newcommand{\adr}[1]{\hyperref[adr:#1]{ADR~#1}}
+% Riga della tabella delle decisioni, con l'ancora del rimando
+\newcommand{\rigaadr}[1]{\phantomsection\label{adr:#1}#1}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \IfFileExists{UnipdLogoRosso.png}
+            {\includegraphics[width=0.7\textwidth]{UnipdLogoRosso.png}}
+            {\framebox[0.7\textwidth]{\rule{0pt}{2.5cm}}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \IfFileExists{BitCrusherTeamNero.png}
+            {\includegraphics[width=0.7\textwidth]{BitCrusherTeamNero.png}}
+            {\framebox[0.7\textwidth]{\rule{0pt}{2.5cm}}}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large\textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}\par}
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica\par}
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software\par}
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027\par}
+
+    \vspace{1.5cm}
+    {\Huge\textbf{Norme di Progetto}\par}
+    \vspace{0.5cm}
+    {\Large Versione \VersioneDocumento\par}
+
+    \vspace{1.5cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \vspace{0.1cm}
+        \textbf{Email:} \href{mailto:bitcrusherteam@gmail.com}{bitcrusherteam@gmail.com} \\
+        \vspace{0.1cm}
+        \textbf{Uso:} Interno \\
+        \vspace{0.1cm}
+        \textbf{Destinatari:} Bit Crusher; Prof.\ Tullio Vardanega; Prof.\ Riccardo Cardin \\
+        \vspace{0.1cm}
+        \textbf{Data ultima modifica:} \DataDocumento
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE (dal più recente, fuori dall'indice)
+% ==========================================
+% ==========================================
+\section*{Registro delle Modifiche}
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|l|l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+        1.0.0 & 2026-11-22 & Erik Giuliano & - & Approvazione per il primo rilascio delle Norme di Progetto. \\ \hline
+        0.1.1 & 2026-11-21 & Alexandru Mitu & Alex Singh & Riscrittura sul processo in esercizio: OpenProject, Mosaico, specchio su GitHub, documenti, verbali e automazioni. \\ \hline
+        0.1.0 & 2026-10-31 & Alex Singh & Antonio Tufano & Prima stesura: principi, struttura, norme delle attività in corso. \\ \hline
+    \end{tabularx}
+\end{center}
+\newpage
+
+% ==========================================
+% INDICE
+% ==========================================
+\tableofcontents
+\newpage
+
+% ==========================================
+% 1. INTRODUZIONE
+% ==========================================
+\section{Introduzione}
+
+\subsection{Scopo del documento}
+Il documento stabilisce le norme (regole, procedure e strumenti) che ogni membro del gruppo Bit Crusher rispetta per l'intera durata del progetto didattico sul capitolato C6, «Sistema AI di caching semantico e dashboard FinOps», proposto da Var Group S.p.A.
+È un documento \emph{esecutivo}: ogni norma prescrive un comportamento verificabile e dice come se ne corrobora il rispetto. Spiegazioni e motivazioni sono ridotte a quanto serve per applicarla; per il giro quotidiano, raccontato in modo discorsivo, c'è la guida \emph{Proposta per il workflow} nel wiki di OpenProject.
+
+\subsection{Norme di Progetto e way of working}
+\begin{itemize}
+    \item Il way of working è la maniera in cui il gruppo organizza ed esegue le attività di progetto: processi, attività, compiti e strumenti. È una pratica: esiste anche dove non è scritta, ed è ciò che il committente osserva e valuta.
+    \item Le Norme di Progetto sono la parte del way of working che il gruppo codifica in regole scritte e verificabili, così che sia ripetibile, trasmissibile a chi subentra in un ruolo e controllabile.
+    \item Le due cose non coincidono. Il way of working si osserva in ciò che il gruppo fa; le Norme dicono che cosa deve fare. Una norma non applicata non fa parte del way of working; una pratica non scritta non è una norma, e non si può né pretendere né verificare.
+    \item Confini con gli altri documenti: le Norme di Progetto dicono \emph{come} si lavora; il Piano di Progetto dice \emph{chi}, \emph{quando} e \emph{con quale costo} (pianificazione, assegnazione dei ruoli, rischi, consuntivi); il Piano di Qualifica dice \emph{quanto bene} (obiettivi e metriche di qualità, anche sul way of working).
+\end{itemize}
+
+\subsection{Principi}\label{sec:principi}
+Sette principi reggono tutte le norme. Quando una norma sembra arbitraria, la ragione è quasi sempre in uno di questi.
+\begin{enumerate}
+    \item \textbf{Una sola fonte di verità.} In OpenProject stanno pianificazione, stato del lavoro, ore e costi. Nel repository di progetto su GitHub stanno sorgenti, codice, documenti e review. Le issue e le milestone di GitHub sono uno \emph{specchio} di OpenProject, in una sola direzione: in OpenProject si scrive, su GitHub si legge (\adr{0005}, \adr{0025}). Quando la stessa cosa si scrive in due posti, prima o poi i due posti dicono cose diverse, e a quel punto nessuno sa più quale sia giusta.
+    \item \textbf{L'iniziativa è di GitHub.} Il server di OpenProject e di Mosaico non chiama GitHub e non custodisce segreti che scrivano su GitHub. Sono i workflow di GitHub Actions a leggere OpenProject e, per gli stati delle carte, a scriverci con un account dedicato. L'unica eccezione voluta è il bot dei verbali, che porta nel repository i documenti approvati (\adr{0029}, \adr{0030}).
+    \item \textbf{Le regole stanno nei controlli, non nella memoria.} Ogni regola ha, dove possibile, un controllo che la fa rispettare: Mosaico il lunedì, le regole dentro OpenProject, la CI nelle pull request. Una regola che va ricordata a memoria prima o poi si dimentica, di solito il giorno della consegna.
+    \item \textbf{Corroborazione} (dalla Dichiarazione degli impegni). Nessun prodotto, decisione o norma è valido finché non è corroborato, in almeno una di tre forme:
+    \begin{itemize}
+        \item \emph{interna}: un membro diverso dall'autore ne verifica il contenuto;
+        \item \emph{documentale}: ne esiste un'evidenza tracciabile (carta, pull request, commit, verbale);
+        \item \emph{esterna}: per ciò che coinvolge committente o proponente, la controparte lo conferma in modo esplicito.
+    \end{itemize}
+    Ne seguono tre corollari, che valgono per tutto il documento: ciò che non è tracciato non è avvenuto; il silenzio non corrobora; nessuno corrobora il proprio lavoro.
+    \item \textbf{Nel dubbio si blocca o si avvisa} (\adr{0004}). Un dato che manca non assolve mai: un predecessore che non si vede conta come non chiuso, una carta senza assegnatario non sta in nessuna colonna, un esito illeggibile è un errore e mai un successo.
+    \item \textbf{Le ore sono stime, non capacità} (\adr{0009}, indicazione del committente). Ogni carta ha una stima, ma nessuno dichiara una capacità e non c'è un tetto di ore: un tetto diventa presto il punto in cui ci si ferma. Gli squilibri producono avvisi, non blocchi.
+    \item \textbf{Riservatezza.} L'indirizzo di OpenProject non compare mai nel repository pubblico; il consuntivo (ore spese, costi, budget) resta privato; i segreti stanno solo nei segreti del repository o sul server, mai in un file del repository, in un argomento di comando o in un log.
+\end{enumerate}
+
+\subsection{Struttura del documento e classificazione delle norme}
+La struttura segue i processi di ciclo di vita dello standard ISO/IEC 12207 (primari, di supporto, organizzativi): ogni norma si trova nel processo in cui viene applicata. Indipendentemente dalla posizione, ogni norma appartiene a uno dei cinque domini della Tabella~\ref{tab:domini}, che ne dà il prefisso dell'identificativo (es.\ \cod{CRT-02}). Verbali, review e commenti citano le norme con il loro identificativo.
+
+Sotto il testo di ogni norma, la riga \emph{Corroborazione} dice come se ne verifica il rispetto. Quando un controllo automatico la fa rispettare, la riga lo nomina, con il codice del controllo quando c'è (es.\ \cod{stima-mancante}). Le decisioni da cui le norme derivano sono elencate nell'Appendice~\ref{app:adr} e citate come \emph{ADR} seguito dal numero.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Domini delle norme}
+\label{tab:domini}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\textbf{Dominio} & \textbf{Sigla} & \textbf{Che cosa regola} \\
+\midrule
+Organizzative & ORG & Ruoli e rotazione, sprint, carte, composizione del lunedì, riunioni, strumenti, indipendenza della verifica, evoluzione delle norme \\
+Burocratiche & BUR & Ore e consuntivo, ciclo di vita e versioni dei documenti, verbali, esiti della verifica \\
+Convenzionali & CNV & Modelli, nomi e posizione dei file, date, tipografia, Glossario, identificativi \\
+Contesti critici & CRT & Comunicazioni con committente e proponente, incontri esterni, candidature alle revisioni \\
+Interazione con il CVS & CVS & Repository, ramo principale, stack, commit, pull request, specchio, revisioni \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Evoluzione delle norme}
+Le norme crescono con il progetto: un'attività si norma prima di essere avviata, non dopo. Le attività non ancora avviate sono segnalate con "Nuova" o "Pronta", nel momento in cui le attività sono avviate passano a "In Corso", una volta concluse e aperta la PR per le integrazioni sono "In Verifica", una volta accettata l'attività rimane "In Attesa delle ore" fino ad inserimento nel Mosaico, dopodichè risulta come "Chiusa".. La procedura di modifica delle norme è nella Sezione~\ref{sec:miglioramento}.
+
+\subsection{Glossario}
+I termini tecnici, le sigle e i termini ambigui sono definiti nel documento \emph{Glossario}. La prima comparsa di ogni termine in ogni documento è collegata alla sua voce in automatico, alla compilazione (Sezione~\ref{sec:glossario}).
+
+\subsection{Riferimenti}
+\subsubsection*{Riferimenti normativi}
+\begin{itemize}
+    \item Regolamento del Progetto Didattico, Ingegneria del Software, A.A.~2026/2027: \href{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf};
+    \item Capitolato C6, \emph{Sviluppare un Sistema IA di Caching Semantico e Dashboard FinOps}, Var Group S.p.A.: \percorso{docs/capitolati/C6/C6-SCSDF.pdf} nel repository;
+    \item \emph{Dichiarazione degli impegni} v1.2.0: preventivo, impegno orario e principio di corroborazione.
+\end{itemize}
+\subsubsection*{Riferimenti informativi}
+\begin{itemize}
+    \item ISO/IEC/IEEE 12207:2017, \emph{Systems and software engineering -- Software life cycle processes};
+    \item Conventional Commits 1.0.0: \url{https://www.conventionalcommits.org/it/v1.0.0/};
+    \item ISO 8601, \emph{Date and time format};
+    \item spr, pull request impilate: \url{https://github.com/ejoffe/spr};
+    \item documentazione di OpenProject: \url{https://www.openproject.org/docs/};
+    \item \emph{Proposta per il workflow}, guida discorsiva al giro quotidiano, nel wiki di OpenProject.
+\end{itemize}
+
+% ==========================================
+% 2. PROCESSI PRIMARI
+% ==========================================
+\section{Processi primari}
+
+\subsection{Fornitura}
+\subsubsection{Scopo}
+Il processo regola i rapporti del gruppo, come fornitore, con il committente (Prof.\ Tullio Vardanega e Prof.\ Riccardo Cardin) e con la proponente del capitolato C6 (Var Group S.p.A.), e il rispetto degli impegni presi in candidatura: costo preventivato e data di consegna.
+
+\subsubsection{Comunicazioni con committente e proponente}\label{sec:esterne}
+Sono contesti critici le interazioni con l'esterno in cui un errore costa molto e non si rimedia: una comunicazione inviata non si ritira. Controparti e requisiti di comunicazione sono nella Tabella~\ref{tab:controparti}.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Controparti e requisiti di comunicazione}
+\label{tab:controparti}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Controparte} & \textbf{Requisiti} \\
+\midrule
+Committente & Prof.\ Tullio Vardanega (\href{mailto:tullio.vardanega@unipd.it}{tullio.vardanega@unipd.it}); Prof.\ Riccardo Cardin per la prima parte delle revisioni RTB e PB. Candidature per posta elettronica, senza allegati, con lettera di presentazione e puntatore alla sezione del repository. Pattern matching regex nelle email con la seguente stringa: "[Progetto SWE 26/27] Capitolato C6 – Argomento" \\
+\addlinespace
+Proponente & Per C6 (Var Group): medesima stringa, tutti i referenti in copia, riunioni su Microsoft Teams. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{norme}
+\norma[crt:canale]{CRT}{Le comunicazioni scritte verso committente e proponente partono solo dall'indirizzo del gruppo e sono firmate dal Responsabile dello sprint in corso. Nessun membro scrive a titolo personale a nome del gruppo.}{la copia di ogni messaggio inviato resta nella casella del gruppo.}
+\norma[crt:link]{CRT}{I documenti non si allegano mai: si inviano collegamenti. Per una candidatura il collegamento va alla versione marcata dal tag della revisione (Norma~\ref{cvs:revisione}) o al permalink del commit, mai a un ramo, il cui contenuto cambia dopo l'invio. Ogni documento si cita con nome e versione (es.\ \emph{Analisi dei Requisiti} v1.0.0).}{controllo prima dell'invio (Norma~\ref{crt:preinvio}).}
+\norma[crt:preinvio]{CRT}{Ogni comunicazione scritta verso l'esterno nasce come carta in OpenProject, con la bozza del messaggio nella descrizione, e parte solo dopo il controllo di un secondo membro. Il controllo verifica: destinatari e copie; oggetto nel formato richiesto (Tabella~\ref{tab:controparti}); nessun allegato; collegamenti aperti uno per uno da una sessione non autenticata; un solo argomento per messaggio; registro formale.}{commento di approvazione del secondo membro sulla carta; la carta si chiude con data e ora dell'invio.}
+\norma[crt:silenzio]{CRT}{Il silenzio non è assenso. Una carta che dipende da una risposta o da un'approvazione esterna resta in «In attesa esterna» finché la risposta non arriva per iscritto o dai canali ufficiali del corso. Un sollecito è ammesso solo dopo 5 giorni lavorativi, con un solo messaggio del Responsabile preparato secondo la Norma~\ref{crt:preinvio}.}{lo stato della carta; la risposta riportata nella carta.}
+\norma[crt:incontri]{CRT}{Ogni incontro esterno ha un ordine del giorno inviato alla controparte almeno 2 giorni lavorativi prima. Durante l'incontro lo scriba raccoglie le note; il verbale esterno è scritto entro 48 ore, approvato (Sezione~\ref{sec:verbali}) e inviato alla controparte per la firma. Le decisioni di un verbale esterno valgono come corroborate solo quando nel repository c'è il PDF firmato.}{\percorso{Verbale_esterno_NN_firmato.pdf} accanto al PDF compilato.}
+\norma[crt:revisioni]{CRT}{La candidatura a una revisione di avanzamento (RTB, PB, CA) avviene per posta elettronica, senza allegati, con la lettera di presentazione e il puntatore alla sezione del repository con i documenti. Prima dell'invio valgono tutte queste condizioni: ogni documento consegnato è approvato (versione $\geq$ 1.0.0 nel suo registro) e il suo PDF compilato è nel repository; il tag della revisione esiste; registri delle modifiche e Glossario sono coerenti fra i documenti; ogni collegamento è verificato secondo la Norma~\ref{crt:preinvio}.}{lista di controllo completata sulla carta della candidatura e verificata da un membro diverso dal Responsabile.}
+\norma[crt:diario]{CRT}{Il diario di bordo si prepara ogni settimana, come carta di tipo «Diario di bordo», dal modello di presentazione del gruppo in \percorso{assets/pptx_templates/}, con il nome \percorso{Diario_di_Bordo_NN.pptx}. Riporta attività svolte, attività pianificate, difficoltà incontrate e domande aperte. }{bozza verificata da un secondo membro prima della presentazione.}
+\end{norme}
+
+\subsubsection{Ciò che vede il committente: lo specchio su GitHub}\label{sec:specchio}
+Lo specchio copia carte e sprint da OpenProject a GitHub, a senso unico, ogni 15 minuti: il committente vede il lavoro su GitHub a qualunque ora, senza un account da noi (\adr{0014}, \adr{0025}).
+\begin{itemize}
+    \item \textbf{Si copia}: una issue per carta, con titolo, etichette (tipo, ruolo, categoria, documento, stato di lavoro, «rifiutata», priorità se non è quella predefinita), assegnatario e milestone dello sprint; aperta o chiusa come la carta, e chiusa come «non pianificata» se la carta è rifiutata. Nel corpo: una tabella con tipo, ruolo, priorità, stima, avanzamento, inizio, fine, sprint e stato; obiettivo e criteri, artefatti, corroborazione ed evidenza; tutti i legami fra carte, ciascuna come \cod{\#n (OP\#x)}. Una milestone per sprint, con l'obiettivo dello sprint e le date.
+    \item \textbf{Non si copia}: il consuntivo (ore spese, costi, budget), le riunioni, le notizie, le discussioni sulle carte, l'indirizzo di OpenProject.
+\end{itemize}
+\begin{norme}
+\norma[cvs:specchio]{CVS}{Carte e sprint si modificano solo in OpenProject. Le issue e le milestone di GitHub sono la loro copia: in cima a ogni issue c'è scritto di quale carta è copia, e una modifica fatta su GitHub torna com'era al giro successivo. I commenti scritti su GitHub restano.}{workflow «Mosaico, specchio» (Tabella~\ref{tab:workflow}).}
+\norma[cvs:orfane]{CVS}{Le issue orfane (copia di una carta che non c'è più) e i doppioni si segnalano e non si toccano: un'assenza non è una prova, e una lettura a metà non deve chiudere niente.}{il rapporto di ogni giro dello specchio.}
+\end{norme}
+
+\subsubsection{Preventivo, ore e consuntivo}\label{sec:impegni}
+Il preventivo è quello della \emph{Dichiarazione degli impegni} v1.2.0 (Tabella~\ref{tab:preventivo}): 644 ore e 12.740 \texteuro, con un impegno di 92 ore a persona e la stessa esposizione ai ruoli per tutti. Il file \percorso{.github/mosaico/preventivo.yml} ne riporta i numeri, e Mosaico e l'installazione li rileggono da lì.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Preventivo per ruolo (capitolato C6)}
+\label{tab:preventivo}
+\begin{tabular}{@{} l r r r @{}}
+\toprule
+\textbf{Ruolo} & \textbf{Tariffa (\texteuro/h)} & \textbf{Ore} & \textbf{Costo (\texteuro)} \\
+\midrule
+Responsabile & 30 & 50 & 1.500 \\
+Amministratore & 20 & 52 & 1.040 \\
+Analista & 25 & 66 & 1.650 \\
+Progettista & 25 & 141 & 3.525 \\
+Programmatore & 15 & 170 & 2.550 \\
+Verificatore & 15 & 165 & 2.475 \\
+\midrule
+\textbf{Totale} & & \textbf{644} & \textbf{12.740} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{norme}
+\norma[bur:ore]{BUR}{Chi ha lavorato a una carta registra il tempo sulla carta, in OpenProject («Registra tempo»): le ore spese davvero, non la stima, con l'attività del ruolo in cui ha lavorato. Se non sceglie l'attività, vale il Ruolo della carta; chi ha lavorato in un altro ruolo la sceglie a mano. Le ore si registrano a lavoro approvato, prima o subito dopo il merge. Un timer ancora acceso non è un'ora dichiarata.}{regola «Senza ore non si chiude» (Norma~\ref{org:senzaore}); il cruscotto elenca le carte chiuse senza ore e le ore con un ruolo diverso da quello della carta.}
+\norma[bur:costo]{BUR}{Il costo di una registrazione è ore $\times$ tariffa del ruolo dell'attività (Tabella~\ref{tab:preventivo}), non la tariffa della persona. Ogni carta appartiene al budget «Preventivo C6». Importo, tabella e tariffe si cambiano nel preventivo del repository, mai a mano in OpenProject.}{regole 3, 4 e 5 di OpenProject (Tabella~\ref{tab:regoleop}); l'installazione riscrive il budget e controlla che le tariffe coincidano (\adr{0024}).}
+\norma[org:stime]{ORG}{Le ore delle carte sono stime: nessuno dichiara una capacità e non esiste un tetto di ore, né per persona né per sprint. Uno squilibrio di carico si legge e si discute, non si blocca. La ripartizione per persona e per ruolo della Dichiarazione è un obiettivo verso cui tendere, non un vincolo.}{avviso \cod{carico-sbilanciato} del lunedì (\adr{0009}).}
+\norma[bur:consuntivo]{BUR}{Nella riunione «Verifica» si legge il cruscotto del consuntivo. Al termine di ogni sprint il Responsabile aggiorna nel Piano di Progetto il consuntivo di periodo e il preventivo a finire. Uno scostamento superiore al 10\% sul costo di un ruolo si discute e si verbalizza; il costo complessivo accettato all'aggiudicazione non si supera.}{verifica del Piano di Progetto da parte di un membro diverso dal Responsabile.}
+\end{norme}
+
+Il \textbf{cruscotto del consuntivo} (\percorso{/mosaico/consuntivo}, \adr{0015}) mostra: ore e costo per ruolo contro il preventivo, con lo sprint in corso e il preventivo a finire; le ore di ciascuno contro le 92 di impegno, anche per ruolo; le ore per sprint; le carte chiuse senza ore, con chi le deve dichiarare; le ore registrate con un ruolo diverso da quello della carta. È privato: sta dietro il login di OpenProject e non va su GitHub.
+
+\subsection{Sviluppo}
+\subsubsection{Analisi dei requisiti}\label{sec:analisi}
+\begin{norme}
+\norma[cnv:uc]{CNV}{I casi d'uso sono identificati come \cod{UC<n>} e i sotto-casi come \cod{UC<n>.<m>}. I requisiti sono identificati come \cod{R<Tipo><Importanza>-<n>}, dove \cod{Tipo} è \cod{F} (funzionale), \cod{Q} (di qualità), \cod{V} (di vincolo) o \cod{P} (prestazionale) e \cod{Importanza} è \cod{O} (obbligatorio), \cod{D} (desiderabile) o \cod{Z} (opzionale). Un identificativo assegnato non si riusa mai, nemmeno se il requisito è rimosso.}{verifica dell'\emph{Analisi dei Requisiti}.}
+\norma[bur:tracciamento]{BUR}{Ogni requisito riporta la propria fonte: sezione del capitolato, verbale esterno (numero del verbale e codice della riga) o caso d'uso. Il tracciamento garantisce necessità (nessun requisito è superfluo) e sufficienza (ogni bisogno rilevante ha almeno un requisito). L'importanza dei requisiti è concordata con la proponente e registrata in un verbale esterno.}{tabelle di tracciamento verificate a ogni modifica dell'\emph{Analisi dei Requisiti}.}
+\end{norme}
+
+\subsubsection{Progettazione}
+[Prematuro]
+
+\subsubsection{Codifica}
+[Prematuro]
+
+% ==========================================
+% 3. PROCESSI DI SUPPORTO
+% ==========================================
+\section{Processi di supporto}
+
+\subsection{Documentazione}\label{sec:documentazione}
+
+\subsubsection{Documenti e posizione dei file}
+\begin{norme}
+\norma[cnv:documento]{CNV}{Un documento è un file \percorso{.tex} sotto \percorso{docs/tex/} con \cmd{documentclass} fuori dai commenti. Il suo PDF sta in \percorso{docs/compiled/}, allo stesso percorso: \percorso{docs/tex/a/b/X.tex} ha il PDF \percorso{docs/compiled/a/b/X.pdf}. Sorgente e PDF hanno lo stesso nome, senza la versione, che sta nel registro delle modifiche (\adr{0029}).}{controllo «Mosaico, documenti».}
+\norma[cnv:parti]{CNV}{Le parti incluse e le figure di un documento stanno nella sua cartella, o in una sua sottocartella, e non hanno un PDF. Un file fuori dalla cartella non entra nell'impronta del documento, e cambiarlo non rifarebbe il PDF. Non si usano collegamenti simbolici. I loghi stanno in \percorso{assets/images/LogoVerbali/}.}{la compilazione rifiuta i collegamenti simbolici; review della PR.}
+\norma[cvs:compilati]{CVS}{I PDF di \percorso{docs/compiled/} li scrive solo il runner dei documenti: non si scrivono né si correggono a mano. Fanno eccezione i PDF messi a mano (il firmato di un verbale esterno, un documento senza sorgente), che il runner non tocca mai.}{l'elenco \percorso{docs/compiled/.compilati.json} (PDF, sorgente, impronta); review della PR.}
+\norma[cnv:compilatore]{CNV}{I documenti si compilano con pdfLaTeX e con i soli pacchetti di TeX Live latex base, recommended, extra, italiano e cm-super, gli stessi sul server di Mosaico e sul runner. Un pacchetto che non sta lì non si usa.}{controllo «Mosaico, documenti», che nella PR compila tutto ciò che il ramo principale compilerebbe.}
+\end{norme}
+
+Il runner dei documenti (Sezione~\ref{sec:automazioni}) compila un documento quando manca il PDF o quando cambia l'\emph{impronta} dei suoi ingressi: il \percorso{.tex}; i file della sua cartella che non sono altri documenti; i loghi; i termini del Glossario e l'indirizzo del sito. Cambiare un verbale non rifà gli altri; cambiare una parte inclusa rifà il suo documento; cambiare un termine del Glossario rifà tutti i documenti, cambiare solo una definizione no.
+
+\subsubsection{Modelli e struttura dei documenti}
+\begin{norme}
+\norma[cnv:modello]{CNV}{Ogni documento nasce da un modello di \percorso{assets/latex_templates/}: in Mosaico, con «Nuovo da un modello del repo» (\adr{0023}). Il documento conserva frontespizio, registro delle modifiche e indice del modello. Un modello nuovo entra con una PR e arriva in Mosaico con l'installazione successiva; un modello sta sotto i 512 KiB, in UTF-8, e i modelli sono al più 40.}{review della PR; elenco dei modelli in Mosaico.}
+\norma[cnv:registro]{CNV}{Il registro delle modifiche sta subito dopo il frontespizio, fuori dall'indice, ordinato dal più recente. Ogni voce ha versione, data, autore, verificatore e descrizione. La voce di approvazione non ha verificatore: l'approvazione è un atto del Responsabile, non una verifica.}{verifica del documento (Norma~\ref{bur:checklist}).}
+\norma[cnv:uso]{CNV}{Ogni documento dichiara il proprio uso: \emph{Interno} (destinato al gruppo) o \emph{Esterno} (destinato a committente o proponente). I verbali esterni sono sempre a uso esterno.}{verifica del documento.}
+\end{norme}
+
+\subsubsection{Ciclo di vita e versioni}\label{sec:ciclodoc}
+Un documento passa da questi momenti: \emph{bozza} in Mosaico; \emph{approvazione} del Responsabile, che lo chiude; \emph{pubblicazione}, con la PR del bot dei verbali; \emph{verifica}, nella review della PR; \emph{merge}; \emph{compilazione} del PDF da parte del runner.
+
+\begin{norme}
+\norma[bur:redazione]{BUR}{Un documento si redige in Mosaico, come bozza: uno nuovo da un modello del repository, uno già pubblicato con «Modifica dal repo». La bozza di un documento già pubblicato parte dalla versione del ramo principale, che diventa la sua \emph{base}, mai da una copia locale (\adr{0031}).}{la bozza ricorda la base e il suo commit.}
+\norma[bur:versione]{BUR}{La versione ha la forma \cod{X.Y.Z}. La prima stesura è 0.1.0. Ogni salvataggio che cambia il testo fuori dal registro produce la versione successiva: 0.1.1, 0.1.2, \dots; dopo un'approvazione, 1.0.1, 1.0.2, \dots. L'approvazione porta alla versione \cod{i+1.0.0}: da 0.x.y a 1.0.0, da 1.0.x a 2.0.0, e così via.}{Mosaico scrive la voce e aggiorna «Versione» e «Data ultima modifica» (\adr{0022}).}
+\norma[bur:voce]{BUR}{A ogni salvataggio Mosaico aggiunge la voce del registro con versione, data e autore; la descrizione la scrive chi ha fatto la modifica (lo scriba, per un verbale), e scriverla non genera un'altra voce. Una voce senza descrizione non passa la verifica.}{verifica del documento (Norma~\ref{bur:checklist}).}
+\norma[bur:approvazione]{BUR}{Approva un documento il Responsabile dello sprint in corso; un verbale, il Responsabile dello sprint della sua riunione. Mosaico lo legge da OpenProject al momento dell'approvazione, che richiede due clic entro cinque secondi. L'approvazione è la voce \cod{i+1.0.0} «Approvazione per il rilascio.», compila il PDF definitivo e chiude il documento: da quel momento ogni scrittura è rifiutata. Approvare non è verificare: la corroborazione interna di un documento è la review della sua PR (Norma~\ref{org:indipendenza}).}{Mosaico accetta l'approvazione solo dal Responsabile; registro delle modifiche.}
+\norma[bur:pubblicazione]{BUR}{Dopo l'approvazione il bot dei verbali porta il documento nel repository con una PR, uno alla volta per documento (per i verbali, uno alla volta per tipo). Se nel ramo principale il file è uguale alla base, il bot lo sostituisce; se è cambiato, unisce le due modifiche e, davanti a un conflitto, si ferma e lo dice; se è già uguale al nuovo, non apre nessuna PR. «Invia di nuovo» si usa solo dopo un errore del bot, e solo dal Responsabile.}{lo stato della pubblicazione in Mosaico (in coda, fatto con il link della PR, errore); la PR.}
+\norma[bur:bozze]{BUR}{Si elimina solo una bozza, mai un documento approvato, che può essere già nel repository. Può eliminarla chi l'ha creata o il Responsabile, con un secondo clic di conferma; la bozza va nel cestino, che entra nella copia di ogni sera.}{Mosaico rifiuta l'eliminazione negli altri casi.}
+\end{norme}
+Due persone possono salvare la stessa bozza: chi salva dichiara la versione su cui ha lavorato e, se intanto un altro ha salvato, la bozza si ricarica e il suo testo resta in un riquadro, da riportare. Niente si perde in silenzio.
+
+\subsubsection{Verbali}\label{sec:verbali}
+\begin{norme}
+\norma[bur:verbale]{BUR}{Ogni riunione ha un verbale, interno o esterno, scritto dallo scriba in Mosaico nella bozza della riunione di oggi (una bozza al giorno) entro 24 ore se interno, entro 48 ore se esterno, e poi approvato dal Responsabile. La struttura viene dal modello: informazioni generali (data, orari, scriba, presenti e assenti, Responsabile, versione, data dell'ultima modifica); registro delle modifiche; ordine del giorno; resoconto, con una sottosezione per punto; decisioni e azioni; prossima riunione.}{review della PR del bot da parte di un membro diverso dallo scriba.}
+\norma[cnv:verbale]{CNV}{I sorgenti dei verbali sono \percorso{docs/tex/verbali/verbali_interni/Verbale_interno_NN.tex} e \percorso{docs/tex/verbali/verbali_esterni/Verbale_esterno_NN.tex}, con \cod{NN} di almeno due cifre; i PDF stanno allo stesso percorso sotto \percorso{docs/compiled/}; il PDF firmato di un verbale esterno, \percorso{Verbale_esterno_NN_firmato.pdf}, sta accanto e lo mette una persona. Per ogni tipo i numeri vanno da 1 al massimo senza buchi, contando insieme sorgenti, PDF e firmati.}{controllo «Mosaico, documenti»: nomi e numeri.}
+\norma[cnv:verbaletex]{CNV}{Il \percorso{.tex} di un verbale dice il suo tipo e il suo numero come il suo nome: nell'intestazione «Verbale Interno N.~NN» e nel titolo «Riunione Interna \#NN» (per gli esterni «Verbale Esterno N.» e «Riunione Esterna \#»). Ha la riga \cod{\% Titolo: \dots} con il titolo per il sito, che l'approvazione esige.}{controllo «Mosaico, documenti»: coerenza e titolo.}
+\norma[bur:numero]{BUR}{Il numero di un verbale lo assegna la pubblicazione: in Mosaico è provvisorio; il bot prende l'ultimo numero del ramo principale per quel tipo, aggiunge uno e riscrive intestazione e titolo. Finché la PR di un verbale è aperta, il successivo dello stesso tipo aspetta.}{la PR del bot; controllo dei numeri senza buchi.}
+\norma[bur:decisioni]{BUR}{Decisioni e azioni stanno nelle loro tabelle del verbale. Ogni riga ha un codice: un'azione il numero della sua carta (\cod{OP\#n}), una deroga le carte che nomina; la composizione dello sprint e il Responsabile, che non sono carte, hanno «---». Un'azione decisa in riunione che non ha ancora una carta la riceve entro 24 ore (\adr{0030}).}{collegamento fra la riga del verbale e la carta.}
+\norma[bur:righemosaico]{BUR}{Le righe che scrive la Conferma (decisioni: composizione, Responsabile, deroghe; azioni: le carte dello sprint, con assegnatario e fine dello sprint come scadenza) sono marcate \cod{\% mosaico} e stanno dopo quelle scritte a mano. Non si modificano a mano: una Conferma successiva le sostituisce e lascia com'erano quelle scritte a mano.}{la Conferma rileva e riscrive le proprie righe.}
+\norma[cvs:readme]{CVS}{Dopo il merge di un verbale il runner aggiorna la tabella del README, dal più recente, e l'elenco \cod{verbali} di \percorso{assets/js/content.js}, dal più vecchio. Una voce nuova la scrive intera dal \percorso{.tex} (data, titolo dalla riga \cod{\% Titolo:}, versione, redattore dallo scriba, verificatore dalla voce 1.0.0 del registro, collegamento al file o al firmato, se c'è); in una voce esistente corregge solo il collegamento. Queste voci non si scrivono a mano.}{il commit del runner (Tabella~\ref{tab:commitauto}).}
+\end{norme}
+
+Il controllo «Mosaico, documenti» verifica su ogni PR, e nella coda di merge: i \textbf{nomi} (ogni \percorso{.tex} sotto \percorso{docs/tex/verbali/} è un verbale nella cartella del suo tipo; il firmato esiste solo per gli esterni, e solo come PDF); i \textbf{numeri} (senza buchi, sullo stato del repository dopo la modifica: anche un buco già presente nel ramo principale rende rossa la PR); la \textbf{coerenza} fra nome e contenuto; la riga \cod{\% Titolo:}; la \textbf{compilazione} di tutto ciò che il ramo principale compilerebbe.
+
+\subsubsection{Glossario}\label{sec:glossario}
+\begin{norme}
+\norma[cnv:voce]{CNV}{Il Glossario è \percorso{docs/tex/glossario/Glossario.tex}, e ogni sua voce si scrive con il comando \cod{\textbackslash VoceGlossario}\allowbreak\cod{\{id\}\{nome\}\{definizione\}}, in ordine alfabetico sotto la sua lettera. L'\cod{id} (lettere minuscole ASCII, cifre e trattini) crea l'ancora \cod{gls-<id>} ed è l'indirizzo della voce nei PDF già pubblicati: una volta pubblicato non si cambia, anche se cambiano nome o definizione.}{un \cod{id} ripetuto è un errore di compilazione.}
+\norma[cnv:termini]{CNV}{Un termine tecnico, una sigla o un termine ambiguo usato in un documento ha la sua voce nel Glossario. Il termine di una voce è il suo nome senza la parte fra parentesi.}{verifica del documento (Norma~\ref{bur:checklist}).}
+\norma[cnv:collegamenti]{CNV}{I collegamenti al Glossario non si scrivono a mano: li aggiunge la compilazione, il runner per i PDF del repository e Mosaico per l'anteprima (\adr{0031}). Si collega solo la prima comparsa di ogni termine in ogni documento; solo nel testo, non nei titoli, nella copertina, nel registro, nei comandi che non formattano testo, nella matematica e nel verbatim; solo nei documenti che usano hyperref; mai il Glossario su se stesso. Si collegano parole intere; una sigla (un termine senza minuscole) solo scritta con le stesse maiuscole; fra due termini sovrapposti vince il più lungo; due voci con lo stesso termine non si collegano.}{la compilazione.}
+\norma[cnv:indirizzo]{CNV}{Il collegamento punta al PDF del Glossario sul sito GitHub Pages del gruppo, all'ancora della voce: \url{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf\#nameddest=gls-<id>}. È un indirizzo assoluto: funziona nell'anteprima di Mosaico, sul sito e in un PDF scaricato.}{apertura di un collegamento a campione nella verifica del documento.}
+\end{norme}
+Il Glossario si modifica come ogni altro documento: «Modifica dal repo», approvazione del Responsabile, PR del bot. Dopo il merge il runner ricompila il Glossario e, se sono cambiati dei termini, tutti i documenti.
+
+\subsubsection{Convenzioni redazionali}
+\begin{norme}
+\norma[cnv:date]{CNV}{Le date si scrivono in formato ISO 8601, \cod{AAAA-MM-GG}, in documenti, registri, carte e commit. Fa eccezione la data dell'ultima modifica nelle informazioni generali dei verbali, scritta per esteso (es.\ 22 novembre 2026).}{verifica del documento.}
+\norma[cnv:tipografia]{CNV}{I termini in lingua straniera che non sono nel Glossario vanno in corsivo; codice, comandi, percorsi e identificativi in carattere a spaziatura fissa; le citazioni fra virgolette basse «». Nelle liste ogni voce comincia con la minuscola e finisce con «;», tranne l'ultima, che finisce con «.».}{verifica del documento.}
+\norma[cnv:ambiguita]{CNV}{Le espressioni vaghe («ecc.», «a breve», «circa» senza un valore) non si usano nei documenti a uso esterno.}{verifica del documento.}
+\end{norme}
+
+\subsection{Gestione della configurazione}\label{sec:configurazione}
+
+\subsubsection{Repository}
+\begin{norme}
+\norma[cvs:repo]{CVS}{Il repository \cod{BitCrusher-Team/Progetto\_SWE\_26-27}, pubblico, è l'unica fonte di verità per sorgenti, codice e documenti: ciò che non è nel repository non è un prodotto del progetto. Pianificazione, stato del lavoro, ore e costi stanno invece in OpenProject (Sezione~\ref{sec:principi}).}{presenza nel repository.}
+\norma[cvs:struttura]{CVS}{La struttura del repository è quella della Tabella~\ref{tab:struttura}. Una cartella nuova al primo livello di \percorso{docs/tex/} o di \percorso{assets/} si aggiunge con una modifica di queste norme.}{review della PR.}
+\end{norme}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Struttura del repository}
+\label{tab:struttura}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Percorso} & \textbf{Contenuto} \\
+\midrule
+\percorso{docs/tex/} & Sorgenti dei documenti, una cartella per documento o per famiglia (\percorso{verbali/}, \percorso{glossario/}, \dots) \\
+\percorso{docs/compiled/} & PDF compilati dal runner, allo stesso percorso dei sorgenti, e PDF messi a mano \\
+\percorso{docs/capitolati/} & Capitolati e loro presentazioni \\
+\percorso{assets/latex_templates/} & Modelli dei documenti \\
+\percorso{assets/pptx_templates/} & Modello di presentazione (diario di bordo) \\
+\percorso{assets/images/LogoVerbali/} & Loghi dei documenti \\
+\percorso{index.html}, \percorso{assets/js/}, \percorso{assets/css/} & Sito del gruppo su GitHub Pages; \percorso{assets/js/content.js} elenca verbali e documenti \\
+\percorso{.github/workflows/} & CI del gruppo e workflow di Mosaico \\
+\percorso{.github/mosaico/} & \percorso{membri.yml} (membri del gruppo), \percorso{preventivo.yml} (preventivo) \\
+\percorso{.github/CODEOWNERS} & Revisori obbligatori \\
+\percorso{cartone.yml} & Il cartone degli artefatti (Sezione~\ref{sec:artefatti}) \\
+\percorso{.gitconfig}, \percorso{.spr.yml} & Alias degli stack e configurazione di spr \\
+\percorso{src/}, \percorso{tests/} & Codice e test del prodotto \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Il ramo principale}
+\begin{norme}
+\norma[cvs:main]{CVS}{Il ramo \cod{main} è protetto da un ruleset: nessun push diretto. Ogni modifica entra con una pull request, dalla coda di merge o con l'auto-merge, solo con i controlli richiesti verdi (Tabella~\ref{tab:controllipr}) e con l'approvazione di un membro diverso dall'autore, secondo \percorso{.github/CODEOWNERS}. L'unica identità che scrive sul ramo principale senza PR è quella del runner dei documenti, per il suo commit dei PDF.}{imposto dal ruleset di GitHub.}
+\norma[cvs:identita]{CVS}{Le scritture automatiche nel repository (commit del runner, PR del bot dei verbali) avvengono con l'identità di servizio del gruppo, una GitHub App, mai con l'account personale di un membro.}{l'autore dei commit e delle PR automatiche.}
+\end{norme}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Controlli richiesti sulle pull request}
+\label{tab:controllipr}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\textbf{Controllo} & \textbf{Workflow} & \textbf{Che cosa verifica} \\
+\midrule
+CI del gruppo & \percorso{ci.yml} & Il titolo e le altre regole del gruppo (Norma~\ref{cvs:titolo}) \\
+«Mosaico» & \percorso{mosaico-perimetro.yml} & Il perimetro: i file della PR contro gli artefatti delle carte citate (Sezione~\ref{sec:perimetro}) \\
+«Mosaico, documenti» & \percorso{mosaico-documenti.yml} & Le regole dei verbali e la compilazione dei documenti (Sezione~\ref{sec:verbali}) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Stack, commit e pull request}
+\begin{norme}
+\norma[cvs:stack]{CVS}{Si lavora con spr: uno stack per lavoro. \cod{git newstack <nome>} crea \cod{stack/<nome>} da \cod{origin/main} aggiornato; non si fanno mai commit sul \cod{main} locale. Gli alias si attivano una volta per clone, con \cod{git config -{}-local include.path ../.gitconfig}. A stack finito, \cod{git delstack} riallinea il \cod{main} locale ed elimina il ramo.}{review della PR; il ruleset rifiuta i push su \cod{main}.}
+\norma[cvs:commit]{CVS}{Un commit per PR: spr apre una PR per ogni commit, e il titolo del commit diventa il titolo della PR. \cod{git spr update} apre o aggiorna le PR dello stack; \cod{git spr merge} le fonde con squash.}{la storia del ramo principale: un commit per PR.}
+\norma[cvs:titolo]{CVS}{Il titolo ha la forma \cod{tipo(scope): descrizione.}, con il punto finale. \cod{tipo} è uno fra \cod{feat}, \cod{fix}, \cod{docs}, \cod{style}, \cod{refactor}, \cod{perf}, \cod{test}, \cod{build}, \cod{ci}, \cod{chore} e \cod{revert}; la descrizione non comincia con una maiuscola; più segmenti si separano con \cod{;~}.}{CI del gruppo.}
+\norma[cvs:carta]{CVS}{Nel \emph{corpo} del commit va la carta: \cod{Refs: OP\#n} se la PR fa una parte del lavoro, \cod{Closes OP\#n} se lo chiude. Con più PR per la stessa carta, \cod{Refs} va in tutte e \cod{Closes} solo nell'ultima. spr porta il corpo nella descrizione della PR, ed è lì che OpenProject e i workflow cercano \cod{OP\#}.}{il perimetro rifiuta una PR che non cita nessuna carta (Norma~\ref{cvs:perimetro}).}
+\end{norme}
+Un commit, per esempio:
+\begin{verbatim}
+docs(glossario): aggiunge i termini del caching semantico.
+
+Refs: OP#123
+\end{verbatim}
+
+\subsubsection{Il perimetro delle pull request}\label{sec:perimetro}
+\begin{norme}
+\norma[cvs:perimetro]{CVS}{I file che una PR cambia devono essere coperti dagli artefatti delle carte che cita (\adr{0018}). Un file è \emph{coperto} se una carta citata dichiara quel file, una sua parte \cod{\#} o una cartella che lo contiene; una radice \cod{@} non copre nessun file del repository; una promessa copre il file che la PR crea; un PDF di \percorso{docs/compiled/} è coperto da chi dichiara il suo sorgente in \percorso{docs/tex/}, o una sua parte. Per un file spostato conta anche il nome vecchio.}{controllo «Mosaico», richiesto sul ramo principale.}
+\norma[cvs:scoperto]{CVS}{Un file \emph{scoperto} fa fallire il controllo, e le uscite sono due: la PR tocca troppo, e quel file va in un'altra PR; oppure la carta dichiara troppo poco, e si aggiunge l'artefatto alla carta. Se lo dichiara già una carta di un'altra colonna è un arco tagliato: prima ci si parla. Un file \emph{conteso} (coperto, ma dichiarato anche da una carta di un'altra colonna nello sprint in corso) dà solo un avviso.}{annotazione del controllo «Mosaico» sul file.}
+\norma[cvs:prbot]{CVS}{Le PR del bot dei verbali, che non nascono da una carta:  il bot cita una carta dello sprint relativa all'assegnatario responsabile della redazione (scriba) e verificatore.}{corpo del commit, con il Co-authored-by e Closes OP\#N}
+\end{norme}
+
+\subsubsection{Commit automatici}
+\begin{table}[htbp]
+\centering
+\small
+\caption{Commit automatici}
+\label{tab:commitauto}
+\begin{tabularx}{\textwidth}{@{} l X l @{}}
+\toprule
+\textbf{Chi} & \textbf{Messaggio} & \textbf{Dove} \\
+\midrule
+Runner dei documenti & \cod{docs(compiled): i PDF dei documenti, il README e il sito.} & ramo principale, o il ramo scelto \\
+Bot, verbale nuovo & \cod{docs(verbali): verbale interno NN.} oppure \cod{docs(verbali): verbale esterno NN.} & PR con spr \\
+Bot, documento ripreso & \cod{docs(<cartella>): <nome> <versione>.} (es.\ \cod{docs(glossario): glossario 2.0.0.}) & PR con spr \\
+\bottomrule
+\end{tabularx}
+\end{table}
+Il commit del bot porta nel corpo chi ha approvato il documento e quando. Il commit del runner non fa ripartire il runner. Per provare un ramo prima del merge, «Run workflow» su «Mosaico, documenti» fa sul ramo scelto ciò che farebbe sul principale: compila, aggiorna e fa il commit su quel ramo.
+
+\subsubsection{Revisioni}
+\begin{norme}
+\norma[cvs:revisione]{CVS}{La consegna per una revisione (RTB, PB, CA) si marca con il tag \cod{<revisione>-<n>} (es.\ \cod{RTB-1}) sul commit del ramo principale che contiene i PDF consegnati, dopo il commit del runner. Un tag non si sposta e non si cancella: una nuova candidatura alla stessa revisione prende il numero successivo.}{il tag è immutabile per ruleset.}
+\end{norme}
+
+\subsection{Verifica}\label{sec:verifica}
+\begin{norme}
+\norma[org:indipendenza]{ORG}{Nessuno verifica o approva un prodotto di cui è autore, in tutto o in parte, nemmeno se lo ha prodotto in uno sprint precedente con un altro ruolo. La PR del bot di un documento la approva un membro diverso dall'autore del documento (lo scriba, per un verbale). L'approvazione del Responsabile in Mosaico è un atto di rilascio, non una verifica.}{la review della PR è di un membro diverso dall'autore; CODEOWNERS.}
+\norma[bur:esito]{BUR}{L'esito della verifica è la review della PR su GitHub: \emph{approva} oppure \emph{richiede modifiche}. Ogni rilievo cita l'identificativo della norma violata, se esiste.}{le review della PR.}
+\norma[bur:checklist]{BUR}{La verifica di un documento controlla almeno: ortografia e grammatica; conformità alle norme convenzionali; voci del Glossario per i termini usati; coerenza con gli altri documenti; collegamenti funzionanti; voci del registro descritte e coerenti con le modifiche.}{la review riporta la lista di controllo compilata.}
+\norma[org:fatto]{ORG}{Una carta è fatta quando esiste la sua \emph{evidenza attesa}, scritta sulla carta prima di cominciare insieme alla forma di corroborazione. La definizione di «fatto» non si riscrive a lavoro finito.}{campi Corroborazione ed Evidenza attesa, bloccanti per entrare nello sprint (\cod{corroborazione-mancante}, \cod{evidenza-mancante}).}
+\end{norme}
+Verifica del codice e test del prodotto: [Prematuro]. Obiettivi e metriche di qualità sono nel Piano di Qualifica.
+
+\subsubsection{Verifica degli strumenti del processo}
+Gli strumenti del processo (Mosaico, le regole dentro OpenProject, l'installazione) si verificano come il prodotto.
+\begin{norme}
+\norma[org:strumentitest]{ORG}{Ogni modifica agli strumenti del processo passa: i test automatici, con una copertura di almeno il 90\% sul nucleo e test basati su proprietà; l'analisi statica (mypy rigoroso sul nucleo, sul client di OpenProject e sul doctor; ruff per stile e formattazione; Python 3.12 come bersaglio, \adr{0001}).}{la CI del repository «strumenti».}
+\norma[org:mutazioni]{ORG}{Ogni prova nuova si falsifica con una mutazione, cioè un errore voluto nel codice, e deve diventare rossa. Una mutazione conta come uccisa solo se fallisce una prova, non se il codice non compila o la raccolta va in errore; si guarda quale prova la uccide; la base è verde prima e dopo.}{il registro delle mutazioni di ogni tappa.}
+\norma[org:finti]{ORG}{I servizi finti usati nelle prove (OpenProject, GitHub, spr) imitano comportamenti misurati sul servizio vero, e la logica del lunedì nel browser si prova contro quella del server su ingressi a caso. Un finto che si scopre diverso dal vero si corregge prima della prova che lo usa.}{prove di parità fra pagina e server; l'installazione rifà le sue prove dal vivo e torna indietro se una non passa.}
+\end{norme}
+
+\subsection{Gestione della qualità}
+[Prematuro ma con dei dati]
+
+Le misure di processo già disponibili, per il Piano di Qualifica, sono nella Tabella~\ref{tab:misure}.
+\begin{table}[htbp]
+\centering
+\small
+\caption{Misure di processo disponibili}
+\label{tab:misure}
+\begin{tabularx}{\textwidth}{@{} X l @{}}
+\toprule
+\textbf{Misura} & \textbf{Dove} \\
+\midrule
+Ore e costo per ruolo, contro il preventivo; preventivo a finire & cruscotto; modulo Budget \\
+Ore per persona contro le 92 di impegno, anche per ruolo & cruscotto \\
+Ore per sprint & cruscotto \\
+Carte chiuse senza ore & cruscotto \\
+Ore con un ruolo diverso da quello della carta & cruscotto \\
+Carico per colonna (somma delle stime) e scostamento dalla media & composizione del lunedì \\
+Avanzamento e stato di ogni carta & OpenProject; issue dello specchio \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Risoluzione dei problemi}
+\begin{norme}
+\norma[org:segnalazione]{ORG}{Un problema di un documento, di uno strumento o del processo si apre come carta di tipo «Segnalazione», con artefatti, corroborazione ed evidenza attesa come ogni carta.}{la carta.}
+\end{norme}
+Gestione delle anomalie del prodotto: [Prematuro].
+
+\begin{xltabular}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.36\textwidth} X @{}}
+\caption{Problemi ricorrenti e che cosa fare}\label{tab:problemi}\\
+\toprule
+\textbf{Problema} & \textbf{Che cosa fare} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Problema} & \textbf{Che cosa fare} \\
+\midrule
+\endhead
+Mosaico non lascia confermare & C'è almeno un bloccante: ognuno dice la carta e il motivo (Tabella~\ref{tab:bloccanti}). \\
+La CI dice «file scoperto» & O la PR tocca troppo, o la carta dichiara troppo poco (Norma~\ref{cvs:scoperto}). \\
+Ore dimenticate & Si registrano sulla carta anche dopo; il cruscotto ricorda quali mancano. \\
+La carta non è nel calendario & Una carta senza date non va in nessun calendario; e Google rilegge il feed con i suoi tempi. \\
+Due persone sulla stessa parte del Glossario & È un arco tagliato vero: o una precede l'altra, o una delle due cede la parte. Un \cod{\#} diverso funziona solo se le parti sono davvero diverse. \\
+Una correzione fatta su GitHub è sparita & Lo specchio va in una sola direzione: si corregge in OpenProject. \\
+Un testo lungo scritto nel wiki è sparito & I testi lunghi si scrivono fuori dall'editor del browser e si incollano; dopo il salvataggio si controlla che ci siano. \\
+\bottomrule
+\end{xltabular}
+
+% ==========================================
+% 4. PROCESSI ORGANIZZATIVI
+% ==========================================
+\section{Processi organizzativi}\label{sec:organizzativi}
+
+\subsection{Gestione dei processi}
+
+\subsubsection{Ruoli}
+\begin{table}[htbp]
+\centering
+\small
+\caption{Ruoli di progetto}
+\label{tab:ruoli}
+\begin{tabularx}{\textwidth}{@{} l X r @{}}
+\toprule
+\textbf{Ruolo} & \textbf{Responsabilità} & \textbf{\texteuro/h} \\
+\midrule
+Responsabile & Coordina il gruppo, pianifica, tiene i rapporti con l'esterno, approva il rilascio dei documenti & 30 \\
+Amministratore & Assicura l'efficienza dei processi e degli strumenti che li sostengono; gestisce infrastruttura e configurazione & 20 \\
+Analista & Svolge l'analisi dei requisiti & 25 \\
+Progettista & Svolge la progettazione & 25 \\
+Programmatore & Svolge la codifica & 15 \\
+Verificatore & Svolge la verifica & 15 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Oltre ai ruoli, alcune responsabilità dipendono da ciò che si sta facendo (Tabella~\ref{tab:chi}).
+\begin{table}[htbp]
+\centering
+\small
+\caption{Chi fa che cosa}
+\label{tab:chi}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.27\textwidth} X l @{}}
+\toprule
+\textbf{Chi} & \textbf{Che cosa} & \textbf{Dove} \\
+\midrule
+Ogni membro & Prepara la propria posta prima del lunedì; lavora alle carte, apre le PR citandole, registra le ore & OpenProject, GitHub \\
+Chi conduce la riunione «Mosaico» & Compone lo sprint e preme Conferma: ogni scrittura in OpenProject porta il suo nome & Mosaico \\
+Lo scriba & Redige il verbale e descrive ogni voce del registro delle modifiche & Mosaico \\
+Il Responsabile dello sprint & Approva i verbali delle riunioni del suo sprint e i documenti; rimanda al bot un lavoro finito in errore; può eliminare una bozza & Mosaico \\
+I revisori & Approvano le PR degli altri, mai le proprie & GitHub \\
+L'Amministratore & Installa e aggiorna Mosaico e la configurazione di OpenProject; gestisce segreti, account di servizio e copie & server, OpenProject \\
+Il gruppo, con decisione verbalizzata & Radici \cod{@} ammesse, punti caldi, deroghe, controlli richiesti sul ramo principale, modifiche al processo & riunione, verbale \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Membri e posta}
+\begin{norme}
+\norma[org:membri]{ORG}{I membri del gruppo sono sette, elencati in \percorso{.github/mosaico/membri.yml} con nome, identificativo in OpenProject e username GitHub. Solo un membro può essere assegnatario di una carta dello sprint.}{bloccante \cod{assegnatario-non-membro}; \cod{mosaico doctor}.}
+\norma[org:posta]{ORG}{Ogni membro ha in OpenProject un backlog bucket con il proprio nome: la sua \emph{posta}, cioè le carte assegnate a lui e non ancora in uno sprint (\adr{0016}). Una carta sta in un bucket oppure in uno sprint, mai in tutti e due. I bucket non si rinominano: un bucket rinominato non è più di nessuno.}{vincolo di OpenProject; \cod{mosaico doctor}.}
+\end{norme}
+
+\subsubsection{Rotazione dei ruoli}\label{sec:rotazione}
+Le norme che seguono attuano i vincoli del regolamento: ogni membro ricopre tutti i ruoli, uno alla volta, e la rotazione garantisce una verifica indipendente. L'assegnazione concreta, sprint per sprint, sta nei verbali delle riunioni «Mosaico» e nel Piano di Progetto. I criteri sono volutamente pochi: la rotazione si decide il lunedì, sulle carte.
+\begin{norme}
+\norma[org:unruolo]{ORG}{Un ruolo per persona per sprint. Nella composizione del lunedì una colonna è una persona in uno sprint e ha un solo ruolo; una carta che entra in una colonna ne prende il ruolo (\adr{0017}). Nella posta il ruolo di una carta è facoltativo, e cambiarle persona non le cambia il ruolo.}{bloccanti \cod{ruoli-misti} e \cod{ruolo-diverso-dal-bucket}.}
+\norma[org:responsabile]{ORG}{In ogni sprint c'è un Responsabile, uno solo: la persona della colonna con il ruolo Responsabile, detta Responsabile dello sprint. La Conferma lo scrive nel campo Responsabile di tutte le carte dello sprint.}{bloccante \cod{responsabili-multipli}; avviso \cod{responsabile-mancante}.}
+\norma[org:copertura]{ORG}{Nel corso del progetto ogni membro ricopre tutti e sei i ruoli, con un'esposizione ai ruoli simile per tutti. I ruoli ruotano da uno sprint all'altro: di norma nessuno ricopre lo stesso ruolo in due sprint consecutivi, e nessuno torna Responsabile prima che tutti lo siano stati una volta. Un'eccezione si motiva nel verbale della riunione «Mosaico».}{il cruscotto (ore di ciascuno per ruolo); i verbali delle riunioni «Mosaico».}
+\norma[org:fase]{ORG}{In ogni sprint c'è almeno un Verificatore. Con sette membri e sei ruoli almeno un ruolo è ricoperto da più persone: di preferenza quello che la fase chiede di più (Analista verso la RTB; Progettista e Programmatore verso la PB; Verificatore a ridosso di ogni revisione).}{verbale della riunione «Mosaico».}
+\norma[org:consegne]{ORG}{Chi lascia un ruolo con carte aperte scrive su ciascuna, prima della riunione «Mosaico», una nota di passaggio: stato del lavoro, problemi aperti, decisioni in sospeso.}{i commenti sulle carte che passano di mano.}
+\norma[org:indisponibilita]{ORG}{Un'indisponibilità prevista (esami, impegni personali) si dice alla riunione «Mosaico»; una imprevista, appena è nota. Le carte si riassegnano alla Conferma successiva, e il verbale lo registra.}{verbale della riunione «Mosaico».}
+\end{norme}
+
+\subsubsection{Sprint e riunioni ricorrenti}
+\begin{norme}
+\norma[org:sprint]{ORG}{Il lavoro è organizzato in sprint di due settimane (dieci giorni lavorativi), chiamati S1, S2, \dots, S11; S1 è cominciato il 2026-11-16. Sono gli sprint nativi di OpenProject. Una carta entra in uno sprint, o ne esce, solo con una Conferma: il contenuto dello sprint cambia il lunedì.}{la Conferma è l'unica a scrivere lo sprint delle carte.}
+\norma[org:ricorrenti]{ORG}{Ogni settimana si tengono due riunioni, nel modulo Riunioni di OpenProject, ciascuna con il suo verbale: il lunedì «Mosaico», per comporre lo sprint e confermarlo (Sezione~\ref{sec:lunedi}); il giovedì «Verifica», per l'avanzamento: stato delle carte e cruscotto del consuntivo. Il giovedì non si ridistribuisce il lavoro: lo si fa il lunedì.}{i verbali.}
+\norma[org:obiettivo]{ORG}{L'obiettivo dello sprint si scrive nella riunione «Mosaico» del primo lunedì dello sprint, come punto all'ordine del giorno intitolato esattamente «Obiettivo dello sprint»: il testo è la descrizione del punto, o il suo esito (\adr{0006}). Un obiettivo non si ricava da un'altra fonte.}{lo specchio lo porta nella milestone dello sprint; senza il punto, la milestone resta senza descrizione.}
+\end{norme}
+
+\subsubsection{Le carte}\label{sec:carte}
+Una \emph{carta} è un work package di OpenProject. I tipi sono nella Tabella~\ref{tab:tipi}, i campi nella Tabella~\ref{tab:campi}, gli stati nella Tabella~\ref{tab:stati}.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Tipi di carta}
+\label{tab:tipi}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Tipo} & \textbf{Uso} \\
+\midrule
+Attività & Un lavoro: un documento, l'infrastruttura, uno studio. Richiede la Categoria \\
+Interfaccia & Fissa prima il punto d'incontro di due lavori che procedono in parallelo (Sezione~\ref{sec:archi}) \\
+Segnalazione & Un problema da correggere \\
+Diario di bordo & Il diario di bordo della settimana \\
+Milestone & Un traguardo: niente stima, niente ore \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{xltabular}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.2\textwidth} >{\raggedright\arraybackslash}p{0.2\textwidth} c X @{}}
+\caption{Campi della carta}\label{tab:campi}\\
+\toprule
+\textbf{Campo} & \textbf{Natura} & \textbf{Sprint} & \textbf{Che cosa ci va} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Campo} & \textbf{Natura} & \textbf{Sprint} & \textbf{Che cosa ci va} \\
+\midrule
+\endhead
+Titolo & nativo & sì & Che cosa si fa, in una riga. È il titolo della issue dello specchio \\
+Assegnatario & nativo & sì & Chi la fa: dà la colonna \\
+Stima & nativo, ore & sì & Le ore previste: carico della colonna e date dello sprint \\
+Ruolo & lista dei sei ruoli & sì & Nello sprint lo dà la colonna; nella posta è facoltativo \\
+Artefatti & testo, un percorso per riga & sì & Ciò che la carta tocca (Sezione~\ref{sec:artefatti}) \\
+Corroborazione & Interna, Documentale, Esterna (anche più d'una) & sì & Come sapremo che il lavoro è fatto bene \\
+Evidenza attesa & testo & sì & Che cosa dimostrerà che è fatta («PR approvata», «verbale firmato dalla proponente») \\
+Categoria & lista, solo Attività & sì & Redazione documento, Modifica documento, Infrastruttura e automazione, Studio e formazione, Altro \\
+Documento & lista, solo Attività & no & Il documento su cui si lavora, o «Nessuno» \\
+Priorità & nativa & sempre & Basso, Normale (predefinita), Alto, Immediata. Ordina la posta, non genera vincoli (\adr{0013}) \\
+Sprint, Responsabile & nativi & --- & Li scrive la Conferma \\
+Inizio, fine, durata & nativi & --- & Dalla Conferma e dalla regola della chiusura anticipata \\
+Budget & nativo & --- & Assegnato da solo: «Preventivo C6» \\
+\bottomrule
+\end{xltabular}
+
+\begin{xltabular}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.2\textwidth} c X >{\raggedright\arraybackslash}p{0.25\textwidth} @{}}
+\caption{Stati della carta}\label{tab:stati}\\
+\toprule
+\textbf{Stato} & \textbf{Chiuso} & \textbf{Significato} & \textbf{Chi lo imposta} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Stato} & \textbf{Chiuso} & \textbf{Significato} & \textbf{Chi lo imposta} \\
+\midrule
+\endhead
+Nuova & no & Appena creata & chi la crea \\
+Pronta & no & Ha tutti i campi che servono per entrare in uno sprint & chi la cura \\
+In corso & no & Qualcuno ci lavora & chi lavora \\
+In verifica & no & C'è una PR aperta che la cita & automatico, o chi lavora \\
+In attesa esterna & no & Aspetta qualcuno fuori dal gruppo & chi lavora \\
+In attesa delle ore & no & Il lavoro è nel ramo principale, mancano le ore. Per Mosaico è lavoro finito & automatico, al merge \\
+Chiusa & sì & Fatta, con le ore registrate & automatico alla registrazione delle ore, o a mano con le ore \\
+Rifiutata & sì & Non si fa più & a mano, o la Conferma per le carte eliminate \\
+\bottomrule
+\end{xltabular}
+
+\begin{norme}
+\norma[org:cartaprima]{ORG}{Ogni lavoro esiste come carta in OpenProject prima di cominciare. Nella posta una carta può restare incompleta; per entrare in uno sprint servono titolo, assegnatario, stima, ruolo, artefatti, corroborazione, evidenza attesa e, per le Attività, la categoria.}{bloccanti \cod{stima-mancante}, \cod{assegnatario-mancante}, \cod{ruolo-mancante}, \cod{artefatti-mancanti}, \cod{corroborazione-mancante}, \cod{evidenza-mancante}, \cod{categoria-mancante}.}
+\norma[org:pronta]{ORG}{Chi cura una carta la porta in «Pronta» quando ha tutti i campi che servono per entrare in uno sprint, prima del lunedì in cui la propone.}{una carta «Pronta» che entra nello sprint non fa scattare nessun bloccante di campo mancante: se lo fa, non era pronta.}
+\norma[org:statimanuali]{ORG}{«In corso» e «In attesa esterna» li aggiorna chi lavora alla carta; «In verifica», «In attesa delle ore» e «Chiusa» seguono il lavoro su GitHub da soli (Sezione~\ref{sec:ciclo}). Il giovedì gli stati servono a sapere a che punto siamo senza chiederlo a ciascuno.}{lo stato delle carte nella riunione «Verifica».}
+\norma[org:rifiutata]{ORG}{Una carta non si cancella: si mette «Rifiutata». Le carte rifiutate non devono ore.}{in OpenProject non si cancella niente: anche le carte eliminate nella bozza del lunedì diventano «Rifiutata».}
+\end{norme}
+
+\subsubsection{Ciclo di vita automatico e regole di chiusura}\label{sec:ciclo}
+\begin{center}
+\small
+Nuova / Pronta $\rightarrow$ In corso $\rightarrow$ In verifica (PR aperta) $\rightarrow$ In attesa delle ore (merge con \cod{Closes}) $\rightarrow$ Chiusa (ore registrate)
+\end{center}
+\begin{norme}
+\norma[org:ciclo]{ORG}{La carta avanza seguendo il lavoro su GitHub (\adr{0026}). Una PR aperta, non in bozza, che cita \cod{OP\#n} porta la carta in «In verifica», con il collegamento della PR in un commento. Un commit sul ramo principale con \cod{Closes OP\#n} la porta in «In attesa delle ore», o direttamente in «Chiusa» se le ore ci sono già: conta il push sul ramo principale, non la PR fusa. Le ore registrate su una carta in attesa, o su una sua figlia, la chiudono a nome di chi le registra. Una CI rossa su una PR lascia un commento sulle sue carte, con il collegamento all'esecuzione.}{workflow «Mosaico, eventi»: ogni azione avviene una volta sola; un passo che OpenProject rifiuta si dice sulla carta e nella PR.}
+\norma[org:senzaore]{ORG}{Senza ore non si chiude: passare da uno stato aperto a uno chiuso richiede ore registrate (più di zero) sulla carta o sulle sue figlie. Sono esenti «Rifiutata» e le milestone; ogni altro stato chiuso, anche uno futuro, le richiede.}{regola 1 dentro OpenProject, che vale per ogni via: interfaccia, API, modifiche in blocco, bot (\adr{0019}).}
+\norma[org:anticipo]{ORG}{Chi finisce prima libera chi aspetta: una carta chiusa prima della sua fine prevista (con qualunque stato chiuso) finisce quel giorno, o l'ultimo giorno lavorativo se si chiude in un giorno non lavorativo, e mai prima del suo inizio. Le carte che la seguono con una precedenza partono il giorno lavorativo dopo. La regola non tocca le carte madri, una chiusura che porta già le sue date, le milestone.}{regola 2 dentro OpenProject (\adr{0019}).}
+\end{norme}
+Le PR aperte da un fork non hanno i segreti e non spostano niente. Un errore di una regola dentro OpenProject non ferma OpenProject: lo scrive nel registro e la modifica passa. Le regole sono una politica del gruppo, non una protezione di sicurezza.
+
+\subsubsection{Gli artefatti}\label{sec:artefatti}
+Un \emph{artefatto} è ciò che una carta tocca, scritto come un percorso del repository (\adr{0018}), uno per riga.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Forme di un artefatto}
+\label{tab:artefatti}
+\begin{tabularx}{\textwidth}{@{} l >{\raggedright\arraybackslash}p{0.38\textwidth} X @{}}
+\toprule
+\textbf{Forma} & \textbf{Esempio} & \textbf{Note} \\
+\midrule
+File, con l'estensione & \percorso{docs/tex/glossario/Glossario.tex} & La forma preferita \\
+Parte di un file, dopo \cod{\#} & \cod{docs/tex/glossario/Glossario.tex\#caching} & Il nome della parte è libero: dice \emph{quale} pezzo si tocca \\
+Cartella, con la \cod{/} finale & \percorso{docs/tex/verbali/} & Ammessa, con un avviso che dice quanti file copre \\
+Fuori dal repository, sotto una radice \cod{@} & \cod{@openproject/flussi} & Per ciò che il repository non traccia \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{norme}
+\norma[cnv:grammatica]{CNV}{In un artefatto non sono ammessi: la virgola, \cod{\textbackslash}, \cod{*}, l'apice inverso, più di un \cod{\#}; una \cod{/} iniziale, \cod{.} e \cod{..}; nomi vuoti o con spazi ai bordi; la radice intera del repository; una parte data a una cartella. Non si possono dichiarare un file con \cod{\#} nel nome né una cartella del repository che comincia per \cod{@}.}{bloccante \cod{artefatto-malformato}.}
+\norma[cnv:identita]{CNV}{Maiuscole e \cod{/} finale non distinguono due artefatti: \cod{Docs/tex/glossario/glossario.tex} è \percorso{docs/tex/glossario/Glossario.tex}. Si scrive comunque con la grafia del repository.}{avviso \cod{artefatto-da-riscrivere}, con la grafia giusta.}
+\norma[cnv:promessa]{CNV}{Un percorso che il repository non ha ancora è una \emph{promessa}, e la mantiene la PR che crea il file. Un refuso è una promessa che nessuno manterrà: si controlla ogni promessa prima della Conferma.}{avviso \cod{artefatto-promesso}; il perimetro lascia scoperto il file vero.}
+\norma[cnv:sorgente]{CNV}{Di un documento si dichiara il sorgente, o una sua parte, mai il PDF: il PDF di \percorso{docs/compiled/} segue il suo sorgente di \percorso{docs/tex/}.}{avviso che rimanda dal PDF al sorgente; regola di copertura del perimetro (Norma~\ref{cvs:perimetro}).}
+\norma[org:radici]{ORG}{Le radici \cod{@} ammesse sono \cod{@openproject}, \cod{@mosaico} e \cod{@organizzazione}. Una radice nuova la decide il gruppo, con decisione verbalizzata, e la aggiunge al cartone.}{bloccante \cod{radice-sconosciuta}.}
+\norma[org:cartone]{ORG}{Il \emph{cartone} (\percorso{cartone.yml}) contiene le note sui percorsi (descrizione, \cod{condiviso} per i punti caldi), le radici ammesse e le ore al giorno (\cod{ore\_al\_giorno}). Si cambia con una PR e diventa operativo con l'installazione successiva.}{l'installazione rilegge il cartone; review della PR.}
+\norma[org:puntocaldo]{ORG}{I \emph{punti caldi} sono file su cui passa quasi ogni lavoro: \percorso{docs/tex/glossario/Glossario.tex}, \percorso{assets/js/content.js} e \percorso{README.md}. Due persone sullo stesso file usano \cod{\#} diversi.}{avviso \cod{artefatto-condiviso} su ogni arco che tocca un punto caldo, anche nella stessa colonna.}
+\end{norme}
+L'elenco dei file del ramo principale arriva a Mosaico con ogni installazione, da un clone fresco in sola lettura; senza, c'è l'avviso \cod{albero-mancante}.
+
+\subsubsection{La composizione del lunedì}\label{sec:lunedi}
+\begin{norme}
+\norma[org:primadellunedi]{ORG}{Prima della riunione «Mosaico» ognuno sistema la propria posta: le carte che pensa di fare, complete di stima, artefatti, corroborazione ed evidenza attesa.}{i bloccanti del lunedì.}
+\norma[org:conduzione]{ORG}{Nella riunione «Mosaico» chi conduce apre Mosaico (all'indirizzo di OpenProject, sotto \percorso{/mosaico/}) con il proprio account di OpenProject. Fino alla Conferma si lavora in bozza: si creano, modificano ed eliminano carte, le si sposta fra le colonne e dalla posta, si creano e tolgono precedenze; in OpenProject non si scrive niente (\adr{0010}).}{la bozza la tiene il server; la Conferma è l'unica scrittura.}
+\end{norme}
+
+La vista del lunedì è un grafo a sette colonne, una per membro (\adr{0008}): in testa a ogni colonna nome, ruolo, numero di carte e ore stimate; dall'alto in basso le carte seguono le precedenze; la posta sta sotto il grafo. I due tipi di dipendenza si distinguono anche senza colori:
+\begin{itemize}
+    \item la \textbf{precedenza} («questa prima di quella», la relazione «precede / segue» di OpenProject) è una freccia dritta e scura, con la punta;
+    \item l'\textbf{accoppiamento} (due carte che dichiarano artefatti in relazione) è un arco curvo senza punta: rosso se taglia due colonne ed è aperto, verde tratteggiato se è risolto, grigio punteggiato dentro la stessa colonna.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Accoppiamenti fra colonne diverse}
+\label{tab:accoppiamenti}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.3\textwidth} >{\raggedright\arraybackslash}p{0.27\textwidth} X @{}}
+\toprule
+\textbf{Una colonna dichiara} & \textbf{L'altra dichiara} & \textbf{Esito} \\
+\midrule
+un percorso & lo stesso percorso & arco tagliato \\
+\cod{docs/tex/X.tex} (il file intero) & \cod{docs/tex/X.tex\#parte} & arco tagliato: chi ha il file intero può toccare anche la parte \\
+\cod{docs/tex/X.tex\#a} & \cod{docs/tex/X.tex\#b} & avviso \cod{parti-sorelle}: nella PR il file è uno solo \\
+\cod{docs/tex/cartella/} & \cod{docs/tex/cartella/Y.tex} & avviso \cod{cartella-e-contenuto} \\
+percorsi disgiunti & & niente \\
+\bottomrule
+\end{tabularx}
+\end{table}
+Nella stessa colonna non c'è mai un arco tagliato.
+
+\paragraph{Archi tagliati e decisioni.}\label{sec:archi}
+\begin{norme}
+\norma[org:archi]{ORG}{Un \emph{arco tagliato} (due persone sulla stessa cosa) si risolve prima della Conferma. I modi sono cinque, da provare in quest'ordine: \emph{separare} (le due carte prendono \cod{\#} diversi dello stesso file, e l'arco diventa un avviso); \emph{accorpare} (le due carte vanno nella stessa colonna); \emph{serializzare} (una precede l'altra, anche attraverso altre carte); \emph{interfacciare}; \emph{derogare}. Una risoluzione si calcola, non si dichiara: Mosaico la riconosce dal grafo e dalle decisioni.}{bloccante \cod{arco-tagliato-non-risolto}; informazione \cod{arco-tagliato-risolto}, con il modo.}
+\norma[org:interfaccia]{ORG}{Un'Interfaccia risolve un arco tagliato solo se ha un titolare, non è rifiutata, è diversa dalle due carte, un cammino di precedenze la porta a entrambe, e dichiara l'oggetto conteso o il file intero di cui è una parte. Non bastano una parte per il file intero, un'altra parte o una cartella che lo contiene: una dichiarazione larga risolverebbe ogni arco che ha sotto.}{la risoluzione calcolata da Mosaico.}
+\norma[org:deroga]{ORG}{Una \emph{deroga} accetta un arco tagliato con una decisione scritta, ed è l'ultima risorsa (\adr{0002}). Nomina almeno due carte e copre ogni coppia fra quelle nominate; nomina gli artefatti e vale solo per l'oggetto che nomina, per identità (derogare sul file intero non copre una sua parte); vale solo nello sprint della sua intestazione; ha una motivazione di almeno 30 caratteri, senza contare gli spazi ai bordi.}{avviso \cod{deroga-non-valida}, con il motivo.}
+\norma[org:formatodecisione]{ORG}{Le decisioni del lunedì si scrivono alla Conferma come commenti sulle carte coinvolte, nel formato qui sotto. I tipi sono \cod{interfaccia}, \cod{serializzazione}, \cod{accorpamento}, \cod{deroga}, \cod{assegnazione}, \cod{ingresso-sprint} e \cod{uscita-sprint}. Un commento modificato a mano che non rispetta più il formato non vale come decisione.}{Mosaico rilegge le decisioni a ogni lunedì.}
+\end{norme}
+\begin{verbatim}
+**Decisione Mosaico** · 2026-11-16 · S1
+tipo: deroga
+carte: OP#12, OP#15
+artefatti: docs/tex/glossario/Glossario.tex#struttura
+dettaglio: ...
+motivazione: ...
+id: ...
+\end{verbatim}
+
+\paragraph{I controlli.}
+Ogni controllo dice la carta, o le carte, e il motivo, con un codice. La Conferma resta spenta finché c'è un bloccante (Tabella~\ref{tab:bloccanti}); gli avvisi non bloccano, ma vanno letti (Tabella~\ref{tab:avvisi}); le informazioni raccontano e basta: \cod{passaggio-di-mano} (una precedenza fra due colonne) e \cod{arco-tagliato-risolto} (con il modo).
+
+\begin{xltabular}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.36\textwidth} X @{}}
+\caption{Controlli bloccanti del lunedì}\label{tab:bloccanti}\\
+\toprule
+\textbf{Codice} & \textbf{Quando} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Codice} & \textbf{Quando} \\
+\midrule
+\endhead
+\cod{stima-mancante} & una carta dello sprint senza stima \\
+\cod{assegnatario-mancante} & una carta dello sprint senza assegnatario \\
+\cod{ruolo-mancante} & una carta dello sprint senza ruolo \\
+\cod{artefatti-mancanti} & una carta dello sprint senza artefatti: il grafo non la vedrebbe \\
+\cod{corroborazione-mancante} & una carta dello sprint senza corroborazione \\
+\cod{evidenza-mancante} & una carta dello sprint senza evidenza attesa \\
+\cod{categoria-mancante} & un'Attività dello sprint senza categoria \\
+\cod{assegnatario-non-membro} & un assegnatario che non è fra i sette membri \\
+\cod{ruoli-misti} & due ruoli nella stessa colonna \\
+\cod{ruolo-diverso-dal-bucket} & una carta con un ruolo diverso da quello della sua colonna \\
+\cod{responsabili-multipli} & due colonne con il ruolo di Responsabile \\
+\cod{ciclo} & un ciclo di precedenze \\
+\cod{predecessore-sprint-successivo} & una carta che segue una carta di uno sprint successivo \\
+\cod{arco-tagliato-non-risolto} & un accoppiamento fra colonne diverse ancora aperto \\
+\cod{artefatto-malformato} & una dichiarazione che non è un percorso valido \\
+\cod{radice-sconosciuta} & una radice \cod{@} che il cartone non ammette \\
+\bottomrule
+\end{xltabular}
+
+\begin{xltabular}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.36\textwidth} X @{}}
+\caption{Avvisi del lunedì}\label{tab:avvisi}\\
+\toprule
+\textbf{Codice} & \textbf{Quando} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Codice} & \textbf{Quando} \\
+\midrule
+\endhead
+\cod{carico-sbilanciato} & una colonna oltre il 20\% dalla media, calcolata fra le colonne con carte \\
+\cod{bucket-vuoto} & una persona senza carte nello sprint \\
+\cod{responsabile-mancante} & nessuna colonna da Responsabile \\
+\cod{carta-bloccata} & un predecessore aperto o non visibile \\
+\cod{catena-oltre-lo-sprint} & una catena di precedenze che, con le stime, va oltre la fine dello sprint \\
+\cod{artefatto-condiviso} & un arco che tocca un punto caldo \\
+\cod{parti-sorelle} & due parti diverse dello stesso file in due colonne \\
+\cod{cartella-e-contenuto} & una cartella in una colonna e un suo contenuto in un'altra \\
+\cod{artefatto-promesso} & un percorso che il repository non ha ancora \\
+\cod{dichiarazione-larga} & una cartella intera, con il numero di file che copre \\
+\cod{artefatto-da-riscrivere} & una grafia diversa da quella del repository, con quella giusta \\
+\cod{albero-mancante} & l'elenco dei file del repository non è arrivato a Mosaico \\
+\cod{deroga-non-valida} & una deroga rifiutata, con il motivo \\
+\bottomrule
+\end{xltabular}
+
+\paragraph{La Conferma.}
+\begin{norme}
+\norma[org:conferma]{ORG}{La Conferma la preme chi conduce, e scrive con il suo nome. Prima rilegge OpenProject e rifà tutti i controlli: con un bloccante non scrive niente, e se intanto qualcuno ha cambiato una carta se ne accorge dalla versione e non sovrascrive. Poi scrive, nell'ordine: le carte nuove; per ogni carta sprint, assegnatario, ruolo, artefatti, priorità, Responsabile dello sprint e date; lo stato «Rifiutata» per le carte eliminate in bozza; il bucket della persona per le carte che restano nella posta; le precedenze nuove e quelle tolte; le decisioni, come commenti. Infine scrive le carte nel verbale della riunione di oggi (Norma~\ref{bur:righemosaico}).}{la Conferma rieseguita dopo un'interruzione non crea doppioni (giornale delle carte create, chiave di bozza nella descrizione); un campo che OpenProject vuole pieno si segnala prima di scrivere.}
+\norma[org:date]{ORG}{Le date le mette la Conferma (\adr{0021}). Una carta dello sprint senza inizio né fine riceve una durata di $\lceil$stima / ore al giorno$\rceil$ giorni lavorativi, almeno 1 (le ore al giorno stanno nel cartone; il valore predefinito è 1). Se non ha predecessori riceve anche l'inizio, uguale all'inizio dello sprint; se li ha, l'inizio lo calcola OpenProject, il giorno lavorativo dopo la fine del predecessore. La fine la calcola sempre OpenProject, con i suoi giorni lavorativi e le sue festività. Una carta che ha già una data la tiene; una carta senza stima, o che segue un predecessore senza date, resta senza date.}{avviso \cod{catena-oltre-lo-sprint}, proiezione dal lunedì al venerdì senza festività.}
+\norma[org:carico]{ORG}{Il carico di una colonna è la somma delle stime delle sue carte, senza tetto. Le carte «In attesa delle ore» sono lavoro finito: non stanno nel lunedì e non contano nei carichi (\adr{0031}). Le milestone stanno fuori dalle colonne, perché non hanno titolare né stima, ma restano nel grafo delle precedenze.}{intestazione delle colonne; avviso \cod{carico-sbilanciato}.}
+\end{norme}
+
+\subsubsection{Comunicazioni interne, riunioni e calendari}
+\begin{norme}
+\norma[org:canali]{ORG}{Le comunicazioni interne avvengono su Whatsapp e Discord; le riunioni interne si tengono su Discord, salvo diversa indicazione nella convocazione. Una decisione presa in chat vale solo se riportata su una carta o in un verbale.}{presenza della decisione sulla carta o nel verbale.}
+\norma[org:riunioni]{ORG}{Ogni riunione sta nel modulo Riunioni di OpenProject, con i partecipanti e l'ordine del giorno, ed è convocata almeno 24 ore prima. Per una riunione che si ripete valgono i partecipanti della serie. Lo scriba la verbalizza secondo la Sezione~\ref{sec:verbali}.}{la riunione in OpenProject e il suo verbale.}
+\norma[org:calendario]{ORG}{Ognuno segue in Google Calendar le proprie carte e le proprie riunioni, non quelle di tutti: in OpenProject, il calendario nella vista «Le mie carte» e le Riunioni offrono «Iscriviti al calendario», e l'indirizzo si aggiunge in Google Calendar con «Altri calendari \textrightarrow{} Da URL». L'indirizzo di un feed è personale, come una chiave, e non si condivide.}{il feed mostra solo le carte aperte assegnate a chi lo legge.}
+\norma[org:notifiche]{ORG}{Le email di OpenProject sono spente: le notifiche si leggono in OpenProject, le riunioni arrivano dai calendari. Google rilegge i feed con i suoi tempi, a volte dopo ore: per l'ultimo minuto fa fede OpenProject.}{configurazione di OpenProject (\cod{mosaico doctor}).}
+\end{norme}
+
+\subsubsection{Gestione dei rischi}
+\begin{norme}
+\norma[org:rischi]{ORG}{Chi individua un rischio lo porta alla prima riunione utile, «Mosaico» o «Verifica». Il Responsabile lo valuta e aggiorna l'analisi dei rischi del Piano di Progetto, con una carta (Attività, documento «Piano di Progetto»).}{verbale della riunione e carta.}
+\end{norme}
+
+\subsection{Infrastruttura}\label{sec:infrastruttura}
+
+\subsubsection{Strumenti}
+Gli strumenti del gruppo sono nella Tabella~\ref{tab:strumenti}.
+\begin{table}[htbp]
+\centering
+\small
+\caption{Strumenti}
+\label{tab:strumenti}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.3\textwidth} X @{}}
+\toprule
+\textbf{Strumento} & \textbf{A che cosa serve} \\
+\midrule
+OpenProject 17.9 (edizione Community, ospitato dal gruppo) & Carte, sprint, backlog bucket, riunioni, ore, budget, wiki, Gantt, calendari \\
+Mosaico (servizio del gruppo, sotto \percorso{/mosaico/} all'indirizzo di OpenProject) & Composizione dello sprint e Conferma; verbali e documenti in redazione, con editor \LaTeX{} e PDF; cruscotto del consuntivo \\
+Repository di progetto su GitHub (pubblico) & Sorgenti, documenti, sito GitHub Pages, CI, issue e milestone dello specchio \\
+Repository «strumenti» (privato) & Il codice di Mosaico, che i workflow installano sul runner \\
+GitHub Actions & CI del gruppo e workflow di Mosaico (Tabella~\ref{tab:workflow}) \\
+spr & Stack di commit: una PR per commit \\
+\LaTeX{} (pdfLaTeX, TeX Live) & Compilazione dei documenti, con gli stessi pacchetti sul server e sul runner (Norma~\ref{cnv:compilatore}) \\
+GitHub Pages & Il sito del gruppo e i PDF compilati, Glossario compreso \\
+Google Calendar & Abbonamento ai feed personali di OpenProject (carte e riunioni) \\
+Discord & Riunioni interne \\
+Posta elettronica del gruppo & Comunicazioni esterne (Sezione~\ref{sec:esterne}) \\
+Microsoft Teams & Incontri con la proponente \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{norme}
+\norma[org:strumenti]{ORG}{L'adozione o la sostituzione di uno strumento richiede la modifica di questa sezione, secondo la Sezione~\ref{sec:miglioramento}.}{storia delle versioni del documento.}
+\norma[org:installazione]{ORG}{La configurazione di OpenProject e di Mosaico cambia solo con l'installazione, un comando unico lanciato dall'Amministratore dopo la prova a vuoto (\cod{-{}-prova}), che non cambia niente. L'installazione verifica ogni passo prima del successivo, torna indietro da sola se un passo fallisce, non sovrascrive file cambiati a mano che non riconosce e tiene un diario di com'è andato ogni passo (\adr{0012}). Ciò che si cambia a mano in OpenProject e che l'installazione gestisce viene riscritto.}{\cod{mosaico doctor} confronta la configurazione di OpenProject con quella attesa (tipi, stati, campi e opzioni, attività, riunioni, membri) e, per ogni errore, indica la pagina dove si sistema; «non verificato» non è un «ok».}
+\end{norme}
+
+\subsubsection{Account di servizio, segreti e variabili}
+\begin{table}[htbp]
+\centering
+\small
+\caption{Account di servizio}
+\label{tab:account}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.17\textwidth} >{\raggedright\arraybackslash}p{0.15\textwidth} X >{\raggedright\arraybackslash}p{0.2\textwidth} @{}}
+\toprule
+\textbf{Account} & \textbf{Dove} & \textbf{Permessi} & \textbf{Chi lo usa} \\
+\midrule
+\cod{mosaico-bot} & OpenProject & sola lettura & specchio, perimetro, doctor \\
+\cod{github-bot} & OpenProject & ruolo «Bot GitHub»: modifica delle carte e transizioni verso «In verifica», «In attesa delle ore», «Chiusa» & workflow degli eventi \\
+GitHub App del gruppo & GitHub & contenuti e pull request in scrittura, sul solo repository di progetto & runner dei documenti, bot dei verbali \\
+Deploy key & repository «strumenti» & sola lettura & i workflow di Mosaico \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{xltabular}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.3\textwidth} l X @{}}
+\caption{Segreti e variabili del repository di progetto}\label{tab:segreti}\\
+\toprule
+\textbf{Nome} & \textbf{Tipo} & \textbf{Contenuto e uso} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Nome} & \textbf{Tipo} & \textbf{Contenuto e uso} \\
+\midrule
+\endhead
+\cod{STRUMENTI\_SSH\_KEY} & segreto & chiave privata della deploy key di «strumenti»: tutti i workflow di Mosaico \\
+\cod{OP\_URL} & segreto & indirizzo di OpenProject: specchio, eventi, perimetro \\
+\cod{OP\_TOKEN} & segreto & token API di \cod{mosaico-bot}: specchio, perimetro \\
+\cod{OP\_EVENTI\_TOKEN} & segreto & token API di \cod{github-bot}: eventi \\
+\cod{MOSAICO\_TOKEN} & segreto & credenziale di scrittura dell'identità di servizio: runner dei documenti \\
+\cod{MOSAICO\_PROGETTO} & variabile & identificativo del progetto in OpenProject: specchio, perimetro \\
+\cod{MOSAICO\_ACCESO\_DA}, \cod{MOSAICO\_ACCESO\_A} & variabili & fascia di servizio (HHMM, ora italiana), predefinite 0530 e 2215 \\
+\bottomrule
+\end{xltabular}
+
+\begin{norme}
+\norma[org:segreti]{ORG}{I segreti stanno solo nei segreti del repository o sul server: mai in un file del repository, in un argomento di comando, in un indirizzo, in un messaggio d'errore o in un log. L'indirizzo di OpenProject non compare nel repository pubblico: né nelle issue dello specchio, né nei commenti dei bot, né nei workflow.}{ogni workflow controlla per prima cosa che i suoi segreti ci siano e li nomina se mancano; lo specchio stampa del token solo la forma (lunghezza, prefisso, impronta), mai il valore.}
+\norma[org:fascia]{ORG}{Il server di OpenProject risponde dalle 05:30 alle 22:15, ora italiana. Fuori fascia lo specchio salta il giro; eventi e perimetro falliscono dicendo il motivo, e «Mosaico, mattino» li rilancia. L'ora si controlla nel job, con il fuso \cod{Europe/Rome}, perché GitHub ritarda le esecuzioni programmate anche di ore.}{variabili \cod{MOSAICO\_ACCESO\_DA} e \cod{MOSAICO\_ACCESO\_A}.}
+\end{norme}
+
+\subsubsection{Catalogo delle automazioni}\label{sec:automazioni}
+Specchio, eventi, perimetro e documenti scaricano il codice di Mosaico dal repository «strumenti» con la deploy key; il mattino usa solo l'API di GitHub.
+
+\begin{xltabular}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.2\textwidth} >{\raggedright\arraybackslash}p{0.27\textwidth} X @{}}
+\caption{Workflow di GitHub Actions}\label{tab:workflow}\\
+\toprule
+\textbf{Workflow} & \textbf{Quando} & \textbf{Che cosa fa} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Workflow} & \textbf{Quando} & \textbf{Che cosa fa} \\
+\midrule
+\endhead
+«Mosaico, specchio» & Ogni 15 minuti, e a mano (anche «solo prova») & Riallinea issue, etichette, milestone e assegnatari a OpenProject (Sezione~\ref{sec:specchio}); un giro alla volta; due giri di fila senza modifiche non scrivono niente \\
+«Mosaico, eventi» & PR aperta, riaperta, pronta o modificata; push sul ramo principale; fine della CI & Porta le carte fra gli stati e commenta la CI rossa (Sezione~\ref{sec:ciclo}) \\
+«Mosaico, perimetro» & PR aperta, aggiornata, riaperta o modificata & Il controllo «Mosaico» (Sezione~\ref{sec:perimetro}) \\
+«Mosaico, documenti» & PR e coda di merge (controllo); push sul ramo principale che tocca i documenti, e a mano su un ramo (pubblicazione) & Regole dei verbali, compilazione, PDF, README e sito (Sezione~\ref{sec:documentazione}) \\
+«Mosaico, mattino» & Ogni giorno alle 04:45 UTC & Rilancia le esecuzioni fallite di eventi e perimetro delle ultime 12 ore, che rilanciate non fanno niente due volte \\
+\bottomrule
+\end{xltabular}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Regole dentro OpenProject}
+\label{tab:regoleop}
+\begin{tabularx}{\textwidth}{@{} c X l l @{}}
+\toprule
+\textbf{\#} & \textbf{Regola} & \textbf{Dove morde} & \textbf{Decisione} \\
+\midrule
+1 & Senza ore non si chiude (esenti «Rifiutata» e milestone) & aggiornamento della carta & \adr{0019} \\
+2 & Chiusura anticipata: la fine diventa oggi, chi segue si anticipa & aggiornamento della carta & \adr{0019} \\
+3 & Una registrazione senza attività prende quella del Ruolo della carta & registrazione delle ore & \adr{0024} \\
+4 & Il costo è ore $\times$ tariffa del ruolo & registrazione delle ore & \adr{0024} \\
+5 & Una carta senza budget prende il primo del progetto & creazione o modifica & \adr{0024} \\
+6 & «In attesa delle ore» con ore già registrate diventa «Chiusa» & aggiornamento della carta & \adr{0026} \\
+7 & Ore registrate su una carta in attesa la chiudono & registrazione delle ore & \adr{0026} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+Le regole sono un modulo caricato da OpenProject, installato in un volume a parte e in sola lettura; ognuna è agganciata separatamente, e se una non si aggancia lo dice il registro mentre le altre restano. L'installazione controlla la sintassi e verifica in memoria, senza salvare niente, che le regole siano caricate e mordano.
+
+Dentro Mosaico, sul server, girano la Conferma (Sezione~\ref{sec:lunedi}), la scrittura del verbale alla Conferma, il registro delle modifiche automatico, la compilazione dei PDF in un ambiente isolato, il bot dei verbali e la copia di ogni sera.
+
+\subsubsection{Accessi, sicurezza, continuità}
+\begin{norme}
+\norma[org:accessi]{ORG}{A OpenProject si accede con l'account del gruppo; a Mosaico solo con il login di OpenProject (OAuth2 con PKCE). I token restano sul server, ogni scrittura in OpenProject porta il nome di chi agisce, e «Esci» revoca il token.}{l'autore di ogni modifica in OpenProject.}
+\norma[org:isolamento]{ORG}{Mosaico non ha accesso a internet; il bot dei verbali è un servizio a parte, l'unico che parla con GitHub, e custodisce lui solo la credenziale di scrittura. Le pagine di Mosaico non caricano librerie da reti esterne; la compilazione \LaTeX{} avviene senza rete, senza shell-escape, con tempi e dimensioni massimi, e ciò che produce si legge come dato non fidato.}{politica di sicurezza dei contenuti delle pagine; manifesto delle impronte dei file incorporati.}
+\norma[org:copie]{ORG}{Ogni sera alle 22:15 si copia il volume di Mosaico: verbali e documenti (bozze e approvati), cestino, giornali delle Conferme e configurazione. La copia si conserva 14 giorni ed è leggibile solo dall'Amministratore; una copia incompleta si scarta. OpenProject ha la sua copia serale, separata.}{il diario delle copie.}
+\norma[org:guasti]{ORG}{Un guasto di Mosaico non ferma OpenProject, che è un servizio a parte. In caso di guasto il lavoro continua in OpenProject e su GitHub; ciò che Mosaico non ha potuto fare (Conferma, verbale, pubblicazione) si fa quando torna, non a mano altrove.}{la Conferma e il bot sono rieseguibili senza doppioni.}
+\norma[org:wiki]{ORG}{Nel wiki di OpenProject i testi lunghi si scrivono fuori dall'editor del browser e si incollano; dopo il salvataggio si controlla che ci siano.}{rilettura della pagina salvata.}
+\end{norme}
+
+\subsection{Formazione}
+[Prematuro con dei dati]
+
+La proponente offre tre formazioni, con video e prove pratiche: LiteLLM (2 ore), Embedding e Caching (2 ore), FinOps e Dashboard (1,5 ore).
+
+\subsection{Miglioramento}\label{sec:miglioramento}
+\begin{norme}
+\norma[org:modifica]{ORG}{Chiunque può proporre una modifica alle norme con una carta (Attività, documento «Norme di Progetto»). Una modifica al processo la decide il gruppo in una riunione, e la decisione sta nel verbale; poi entra in queste norme come ogni documento: «Modifica dal repo», approvazione del Responsabile, PR del bot.}{il verbale della decisione e la voce del registro delle modifiche.}
+\norma[org:prima]{ORG}{Un'attività nuova si norma prima di essere avviata.}{la norma esiste in una versione precedente alla prima carta dell'attività.}
+\norma[org:controllo]{ORG}{Una norma nuova dice come se ne corrobora il rispetto e, quando si può, con quale controllo automatico.}{la riga Corroborazione di ogni norma.}
+\norma[org:revisione]{ORG}{Almeno una volta per sprint, nella riunione «Verifica», il gruppo controlla se le norme sono state rispettate e se vanno cambiate; le proposte diventano carte.}{verbale della riunione «Verifica».}
+\end{norme}
+
+% ==========================================
+% APPENDICE
+% ==========================================
+\appendix
+\section{Le decisioni (ADR)}\label{app:adr}
+Ogni decisione sul processo e sugli strumenti ha un numero, e le norme la citano come fonte. Le decisioni sostituite restano nell'elenco: la storia di una scelta spiega la scelta.
+
+\begin{xltabular}{\textwidth}{@{} l l X >{\raggedright\arraybackslash}p{0.2\textwidth} @{}}
+\caption{Decisioni sul processo e sugli strumenti}\label{tab:adr}\\
+\toprule
+\textbf{ADR} & \textbf{Data} & \textbf{Decisione} & \textbf{Stato} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ADR} & \textbf{Data} & \textbf{Decisione} & \textbf{Stato} \\
+\midrule
+\endhead
+\rigaadr{0001} & 2026-11-08 & Python 3.12 come bersaglio & in vigore \\
+\rigaadr{0002} & 2026-11-08 & Una deroga vale per un artefatto e per uno sprint & in vigore \\
+\rigaadr{0003} & 2026-11-08 & Il webhook verso OpenProject sottoscrive solo PR, commenti delle issue e check run & in vigore \\
+\rigaadr{0004} & 2026-11-08 & Il nucleo assolve solo davanti a una prova (nel dubbio blocca o avvisa) & in vigore \\
+\rigaadr{0005} & 2026-11-08 & Il server non chiama GitHub; è GitHub che legge OpenProject & in vigore \\
+\rigaadr{0006} & 2026-11-08 & L'obiettivo dello sprint dalla riunione «Mosaico» & in vigore \\
+\rigaadr{0007} & 2026-11-09 & La vista del lunedì come «quadro di vetro» & sostituita da 0008 e 0009 \\
+\rigaadr{0008} & 2026-11-09 & La vista del lunedì è il grafo dei bucket & in vigore \\
+\rigaadr{0009} & 2026-11-09 & Le ore sono stime, non capacità & in vigore \\
+\rigaadr{0010} & 2026-11-09 & Mosaico sotto l'indirizzo di OpenProject; la Conferma scrive con il nome di chi conduce & in vigore \\
+\rigaadr{0011} & 2026-11-09 & Google Calendar condiviso, aggiornato dal runner & non attuata: al suo posto i feed personali \\
+\rigaadr{0012} & 2026-11-10 & Installazione: pacchetto provato prima, costruzione senza rete, ritorno indietro automatico & in vigore \\
+\rigaadr{0013} & 2026-11-10 & La priorità è quella nativa di OpenProject & in vigore \\
+\rigaadr{0014} & 2026-11-10 & Lo specchio su GitHub: come riallinea & in vigore \\
+\rigaadr{0015} & 2026-11-10 & Il cruscotto del consuntivo, privato & in vigore \\
+\rigaadr{0016} & 2026-11-10 & Un backlog bucket per persona & in vigore \\
+\rigaadr{0017} & 2026-11-11 & Il ruolo lo dà il bucket; la posta si trascina nel grafo & in vigore \\
+\rigaadr{0018} & 2026-11-11 & Gli artefatti sono percorsi; il controllo del perimetro delle PR & in vigore \\
+\rigaadr{0019} & 2026-11-13 & Le regole di chiusura vivono in OpenProject & in vigore \\
+\rigaadr{0020} & 2026-11-13 & Il verbale della riunione dal modello del gruppo & in vigore \\
+\rigaadr{0021} & 2026-11-13 & Le date dello sprint dalla stima, in sequenza & in vigore \\
+\rigaadr{0022} & 2026-11-13 & I verbali in redazione: archivio, pagina dello scriba, approvazione, PDF & in vigore \\
+\rigaadr{0023} & 2026-11-15 & I documenti dai modelli del repository & in vigore \\
+\rigaadr{0024} & 2026-11-16 & Il budget dentro OpenProject: chi registra scrive solo le ore & in vigore \\
+\rigaadr{0025} & 2026-11-16 & Lo specchio sul runner, con il codice in «strumenti» & in vigore \\
+\rigaadr{0026} & 2026-11-16 & Gli stati dalla PR; la carta si chiude quando arrivano le ore & in vigore \\
+\rigaadr{0027} & 2026-11-16 & L'editor dei verbali, tipo Overleaf & in vigore \\
+\rigaadr{0028} & 2026-11-17 & I verbali nel repository: sorgenti in \percorso{src/LaTEX} & sostituita da 0029 \\
+\rigaadr{0029} & 2026-11-21 & \percorso{docs/tex} e \percorso{docs/compiled} a specchio; il runner dei documenti & in vigore \\
+\rigaadr{0030} & 2026-11-21 & Il bot dei verbali; il codice delle righe dalla carta & in vigore \\
+\rigaadr{0031} & 2026-11-21 & Collegamenti al Glossario, documenti ripresi dal repository, versione i+1.0.0, eliminazione delle bozze, ricalcolo dei costi & in vigore \\
+\bottomrule
+\end{xltabular}
+
+\end{document}
