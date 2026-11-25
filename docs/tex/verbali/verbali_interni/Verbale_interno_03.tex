@@ -1,0 +1,216 @@
+% Titolo: Formazione del primo diario di bordo ed il relativo template
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI ---
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+% --- CONFIGURAZIONE HEADER E FOOTER ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Verbale Interno N. 3} 
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Configurazione link indice
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+    
+    % --- LOGHI ---
+    % Sostituisci i \framebox con i comandi \includegraphics corretti
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        % Esempio: \includegraphics[width=0.7\textwidth]{logo_unipd.png}
+        \includegraphics[width=0.7\textwidth]{unipd_logo.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        % Esempio: \includegraphics[width=0.7\textwidth]{WhatsApp Image 2026-10-15 at 17.29.12.jpeg}
+        \includegraphics[width=0.7\textwidth]{Logo-BitCrusher-Nero.png}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large \textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}} \\
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica} \\
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software} \\
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027} \\
+
+    \vspace{2cm}
+    {\Huge \textbf{Verbale di Riunione}} \\
+    \vspace{0.5cm}
+    {\Large Riunione Interna \#3}
+
+    \vspace{2cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \textbf{Email:} bitcrusherteam@gmail.com \\
+        \textbf{Versione:} v1.0.0 \\
+        \textbf{Data della riunione:} 2026-10-24 \\
+        \textbf{Data ultima modifica:} 24 ottobre 2026
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+\newpage
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE
+% ==========================================
+\section*{Registro delle Modifiche}
+\vspace{0.5cm}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|l|l|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{3.5cm}|X|}
+%modificato per permettere ai campi nella tabella di andare a capo
+\hline
+\textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+1.0.0 & 2026-11-03 & Alex Singh & - & Approvazione per il rilascio. \\ \hline
+0.2.0 & 2026-11-03 & Antonio Tufano & Riccardo Pozzato & Aggiornamento logo UniPD e adeguamento registro modifiche. \\ \hline
+0.1.0 & 2026-10-24 & Pietro Leonardo Acampora & Marco Bollettin, Antonio Tufano & Stesura verbale di riunione \\ \hline
+
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==========================================
+% INDICE
+% ==========================================
+\tableofcontents
+\newpage
+% ==========================================
+% 1. INFORMAZIONI GENERALI
+% ==========================================
+\section{Informazioni Generali}
+\begin{itemize}
+    \item \textbf{Luogo/Piattaforma:} Riunione Discord
+    \item \textbf{Data:} 2026-10-24
+    \item \textbf{Orario di inizio:} 17:30
+    \item \textbf{Orario di fine:} 20:15
+    \item \textbf{Responsabile:} Riccardo Pozzato
+    \item \textbf{Scriba:} Riccardo Pozzato
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Partecipanti presenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Pietro Leonardo Acampora & 2146762 \\ \hline
+Marco Bollettin & 2147955 \\ \hline
+Alexandru Mitu & 2101083 \\ \hline
+Riccardo Pozzato & 2147988 \\ \hline
+Alex Singh & 2148621 \\ \hline
+Antonio Tufano & 2137972 \\ \hline
+Erik Giuliano & 2138012 \\ \hline
+\end{tabularx}
+
+\vspace{0.5cm}
+\textbf{Partecipanti assenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.8\textwidth}{|X|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+ Nessuno & - \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 2. ORDINE DEL GIORNO
+% ==========================================
+\vspace{0.5cm}
+\section{Ordine del Giorno}
+Gli argomenti previsti per la riunione odierna sono:
+\begin{enumerate}
+    \item Creazione del template .pptx per i diari di bordo
+    \item Creazione diario di bordo N.1
+    \item Stesura presentazione diario di bordo
+    \item Scelta rappresentante per presentazione diario di bordo N.1
+    \item Discussione riguardo le risposte ricevute dalle aziende in merito alle domande fatte
+\end{enumerate}
+
+% ==========================================
+% 3. RESOCONTO DELLA RIUNIONE
+% ==========================================
+\newpage
+\section{Resoconto della Riunione}
+
+\subsection{Verifica delle azioni precedenti}
+\begin{itemize}
+    \item \textbf{VI-1.1 del verbale 02} Il gruppo ha esaminato le risposte delle aziende ai quesiti inviati. Il dialogo è proseguito con il primo incontro con VarGroup, documentato nel verbale esterno inserito il 27/10/2026 (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/14}{PR \#14}).
+\end{itemize}
+
+\subsection{Creazione del template .pptx per i diari di bordo}
+Il gruppo ha discusso e definito la struttura, lo stile e la grafica del template in formato PowerPoint da utilizzare per le presentazioni dei futuri diari di bordo.
+
+\subsection{Creazione diario di bordo N.1}
+È stato redatto in modo collaborativo il contenuto del primo diario di bordo, riassumendo i risultati raggiunti, le decisioni prese e i problemi riscontrati nel periodo corrente.
+
+\subsection{Stesura presentazione diario di bordo}
+Sono state preparate e impaginate le slide per la presentazione del diario di bordo N.1, inserendo i contenuti discussi all'interno del nuovo template.
+
+\subsection{Scelta rappresentante per presentazione diario di bordo N.1}
+I membri del gruppo si sono confrontati e hanno selezionato formalmente la persona incaricata di esporre la presentazione durante la prima revisione di avanzamento.
+
+\subsection{Discussione riguardo le risposte ricevute dalle aziende in merito alle domande fatte}
+Sono state lette e analizzate congiuntamente le email di risposta fornite dalle aziende proponenti, valutando i chiarimenti ottenuti in merito ai dubbi relativi ai capitolati.
+
+\subsection{Decisioni prese}
+\begin{itemize}
+    \item \textbf{V-3.1} Scelta la tecnologia da usare per la redazione e presentazione dei diari di bordo
+    \item \textbf{V-3.2} Definite le convenzioni per l'approccio trunk-based development sul repository
+\end{itemize}
+
+% ==========================================
+% 4. AZIONI DA SVOLGERE (TO-DO)
+% ==========================================
+\vspace{0.5cm}
+\section{Azioni da Svolgere (To-Do)}
+Nessun task assegnato al termine di questa riunione. Le attività elencate sono ricostruite dalle modifiche successive al repository.
+
+\begin{tabularx}{\textwidth}{|c|X|l|l|}
+\hline
+\textbf{Codice Rif.} & \textbf{Descrizione Task} & \textbf{Assegnatario} & \textbf{Scadenza} \\ \hline
+--- & Pubblicare nel repository il primo diario di bordo e il template PowerPoint. Entrambi sono stati aggiunti il 30/10/2026 (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/26}{PR \#26}). & --- & --- \\ \hline
+--- & Rendere operative le convenzioni per il lavoro a stack. Il 27/10/2026 sono stati aggiunti gli alias e lo script per gestire gli stack con \texttt{git spr} (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/commit/45c68ee}{commit \texttt{45c68ee}}). & --- & --- \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 5. PROSSIMA RIUNIONE
+% ==========================================
+\vspace{0.5cm}
+\section{Prossima Riunione}
+\begin{itemize}
+    \item \textbf{Data:} Da concordare
+    \item \textbf{Ora:} Da concordare
+    \item \textbf{OdG preliminare:} Da concordare
+\end{itemize}
+
+\end{document}

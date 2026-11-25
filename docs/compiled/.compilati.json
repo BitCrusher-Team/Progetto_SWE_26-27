@@ -1,0 +1,45 @@
+{
+ "compilati": {
+  "docs/compiled/glossario/Glossario.pdf": {
+   "impronta": "e413c7392aefa7bc94e5f2e3d5c2dca2150b06a76a5cecf1b7c8b809928632d7",
+   "sorgente": "docs/tex/glossario/Glossario.tex"
+  },
+  "docs/compiled/verbali/verbali_interni/Verbale_interno_01.pdf": {
+   "impronta": "c596aed989b78b2c0e5133da52acdc4c17488f08d79f7ca2018f19e696203154",
+   "sorgente": "docs/tex/verbali/verbali_interni/Verbale_interno_01.tex"
+  },
+  "docs/compiled/verbali/verbali_interni/Verbale_interno_02.pdf": {
+   "impronta": "5eb2900df779f8726e940050ad48eb1dce60f91920926accd1231400d0485642",
+   "sorgente": "docs/tex/verbali/verbali_interni/Verbale_interno_02.tex"
+  },
+  "docs/compiled/verbali/verbali_interni/Verbale_interno_03.pdf": {
+   "impronta": "e60b09c910d2d8d77746567b968103926776af2018b2a68e05fb740ff76d5ec5",
+   "sorgente": "docs/tex/verbali/verbali_interni/Verbale_interno_03.tex"
+  },
+  "docs/compiled/verbali/verbali_interni/Verbale_interno_04.pdf": {
+   "impronta": "006c9812e049b3876f384b6e40d722ffa8e4f12aa3098d471126a71e8d6b12e0",
+   "sorgente": "docs/tex/verbali/verbali_interni/Verbale_interno_04.tex"
+  },
+  "docs/compiled/verbali/verbali_interni/Verbale_interno_05.pdf": {
+   "impronta": "1a09078e235dca3844af82420ee69acee2d4db1318b691986af759528113b3d2",
+   "sorgente": "docs/tex/verbali/verbali_interni/Verbale_interno_05.tex"
+  },
+  "docs/compiled/verbali/verbali_interni/Verbale_interno_06.pdf": {
+   "impronta": "9be3ec3745d0093b935242a81e499813e426db1f5c4a3e88e0412c2c2b78709c",
+   "sorgente": "docs/tex/verbali/verbali_interni/Verbale_interno_06.tex"
+  },
+  "docs/compiled/verbali/verbali_interni/Verbale_interno_07.pdf": {
+   "impronta": "21e85b130a9b9cbfad065a234650693e80695560cab253ea3c6dae49aeef6f5e",
+   "sorgente": "docs/tex/verbali/verbali_interni/Verbale_interno_07.tex"
+  },
+  "docs/compiled/verbali/verbali_interni/Verbale_interno_08.pdf": {
+   "impronta": "e01ca5b64487ba40283ca05fb48abcc8922e7e6e82e74a47a7f30bf366810c78",
+   "sorgente": "docs/tex/verbali/verbali_interni/Verbale_interno_08.tex"
+  },
+  "docs/compiled/verbali/verbali_interni/Verbale_interno_09.pdf": {
+   "impronta": "013bbe57fc65ec22e0db2004fb61d0b4b2f2f4676aa5a241961f64797c740531",
+   "sorgente": "docs/tex/verbali/verbali_interni/Verbale_interno_09.tex"
+  }
+ },
+ "versione": 1
+}

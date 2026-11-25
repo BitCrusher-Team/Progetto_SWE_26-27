@@ -8,7 +8,7 @@
      altrimenti decide il catalogo qui sotto;
    - i verbali dalla tabella del README e da docs/verbali/ (o
      docs/compiled/verbali/);
-   - i diari di bordo da docs/diario_di_bordo/;
+   - i diari di bordo da docs/pptx/diari_di_bordo/;
    - i componenti dalla tabella del team nel README.
    La pagina del Glossario (glossario.html) legge i file scelti in
    «glossari», più sotto.
@@ -124,6 +124,42 @@ window.BC_CONTENT = {
       file: "docs/verbali/verbali_interni/Verbale_interno_08.pdf" },
     { tipo: "interno", data: "2026-11-16", titolo: "Mosaico e pianificazione sprint", versione: "1.0.0",
       file: "docs/verbali/verbali_interni/Verbale_interno_09.pdf" },
+    { id: "I01", tipo: "interno", data: "2026-10-17", titolo: "Primo incontro conoscitivo",
+      versione: "v1.0.0", redattore: "Riccardo Pozzato",
+      verificatore: "-",
+      file: "docs/compiled/verbali/verbali_interni/Verbale_interno_01.pdf" },
+    { id: "I02", tipo: "interno", data: "2026-10-21", titolo: "Organizzazione repo, stesura domande ed invio mail ai proponenti",
+      versione: "v1.0.0", redattore: "Riccardo Pozzato",
+      verificatore: "-",
+      file: "docs/compiled/verbali/verbali_interni/Verbale_interno_02.pdf" },
+    { id: "I03", tipo: "interno", data: "2026-10-24", titolo: "Formazione del primo diario di bordo ed il relativo template",
+      versione: "v1.0.0", redattore: "Riccardo Pozzato",
+      verificatore: "-",
+      file: "docs/compiled/verbali/verbali_interni/Verbale_interno_03.pdf" },
+    { id: "I04", tipo: "interno", data: "2026-10-28", titolo: "Redazione bozza dei documenti di candidatura",
+      versione: "v1.0.0", redattore: "Pietro Acampora",
+      verificatore: "-",
+      file: "docs/compiled/verbali/verbali_interni/Verbale_interno_04.pdf" },
+    { id: "I05", tipo: "interno", data: "2026-10-29", titolo: "Revisione documenti per candidatura ed elezione responsabile",
+      versione: "v1.0.0", redattore: "Pietro Acampora",
+      verificatore: "-",
+      file: "docs/compiled/verbali/verbali_interni/Verbale_interno_05.pdf" },
+    { id: "I06", tipo: "interno", data: "2026-11-03", titolo: "Ristesura dei documenti per la candidatura",
+      versione: "v1.0.0", redattore: "Erik Giuliano",
+      verificatore: "-",
+      file: "docs/compiled/verbali/verbali_interni/Verbale_interno_06.pdf" },
+    { id: "I07", tipo: "interno", data: "2026-11-07", titolo: "Decisioni su organizzazione interna",
+      versione: "v0.1.1", redattore: "Pietro Leonardo Acampora",
+      verificatore: "-",
+      file: "docs/compiled/verbali/verbali_interni/Verbale_interno_07.pdf" },
+    { id: "I08", tipo: "interno", data: "2026-11-12", titolo: "Discussione sull'uso e funzionamento di OpenProject",
+      versione: "v1.0.0", redattore: "Marco Bollettin",
+      verificatore: "-",
+      file: "docs/compiled/verbali/verbali_interni/Verbale_interno_08.pdf" },
+    { id: "I09", tipo: "interno", data: "2026-11-16", titolo: "Mosaico e pianificazione sprint",
+      versione: "v1.0.0", redattore: "Riccardo Pozzato",
+      verificatore: "-",
+      file: "docs/compiled/verbali/verbali_interni/Verbale_interno_09.pdf" }
   ],
 
   // Diari di bordo: il numero si legge dal nome del file. La data è quella
@@ -131,11 +167,11 @@ window.BC_CONTENT = {
   // e mette il diario nella consegna giusta. Un diario nuovo va aggiunto qui
   // con la sua data; finché manca, sta nella consegna in corso senza data
   diari: [
-    { numero: 1, data: "2026-10-26", file: "docs/diario_di_bordo/Diario_di_Bordo_01.pptx" },
-    { numero: 2, data: "2026-11-02", file: "docs/diario_di_bordo/Diario_di_Bordo_02.pptx" },
-    { numero: 3, data: "2026-11-09", file: "docs/diario_di_bordo/Diario_di_Bordo_03.pptx" },
-    { numero: 4, data: "2026-11-16", file: "docs/diario_di_bordo/Diario_di_Bordo_04.pptx" },
-    { numero: 5, data: "2026-11-21", file: "docs/diario_di_bordo/Diario_di_Bordo_05.pptx" },
+    { numero: 1, data: "2026-10-26", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_01.pptx" },
+    { numero: 2, data: "2026-11-02", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_02.pptx" },
+    { numero: 3, data: "2026-11-09", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_03.pptx" },
+    { numero: 4, data: "2026-11-16", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_04.pptx" },
+    { numero: 5, data: "2026-11-21", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_05.pptx" },
   ],
 
   componenti: [

@@ -1,0 +1,286 @@
+% Titolo: Discussione sull'uso e funzionamento di OpenProject
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI E CONFIGURAZIONE ---
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{longtable}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Verbale Interno N. 8}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+    
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{unipd_logo.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{Logo-BitCrusher-Nero.png}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large \textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}} \\
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica} \\
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software} \\
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027} \\
+
+    \vspace{2cm}
+    {\Huge \textbf{Verbale di Riunione}} \\
+    \vspace{0.5cm}
+    {\Large Riunione Interna \#8}
+
+    \vspace{2cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \textbf{Email:} bitcrusherteam@gmail.com \\
+        \textbf{Versione:} v1.0.0 \\
+        \textbf{Data della riunione:} 2026-11-12 \\
+        \textbf{Data ultima modifica:} 15 Novembre 2026
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+\newpage
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE
+% ==========================================
+\section*{Registro delle Modifiche}
+\vspace{0.5cm}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|l|l|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{3.5cm}|X|}
+\hline
+\textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+1.0.0 & 2026-11-16 & Erik Giuliano & - & Approvazione per il rilascio. \\ \hline
+0.1.0 & 2026-11-15 & Marco Bollettin & Alexandru Mitu & Prima stesura del verbale (OdG, Resoconto, Decisioni). \\ \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ==================================================================
+% 1 Informazioni generali
+% ==================================================================
+\section{Informazioni Generali}
+
+\begin{itemize}
+  \item \textbf{Luogo/Piattaforma:} Discord
+  \item \textbf{Data:} 2026-11-12
+  \item \textbf{Orario di inizio:} 17:30
+  \item \textbf{Orario di fine:} 19:00
+  \item \textbf{Responsabile:} Alex Singh
+  \item \textbf{Scriba:} Marco Bollettin
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Partecipanti presenti:}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{0.8\textwidth}{|>{\arraybackslash}X|>{\centering\arraybackslash}p{2cm}|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Alex Singh & 2148621 \\ \hline
+Antonio Tufano & 2137972 \\ \hline
+Pietro Leonardo Acampora & 2146762 \\ \hline
+Marco Bollettin & 2147955 \\ \hline
+Erik Giuliano & 2138012 \\ \hline
+Riccardo Pozzato & 2147988 \\ \hline
+Alexandru Mitu & 2101083 \\ \hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Partecipanti assenti:}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{0.8\textwidth}{|>{\arraybackslash}X|>{\centering\arraybackslash}p{2cm}|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+- & - \\ \hline
+\end{tabularx}
+\end{center}
+
+% ==================================================================
+% 2 Ordine del giorno
+% ==================================================================
+\vspace{0.5cm}
+\section{Ordine del Giorno}
+
+Gli argomenti previsti per la riunione sono:
+\begin{enumerate}
+  \item Principi alla base del flusso di lavoro
+  \item Composizione dello sprint il luned\`i (Mosaico)
+  \item Lavoro su stack, commit e pull request, con controllo degli artefatti in CI
+  \item Chiusura del lavoro, ore dichiarate e verifica del gioved\`i
+  \item Specchio su GitHub, vista del professore e calendario personale
+  \item Funzionalit\`a ancora da realizzare e problemi noti
+\end{enumerate}
+
+% ==================================================================
+% 3 Resoconto
+% ==================================================================
+\section{Resoconto della Riunione}
+
+La riunione ha avuto per oggetto la una proposta per il workflow da adottare durante tutto il progetto, che descrive il modo di lavorare a cui il gruppo punta, nei minimi dettagli. \newline Le decisioni sono riportate come proposte.
+
+\subsection{Principi del flusso di lavoro}
+
+\begin{itemize}
+  \item \textbf{Una sola fonte di verit\`a:} Si pianifica e si lavora in OpenProject; GitHub ne \`e lo specchio a senso unico. Codice e review restano su GitHub.
+  \item \textbf{Le regole stanno nei controlli, non nella memoria:} Chi tocca cosa lo dichiarano le carte e lo verificano Mosaico il luned\`i e la CI a ogni PR.
+  \item \textbf{Principio di corroborazione:} Nessun prodotto, decisione o norma \`e valido finch\'e non \`e corroborato, in forma interna, documentale o esterna. Ne seguono tre corollari: ci\`o che non \`e tracciato non \`e avvenuto, il silenzio non corrobora, nessuno corrobora il proprio lavoro.
+  \item \textbf{Le ore sono stime:} Il Mosaico avvisa se il carico di una colonna si allontana dalla media, ma non blocca nessuno.
+\end{itemize}
+
+\subsection{Carte e artefatti}
+
+La carta \`e un work package di OpenProject (Attivit\`a, Interfaccia, Segnalazione, Diario di bordo; Milestone per i traguardi). \newline Per entrare in uno sprint servono tipo, titolo, stima, artefatti, corroborazione ed evidenza attesa, cio\`e la \textbf{Definition of Done} scritta in anticipo; il ruolo lo d\`a la colonna.
+\newline \newline
+Gli artefatti si scrivono come percorsi del repo (da realizzare): un file, una parte di file dopo \texttt{\#}, una cartella con \texttt{/} finale, oppure una risorsa fuori dal repo con una radice \texttt{@} decisa dal gruppo. Per i documenti si dichiara il sorgente e il PDF lo segue. La regola che conta di pi\`u: due persone sullo stesso file usano \texttt{\#} diversi, altrimenti nasce un arco tagliato da risolvere prima della Conferma. I punti caldi sono \texttt{docs/Glossario.tex}, \texttt{assets/js/content.js} e \texttt{README.md}.
+
+\subsection{Composizione dello sprint il luned\`i}
+
+Nella riunione Mosaico del lunedi le carte si trascinano dalla posta alle colonne, una per persona e un ruolo per colonna, e si leggono i due grafi: precedenze e accoppiamenti. Gli archi tagliati si risolvono, nell'ordine, separando, accorpando, serializzando, interponendo una carta Interfaccia oppure derogando. La deroga \`e l'ultima risorsa: richiede una decisione scritta con motivazione e vale per un solo sprint.
+\newline \newline
+Gli avvisi hanno tre gradi: i bloccanti tengono spenta la Conferma, gli avvisi vanno letti (per esempio un carico oltre il 20\% dalla media), le informazioni raccontano soltanto. Si scrive l'obiettivo dello sprint come punto all'ordine del giorno; alla Conferma OpenProject si aggiorna con sprint, assegnatari, ruoli, artefatti, precedenze e decisioni.
+
+\subsection{Lavoro su stack, commit e pull request}
+
+Si lavora con \texttt{spr}: uno stack per lavoro e un commit per PR. Il titolo segue il formato \texttt{tipo(scope):} \texttt{descrizione.} con punto finale, e nel corpo del commit va la carta: \texttt{Refs: OP\#123}, oppure \texttt{Closes OP\#123} nell'ultima PR. La review resta su GitHub, con CODEOWNERS, approvazione obbligatoria e CI verde.
+\newline
+Il controllo degli artefatti in CI (da realizzare) confronta i file cambiati con quelli dichiarati dalle carte citate: un file scoperto fa fallire la build, un file dichiarato anche da un'altra colonna d\`a solo un avviso.
+
+\subsection{Chiusura, dichiarazione delle ore e riunione di verifica}
+
+Le ore effettive si registrano sulla carta prima del merge, con il ruolo della colonna come attivit\`a. Il merge con \texttt{Closes} porta la carta alla chiusura e lo specchio chiude la issue gemella. Una carta superata non si cancella ma si rappresenta come rifiutata.
+\newline \newline
+Il gioved\`i, nella riunione di verifica, si guardano lo stato delle carte e il cruscotto del consuntivo. 
+Il cruscotto confronta ore e costi per ruolo con il preventivo, le ore di ciascuno con le 92 di impegno, le ore per sprint, le carte chiuse senza ore e le ore registrate con un ruolo diverso da quello della carta.
+
+\subsection{Funzionalit\`a da realizzare}
+
+La proposta elenca sei promesse, alcune delle quali non ancora mantenute: artefatti come percorsi, calendario personale, controllo degli artefatti nella PR, chiusura della carta con \texttt{Closes}, specchio su GitHub e link Mosaico nella Panoramica del progetto. \newline Servono pertanto un paio di giorni di lavoro e alcuni passi del gruppo su GitHub (workflow, repository per il codice di Mosaico, token fra i segreti), senza i quali le promesse non partono.
+\newline \newline
+Nel frattempo restano in uso il concetto degli artefatti toccati, le viste del calendario con date fisse dal 26/10 al 7/12, la verifica manuale dei file in review e la chiusura manuale della carta dopo il merge.
+
+\subsection{Riscontro delle azioni sul flusso di lavoro}
+\begin{itemize}
+    \item \href{https://openproject.tail1be59a.ts.net/work_packages/48}{OP\#48} (sincronizzazione di GitHub con Mosaico e OpenProject). Il runner dello specchio GitHub, previsto per la vista del professore, è stato aggiunto il 16/11/2026 nella \href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/56}{PR \#56}, che riporta la chiusura della carta.
+    \item \href{https://openproject.tail1be59a.ts.net/work_packages/48}{OP\#48} (stato della carta dopo \texttt{Closes}). Il workflow aggiunto nella \href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/76}{PR \#76} rileva \texttt{Closes OP\#n} sul ramo principale. La carta passa in attesa delle ore se la rendicontazione è ancora da completare.
+    \item \href{https://openproject.tail1be59a.ts.net/work_packages/57}{OP\#57} (controllo del perimetro degli artefatti nella PR). Il verbale interno \#9 elenca la carta tra le azioni da svolgere. Il workflow è stato inserito il 17/11/2026 nella \href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/76}{PR \#76}.
+\end{itemize}
+
+% ==================================================================
+% 4 Azioni da svolgere
+% ==================================================================
+\vspace{0.5cm}
+\section{Azioni da Svolgere (To-Do)}
+
+La proposta resta oggetto di discussione. L'esito su ciascun punto \`e da completare.
+
+\subsection*{Proposte e azioni associate}
+\renewcommand{\arraystretch}{1.4}
+
+\begin{longtable}{|
+>{\raggedright\arraybackslash}p{1.3cm}|
+>{\raggedright\arraybackslash}p{3.0cm}|
+>{\raggedright\arraybackslash}p{4.5cm}|
+>{\raggedright\arraybackslash}p{3.0cm}|
+>{\raggedright\arraybackslash}p{2.6cm}|
+}
+\hline
+\textbf{Codice} &
+\textbf{Decisione} &
+\textbf{Azione associata} &
+\textbf{Assegnatario in OpenProject} &
+\textbf{Scadenza} \\ \hline
+\endfirsthead
+
+\hline
+\textbf{Codice} &
+\textbf{Decisione} &
+\textbf{Azione associata} &
+\textbf{Assegnatario in OpenProject} &
+\textbf{Scadenza} \\ \hline
+\endhead
+
+---
+& Artefatti scritti come percorsi del repo
+& Creare il campo \guillemotleft Artefatti\guillemotright{} in OpenProject, migrare le carte esistenti e far leggere e scrivere il campo a Mosaico. Nel frattempo vale il campo \guillemotleft Artefatti toccati\guillemotright
+& Alex Singh
+& 14/11/2026 \\
+\hline
+---
+& Uso di un calendario personale. 
+& Impostare un calendario personale per ogni membro con tutte le attività assegnategli
+& Riccardo Pozzato
+&  18/11/2026 \\
+\hline
+OP\#57
+& Controllo degli artefatti nella PR
+& Creare il workflow su GitHub, uno spazio per il codice di Mosaico, il token di sola lettura e la regola per cui il PDF segue il sorgente
+& Antonio Tufano
+& 19/11/2026 \\
+\hline
+OP\#48
+& Chiusura della carta con \texttt{Closes OP\#123}
+& Creare il workflow al merge e un utente di servizio con il token. Nel frattempo la carta si chiude a mano
+& Alexandru Mitu
+& 17/11/2026 \\
+\hline
+OP\#48
+& Specchio su GitHub per il professore
+& Realizzare la lettura da OpenProject e il workflow
+& Alex Singh
+& 16/11/2026 \\
+\hline
+\end{longtable}
+
+La scadenza del 19/11/2026 per il controllo del perimetro è quella della proposta del 12/11/2026. Il verbale interno \#9 riporta il 17/11/2026 come scadenza di OP\#57.
+
+% ==========================================
+% PROSSIMA RIUNIONE
+% ==========================================
+\vspace{0.5cm}
+\section{Prossima Riunione}
+\begin{itemize}
+    \item \textbf{Data:} 16-11-2026
+    \item \textbf{Ora:} 17:30
+    \item \textbf{OdG preliminare:} Stendere il mosaico per lo sprint 1 
+\end{itemize}
+
+\end{document}

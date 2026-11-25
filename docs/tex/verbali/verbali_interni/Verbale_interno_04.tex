@@ -1,0 +1,227 @@
+% Titolo: Redazione bozza dei documenti di candidatura
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI E CONFIGURAZIONE ---
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Verbale Interno N. 4} 
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+    
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{unipd_logo.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{Logo-BitCrusher-Nero.png}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large \textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}} \\
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica} \\
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software} \\
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027} \\
+
+    \vspace{2cm}
+    {\Huge \textbf{Verbale di Riunione}} \\
+    \vspace{0.5cm}
+    {\Large Riunione Interna \#4}
+
+    \vspace{2cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \textbf{Email:} bitcrusherteam@gmail.com \\
+        \textbf{Versione:} v1.0.0 \\
+        \textbf{Data della riunione:} 2026-10-28 \\
+        \textbf{Data ultima modifica:} 28 ottobre 2026
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+\newpage
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE
+% ==========================================
+\section*{Registro delle Modifiche}
+\vspace{0.5cm}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|l|l|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{3.5cm}|X|}
+\hline
+\textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+1.0.0 & 2026-11-03 & Alex Singh & - & Approvazione per il rilascio. \\ \hline
+0.2.0 & 2026-11-03 & Antonio Tufano & Riccardo Pozzato & Aggiornamento logo UniPD e adeguamento registro modifiche. \\ \hline
+0.1.0 & 2026-10-28 & Pietro Acampora & Erik Giuliano & Prima stesura del verbale (OdG, Resoconto, Decisioni, Stime di progetto). \\ \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ==========================================
+% 1. INFORMAZIONI GENERALI
+% ==========================================
+\section{Informazioni Generali}
+\begin{itemize}
+    \item \textbf{Luogo/Piattaforma:} Riunione Discord
+    \item \textbf{Data:} 2026-10-28
+    \item \textbf{Orario di inizio:} 17:30
+    \item \textbf{Orario di fine:} 20:15
+    \item \textbf{Responsabile:} Alex Singh
+    \item \textbf{Scriba:} Pietro Acampora
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Partecipanti presenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+Pietro Leonardo Acampora & 2146762 \\ \hline
+Marco Bollettin & 2147955 \\ \hline
+Alexandru Mitu & 2101083 \\ \hline
+Riccardo Pozzato & 2147988 \\ \hline
+Alex Singh & 2148621 \\ \hline
+Antonio Tufano & 2137972 \\ \hline
+Erik Giuliano & 2138012 \\ \hline
+\end{tabular}
+
+\vspace{0.5cm}
+\textbf{Partecipanti assenti:} \\
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Nome e Cognome} & \textbf{Matricola} \\ \hline
+ Nessuno & - \\ \hline
+\end{tabular}
+
+
+% ==========================================
+% 2. ORDINE DEL GIORNO
+% ==========================================
+\vspace{0.5cm}
+\section{Ordine del Giorno}
+Gli argomenti previsti per la riunione odierna sono:
+\begin{enumerate}
+    \item Discussione e chiarimenti sui documenti da produrre e loro composizione
+    \item Definizione del monte ore per persona e ripartizione oraria per ruolo
+    \item Definizione del costo totale stimato
+    \item Scelta della metodologia di lavoro e durata degli Sprint
+    \item Stima delle scadenze progettuali (RTB e PB) e analisi dei rischi associati per il rispetto dei tempi
+\end{enumerate}
+
+% ==========================================
+% 3. RESOCONTO DELLA RIUNIONE
+% ==========================================
+\newpage
+\section{Resoconto della Riunione}
+
+\subsection{Chiarimenti sui documenti} 
+Sono stati chiesti e forniti chiarimenti generali riguardo alla tipologia di documenti da mandare, la loro composizione strutturale e i processi per la loro stesura.
+
+\subsection{Definizione monte ore e ripartizione ruoli}
+Il gruppo ha stabilito un monte ore di 92 ore per persona (calcolato su un impegno di circa 4,6 ore settimanali di lavoro). È stato inoltre deciso di tenere un margine di 3 ore per persona. Sulla base della preparazione e delle preferenze personali, sono state ripartite le ore per i diversi ruoli progettuali per ogni membro.
+
+\subsection{Definizione costo e metodologia}
+Sono stati verificati i prezzi associati ai singoli ruoli per calcolare le stime economiche. Il costo totale stimato del progetto ammonta a 12900 euro. A livello metodologico, si è deciso di adottare Sprint della durata di 2 settimane e una rotazione dei ruoli ogni 2 settimane. Questa scelta risulta comoda in quanto si allinea con gli stand-up bisettimanali previsti con l'azienda che propone il capitolato di maggiore interesse.
+
+\subsection{Stime temporali e analisi dei rischi}
+La data di consegna stimata per il completamento è stata fissata al 17 marzo 2027.
+Per le revisioni intermedie si è stimato:
+\begin{itemize}
+    \item \textbf{RTB:} 11 gennaio 2027.
+    \item \textbf{PB:} 26 febbraio 2027.
+\end{itemize}
+Sono stati inoltre valutati i principali rischi che potrebbero compromettere il rispetto delle stime temporali:
+\begin{itemize}
+    \item \textbf{Requisiti ambigui:} Necessità di capire e chiarire in dettaglio alcune criticità per evitare blocchi.
+    \item \textbf{Indisponibilità:} Alcuni componenti presentano una possibile indisponibilità durante il periodo natalizio ed in alcuni periodi di tempo
+    \item \textbf{Tecnologie poco note:} Rischio legato all'impiego di tecnologie di sviluppo attualmente poco conosciute dal gruppo.
+    \item \textbf{RR1:} Bassa probabilità di mancanza di descrizione (o buchi) nei requisiti forniti.
+    \item \textbf{RO1:} Impatto di festività e imprevisti.
+\end{itemize}
+
+\subsection{Ripartizione Ore per Ruolo}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|l|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|c|}
+\hline
+\textbf{Membro} & \textbf{Respon.} & \textbf{Ammini.} & \textbf{Analis.} & \textbf{Proget.} & \textbf{Progra.} & \textbf{Verific.} & \textbf{Totale} \\ \hline
+Antonio & 8 & 7 & 10 & 21 & 23 & 23 & 92 \\ \hline
+Alexandru & 6 & 7 & 9 & 22 & 25 & 23 & 92 \\ \hline
+Erik & 8 & 7 & 9 & 22 & 24 & 22 & 92 \\ \hline
+Pietro & 7 & 8 & 10 & 22 & 22 & 23 & 92 \\ \hline
+Marco & 8 & 7 & 9 & 20 & 25 & 23 & 92 \\ \hline
+Alex & 9 & 8 & 9 & 22 & 22 & 22 & 92 \\ \hline
+Riccardo & 8 & 8 & 10 & 22 & 22 & 22 & 92 \\ \hline
+\end{tabularx}
+
+\subsection{Decisioni prese}
+\begin{itemize}
+    \item \textbf{V-4.1} Fissato il monte ore a 92 ore/persona (più 3 ore di margine)
+    \item \textbf{V-4.2} Stabilito il costo totale stimato a 12900 euro
+    \item \textbf{V-4.3} Approvata l'adozione di Sprint e rotazioni di 2 settimane
+    \item \textbf{V-4.4} Stimate le date per RTB (11 gen 2027), PB (26 feb 2027) e Consegna (17 mar 2027)
+\end{itemize}
+
+% ==========================================
+% 4. AZIONI DA SVOLGERE (TO-DO)
+% ==========================================
+\vspace{0.5cm}
+\section{Azioni da Svolgere (To-Do)}
+Nessun task specifico assegnato nel verbale. Le attività elencate sono ricostruite dalle modifiche successive al repository.
+
+\begin{tabularx}{\textwidth}{|c|X|l|l|}
+\hline
+\textbf{Codice Rif.} & \textbf{Descrizione Task} & \textbf{Assegnatario} & \textbf{Scadenza} \\ \hline
+--- & Finalizzare e pubblicare i documenti di candidatura. Nel verbale del 29/10/2026 risultano la revisione della valutazione dei capitolati e la finalizzazione della dichiarazione degli impegni. Questi due documenti e la lettera di presentazione sono stati inseriti nel repository il 30/10/2026 (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/27}{PR \#27}). & --- & --- \\ \hline
+--- & Allineare i riferimenti di pubblicazione. Il 30/10/2026 il README è stato aggiornato con il verbale del 28/10 e il sito con i percorsi dei documenti di candidatura (\href{https://github.com/BitCrusher-Team/Progetto_SWE_26-27/pull/31}{PR \#31}). & --- & --- \\ \hline
+\end{tabularx}
+
+% ==========================================
+% 5. PROSSIMA RIUNIONE
+% ==========================================
+\vspace{0.5cm}
+\section{Prossima Riunione}
+\begin{itemize}
+    \item \textbf{Data:} 29-10-2026
+    \item \textbf{Ora:} 17:30
+    \item \textbf{OdG preliminare:} Conclusione documentazione per candidatura
+\end{itemize}
+
+\end{document}
