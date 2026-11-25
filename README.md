@@ -77,7 +77,7 @@
   <a href="./assets/pptx_templates/Meeting_Bit_Crusher.pptx"><code>Meeting_Bit_Crusher.pptx</code></a>.
   
   Mentre la concretizzazione nelle istanze è presente in
-  <a href="./docs/diario_di_bordo/"><code>docs/diario_di_bordo</code></a>.
+  <a href="./docs/pptx/diari_di_bordo/"><code>docs/pptx/diari_di_bordo</code></a>.
 </p>
 
 ## Verbali delle Riunioni

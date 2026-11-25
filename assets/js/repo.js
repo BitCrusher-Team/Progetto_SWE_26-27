@@ -6,7 +6,7 @@
    - albero dei file: documenti delle consegne in docs/<consegna>/ o
      docs/compiled/<consegna>/, verbali in docs/verbali/ o
      docs/compiled/verbali/ (anche quelli non ancora nel README, e la
-     versione _firmato se c'è), diari in docs/diario_di_bordo/, e quali
+     versione _firmato se c'è), diari in docs/pptx/diari_di_bordo/, e quali
      file dei glossari (content.js) ci sono davvero.
    content.js resta il ripiego se la repo non risponde. Due richieste in
    tutto: l'albero (API) e il README (file grezzo).
@@ -179,7 +179,7 @@
 
     // diari di bordo: numero dal nome del file, data dal ripiego (se c'è)
     const diari = files
-      .filter((f) => /^docs\/diario_di_bordo\/[^/]+\.(pdf|pptx?|odp)$/i.test(f.path))
+      .filter((f) => /^docs\/pptx\/diari_di_bordo\/[^/]+\.(pdf|pptx?|odp)$/i.test(f.path))
       .map((f) => {
         const numero = Number((/(\d+)\.[a-z0-9]+$/i.exec(f.path) || [])[1]) || null;
         const prev = C.diari.find((d) => d.file === f.path || (numero && d.numero === numero)) || {};

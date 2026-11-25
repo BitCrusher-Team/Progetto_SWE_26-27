@@ -8,7 +8,7 @@
      altrimenti decide il catalogo qui sotto;
    - i verbali dalla tabella del README e da docs/verbali/ (o
      docs/compiled/verbali/);
-   - i diari di bordo da docs/diario_di_bordo/;
+   - i diari di bordo da docs/pptx/diari_di_bordo/;
    - i componenti dalla tabella del team nel README.
    La pagina del Glossario (glossario.html) legge i file scelti in
    «glossari», più sotto.
@@ -167,11 +167,11 @@ window.BC_CONTENT = {
   // e mette il diario nella consegna giusta. Un diario nuovo va aggiunto qui
   // con la sua data; finché manca, sta nella consegna in corso senza data
   diari: [
-    { numero: 1, data: "2026-10-26", file: "docs/diario_di_bordo/Diario_di_Bordo_01.pptx" },
-    { numero: 2, data: "2026-11-02", file: "docs/diario_di_bordo/Diario_di_Bordo_02.pptx" },
-    { numero: 3, data: "2026-11-09", file: "docs/diario_di_bordo/Diario_di_Bordo_03.pptx" },
-    { numero: 4, data: "2026-11-16", file: "docs/diario_di_bordo/Diario_di_Bordo_04.pptx" },
-    { numero: 5, data: "2026-11-21", file: "docs/diario_di_bordo/Diario_di_Bordo_05.pptx" },
+    { numero: 1, data: "2026-10-26", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_01.pptx" },
+    { numero: 2, data: "2026-11-02", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_02.pptx" },
+    { numero: 3, data: "2026-11-09", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_03.pptx" },
+    { numero: 4, data: "2026-11-16", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_04.pptx" },
+    { numero: 5, data: "2026-11-21", file: "docs/pptx/diari_di_bordo/Diario_di_Bordo_05.pptx" },
   ],
 
   componenti: [
