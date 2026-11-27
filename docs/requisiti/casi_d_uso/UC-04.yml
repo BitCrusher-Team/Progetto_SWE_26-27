@@ -1,0 +1,30 @@
+active: true
+attore_primario: "Utente"
+attori_secondari: ""
+derived: false
+header: "Consultare i propri elementi conservati"
+importanza: "desiderabile"
+include: ""
+level: '2.3'
+links:
+- BIS-027: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "ipotesi"
+text: |
+  **Obiettivo.** L'[utente](gls:utente) vede quali risposte alle proprie richieste sono conservate, per decidere quali eliminare.
+
+  **Precondizioni.** L'utente è autenticato presso il sistema.
+
+  **Trigger.** L'utente chiede l'elenco dei propri elementi conservati.
+
+  **Postcondizioni.** Nessuna modifica.
+
+  **Scenario principale.**
+  1. L'utente chiede l'elenco.
+  2. Il sistema mostra gli [elementi conservati](gls:elemento-conservato) di cui l'utente è l'utente d'origine ([richiesta d'origine](gls:richiesta-d-origine)), con richiesta d'origine, istante di conservazione e [scadenza](gls:scadenza).
+
+  **Scenari alternativi.**
+  - **2a.** L'utente non ha elementi conservati: il sistema lo indica. Fine.

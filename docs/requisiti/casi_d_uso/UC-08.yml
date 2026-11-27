@@ -1,0 +1,31 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Impostare la conservazione per un team o un utente"
+importanza: "obbligatorio"
+include: ""
+level: '3.2'
+links:
+- BIS-007: null
+- BIS-008: null
+- BIS-010: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) impedisce che le risposte di un [team](gls:team) o di un [utente](gls:utente) diventino [elementi conservati](gls:elemento-conservato), oppure revoca il divieto, per controllare quali dati restano nel sistema.
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore sceglie di cambiare il divieto.
+
+  **Postcondizioni.** La disattivazione della conservazione per il team o l'utente scelto ha il valore indicato; vale per le richieste successive.
+
+  **Scenario principale.**
+  1. L'amministratore seleziona un team o un utente.
+  2. Il sistema mostra se la conservazione è disattivata per il team o per l'utente e, per un utente, anche la sua [impostazione di conservazione](gls:impostazione-di-conservazione) e quella [effettiva](gls:impostazione-effettiva).
+  3. L'amministratore disattiva la conservazione o revoca la disattivazione.
+  4. Il sistema registra la scelta e mostra le impostazioni effettive risultanti.

@@ -1,0 +1,29 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Consentire l'ambito globale agli elementi di un team"
+importanza: "opzionale"
+include: ""
+level: '3.3'
+links:
+- BIS-010: null
+normative: true
+note: "Ipotesi interna: Var Group non ha chiesto un ambito globale. Da presentare come opzione, con il rischio che comporta."
+ref: ''
+reviewed: null
+stato: "ipotesi"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) decide se gli [elementi conservati](gls:elemento-conservato) nati in un [team](gls:team) possono essere riusati da utenti di altri team, per estendere il risparmio alle domande di interesse generale.
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore sceglie di cambiare l'[ambito di condivisione](gls:ambito-di-condivisione) consentito per un team.
+
+  **Postcondizioni.** La scelta vale per gli elementi conservati da quel momento; gli elementi già conservati mantengono il loro ambito.
+
+  **Scenario principale.**
+  1. L'amministratore seleziona un team.
+  2. Il sistema mostra se al team è consentito l'ambito globale.
+  3. L'amministratore lo consente o lo nega.
+  4. Il sistema registra la scelta.

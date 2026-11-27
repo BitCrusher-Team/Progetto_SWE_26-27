@@ -1,0 +1,32 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Consultare gli elementi conservati"
+importanza: "obbligatorio"
+include: ""
+level: '3.5'
+links:
+- BIS-012: null
+- BIS-013: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) individua gli [elementi conservati](gls:elemento-conservato) da esaminare, ad esempio quelli con la maggiore [confidenza di sensibilità](gls:confidenza-di-sensibilita).
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore chiede l'elenco degli elementi conservati.
+
+  **Postcondizioni.** Nessuna modifica.
+
+  **Scenario principale.**
+  1. L'amministratore chiede l'elenco.
+  2. Il sistema mostra gli [elementi validi](gls:elemento-valido) con, per ciascuno, la [richiesta d'origine](gls:richiesta-d-origine), la risposta, il team d'origine, l'[ambito di condivisione](gls:ambito-di-condivisione), l'istante di conservazione, la [scadenza](gls:scadenza), la [confidenza di sensibilità](gls:confidenza-di-sensibilita) e il numero di riusi.
+  3. L'amministratore restringe o ordina l'elenco.
+
+  **Scenari alternativi.**
+  - **2a.** Non ci sono elementi validi: il sistema lo indica. Fine.

@@ -1,0 +1,54 @@
+active: true
+attore_primario: "Client Claude"
+attori_secondari: "Provider (Anthropic)"
+derived: false
+header: "Ottenere la risposta a una richiesta di primo turno"
+importanza: "obbligatorio"
+include: ""
+level: '1.1'
+links:
+- BIS-001: null
+- BIS-002: null
+- BIS-009: null
+- BIS-010: null
+- BIS-011: null
+- BIS-014: null
+- BIS-015: null
+- BIS-017: null
+- BIS-018: null
+- BIS-022: null
+- BIS-023: null
+normative: true
+note: "Le richieste di generazione che non sono di primo turno attraversano il sistema senza riuso né conservazione (RF-003): non hanno un caso d'uso proprio perché il sistema non vi aggiunge comportamento."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** Il [client Claude](gls:client-claude) ottiene una risposta a una [richiesta di primo turno](gls:richiesta-di-primo-turno) inviata per conto di un [utente](gls:utente).
+
+  **Precondizioni.**
+  - Il client Claude invia le proprie [richieste di generazione](gls:richiesta-di-generazione) al sistema.
+  - L'utente è registrato in [LiteLLM](gls:litellm) e appartiene a un [team](gls:team).
+
+  **Trigger.** Il client Claude invia una richiesta di primo turno.
+
+  **Postcondizioni.**
+  - Il client Claude ha ricevuto una risposta alla richiesta, oppure un errore che ne indica la causa.
+  - Il [costo sostenuto](gls:costo-sostenuto) o il [costo evitato](gls:costo-evitato) della richiesta è registrato e attribuito all'utente e al suo team.
+  - Se la richiesta era ammessa alla [conservazione](gls:conservazione) e la risposta è arrivata dal [provider](gls:provider), la risposta è riusabile fino alla sua [scadenza](gls:scadenza).
+
+  **Scenario principale.**
+  1. Il client Claude invia la richiesta.
+  2. Il sistema inoltra la richiesta al provider.
+  3. Il provider restituisce la risposta.
+  4. Il sistema restituisce la risposta al client Claude.
+  5. Il sistema registra la risposta come [elemento conservato](gls:elemento-conservato).
+  6. Il sistema registra il costo sostenuto.
+
+  **Scenari alternativi.**
+  - **1a.** La credenziale della richiesta non è valida: il sistema rifiuta la richiesta. Fine.
+  - **2a.** Il sistema riconosce ([riconoscimento di equivalenza](gls:riconoscimento-di-equivalenza)) la richiesta come equivalente alla [richiesta d'origine](gls:richiesta-d-origine) di un [elemento valido](gls:elemento-valido), il cui [ambito di condivisione](gls:ambito-di-condivisione) comprende l'utente, e l'[impostazione effettiva](gls:impostazione-effettiva) di riuso dell'utente è attiva: il sistema restituisce il contenuto dell'elemento con la [segnalazione di riuso](gls:segnalazione-di-riuso), senza interpellare il provider, e registra il costo evitato. Fine.
+  - **2b.** Il sistema non riesce a stabilire se esiste un elemento riusabile, per un guasto o perché supererebbe il limite di [latenza aggiunta](gls:latenza-aggiunta): si prosegue dal passo 2 come se non esistesse.
+  - **3a.** Il provider restituisce un errore o interrompe la risposta: il sistema restituisce l'errore al client Claude, non conserva nulla e registra il costo sostenuto. Fine.
+  - **5a.** La richiesta ha [accesso differenziato](gls:accesso-differenziato), oppure l'impostazione effettiva di conservazione dell'utente è disattiva: il sistema non conserva la risposta. Si prosegue dal passo 6.
+  - **5b.** La richiesta è [non permanente](gls:richiesta-non-permanente): il sistema conserva la risposta con una scadenza non successiva a 1 settimana dalla conservazione. Si prosegue dal passo 6.

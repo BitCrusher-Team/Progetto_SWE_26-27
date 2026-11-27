@@ -1,0 +1,31 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Far scadere elementi conservati"
+importanza: "obbligatorio"
+include: "UC-11"
+level: '3.6'
+links:
+- BIS-012: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) impedisce subito il [riuso](gls:riuso) di [elementi conservati](gls:elemento-conservato), ad esempio perché contengono [dati sensibili](gls:dato-sensibile).
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore sceglie di far scadere elementi.
+
+  **Postcondizioni.** La [scadenza](gls:scadenza) degli elementi scelti è trascorsa: non sono più riusati.
+
+  **Scenario principale.**
+  1. L'amministratore seleziona gli elementi (UC-11, incluso).
+  2. L'amministratore chiede la scadenza immediata e la conferma.
+  3. Il sistema porta la scadenza degli elementi all'istante presente e conferma l'esito.
+
+  **Scenari alternativi.**
+  - **2a.** L'amministratore annulla: nessuna modifica. Fine.

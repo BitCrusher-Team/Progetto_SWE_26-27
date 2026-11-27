@@ -1,0 +1,30 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Impostare il riuso per un team o un utente"
+importanza: "obbligatorio"
+include: ""
+level: '3.1'
+links:
+- BIS-007: null
+- BIS-008: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) esclude dal [riuso](gls:riuso) un [team](gls:team) o un [utente](gls:utente), oppure revoca l'esclusione, per controllare dove il riuso è ammesso.
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore sceglie di cambiare l'esclusione.
+
+  **Postcondizioni.** La disattivazione del riuso per il team o l'utente scelto ha il valore indicato; le [impostazioni effettive](gls:impostazione-effettiva) degli utenti interessati lo riflettono.
+
+  **Scenario principale.**
+  1. L'amministratore seleziona un team o un utente.
+  2. Il sistema mostra se il riuso è disattivato per il team o per l'utente e, per un utente, anche la sua [impostazione di riuso](gls:impostazione-di-riuso) e quella effettiva.
+  3. L'amministratore disattiva il riuso o revoca la disattivazione.
+  4. Il sistema registra la scelta e mostra le impostazioni effettive risultanti.

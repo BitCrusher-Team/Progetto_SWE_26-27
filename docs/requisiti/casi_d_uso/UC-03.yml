@@ -1,0 +1,33 @@
+active: true
+attore_primario: "Utente"
+attori_secondari: ""
+derived: false
+header: "Impostare la conservazione delle proprie risposte"
+importanza: "desiderabile"
+include: ""
+level: '2.2'
+links:
+- BIS-007: null
+- BIS-008: null
+- BIS-027: null
+normative: true
+note: "Come per UC-02: che sia l'utente a impostarla è un'ipotesi interna."
+ref: ''
+reviewed: null
+stato: "ipotesi"
+text: |
+  **Obiettivo.** L'[utente](gls:utente) decide se le risposte alle proprie [richieste di primo turno](gls:richiesta-di-primo-turno) possono diventare [elementi conservati](gls:elemento-conservato), così da non lasciare nel sistema ciò che chiede.
+
+  **Precondizioni.** L'utente è autenticato presso il sistema.
+
+  **Trigger.** L'utente apre le proprie impostazioni.
+
+  **Postcondizioni.** L'[impostazione di conservazione](gls:impostazione-di-conservazione) dell'utente ha il valore scelto; vale per le richieste successive.
+
+  **Scenario principale.**
+  1. Il sistema mostra l'impostazione di conservazione dell'utente e l'[impostazione effettiva](gls:impostazione-effettiva) di conservazione.
+  2. L'utente attiva o disattiva l'impostazione di conservazione.
+  3. Il sistema registra il nuovo valore e mostra l'impostazione effettiva risultante.
+
+  **Scenari alternativi.**
+  - **1a.** L'[amministratore LiteLLM](gls:amministratore-litellm) ha disattivato la conservazione per l'utente o per il suo team: il sistema lo indica insieme all'impostazione effettiva. L'utente può comunque cambiare la propria impostazione.

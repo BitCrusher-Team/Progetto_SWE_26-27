@@ -1,0 +1,31 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Impostare un budget"
+importanza: "obbligatorio"
+include: ""
+level: '3.13'
+links:
+- BIS-004: null
+normative: true
+note: "LiteLLM gestisce già un budget per persona: verificare sulla v1.106.7 che cosa resta da realizzare."
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) fissa un limite mensile di spesa per un [utente](gls:utente) o un [team](gls:team), per essere avvisato quando viene superato.
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore sceglie di impostare un [budget](gls:budget).
+
+  **Postcondizioni.** Il budget è registrato e vale dal mese in corso.
+
+  **Scenario principale.**
+  1. L'amministratore seleziona un utente o un team.
+  2. L'amministratore inserisce l'importo mensile.
+  3. Il sistema registra il budget.
+
+  **Scenari alternativi.**
+  - **2a.** L'importo non è positivo: il sistema lo rifiuta e lo indica. Si torna al passo 2.
