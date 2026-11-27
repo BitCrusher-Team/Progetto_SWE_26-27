@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Retention e controllo della cache"
+header: "Domande non permanenti"
+level: '1.14'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Le domande di natura non permanente, come «che tempo fa oggi», non vanno conservate, oppure vanno conservate con una retention di un giorno o meno.

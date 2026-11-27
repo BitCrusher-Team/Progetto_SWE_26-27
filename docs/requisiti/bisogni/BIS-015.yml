@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "CAP p. 9"
+header: "Soglia e invalidazione"
+level: '1.15'
+links: []
+normative: true
+note: "Sono soluzioni proposte: nei requisiti compaiono come severità del riconoscimento, retention e scadenza. Il versioning resta da definire (BIS-016)."
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  Il capitolato chiede una soglia di similarità configurabile e l'invalidazione per TTL e per versioning.

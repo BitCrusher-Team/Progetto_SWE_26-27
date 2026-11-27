@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DOM-ANT"
+header: "Vincoli dell'ambiente Anthropic"
+level: '1.28'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  Nei modelli Claude attuali un blocco di ragionamento è legato a tutto ciò che lo precede: istruzioni di sistema, strumenti e messaggi. Se cambia, il blocco non è più valido. Il prompt caching di Anthropic riconosce solo prefissi identici.

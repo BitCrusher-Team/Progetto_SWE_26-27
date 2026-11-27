@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Interfaccia utente; DT-A"
+header: "Riconoscere il riuso"
+level: '1.22'
+links: []
+normative: true
+note: "Gli appunti di gruppo dicono «inizio o fine», quelli di Alex Singh «alla fine»."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Deve essere visibile subito se una risposta proviene dalla cache, ad esempio con un testo all'inizio o alla fine della risposta.

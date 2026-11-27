@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Informazioni; DT-A; CAP p. 10"
+header: "LiteLLM"
+level: '1.25'
+links: []
+normative: true
+note: "Attenua il vincolo del capitolato «LiteLLM come proxy base (non reinventarlo)»."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  LiteLLM non è obbligatorio, ma è preferito: va sostituito solo se impone limiti strutturali al progetto. Il fork di Var Group è modificabile; la versione fissata è la v1.106.7.

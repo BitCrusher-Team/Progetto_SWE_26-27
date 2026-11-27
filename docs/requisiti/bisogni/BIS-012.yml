@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Retention e controllo della cache; DT-A"
+header: "Retention e controllo"
+level: '1.12'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Ogni elemento in cache deve avere una retention. Un amministratore della cache deve poter far scadere gli elementi o prolungarne la retention, anche per eliminare un dato sensibile finito in cache. La retention deve essere verificabile alla fine del flusso, in produzione.

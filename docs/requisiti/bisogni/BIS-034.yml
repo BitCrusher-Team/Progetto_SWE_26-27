@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Parti opzionali"
+header: "Rigenerazione"
+level: '1.34'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Sviluppo futuro: l'utente può chiedere di rigenerare una risposta riusata («se non ti va bene, rigenera»).

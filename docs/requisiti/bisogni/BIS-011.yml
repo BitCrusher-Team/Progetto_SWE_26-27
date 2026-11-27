@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Sicurezza e accessi"
+header: "Risposte che dipendono dagli accessi"
+level: '1.11'
+links: []
+normative: true
+note: "Da chiedere a Var Group come sono rappresentati oggi i permessi sui dati."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Se la stessa domanda può avere risposte diverse per utenti con accessi diversi ai dati privati, la risposta non va conservata.

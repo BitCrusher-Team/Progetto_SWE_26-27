@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "CAP p. 8; DT-A"
+header: "Misurare il risparmio reale"
+level: '1.3'
+links: []
+normative: true
+note: "La seconda frase è dichiarata (DT-A), non scritta nel capitolato."
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  Var Group vuole misurare il risparmio reale prodotto dalla cache. Il monitoraggio dei costi spetta agli amministratori di LiteLLM; per l'utente il dato è accessorio.

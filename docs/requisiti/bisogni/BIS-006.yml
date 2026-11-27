@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "CAP p. 9; DT-A"
+header: "Dati di costo aggiornati"
+level: '1.6'
+links: []
+normative: true
+note: "La voce near-real-time del Glossario di progetto parla di pochi secondi: va corretta."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  I dati di costo devono essere aggiornati «near real-time»; Var Group intende con questo un ritardo di al più un giorno.

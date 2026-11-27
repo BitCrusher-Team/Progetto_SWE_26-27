@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Prestazioni; DT-A"
+header: "Latenza"
+level: '1.17'
+links: []
+normative: true
+note: "Da concordare il percentile e il punto di misura."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Il sistema non deve aggiungere più di 500 ms al tempo di risposta normale.

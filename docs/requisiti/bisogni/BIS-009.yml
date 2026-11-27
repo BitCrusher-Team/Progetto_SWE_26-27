@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Caching semantico; DT-A"
+header: "Solo il primo turno"
+level: '1.9'
+links: []
+normative: true
+note: "Da chiarire se le richieste che proseguono il primo turno dopo l'uso di uno strumento rientrano nel perimetro."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Il caching riguarda soltanto il primo turno delle conversazioni (prompt one-shot); le conversazioni a più turni sono affidate a un altro gruppo.

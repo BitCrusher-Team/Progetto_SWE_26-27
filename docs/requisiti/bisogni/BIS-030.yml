@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "CAP p. 10"
+header: "Logica originale"
+level: '1.30'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  Il capitolato richiede logica originale sostanziale su cache semantica e FinOps.

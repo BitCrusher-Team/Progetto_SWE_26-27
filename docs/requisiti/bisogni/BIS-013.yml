@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Retention e controllo della cache"
+header: "Confidenza di sensibilità"
+level: '1.13'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Per ogni elemento in cache deve essere visibile la confidenza che contenga dati sensibili.

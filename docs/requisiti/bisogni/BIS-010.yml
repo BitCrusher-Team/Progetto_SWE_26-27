@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Sicurezza e accessi; DT-A; CAP p. 10"
+header: "Nessuna fuga di dati tra team"
+level: '1.10'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Una risposta non deve mai raggiungere un utente che non ha accesso ai dati su cui si basa: un elemento nato nel team HR non deve arrivare a un altro reparto.

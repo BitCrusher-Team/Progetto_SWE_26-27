@@ -1,0 +1,44 @@
+# Livelli dei glossari e documenti Doorstop che li usano.
+# Un livello eredita le voci dei livelli da cui discende: un testo può citare
+# (con un collegamento gls:<id>) solo voci del proprio livello o degli antenati.
+sito: https://bitcrusher-team.github.io/Progetto_SWE_26-27/
+
+livelli:
+  progetto:
+    file: docs/tex/glossario/Glossario.tex
+    pdf: docs/compiled/glossario/Glossario.pdf
+    eredita: null
+    documenti: []
+  c6-casi-d-uso:
+    file: docs/tex/glossario/Glossario_Casi_d_uso.tex
+    pdf: docs/compiled/glossario/Glossario_Casi_d_uso.pdf
+    eredita: progetto
+    documenti: [BIS, UC]
+
+# Voci del Glossario di progetto che descrivono una soluzione: appartengono
+# alla progettazione, quindi i testi di casi d'uso e requisiti non le citano
+# né le nominano. Quando nasce il glossario di progettazione si spostano lì,
+# con lo stesso id.
+riservate_progettazione:
+  - bi-encoder
+  - cross-encoder
+  - embedding
+  - entry
+  - hash
+  - pgvector
+  - qdrant
+  - redis
+  - sentence-transformers
+  - similarita-del-coseno
+  - similarity-search
+  - soglia-di-similarita
+  - text-embedding-3-small
+  - ttl
+  - vector-store
+
+# Voci del Glossario di progetto da correggere in Glossario.tex.
+da_correggere:
+  near-real-time: "Per Var Group significa un ritardo di al più un giorno, non pochi secondi."
+  budget: "Le dimensioni sono utente e team: il progetto è stato escluso (incontro del 2026-11-23)."
+  amministratore: "Omonimo dell'attore Amministratore LiteLLM: va mantenuta la distinzione."
+  falso-hit: "La definizione contiene un giudizio («più dannoso di un miss») che non è una definizione."

@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "CAP p. 8; DT-G §Informazioni; DT-A"
+header: "Sapere chi spende"
+level: '1.2'
+links: []
+normative: true
+note: "Modifica del capitolato: va registrata in un verbale esterno approvato."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Var Group vuole attribuire costi e consumi dell'IA a chi li genera. Il capitolato indica team, progetto e utente; nell'incontro del 2026-11-23 Var Group ha ristretto le dimensioni a utente e team, escludendo organizzazione e progetto perché richiederebbero una configurazione manuale.

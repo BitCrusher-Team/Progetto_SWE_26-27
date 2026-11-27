@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "CAP p. 10"
+header: "Qualità contrattuale"
+level: '1.29'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  Il capitolato richiede test con copertura del codice di almeno il 70% e la separazione tra test deterministici e valutazione probabilistica.

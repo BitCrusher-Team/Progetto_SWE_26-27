@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "CAP p. 8"
+header: "Budget e avvisi"
+level: '1.4'
+links: []
+normative: true
+note: "LiteLLM gestisce già un budget per persona (DT-G §Informazioni): verificare che cosa offre la v1.106.7 prima di stabilire che cosa resta da realizzare."
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  Var Group vuole definire budget di spesa e ricevere avvisi automatici quando la spesa li supera.
