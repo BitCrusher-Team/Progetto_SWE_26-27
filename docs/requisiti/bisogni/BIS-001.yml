@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "CAP p. 3, p. 7"
+header: "Pagare una sola volta le domande equivalenti"
+level: '1.1'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  Var Group paga a consumo ogni richiesta ai modelli, anche quando una domanda equivalente ha già ricevuto risposta, e vuole evitare di pagare più volte la stessa risposta.

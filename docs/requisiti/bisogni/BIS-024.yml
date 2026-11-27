@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-A"
+header: "Client e percorso delle richieste"
+level: '1.24'
+links: []
+normative: true
+note: "Da confermare che Claude Desktop sia configurato in modalità di inferenza di terze parti, con LiteLLM come gateway."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Gli utenti usano l'agente di Anthropic nell'applicativo Claude; tutte le richieste passano dagli endpoint di LiteLLM.

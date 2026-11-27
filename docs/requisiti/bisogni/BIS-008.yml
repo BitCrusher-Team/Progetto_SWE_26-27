@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-A (2026-11-25)"
+header: "Precedenza dell'amministratore"
+level: '1.8'
+links: []
+normative: true
+note: "Da confermare se la regola vale separatamente per riuso e conservazione."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Quando l'amministratore disattiva il caching per un team o un utente, la sua scelta prevale su quella dell'utente; l'amministratore non può invece attivarlo al posto dell'utente.

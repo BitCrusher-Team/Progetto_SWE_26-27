@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-A"
+header: "Continuità del servizio"
+level: '1.23'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Var Group vuole continuità del servizio: il caching è un processo di supporto e non deve impedire alle richieste di ricevere risposta.

@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-A"
+header: "Il punto di equilibrio"
+level: '1.19'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Var Group vuole scegliere il punto di equilibrio sulla curva tra costo e precisione. Una risposta riusata che non c'entra è inutile; una risposta imprecisa ma pertinente fa meno danni.

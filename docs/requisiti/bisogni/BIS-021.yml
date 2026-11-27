@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Dashboard"
+header: "Le ottimizzazioni funzionano?"
+level: '1.21'
+links: []
+normative: true
+note: "Da chiarire se «categorie di utenti» significa team."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  La dashboard deve far capire se le ottimizzazioni funzionano, e se funzionano solo per certe categorie di utenti.

@@ -1,0 +1,13 @@
+active: false
+derived: false
+fonte: "DT-A"
+header: "Riuso di frammenti di ragionamento"
+level: '1.37'
+links: []
+normative: true
+note: "Scartato: i blocchi di ragionamento sono firmati e legati al loro prefisso (BIS-028), quindi non si possono trapiantare in un'altra richiesta. Resta possibile dare testo al modello come contesto, ma è un'altra soluzione (BIS-033)."
+ref: ''
+reviewed: null
+stato: "scartato"
+text: |
+  Var Group ha suggerito di comporre nuovi ragionamenti con parti di ragionamenti già conservati.

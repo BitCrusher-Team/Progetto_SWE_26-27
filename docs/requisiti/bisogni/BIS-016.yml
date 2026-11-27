@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-A"
+header: "Le informazioni interne cambiano"
+level: '1.16'
+links: []
+normative: true
+note: "Nessun requisito per ora: serve sapere da Var Group quali cambiamenti il sistema può osservare. Doorstop segnala che il bisogno non ha figli: è voluto."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Quando cambiano le informazioni interne su cui si basa una risposta, cambia anche ciò che si può riusare.

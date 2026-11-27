@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Parti opzionali; DT-A"
+header: "Ottimizzare parti dell'agente"
+level: '1.33'
+links: []
+normative: true
+note: "Nessun requisito per ora: serve prima uno studio di fattibilità. Doorstop segnala che il bisogno non ha figli: è voluto."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Opzionale: ottimizzare singole parti dell'attività dell'agente, ad esempio ridurre le [skill](gls:skill) e gli [strumenti](gls:strumento) considerati in base alla domanda, così da usare meno contesto e meno ragionamento. Var Group suggerisce una RAG.

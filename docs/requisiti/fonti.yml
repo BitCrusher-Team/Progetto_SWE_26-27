@@ -1,0 +1,21 @@
+# Fonti dei bisogni. Il campo «fonte» di un bisogno inizia con uno di questi identificatori.
+CAP:
+  titolo: "Capitolato C6 «Sistema AI di caching semantico e dashboard FinOps», Var Group S.p.A."
+  tipo: contrattuale
+DT-G:
+  titolo: "Appunti di gruppo dell'incontro di design thinking con Var Group, 2026-11-23"
+  tipo: incontro esterno
+  nota: "E' confermata se e solo se il verbale esterno è approvato da Var Group."
+DT-A:
+  titolo: "Appunti di Alex Singh e Alexandru Mitu dello stesso incontro (2026-11-23)"
+  tipo: incontro esterno
+  nota: "Parte di DT-G."
+NOR-GDPR:
+  titolo: "Regolamento (UE) 2016/679 (GDPR)"
+  tipo: normativa
+DOM-ANT:
+  titolo: "Documentazione di Claude Platform su thinking, preserved thinking e prompt caching - consultata il 2026-11-25"
+  tipo: dominio
+DOM-LLM:
+  titolo: "LiteLLM v1.106.7, documentazione e codice del fork di Var Group"
+  tipo: dominio

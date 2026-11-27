@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Prestazioni; DT-A"
+header: "Risparmio e accuratezza"
+level: '1.18'
+links: []
+normative: true
+note: "Contraddizione tra 80% e 90%: va risolta con Var Group prima di fissare RQ-01."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Il risparmio non deve essere totale: va bilanciato con l'accuratezza. Un risparmio del 50% è più che buono con un'accuratezza alta: almeno l'80% secondo gli appunti di gruppo, 90 casi giusti su 100 secondo gli appunti di Alex Singh.

@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-A"
+header: "FinOps in LiteLLM"
+level: '1.36'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Opzionale: integrare la dashboard FinOps in LiteLLM.

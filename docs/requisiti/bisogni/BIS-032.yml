@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-A"
+header: "Dove si può ottimizzare il ragionamento"
+level: '1.32'
+links: []
+normative: true
+note: "Da confermare se è un'analisi da consegnare o una funzione del prodotto."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Var Group chiede di individuare dove si può ottimizzare il ragionamento nei prompt one-shot, con un elenco delle aree.

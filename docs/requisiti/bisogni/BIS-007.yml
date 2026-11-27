@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Caching semantico"
+header: "Riuso selettivo"
+level: '1.7'
+links: []
+normative: true
+note: "Gli appunti non dicono chi attiva e disattiva: per team è l'amministratore; per il singolo utente può essere l'amministratore, l'utente stesso o entrambi."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Il caching deve poter essere attivato o disattivato per un singolo team o per un singolo utente.

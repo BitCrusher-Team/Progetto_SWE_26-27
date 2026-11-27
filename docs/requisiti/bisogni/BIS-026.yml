@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Informazioni; DT-A"
+header: "Esclusioni dal perimetro"
+level: '1.26'
+links: []
+normative: false
+note: "Voce informativa: delimita il perimetro e non genera requisiti."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Non rientrano nel progetto la classificazione dei dati in Gold, Silver e Bronze e le organizzazioni e i progetti come dimensioni di attribuzione.

@@ -1,0 +1,10 @@
+settings:
+  digits: 3
+  itemformat: yaml
+  prefix: BIS
+  sep: '-'
+attributes:
+  publish:
+  - fonte
+  - stato
+  - note

@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-A"
+header: "Lettore in ombra"
+level: '1.20'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Var Group suggerisce un «lettore in ombra» per stimare la confidenza e calibrare le soglie sul ragionamento.

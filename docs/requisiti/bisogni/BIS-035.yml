@@ -1,0 +1,13 @@
+active: true
+derived: false
+fonte: "DT-G §Parti opzionali; DT-A"
+header: "Gestione nella dashboard di LiteLLM"
+level: '1.35'
+links: []
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  Opzionale: integrare la gestione della cache nella dashboard di LiteLLM, così che l'amministratore della cache coincida con l'amministratore di LiteLLM e i controlli di accesso esistano già.
