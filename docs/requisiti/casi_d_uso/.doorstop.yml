@@ -1,7 +1,7 @@
 settings:
   digits: 2
   itemformat: yaml
-  parent: # BIS da aggiungere
+  parent: BIS
   prefix: UC
   sep: '-'
 attributes:
