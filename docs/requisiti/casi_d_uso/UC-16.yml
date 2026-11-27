@@ -1,0 +1,34 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Regolare il compromesso tra costo evitato e correttezza"
+importanza: "obbligatorio"
+include: ""
+level: '3.10'
+links:
+- BIS-015: null
+- BIS-018: null
+- BIS-019: null
+- BIS-020: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) sceglie la [severità del riconoscimento](gls:severita-del-riconoscimento) che dà il compromesso preferito tra [costo evitato](gls:costo-evitato) e correttezza del [riuso](gls:riuso).
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore chiede di regolare la severità.
+
+  **Postcondizioni.** La severità scelta vale per i riconoscimenti successivi.
+
+  **Scenario principale.**
+  1. Il sistema mostra la severità in vigore e, per ciascun livello di severità, la quota di richieste che avrebbero ricevuto riuso e la quota di riusi giudicati corretti, stimate sulle coppie giudicate del [lettore in ombra](gls:lettore-in-ombra).
+  2. L'amministratore sceglie un livello di severità.
+  3. Il sistema lo registra.
+
+  **Scenari alternativi.**
+  - **1a.** Non ci sono coppie giudicate: il sistema mostra solo la severità in vigore e indica che mancano i dati. Si prosegue dal passo 2.

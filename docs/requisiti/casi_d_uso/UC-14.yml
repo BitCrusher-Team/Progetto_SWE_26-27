@@ -1,0 +1,32 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Attivare il lettore in ombra"
+importanza: "desiderabile"
+include: ""
+level: '3.8'
+links:
+- BIS-020: null
+- BIS-019: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) raccoglie dati su ciò che il sistema riuserebbe, senza riusarlo, per valutarne la correttezza prima di attivare il [riuso](gls:riuso).
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore sceglie di attivare o disattivare il [lettore in ombra](gls:lettore-in-ombra).
+
+  **Postcondizioni.** Il lettore in ombra è attivo, o disattivo, per i team scelti.
+
+  **Scenario principale.**
+  1. L'amministratore sceglie un [team](gls:team) o tutti i team.
+  2. L'amministratore attiva il lettore in ombra.
+  3. Il sistema registra la scelta.
+
+  **Scenari alternativi.**
+  - **2a.** L'amministratore disattiva il lettore in ombra: il sistema registra la scelta. Fine.

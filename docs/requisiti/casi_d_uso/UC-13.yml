@@ -1,0 +1,32 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Prolungare la retention di elementi conservati"
+importanza: "obbligatorio"
+include: "UC-11"
+level: '3.7'
+links:
+- BIS-012: null
+- BIS-014: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) mantiene riusabili più a lungo [elementi conservati](gls:elemento-conservato) che ritiene ancora corretti.
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore sceglie di prolungare la [retention](gls:retention) di elementi.
+
+  **Postcondizioni.** La [scadenza](gls:scadenza) degli elementi scelti è spostata in avanti.
+
+  **Scenario principale.**
+  1. L'amministratore seleziona gli elementi (UC-11, incluso).
+  2. L'amministratore indica la nuova scadenza.
+  3. Il sistema registra la nuova scadenza e conferma l'esito.
+
+  **Scenari alternativi.**
+  - **3a.** Un elemento è nato da una [richiesta non permanente](gls:richiesta-non-permanente) e la nuova scadenza supererebbe le 24 ore dalla conservazione: il sistema non la applica a quell'elemento e lo indica.

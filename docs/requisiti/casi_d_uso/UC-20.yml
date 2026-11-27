@@ -1,0 +1,29 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Consultare la previsione di spesa"
+importanza: "obbligatorio"
+include: ""
+level: '3.14'
+links:
+- BIS-005: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) stima la spesa del mese in corso, per [team](gls:team) e in totale, per pianificare il [budget](gls:budget).
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore chiede la previsione.
+
+  **Postcondizioni.** Nessuna modifica.
+
+  **Scenario principale.**
+  1. Il sistema mostra la previsione ([forecast](gls:forecast)) della spesa a fine mese, per ciascun team e in totale, con la spesa già sostenuta nel mese.
+
+  **Scenari alternativi.**
+  - **1a.** Mancano i dati per una previsione: il sistema lo indica. Fine.

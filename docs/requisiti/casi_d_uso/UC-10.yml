@@ -1,0 +1,32 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Impostare la retention predefinita"
+importanza: "obbligatorio"
+include: ""
+level: '3.4'
+links:
+- BIS-012: null
+- BIS-015: null
+normative: true
+note: "Che ogni elemento abbia una retention è dichiarato; che la imposti l'amministratore, per tutti o per team, è un'ipotesi interna."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) stabilisce per quanto tempo restano riusabili i nuovi [elementi conservati](gls:elemento-conservato), per tutti i team o per un singolo [team](gls:team).
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore sceglie di cambiare la [retention](gls:retention) predefinita.
+
+  **Postcondizioni.** La nuova retention predefinita vale per gli elementi conservati da quel momento.
+
+  **Scenario principale.**
+  1. L'amministratore sceglie se impostare la retention per tutti i team o per un team.
+  2. L'amministratore inserisce la durata.
+  3. Il sistema registra la durata.
+
+  **Scenari alternativi.**
+  - **2a.** La durata non è positiva: il sistema la rifiuta e lo indica. Si torna al passo 2.

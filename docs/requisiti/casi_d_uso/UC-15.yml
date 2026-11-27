@@ -1,0 +1,31 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Giudicare le coppie registrate dal lettore in ombra"
+importanza: "desiderabile"
+include: ""
+level: '3.9'
+links:
+- BIS-020: null
+normative: true
+note: "Da chiedere a Var Group chi giudica le coppie: l'amministratore, gli utenti, un altro modello?"
+ref: ''
+reviewed: null
+stato: "ipotesi"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) indica, per le coppie registrate dal [lettore in ombra](gls:lettore-in-ombra), se l'[elemento conservato](gls:elemento-conservato) individuato sarebbe stato una risposta corretta, così che il sistema possa stimarne la correttezza.
+
+  **Precondizioni.** Il lettore in ombra ha registrato almeno una coppia.
+
+  **Trigger.** L'amministratore chiede le coppie da giudicare.
+
+  **Postcondizioni.** Le coppie giudicate hanno un giudizio registrato.
+
+  **Scenario principale.**
+  1. Il sistema mostra una coppia non giudicata: la richiesta, la risposta dell'elemento individuato e la risposta generata dal [provider](gls:provider).
+  2. L'amministratore la giudica corretta o non corretta.
+  3. Il sistema registra il giudizio. Si torna al passo 1 finché l'amministratore non smette.
+
+  **Scenari alternativi.**
+  - **1a.** Non ci sono coppie da giudicare: il sistema lo indica. Fine.

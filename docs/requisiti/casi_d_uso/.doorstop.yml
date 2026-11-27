@@ -1,0 +1,14 @@
+settings:
+  digits: 2
+  itemformat: yaml
+  parent: BIS
+  prefix: UC
+  sep: '-'
+attributes:
+  publish:
+  - attore_primario
+  - attori_secondari
+  - include
+  - importanza
+  - stato
+  - note

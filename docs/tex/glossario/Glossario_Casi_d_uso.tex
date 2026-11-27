@@ -1,0 +1,342 @@
+% ==========================================
+% Glossario C6 -- Casi d'uso
+% ==========================================
+% Documento del gruppo Bit Crusher, compilabile con pdfLaTeX, autonomo
+% come il modello del Glossario: non include altri sorgenti.
+% Le voci sono scritte con \VoceGlossario{id}{nome}{definizione}, come nel
+% Glossario di progetto, e la pagina glossario.html le legge da questo file.
+% Livelli, ereditarieta' e regole: vedi l'Introduzione e
+% docs/requisiti/glossari.yml.
+
+\documentclass[a4paper, 11pt]{article}
+
+% --- PACCHETTI ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage[hidelinks, hypertexnames=false]{hyperref}
+
+% --- METADATI ---
+\newcommand{\VersioneDocumento}{0.1.0}
+\newcommand{\DataDocumento}{2026-11-26}
+\newcommand{\RedattoriDocumento}{Alex Singh}
+\newcommand{\VerificatoriDocumento}{[Nome Cognome]}
+\newcommand{\ApprovatoreDocumento}{[Nome Cognome]}
+
+\hypersetup{
+    pdftitle={Glossario C6 -- Casi d'uso},
+    pdfauthor={Bit Crusher},
+    pdfsubject={Glossario del capitolato C6 per livello}
+}
+
+% --- HEADER E FOOTER ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Bit Crusher}
+\fancyhead[R]{Glossario C6, casi d'uso}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ==========================================
+% COMANDI PER LE VOCI E I COLLEGAMENTI (come nel Glossario di progetto)
+% ==========================================
+% \VoceGlossario{id}{nome}{definizione}: stampa la voce e crea l'ancora gls-<id>.
+% Una chiave ripetuta produce un errore di compilazione.
+\newcommand{\VoceGlossario}[3]{%
+    \ifcsname bitcrusherglossario@#1\endcsname
+        \PackageError{Glossario}{Identificatore duplicato: #1}%
+            {Assegnare un identificatore diverso a ogni voce.}%
+    \else
+        \expandafter\gdef\csname bitcrusherglossario@#1\endcsname{}%
+        \par\addvspace{\baselineskip}%
+        \noindent\hypertarget{gls-#1}{\textbf{#2}}\par
+        \nopagebreak\smallskip
+        \noindent #3\par
+    \fi
+}
+% \RifGlossario{id}{testo}: rimando a una voce di QUESTO documento.
+\newcommand{\RifGlossario}[2]{%
+    \hyperlink{gls-#1}{#2}%
+}
+% \RifGlossarioWeb{URL del PDF}{id}{testo}: rimando a una voce di un ALTRO
+% glossario pubblicato (Glossario di progetto o livello C6 precedente).
+\newcommand{\RifGlossarioWeb}[3]{%
+    \href{#1\#nameddest=gls-#2}{#3}%
+}
+
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \IfFileExists{UnipdLogoRosso.png}%
+            {\includegraphics[width=0.7\textwidth]{UnipdLogoRosso.png}}%
+            {\fbox{\parbox[c][2.5cm][c]{0.7\textwidth}{\centering Logo UniPD}}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \IfFileExists{BitCrusherTeamNero.png}%
+            {\includegraphics[width=0.7\textwidth]{BitCrusherTeamNero.png}}%
+            {\fbox{\parbox[c][2.5cm][c]{0.7\textwidth}{\centering Logo Bit Crusher}}}
+    \end{minipage}
+
+    \vspace{1.5cm}
+    {\Large\textbf{UNIVERSITÀ DEGLI STUDI DI PADOVA}\par}
+    \vspace{0.3cm}
+    {\large Corso di Laurea in Informatica\par}
+    \vspace{0.3cm}
+    {\large Insegnamento di Ingegneria del Software\par}
+    \vspace{0.3cm}
+    {\large Anno Accademico 2026/2027\par}
+
+    \vspace{1.5cm}
+    {\Huge\textbf{Glossario C6 -- Casi d'uso}\par}
+    \vspace{0.5cm}
+    {\Large Versione \VersioneDocumento\par}
+
+    \vspace{1.5cm}
+    \begin{flushleft}
+        \large
+        \textbf{Gruppo:} Bit Crusher \\
+        \vspace{0.1cm}
+        \textbf{Email:} \href{mailto:bitcrusherteam@gmail.com}{bitcrusherteam@gmail.com} \\
+        \vspace{0.1cm}
+        \textbf{Redattori:} \RedattoriDocumento \\
+        \vspace{0.1cm}
+        \textbf{Verificatori:} \VerificatoriDocumento \\
+        \vspace{0.1cm}
+        \textbf{Data ultima modifica:} \DataDocumento
+    \end{flushleft}
+    \vfill
+\end{titlepage}
+
+% ==========================================
+% REGISTRO DELLE MODIFICHE (fuori dall'indice, dal piu' recente)
+% ==========================================
+\section*{Registro delle modifiche}
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|l|l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Versione} & \textbf{Data} & \textbf{Autore} & \textbf{Verificatore} & \textbf{Descrizione} \\ \hline
+        0.1.0 & 2026-11-26 & Alex Singh & [Nome Cognome] & Prima stesura delle voci. \\ \hline
+    \end{tabularx}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+
+\subsection{Scopo del documento}
+Il presente glossario definisce i termini del dominio del capitolato C6 usati nei casi d'uso dell'Analisi dei Requisiti: gli attori, gli oggetti e le operazioni che il prodotto offre, descritti dall'esterno e senza riferimento al modo in cui saranno realizzati. Raccoglie anche i termini dei bisogni ricavati dalle fonti, quando servono a darne un significato univoco.
+
+\subsection{Livelli ed ereditarietà}
+I glossari del capitolato C6 sono tre, uno per livello: casi d'uso, requisiti e progettazione. Ogni livello eredita le voci dei livelli precedenti e aggiunge le proprie. Un testo di un livello usa le voci del proprio livello e di quelli precedenti, mai quelle dei successivi: un caso d'uso non usa termini dei requisiti, un requisito non usa termini di progettazione.
+\begin{center}
+Glossario di progetto $\rightarrow$ C6 casi d'uso $\rightarrow$ C6 requisiti $\rightarrow$ C6 progettazione
+\end{center}
+Questo glossario eredita le voci del \href{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{Glossario di progetto}, che non ripete. Le sue voci sono a loro volta ereditate dal glossario dei requisiti e da quello di progettazione.
+
+\subsection{Regole di univocità}
+\begin{itemize}
+    \item Ogni voce ha un identificatore unico in tutti i glossari: un livello non ridefinisce una voce ereditata.
+    \item In una stessa catena di livelli due voci non hanno lo stesso nome.
+    \item Una definizione usa solo voci del proprio livello o dei precedenti, oppure parole del linguaggio comune nel loro significato comune.
+    \item Le voci del Glossario di progetto che descrivono una soluzione, come \textit{Embedding}, \textit{TTL} o \textit{Soglia di similarità}, appartengono alla progettazione: i casi d'uso e i requisiti non le usano.
+    \item Lo script \texttt{strumenti/verifica\_requisiti.py} controlla queste regole sui glossari e sugli elementi Doorstop.
+\end{itemize}
+
+\subsection{Convenzioni di lettura}
+\begin{itemize}
+    \item \textbf{Ordinamento:} le voci sono in ordine alfabetico, raggruppate per lettera iniziale.
+    \item \textbf{Rimandi:} i riferimenti ad altre voci sono in corsivo e cliccabili. Un rimando a una voce di questo glossario porta alla voce; un rimando a un altro glossario apre il suo PDF pubblicato sulla voce.
+\end{itemize}
+
+\newpage
+% ==========================================
+% TERMINI: generati in ordine alfabetico; una voce per concetto.
+% Rimandi: \RifGlossario per questo documento, \RifGlossarioWeb per gli altri glossari.
+% ==========================================
+
+\section{A}
+
+\VoceGlossario{accesso-differenziato}{Accesso differenziato}{
+    Proprietà di una \RifGlossario{richiesta-di-primo-turno}{\textit{richiesta di primo turno}} la cui risposta corretta dipende da dati che non tutti gli utenti del suo \RifGlossario{ambito-di-condivisione}{\textit{ambito di condivisione}} possono consultare: posta da utenti diversi, la stessa richiesta può avere risposte corrette diverse. Esempio: una domanda a cui l'agente risponde consultando documenti riservati del reparto HR.
+}
+
+\VoceGlossario{ambito-di-condivisione}{Ambito di condivisione}{
+    Insieme degli utenti a cui può essere restituito il contenuto di un \RifGlossario{elemento-conservato}{\textit{elemento conservato}}. Ha uno di tre valori: \textit{ambito utente}, il solo utente d'origine; \textit{ambito team}, gli utenti del team d'origine; \textit{ambito globale}, tutti gli utenti (vedi \RifGlossario{richiesta-d-origine}{\textit{Richiesta d'origine}}).
+}
+
+\VoceGlossario{amministratore-litellm}{Amministratore LiteLLM}{
+    Persona con il ruolo di amministratore nell'istanza di \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{litellm}{\textit{LiteLLM}} di Var Group. Ne monitora costi e consumi e, nel prodotto, gestisce le impostazioni di riuso e di conservazione, la \RifGlossario{retention}{\textit{retention}} e gli \RifGlossario{elemento-conservato}{\textit{elementi conservati}}. Da non confondere con l'\RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{amministratore}{\textit{Amministratore}}, ruolo del progetto didattico.
+}
+
+\section{C}
+
+\VoceGlossario{client-claude}{Client Claude}{
+    Applicazione Claude di Anthropic, nella versione desktop, usata dagli utenti di Var Group. Invia le \RifGlossario{richiesta-di-generazione}{\textit{richieste di generazione}} dei suoi utenti a LiteLLM, e quindi al sistema, di cui è l'attore che chiede le risposte.
+}
+
+\VoceGlossario{confidenza-di-sensibilita}{Confidenza di sensibilità}{
+    Numero compreso tra 0 e 1 che il sistema associa a ogni \RifGlossario{elemento-conservato}{\textit{elemento conservato}} per stimare la probabilità che la richiesta d'origine o la risposta contengano \RifGlossario{dato-sensibile}{\textit{dati sensibili}}.
+}
+
+\VoceGlossario{conservazione}{Conservazione}{
+    Operazione con cui il sistema registra la risposta a una \RifGlossario{richiesta-di-primo-turno}{\textit{richiesta di primo turno}} come \RifGlossario{elemento-conservato}{\textit{elemento conservato}}.
+}
+
+\VoceGlossario{conversazione}{Conversazione}{
+    Sequenza di messaggi scambiati tra un utente e il modello nel \RifGlossario{client-claude}{\textit{client Claude}}. Ogni \RifGlossario{richiesta-di-generazione}{\textit{richiesta di generazione}} di una conversazione contiene tutti i messaggi precedenti.
+}
+
+\VoceGlossario{costo-evitato}{Costo evitato}{
+    Per una richiesta servita con \RifGlossario{riuso}{\textit{riuso}}, costo che la richiesta avrebbe comportato se fosse stata inoltrata al \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{provider}{\textit{provider}}. Si calcola come il \RifGlossario{costo-sostenuto}{\textit{costo sostenuto}} per generare la risposta dell'elemento riusato.
+}
+
+\VoceGlossario{costo-sostenuto}{Costo sostenuto}{
+    Costo addebitato a Var Group dal \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{provider}{\textit{provider}} per una \RifGlossario{richiesta-di-generazione}{\textit{richiesta di generazione}} inoltrata, calcolato sui \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{token}{\textit{token}} consumati con le tariffe applicate a Var Group.
+}
+
+\section{D}
+
+\VoceGlossario{dato-sensibile}{Dato sensibile}{
+    Nel prodotto: qualsiasi dato personale nel senso del \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{gdpr}{\textit{GDPR}} o informazione aziendale riservata di Var Group. Il termine è più ampio delle «categorie particolari di dati personali» dell'articolo 9 del GDPR, con cui non va confuso.
+}
+
+\section{E}
+
+\VoceGlossario{elemento-conservato}{Elemento conservato}{
+    Risposta che il sistema ha registrato per poterla restituire ad altre \RifGlossario{richiesta-di-primo-turno}{\textit{richieste di primo turno}}, insieme alla \RifGlossario{richiesta-d-origine}{\textit{richiesta d'origine}}, all'utente e al team d'origine, al modello che l'ha generata, all'\RifGlossario{ambito-di-condivisione}{\textit{ambito di condivisione}}, all'istante di conservazione e alla \RifGlossario{scadenza}{\textit{scadenza}}. Negli appunti di Var Group è l'elemento in cache.
+}
+
+\VoceGlossario{elemento-valido}{Elemento valido}{
+    \RifGlossario{elemento-conservato}{\textit{Elemento conservato}} la cui \RifGlossario{scadenza}{\textit{scadenza}} non è ancora trascorsa e che non è stato eliminato.
+}
+
+\section{I}
+
+\VoceGlossario{impostazione-di-conservazione}{Impostazione di conservazione}{
+    Scelta di un \RifGlossario{utente}{\textit{utente}}, attiva o disattiva, che stabilisce se le risposte alle sue \RifGlossario{richiesta-di-primo-turno}{\textit{richieste di primo turno}} possono diventare \RifGlossario{elemento-conservato}{\textit{elementi conservati}}. Il sistema applica l'\RifGlossario{impostazione-effettiva}{\textit{impostazione effettiva}}.
+}
+
+\VoceGlossario{impostazione-di-riuso}{Impostazione di riuso}{
+    Scelta di un \RifGlossario{utente}{\textit{utente}}, attiva o disattiva, che stabilisce se alle sue \RifGlossario{richiesta-di-primo-turno}{\textit{richieste di primo turno}} può essere restituito il contenuto di un \RifGlossario{elemento-conservato}{\textit{elemento conservato}}. Il sistema applica l'\RifGlossario{impostazione-effettiva}{\textit{impostazione effettiva}}.
+}
+
+\VoceGlossario{impostazione-effettiva}{Impostazione effettiva}{
+    Valore che il sistema applica a un \RifGlossario{utente}{\textit{utente}} per il riuso e, separatamente, per la conservazione. È attiva se e solo se l'impostazione dell'utente è attiva e l'\RifGlossario{amministratore-litellm}{\textit{amministratore LiteLLM}} non ha disattivato quella funzione né per l'utente né per il suo \RifGlossario{team}{\textit{team}}. Ne segue che l'amministratore può disattivare una funzione per un utente, ma non attivarla al suo posto.
+}
+
+\section{L}
+
+\VoceGlossario{latenza-aggiunta}{Latenza aggiunta}{
+    Tempo che il sistema aggiunge a una \RifGlossario{richiesta-di-generazione}{\textit{richiesta di generazione}}. Per una richiesta inoltrata al \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{provider}{\textit{provider}}: tempo trascorso nel sistema tra la ricezione della richiesta e il suo inoltro, più il tempo tra l'arrivo del primo frammento della risposta del provider e la sua restituzione al \RifGlossario{client-claude}{\textit{client Claude}}. Per una richiesta servita con \RifGlossario{riuso}{\textit{riuso}}: tempo tra la ricezione della richiesta e la restituzione del primo frammento della risposta.
+}
+
+\VoceGlossario{lettore-in-ombra}{Lettore in ombra}{
+    Modalità di funzionamento, attivabile per \RifGlossario{team}{\textit{team}}, in cui il sistema stabilisce per ogni \RifGlossario{richiesta-di-primo-turno}{\textit{richiesta di primo turno}} quale \RifGlossario{elemento-conservato}{\textit{elemento conservato}} riuserebbe, ma inoltra comunque la richiesta al \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{provider}{\textit{provider}} e restituisce la risposta generata. Registra la richiesta, l'elemento individuato e la risposta generata, in modo da poterli confrontare. In inglese si dice \textit{shadow mode}.
+}
+
+\section{M}
+
+\VoceGlossario{mcp}{MCP (Model Context Protocol)}{
+    Protocollo aperto con cui un'applicazione, come il \RifGlossario{client-claude}{\textit{client Claude}}, si collega a server esterni che le offrono \RifGlossario{strumento}{\textit{strumenti}} e dati.
+}
+
+\section{O}
+
+\VoceGlossario{one-shot}{One-shot}{
+    Termine con cui Var Group indica le \RifGlossario{richiesta-di-primo-turno}{\textit{richieste di primo turno}}. Da non confondere con il \textit{one-shot prompting}, in cui il prompt contiene un solo esempio del compito. Vedi anche \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{single-shot}{\textit{Single-shot}}.
+}
+
+\section{R}
+
+\VoceGlossario{ragionamento}{Ragionamento (reasoning)}{
+    Parte dell'elaborazione di un modello che precede la risposta. Nei modelli Claude è restituita in blocchi separati dal testo della risposta, ciascuno legato a tutto ciò che lo precede nella richiesta, ed è fatturata come \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{token}{\textit{token}} in uscita.
+}
+
+\VoceGlossario{retention}{Retention}{
+    Durata per cui un nuovo \RifGlossario{elemento-conservato}{\textit{elemento conservato}} resta riusabile: la sua \RifGlossario{scadenza}{\textit{scadenza}} è l'istante di conservazione più la retention in vigore. È il termine usato da Var Group; la sua realizzazione, ad esempio con un \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{ttl}{\textit{TTL}}, è materia di progettazione.
+}
+
+\VoceGlossario{richiesta-d-origine}{Richiesta d'origine}{
+    \RifGlossario{richiesta-di-primo-turno}{\textit{Richiesta di primo turno}} la cui risposta è diventata un \RifGlossario{elemento-conservato}{\textit{elemento conservato}}. L'utente e il team che l'hanno inviata sono l'\textit{utente d'origine} e il \textit{team d'origine} dell'elemento.
+}
+
+\VoceGlossario{richiesta-di-generazione}{Richiesta di generazione}{
+    Richiesta inviata dal \RifGlossario{client-claude}{\textit{client Claude}} per ottenere una risposta da un modello. Contiene il modello scelto, le istruzioni di sistema, gli \RifGlossario{strumento}{\textit{strumenti}} disponibili e tutti i messaggi della \RifGlossario{conversazione}{\textit{conversazione}} fino a quel momento.
+}
+
+\VoceGlossario{richiesta-di-primo-turno}{Richiesta di primo turno}{
+    \RifGlossario{richiesta-di-generazione}{\textit{Richiesta di generazione}} che contiene un solo messaggio dell'utente e nessun messaggio del modello. Le richieste che proseguono una risposta dopo l'uso di uno \RifGlossario{strumento}{\textit{strumento}} contengono messaggi del modello, quindi non sono di primo turno. Var Group le chiama \RifGlossario{one-shot}{\textit{one-shot}}.
+}
+
+\VoceGlossario{richiesta-non-permanente}{Richiesta non permanente}{
+    \RifGlossario{richiesta-di-primo-turno}{\textit{Richiesta di primo turno}} la cui risposta corretta può cambiare entro un giorno, perché dipende dall'istante in cui è posta. Esempio: «che tempo fa oggi a Padova?».
+}
+
+\VoceGlossario{richieste-equivalenti}{Richieste equivalenti}{
+    Due \RifGlossario{richiesta-di-primo-turno}{\textit{richieste di primo turno}} rivolte allo stesso modello sono equivalenti quando ogni risposta corretta all'una è corretta anche per l'altra, e viceversa. L'equivalenza riguarda il significato, non il testo: richieste scritte in modo diverso possono essere equivalenti. Stabilirla spetta a valutatori umani; il giudizio del sistema è il \RifGlossario{riconoscimento-di-equivalenza}{\textit{riconoscimento di equivalenza}}.
+}
+
+\VoceGlossario{riconoscimento-di-equivalenza}{Riconoscimento di equivalenza}{
+    Giudizio con cui il sistema stabilisce che una \RifGlossario{richiesta-di-primo-turno}{\textit{richiesta di primo turno}} è \RifGlossario{richieste-equivalenti}{\textit{equivalente}} alla \RifGlossario{richiesta-d-origine}{\textit{richiesta d'origine}} di un \RifGlossario{elemento-conservato}{\textit{elemento conservato}}. Può sbagliare: un riconoscimento errato seguito da riuso è un \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{falso-hit}{\textit{falso hit}}. La sua prudenza dipende dalla \RifGlossario{severita-del-riconoscimento}{\textit{severità del riconoscimento}}.
+}
+
+\VoceGlossario{risparmio-netto}{Risparmio netto}{
+    Per un intervallo di tempo: somma dei \RifGlossario{costo-evitato}{\textit{costi evitati}} meno i costi che il sistema sostiene nello stesso intervallo per il \RifGlossario{riconoscimento-di-equivalenza}{\textit{riconoscimento di equivalenza}} e per la \RifGlossario{conservazione}{\textit{conservazione}}.
+}
+
+\VoceGlossario{riuso}{Riuso}{
+    Restituzione al \RifGlossario{client-claude}{\textit{client Claude}}, come risposta a una \RifGlossario{richiesta-di-primo-turno}{\textit{richiesta di primo turno}}, del contenuto di un \RifGlossario{elemento-conservato}{\textit{elemento conservato}} al posto di una risposta generata dal modello per quella richiesta. Una richiesta servita con riuso è un \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{cache-hit}{\textit{cache hit}}.
+}
+
+\section{S}
+
+\VoceGlossario{scadenza}{Scadenza}{
+    Istante dopo il quale il contenuto di un \RifGlossario{elemento-conservato}{\textit{elemento conservato}} non può più essere restituito.
+}
+
+\VoceGlossario{segnalazione-di-riuso}{Segnalazione di riuso}{
+    Testo che il sistema aggiunge a una risposta restituita con \RifGlossario{riuso}{\textit{riuso}} per indicare all'utente che proviene da un \RifGlossario{elemento-conservato}{\textit{elemento conservato}}.
+}
+
+\VoceGlossario{severita-del-riconoscimento}{Severità del riconoscimento}{
+    Parametro, impostato dall'\RifGlossario{amministratore-litellm}{\textit{amministratore LiteLLM}}, che stabilisce quanto deve essere prudente il \RifGlossario{riconoscimento-di-equivalenza}{\textit{riconoscimento di equivalenza}}: a una severità maggiore corrispondono meno riusi e meno \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{falso-hit}{\textit{falsi hit}}. Il capitolato la chiama \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{soglia-di-similarita}{\textit{soglia di similarità}}, nome che descrive una possibile realizzazione.
+}
+
+\VoceGlossario{skill}{Skill}{
+    Pacchetto di istruzioni, a volte con script e risorse, che il \RifGlossario{client-claude}{\textit{client Claude}} mette a disposizione del modello e che il modello carica nel proprio contesto quando lo ritiene pertinente alla richiesta.
+}
+
+\VoceGlossario{strumento}{Strumento (tool)}{
+    Funzione esterna che il modello può chiedere al \RifGlossario{client-claude}{\textit{client Claude}} di eseguire durante una risposta, ad esempio una ricerca in un archivio. Il risultato torna al modello in una \RifGlossario{richiesta-di-generazione}{\textit{richiesta di generazione}} successiva. Gli strumenti possono essere offerti da server \RifGlossario{mcp}{\textit{MCP}}.
+}
+
+\section{T}
+
+\VoceGlossario{team}{Team}{
+    Gruppo di utenti definito in \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{litellm}{\textit{LiteLLM}}, a cui si attribuiscono costi e impostazioni. Nel prodotto si assume che ogni utente appartenga a uno e un solo team; l'ipotesi va confermata con Var Group.
+}
+
+\section{U}
+
+\VoceGlossario{utente}{Utente}{
+    Dipendente di Var Group che usa il \RifGlossario{client-claude}{\textit{client Claude}} ed è registrato in \RifGlossarioWeb{https://bitcrusher-team.github.io/Progetto_SWE_26-27/docs/compiled/glossario/Glossario.pdf}{litellm}{\textit{LiteLLM}}.
+}
+
+\end{document}

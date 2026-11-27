@@ -1,0 +1,31 @@
+active: true
+attore_primario: "Utente"
+attori_secondari: ""
+derived: false
+header: "Eliminare propri elementi conservati"
+importanza: "desiderabile"
+include: "UC-04"
+level: '2.4'
+links:
+- BIS-027: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "ipotesi"
+text: |
+  **Obiettivo.** L'[utente](gls:utente) toglie dal sistema risposte alle proprie richieste che non vuole siano conservate.
+
+  **Precondizioni.** L'utente è autenticato presso il sistema.
+
+  **Trigger.** L'utente sceglie di eliminare elementi.
+
+  **Postcondizioni.** Gli [elementi conservati](gls:elemento-conservato) scelti non sono più [validi](gls:elemento-valido) e non compaiono più nell'elenco.
+
+  **Scenario principale.**
+  1. L'utente seleziona, tra i propri elementi conservati (UC-04, incluso), quelli da eliminare.
+  2. L'utente conferma l'eliminazione.
+  3. Il sistema elimina gli elementi e conferma l'esito.
+
+  **Scenari alternativi.**
+  - **2a.** L'utente annulla: nessuna modifica. Fine.

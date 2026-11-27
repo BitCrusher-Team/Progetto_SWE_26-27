@@ -1,0 +1,29 @@
+active: true
+attore_primario: "Utente"
+attori_secondari: "Provider (Anthropic)"
+derived: false
+header: "Ottenere una nuova generazione al posto di una risposta riusata"
+importanza: "opzionale"
+include: ""
+level: '2.5'
+links:
+- BIS-034: null
+normative: true
+note: "Var Group lo indica come sviluppo futuro. Va definito come il client Claude comunica al sistema la richiesta di rigenerazione."
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** L'[utente](gls:utente) che ha ricevuto una risposta con [riuso](gls:riuso) ottiene, per la stessa richiesta, una risposta generata dal modello.
+
+  **Precondizioni.** L'utente ha ricevuto una risposta con la [segnalazione di riuso](gls:segnalazione-di-riuso).
+
+  **Trigger.** L'utente chiede di rigenerare la risposta.
+
+  **Postcondizioni.** L'utente ha ricevuto una risposta generata dal [provider](gls:provider); il [costo sostenuto](gls:costo-sostenuto) è registrato.
+
+  **Scenario principale.**
+  1. L'utente chiede di rigenerare la risposta.
+  2. Il sistema inoltra la richiesta al provider senza riuso.
+  3. Il provider restituisce la risposta.
+  4. Il sistema restituisce la risposta e registra il costo sostenuto.

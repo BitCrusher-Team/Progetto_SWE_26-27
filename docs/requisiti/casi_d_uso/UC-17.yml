@@ -1,0 +1,34 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Consultare costi e risparmio"
+importanza: "obbligatorio"
+include: ""
+level: '3.11'
+links:
+- BIS-002: null
+- BIS-003: null
+- BIS-006: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "confermato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) conosce quanto si è speso e quanto si è evitato di spendere, per [utente](gls:utente), per [team](gls:team) e in totale, per governare la spesa.
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore chiede i costi di un intervallo di date.
+
+  **Postcondizioni.** Nessuna modifica.
+
+  **Scenario principale.**
+  1. L'amministratore sceglie l'intervallo di date.
+  2. Il sistema mostra il [costo sostenuto](gls:costo-sostenuto), il [costo evitato](gls:costo-evitato) e il [risparmio netto](gls:risparmio-netto), per team e in totale, giorno per giorno.
+  3. L'amministratore sceglie un team.
+  4. Il sistema mostra gli stessi valori per gli utenti del team.
+
+  **Scenari alternativi.**
+  - **2a.** Nell'intervallo non ci sono richieste: il sistema lo indica. Fine.

@@ -1,0 +1,30 @@
+active: true
+attore_primario: "Amministratore LiteLLM"
+attori_secondari: ""
+derived: false
+header: "Consultare l'efficacia del riuso"
+importanza: "obbligatorio"
+include: ""
+level: '3.12'
+links:
+- BIS-021: null
+normative: true
+note: ""
+ref: ''
+reviewed: null
+stato: "dichiarato"
+text: |
+  **Obiettivo.** L'[amministratore LiteLLM](gls:amministratore-litellm) capisce se il [riuso](gls:riuso) funziona, e per quali [team](gls:team).
+
+  **Precondizioni.** L'amministratore è autenticato come amministratore di LiteLLM.
+
+  **Trigger.** L'amministratore chiede l'efficacia del riuso in un intervallo di date.
+
+  **Postcondizioni.** Nessuna modifica.
+
+  **Scenario principale.**
+  1. L'amministratore sceglie l'intervallo di date.
+  2. Il sistema mostra, per ciascun team e in totale, l'[hit rate](gls:hit-rate), il numero di richieste servite con riuso, il [costo evitato](gls:costo-evitato), la [latenza aggiunta](gls:latenza-aggiunta) e, se esistono coppie giudicate del [lettore in ombra](gls:lettore-in-ombra), la quota di riusi giudicati corretti.
+
+  **Scenari alternativi.**
+  - **2a.** Nell'intervallo non ci sono richieste: il sistema lo indica. Fine.
